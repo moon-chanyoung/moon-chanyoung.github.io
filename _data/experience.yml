@@ -36,6 +36,6 @@
   location: "Seoul, South Korea"
   role: "Undergraduate Research Intern"
   advisor: "Prof. Seon Wook Kim"
-  advisor_url: "https://pure.korea.ac.kr/en/persons/seon-wook-kim/"
+  advisor_url: "http://compiler.korea.ac.kr/index.php/professor/"
   bullets:
     - "Implemented and verified RISC-V R-type instruction modules in Verilog HDL on FPGA; published at the IEIE Autumn Conference 2022."
