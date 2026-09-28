@@ -46,7 +46,9 @@ atom_feed:
 
 # Analytics
 analytics:
-  provider               : "false"
+  provider               : "google-analytics-4"
+  google:
+    tracking_id          : "G-VHZHY3Y5DG"
 
 # Reading files
 include:
