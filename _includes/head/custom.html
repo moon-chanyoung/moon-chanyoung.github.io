@@ -23,7 +23,10 @@
 <!-- Link previews -->
 {% if site.share_image %}
 <meta property="og:image" content="{{ base_path }}/images/{{ site.share_image }}">
-<meta property="og:image:alt" content="Photo of {{ site.name }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="{{ site.name }}: computer architecture and hardware-software co-design">
+<meta name="twitter:card" content="summary_large_image">
 {% endif %}
 {% if page.url == "/" %}<meta property="og:type" content="profile">{% endif %}
 

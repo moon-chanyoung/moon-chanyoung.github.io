@@ -25,7 +25,7 @@ author:
   linkedin         : "chanyoung-moon-9b0098337"
 
 # Social sharing
-share_image              : "profile.jpg"   # used for link previews (og:image)
+share_image              : "og-card.png"   # link preview card (og:image), 1200x627
 og_description           : *description
 social:
   type                   : Person
