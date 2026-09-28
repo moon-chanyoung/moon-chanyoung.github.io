@@ -1,0 +1,18 @@
+# Newest first. The author matching `self` is highlighted.
+# `links` is optional: a list of {label, url}.
+self: "Chanyoung Moon"
+papers:
+  - id: "C.1"
+    venue_short: "ASPLOS 2027"
+    badges: ["Conference", "First Author"]
+    title: "FORGE: Procedural Weight Generation for Sparse MoE Inference"
+    authors: ["Chanyoung Moon", "Travis Pence", "Daisuke Yamada", "Jiaqi Mo", "Yanxin Zhang", "Vikas Singh", "Karthikeyan Sankaralingam"]
+    venue: "ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS), 2027"
+    summary: "An on-SM Rotor Generation Unit regenerates MoE expert weights on the fly, trading HBM weight traffic for on-chip computation. FORGE cuts parameter memory by 28–29% and raises system throughput by 1.3–2.8× at about 0.9% of GPU SM area (7 nm)."
+  - id: "C.2"
+    venue_short: "NeurIPS 2026"
+    badges: ["Conference"]
+    title: "Fast Sandwich Products in Clifford Algebra"
+    authors: ["Travis Pence", "Daisuke Yamada", "Jiaqi Mo", "Chanyoung Moon", "Karthikeyan Sankaralingam", "Vikas Singh"]
+    venue: "Advances in Neural Information Processing Systems (NeurIPS), 2026"
+    summary: "My contribution: a GPU kernel for the rotor sandwich product with bank-conflict-free shared-memory access, yielding up to 64× wall-clock and 35× memory improvements over existing implementations."

@@ -1,0 +1,143 @@
+# Site settings for https://moon-chanyoung.github.io
+# Built on AcademicPages (https://github.com/academicpages/academicpages.github.io).
+# This file is not reloaded by `jekyll serve`; restart the server after editing it.
+
+# Basic site settings
+locale                   : "en-US"
+site_theme               : "default"
+title                    : "Chanyoung Moon"
+title_separator          : "-"
+name                     : &name "Chanyoung Moon"
+description              : &description "Chanyoung Moon: computer architecture, hardware-software co-design, and domain-specific accelerators."
+url                      : https://moon-chanyoung.github.io
+baseurl                  : ""
+repository               : "moon-chanyoung/moon-chanyoung.github.io"
+
+# Author (used by the SEO tags and footer)
+author:
+  avatar           : "profile.jpg"
+  name             : *name
+  bio              : "Undergraduate researcher in computer architecture"
+  location         : "Seoul, South Korea"
+  employer         : "Korea University"
+  email            : "cmoon27@wisc.edu"
+  github           : "moon-chanyoung"
+  linkedin         : "chanyoung-moon-9b0098337"
+
+# Social sharing
+share_image              : "profile.jpg"   # used for link previews (og:image)
+og_description           : *description
+social:
+  type                   : Person
+  name                   : *name
+  links:
+    - "https://github.com/moon-chanyoung"
+    - "https://www.linkedin.com/in/chanyoung-moon-9b0098337/"
+
+# Site settings
+breadcrumbs              : false
+words_per_minute         : 160
+future                   : true
+read_more                : "disabled"
+comments:
+  provider               : false
+atom_feed:
+  hide                   : true
+
+# Analytics
+analytics:
+  provider               : "false"
+
+# Reading files
+include:
+  - .htaccess
+  - _pages
+  - files
+exclude:
+  - "*.sublime-project"
+  - "*.sublime-workspace"
+  - .asset-cache
+  - .bundle
+  - .devcontainer
+  - .jekyll-assets-cache
+  - .sass-cache
+  - assets/js/_main.js
+  - assets/js/plugins
+  - assets/js/vendor
+  - CHANGELOG
+  - Capfile
+  - config
+  - Dockerfile
+  - docker-compose.yaml
+  - Gemfile
+  - Gemfile.lock
+  - Gruntfile.js
+  - gulpfile.js
+  - LICENSE
+  - local
+  - log
+  - node_modules
+  - package.json*
+  - Rakefile
+  - README
+  - README.md
+  - tmp
+  - vendor
+keep_files:
+  - .git
+  - .svn
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
+# Markdown processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+
+# Sass/SCSS
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Outputting
+permalink: /:categories/:title/
+timezone: Asia/Seoul
+
+# Plugins (all on the GitHub Pages whitelist)
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+  - jemoji
+
+whitelist:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+  - jemoji
+
+# HTML compression
+compress_html:
+  clippings: all
+  ignore:
+    envs: development

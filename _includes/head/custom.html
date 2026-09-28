@@ -1,0 +1,30 @@
+{% include base_path %}
+
+<!-- start custom head snippets -->
+
+<!-- Support for Academicons -->
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"></noscript>
+
+<!-- Support for Font Awesome -->
+ <link rel="preload" href="{{ base_path }}/assets/css/fontawesome.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ base_path }}/assets/css/fontawesome.css"></noscript>
+
+<!-- favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ base_path }}/images/apple-touch-icon-180x180.png"/>
+<link rel="icon" type="image/svg+xml" href="{{ base_path }}/images/favicon.svg"/>
+<link rel="icon" type="image/png" href="{{ base_path }}/images/favicon-32x32.png" sizes="32x32"/>
+<link rel="icon" type="image/png" href="{{ base_path }}/images/favicon-192x192.png" sizes="192x192"/>
+<link rel="manifest" href="{{ base_path }}/images/manifest.json"/>
+<link rel="icon" href="{{ base_path }}/images/favicon.ico" sizes="any"/>
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)"/>
+
+<!-- Link previews -->
+{% if site.share_image %}
+<meta property="og:image" content="{{ base_path }}/images/{{ site.share_image }}">
+<meta property="og:image:alt" content="Photo of {{ site.name }}">
+{% endif %}
+{% if page.url == "/" %}<meta property="og:type" content="profile">{% endif %}
+
+<!-- end custom head snippets -->

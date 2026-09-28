@@ -1,0 +1,13 @@
+intro: >-
+  I am interested in computer architecture, hardware-software co-design, and domain-specific accelerators.
+  I look for structure that a workload has but the hardware-software interface discards, then add the minimal mechanism that exposes it.
+areas:
+  - title: "Accelerators for LLM Inference"
+    text: "Trading memory traffic for on-chip compute: FORGE regenerates sparse MoE expert weights inside the SM instead of streaming them from HBM."
+    tags: ["Sparse MoE", "RTL design", "Accel-Sim"]
+  - title: "GPU Performance Analysis"
+    text: "Finding what limits a workload, on H100 and in cycle-level simulation, from shared-memory bank conflicts to serialized alpha blending."
+    tags: ["CUDA", "Nsight Compute", "3D Gaussian Splatting"]
+  - title: "Real-Time System Co-design"
+    text: "Simulation-first design of closed-loop neural-machine interfaces, with the sensorimotor loop modeled as a multi-rate dependency graph under a sub-100 ms budget."
+    tags: ["BCI", "System simulation", "Latency budgets"]
