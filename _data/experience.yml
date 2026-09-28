@@ -5,7 +5,7 @@
   institution: "University of Wisconsin-Madison"
   location: "Madison, WI"
   role: "Undergraduate Researcher"
-  advisor: "Prof. Karthikeyan Sankaralingam"
+  advisor: "Prof. Karu Sankaralingam"
   advisor_url: "https://pages.cs.wisc.edu/~karu/"
   projects:
     - title: "FORGE: Procedural Weight Generation for Sparse MoE Inference"

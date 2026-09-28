@@ -30,4 +30,4 @@ contact:
   emails: ["cmoon27@wisc.edu", "rchan02@korea.ac.kr"]
 ---
 
-I am an undergraduate in Electrical Engineering at [Korea University](https://ee.korea.ac.kr/). I spent 2025–26 as a visiting student at the [University of Wisconsin-Madison](https://www.wisc.edu/) and continue to work with [Prof. Karthikeyan Sankaralingam](https://pages.cs.wisc.edu/~karu/) in the [Vertical Research Group](https://research.cs.wisc.edu/vertical/). My first-author paper, FORGE (ASPLOS 2027), regenerates sparse MoE expert weights on chip instead of streaming them from HBM.
+I am an undergraduate in Electrical Engineering at [Korea University](https://ee.korea.ac.kr/). I spent 2025–26 as a visiting student at the [University of Wisconsin-Madison](https://www.wisc.edu/) and continue to work with [Prof. Karu Sankaralingam](https://pages.cs.wisc.edu/~karu/) in the [Vertical Research Group](https://research.cs.wisc.edu/vertical/). My first-author paper, FORGE (ASPLOS 2027), regenerates sparse MoE expert weights on chip instead of streaming them from HBM.
