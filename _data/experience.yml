@@ -16,7 +16,7 @@
         - "Implemented and verified the RTL in SystemVerilog (cocotb, Verilator), synthesized it for area and timing, built a system-level simulator to project end-to-end speedup, and integrated the RGU into Accel-Sim for cycle-level GPU simulation."
     - title: "Fast Sandwich Products in Clifford Algebra"
       tag: "NeurIPS 2026"
-      text: "Contributed a GPU kernel for the rotor sandwich product with bank-conflict-free shared-memory access, yielding up to 64× wall-clock and 35× memory improvements over existing implementations."
+      text: "Contributed to the GPU kernel for the rotor sandwich product with bank-conflict-free shared-memory access, yielding up to 64× wall-clock and 35× memory improvements over existing implementations."
     - title: "3D Gaussian Splatting Rendering Acceleration"
       tag: "Ongoing"
       text: "Reproduced GEMM-GS (DAC 2026) as a baseline, profiled it on H100, and identified the sequential alpha-blending stage as the dominant remaining bottleneck. Prototyping parallelization of its dependency chain on tensor cores."

@@ -15,4 +15,4 @@ papers:
     title: "Fast Sandwich Products in Clifford Algebra"
     authors: ["Travis Pence", "Daisuke Yamada", "Jiaqi Mo", "Chanyoung Moon", "Karthikeyan Sankaralingam", "Vikas Singh"]
     venue: "Advances in Neural Information Processing Systems (NeurIPS), 2026"
-    summary: "My contribution: a GPU kernel for the rotor sandwich product with bank-conflict-free shared-memory access, yielding up to 64× wall-clock and 35× memory improvements over existing implementations."
+    summary: "A GPU kernel for the rotor sandwich product with bank-conflict-free shared-memory access, yielding up to 64× wall-clock and 35× memory improvements over existing implementations."
