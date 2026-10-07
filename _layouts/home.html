@@ -93,11 +93,11 @@ layout: default
       <h2 class="section__title" id="experience-title">Experience</h2>
       {% for e in site.data.experience %}
       <div class="entry">
-        <p class="entry__when">{% assign d = e.dates | split: " – " %}<span>{{ d[0] }}{% if d.size > 1 %} –</span> <span>{{ d[1] }}{% endif %}</span></p>
+        <p class="entry__when">{% assign d = e.dates | split: " – " %}<span>{{ d[0] }}{% if d.size > 1 %} –</span> <span>{{ d[1] }}{% endif %}</span>{% if e.dates_note %} <span class="entry__when-note">{{ e.dates_note }}</span>{% endif %}</p>
         <div class="entry__body">
           <h3 class="entry__title">{% if e.org_url %}<a href="{{ e.org_url }}">{{ e.org }}</a>{% else %}{{ e.org }}{% endif %}{% if e.institution %}<span class="entry__inst">, {{ e.institution }}</span>{% endif %}</h3>
           {% if e.location %}<p class="entry__loc">{{ e.location }}</p>{% endif %}
-          <p class="entry__role">{{ e.role }}{% if e.advisor %}<span class="entry__advisor">, advised by {% if e.advisor_url %}<a href="{{ e.advisor_url }}">{{ e.advisor }}</a>{% else %}{{ e.advisor }}{% endif %}</span>{% endif %}</p>
+          <p class="entry__role">{{ e.role }}{% if e.advisor %}<span class="entry__advisor">, advised by {% if e.advisor_url %}<a href="{{ e.advisor_url }}">{{ e.advisor }}</a>{% else %}{{ e.advisor }}{% endif %}{% if e.advisor_note %} {{ e.advisor_note }}{% endif %}</span>{% endif %}</p>
           {% if e.projects %}
           <ul class="projects">
             {% for pr in e.projects %}
