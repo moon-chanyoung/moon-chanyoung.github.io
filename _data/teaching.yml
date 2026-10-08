@@ -1,0 +1,13 @@
+intro: >-
+  I care about explaining systems ideas clearly, and I am interested in how AI tools can help turn a hard concept into something people can see and play with.
+  My lecture material is built as an interactive explainer.
+items:
+  - dates: "Fall 2026"
+    title: "Architecture & System for AI Seminar"
+    org: "HandS Academic Society, Korea University"
+    role: "Co-host and lecturer"
+    text: "Gave five lectures to 21 students on GPU architecture, HBM, and interconnects."
+    links:
+      - label: "Interactive lecture: Why Are GPUs Fast?"
+        url: "/teaching/gpu-seminar/"
+        icon: "fa-solid fa-microchip"

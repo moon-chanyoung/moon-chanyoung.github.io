@@ -1,4 +1,6 @@
 # Newest first. `text` accepts Markdown (links, **bold**).
+- date: "Oct 2026"
+  text: "Gave lectures on GPU architecture at the HandS Architecture & System for AI Seminar, Korea University. [Interactive lecture notes](/teaching/gpu-seminar/)."
 - date: "Sep 2026"
   text: "First-author paper **FORGE** accepted to **ASPLOS 2027**."
 - date: "Sep 2026"

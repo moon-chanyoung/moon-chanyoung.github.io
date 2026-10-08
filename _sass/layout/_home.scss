@@ -566,6 +566,17 @@ body {
     }
   }
 
+  #teaching .section__lede {
+    margin-bottom: 1.1em;
+  }
+
+  .entry__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.8em;
+  }
+
   .entry__when-note {
     color: var(--cm-faint);
     font-weight: 500;

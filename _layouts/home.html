@@ -115,6 +115,23 @@ layout: default
       {% endfor %}
     </section>
 
+    {% assign teaching = site.data.teaching %}
+    <section id="teaching" class="section" aria-labelledby="teaching-title">
+      <h2 class="section__title" id="teaching-title">Teaching</h2>
+      {% if teaching.intro %}<p class="section__lede">{{ teaching.intro }}</p>{% endif %}
+      {% for t in teaching.items %}
+      <div class="entry">
+        <p class="entry__when"><span>{{ t.dates }}</span></p>
+        <div class="entry__body">
+          <h3 class="entry__title">{{ t.title }}<span class="entry__inst">, {{ t.org }}</span></h3>
+          {% if t.role %}<p class="entry__role">{{ t.role }}</p>{% endif %}
+          {% if t.text %}<p class="entry__detail">{{ t.text }}</p>{% endif %}
+          {% if t.links %}<p class="entry__links">{% for l in t.links %}<a class="pill pill--primary" href="{{ l.url | prepend: base_path }}">{% if l.icon %}<i class="{{ l.icon }}" aria-hidden="true"></i>{% endif %}<span>{{ l.label }}</span></a>{% endfor %}</p>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+
     <section id="honors" class="section" aria-labelledby="honors-title">
       <h2 class="section__title" id="honors-title">Honors &amp; Awards</h2>
       <ul class="awards">
