@@ -91,11 +91,11 @@ $cm-page-width : 848px; // 800px of content plus 24px gutters
 }
 
 .masthead__menu {
-  font-size: 0.94em;
+  font-size: 0.9em;
 }
 
 .masthead__menu-item--lg {
-  padding-right: 1.2em;
+  padding-right: 0.8em;
 }
 
 .masthead__menu-item--lg.selected a,
@@ -104,7 +104,7 @@ $cm-page-width : 848px; // 800px of content plus 24px gutters
 }
 
 .greedy-nav .visible-links a {
-  margin: 0 0.75rem;
+  margin: 0 0.6rem;
 }
 
 /* Footer in normal flow below the content, aligned with the column */
@@ -756,5 +756,101 @@ body {
     .sep {
       color: var(--cm-faint);
     }
+  }
+
+  /* Explainers gallery -------------------------------------------------- */
+
+  .section__more {
+    margin-top: 1.1em;
+    font-weight: 600;
+  }
+
+  .gallery__back {
+    font-size: 0.88em;
+    font-weight: 600;
+  }
+
+  .gallery__title {
+    margin-top: 0.6em;
+    margin-bottom: 0.5em;
+    font-size: 2em;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1em;
+    margin-top: 1.6em;
+
+    @include breakpoint($small) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  a.gcard {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--cm-border);
+    border-radius: 12px;
+    background: var(--cm-surface);
+    color: var(--cm-text);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      border-color: var(--cm-accent);
+      box-shadow: 0 6px 18px rgba(20, 30, 50, 0.1);
+      transform: translateY(-2px);
+      color: var(--cm-text);
+    }
+  }
+
+  .gcard__thumb {
+    aspect-ratio: 16 / 9;
+    background: #0b0d12;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .gcard__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    padding: 0.95em 1.05em 1.1em;
+  }
+
+  .gcard__title {
+    font-size: 1.1em;
+    font-weight: 750;
+    line-height: 1.3;
+  }
+
+  .gcard__subtitle {
+    color: var(--cm-muted);
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+
+  .gcard__context {
+    color: var(--cm-faint);
+    font-size: 0.82em;
+  }
+
+  .gcard__text {
+    color: var(--cm-muted);
+    font-size: 0.88em;
+    line-height: 1.6;
+  }
+
+  .gcard__tags {
+    margin-top: 0.3em;
   }
 }

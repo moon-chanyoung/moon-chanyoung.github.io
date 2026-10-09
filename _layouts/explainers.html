@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+{% include base_path %}
+{% assign ex = site.data.explainers %}
+
+<div id="main" role="main" class="home">
+  <article class="home__inner">
+    <header class="gallery__head">
+      <p class="gallery__back"><a href="{{ base_path }}/">← Chanyoung Moon</a></p>
+      <h1 class="gallery__title">{{ page.title }}</h1>
+      {% if ex.intro %}<p class="section__lede">{{ ex.intro }}</p>{% endif %}
+    </header>
+
+    <div class="gallery">
+      {% for it in ex.items %}
+      {% if it.url contains '://' %}{% assign href = it.url %}{% else %}{% assign href = it.url | prepend: base_path %}{% endif %}
+      <a class="gcard" href="{{ href }}">
+        <div class="gcard__thumb">
+          {% if it.thumb %}<img src="{{ base_path }}/images/explainers/{{ it.thumb }}" alt="" loading="lazy" width="800" height="450">{% endif %}
+        </div>
+        <div class="gcard__body">
+          <p class="tags">{% if it.kind %}<span class="tag tag--venue">{{ it.kind }}</span>{% endif %}{% if it.date %}<span class="tag">{{ it.date }}</span>{% endif %}</p>
+          <h2 class="gcard__title">{{ it.title }}</h2>
+          {% if it.subtitle %}<p class="gcard__subtitle">{{ it.subtitle }}</p>{% endif %}
+          {% if it.context %}<p class="gcard__context">{{ it.context }}</p>{% endif %}
+          {% if it.text %}<p class="gcard__text">{{ it.text }}</p>{% endif %}
+          {% if it.tags %}<p class="tags gcard__tags">{% for t in it.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>{% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </article>
+</div>

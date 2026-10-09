@@ -8,5 +8,7 @@ main:
     url: /#research
   - title: "Experience"
     url: /#experience
+  - title: "Explainers"
+    url: /explainers/
   - title: "CV"
     url: /files/Chanyoung_Moon_CV.pdf

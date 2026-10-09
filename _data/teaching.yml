@@ -1,6 +1,5 @@
 intro: >-
   I care about explaining systems ideas clearly, and I am interested in how AI tools can help turn a hard concept into something people can see and play with.
-  My lecture material is built as an interactive explainer.
 items:
   - dates: "Fall 2026"
     title: "Architecture & System for AI Seminar"
@@ -11,3 +10,6 @@ items:
       - label: "Interactive lecture: Why Are GPUs Fast?"
         url: "/teaching/gpu-seminar/"
         icon: "fa-solid fa-microchip"
+more:
+  label: "More explainers"
+  url: "/explainers/"

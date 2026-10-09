@@ -1,0 +1,14 @@
+# Newest first. Each card links to a self-contained page (usually under /teaching/ or /explainers/).
+# thumb: image under /images/explainers/ (16:9, about 800x450).
+intro: >-
+  Interactive explainers I build to understand something well enough to teach it: seminar lectures, paper walkthroughs, and topics I got curious about.
+items:
+  - title: "Why Are GPUs Fast?"
+    subtitle: "From one core to the data center"
+    url: "/gpu/"
+    thumb: "gpu-seminar.jpg"
+    kind: "Lecture"
+    date: "Oct 2026"
+    context: "Architecture & System for AI Seminar, Korea University"
+    text: "Parallel computing basics, GPU architecture and its history, and what happens inside a GPU during LLM inference and training."
+    tags: ["GPU architecture", "Roofline", "LLM inference"]
