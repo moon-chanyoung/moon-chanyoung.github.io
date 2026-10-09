@@ -566,6 +566,13 @@ body {
     }
   }
 
+  .gallery__intro {
+    max-width: 46rem;
+    margin-bottom: 1.6em;
+
+    p { margin: 0 0 0.9em; }
+  }
+
   #teaching .section__lede {
     margin-bottom: 1.1em;
   }

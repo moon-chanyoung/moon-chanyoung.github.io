@@ -1,7 +1,9 @@
 # Newest first. Each card links to a self-contained page (usually under /teaching/ or /explainers/).
 # thumb: image under /images/explainers/ (16:9, about 800x450).
-intro: >-
-  Interactive explainers I build to understand something well enough to teach it: seminar lectures, paper walkthroughs, and topics I got curious about.
+intro: |
+  I am very interested in using AI to explain difficult ideas so that they become easy to grasp. AI can now build and implement things faster than ever, and I suspect that from here on, the one real bottleneck will be human understanding: whether people can actually follow what was built, and why it works.
+
+  How to loosen that bottleneck is a question I keep coming back to, and these explainers are one attempt at an answer. Each starts from something I wanted to understand myself, a lecture topic, a paper, or a question I got curious about, and turns it into a page you can see and play with. I do not know yet what the best answer looks like, but building these is how I am trying to find out.
 items:
   - title: "Why Are GPUs Fast?"
     subtitle: "From one core to the data center"

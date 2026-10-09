@@ -10,7 +10,7 @@ layout: default
     <header class="gallery__head">
       <p class="gallery__back"><a href="{{ base_path }}/">← Chanyoung Moon</a></p>
       <h1 class="gallery__title">{{ page.title }}</h1>
-      {% if ex.intro %}<p class="section__lede">{{ ex.intro }}</p>{% endif %}
+      {% if ex.intro %}<div class="section__lede gallery__intro">{{ ex.intro | markdownify }}</div>{% endif %}
     </header>
 
     <div class="gallery">
