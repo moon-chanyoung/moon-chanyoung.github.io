@@ -3,13 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="generator" content="paper-explorable 2.6.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="generator" content="paper-explorable 2.7.0">
 <title>Why Are GPUs Fast?</title>
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
 <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
 <meta name="description" content="Why Are GPUs Fast? An interactive lecture by Chanyoung Moon for the AI Systems Architecture Seminar, Korea University (2026).">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHZHY3Y5DG"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VHZHY3Y5DG');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- FONTS: the default pairing (Inter for text, JetBrains Mono for code). Replace per page with src/fonts.txt; for Korean, Japanese or Chinese add that script's Noto Sans family there and put it after "Inter" in --font-* (paper.css). -->
@@ -57,28 +61,41 @@ button{font:inherit;color:inherit}
 #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 #deck{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 #scrim,#mast,#pills,#tbar{display:none!important}
-.lbl{position:absolute;left:0;top:0;white-space:nowrap;font:600 13px/1 var(--font-ui);letter-spacing:.01em;color:var(--ink);padding:5px 8px 5px 7px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line2);border-left:4px solid var(--lc,var(--ink));pointer-events:none;will-change:transform}
-.lbl.plain{background:none;border:none;padding:0;color:var(--lc,var(--ink));text-shadow:0 0 5px var(--bg0),0 0 3px var(--bg0),0 0 1px var(--bg0)}
-.lbl.big{font:600 15px/1.1 var(--font-ui)}
-.lbl.num{font:700 22px/1 var(--font-display);font-variant-numeric:tabular-nums}
-.lbl.tiny{font:500 11px/1 var(--font-ui);padding:3px 5px 3px 4px;border-left-width:3px}
-.lbl.hero{font:700 46px/1 var(--font-display);font-variant-numeric:tabular-nums;background:none;border:none;padding:0;color:var(--lc,var(--ink));text-shadow:0 0 8px var(--bg0),0 0 3px var(--bg0)}
+/* stage labels: quiet type on a paper plate, square corners; an actor's colour leads as a small square (no bars, no borders, no shadows) */
+.lbl{position:absolute;left:0;top:0;white-space:nowrap;font:600 13px/1.2 var(--font-ui);letter-spacing:.005em;color:var(--ink);padding:3px 7px 4px;border-radius:var(--radius);background:color-mix(in srgb,var(--bg0) 90%,transparent);pointer-events:none;will-change:transform}
+.lbl[style*="--lc"]:not(.plain):not(.hero):not(.num):not(.tag):not(.callout)::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;background:var(--lc);vertical-align:1px}
+.lbl.plain{background:none;padding:0;color:var(--lc,var(--ink));text-shadow:0 0 5px var(--bg0),0 0 3px var(--bg0),0 0 1px var(--bg0)}
+.lbl.tag{background:var(--hero-bg);color:var(--hero-ink);padding:4px 8px 5px}
+.lbl.big{font:600 15px/1.15 var(--font-ui)}
+.lbl.num{font:700 22px/1 var(--font-display);font-variant-numeric:tabular-nums;background:none;padding:0;color:var(--lc,var(--ink));text-shadow:0 0 6px var(--bg0),0 0 3px var(--bg0),0 0 1px var(--bg0)}
+.lbl.tiny{font:500 11px/1.15 var(--font-ui);padding:2px 5px 3px}
+.lbl.hero{font:700 46px/1 var(--font-display);font-variant-numeric:tabular-nums;background:none;padding:0;color:var(--lc,var(--ink));text-shadow:0 0 8px var(--bg0),0 0 3px var(--bg0)}
+/* callouts (X.callout): a number at the thing it measures, a hairline leader to it, shown when the motion gets there */
+.lbl.callout{background:none;padding:0;line-height:1.05;color:var(--ink);text-shadow:0 0 6px var(--bg0),0 0 3px var(--bg0),0 0 1px var(--bg0)}
+.lbl.callout .v{font:700 24px/1 var(--font-display);font-variant-numeric:tabular-nums;letter-spacing:-.01em;color:var(--cc,var(--ink))}
+.lbl.callout .u{font:600 13px/1 var(--font-ui);margin-left:3px;color:var(--cc,var(--ink))}
+.lbl.callout .k{display:block;margin-top:4px;font:500 12px/1.2 var(--font-ui);color:var(--ink2)}
+.lbl.callout .st{margin-left:6px;font:700 9.5px/1 var(--font-ui);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.lbl.callout.big .v{font-size:34px}.lbl.callout.small .v{font-size:18px}
+.ldr{position:absolute;left:0;top:0;height:1px;background:var(--lc,var(--ink3));transform-origin:0 50%;pointer-events:none;will-change:transform}
+.ldr i{position:absolute;left:-3px;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--lc,var(--ink3))}
 .lbl.dim{color:var(--ink3)}
 .lbl .mono,.mono{font-family:var(--font-mono)}
 .lbl .lg{display:inline-flex;align-items:center;gap:5px;margin-right:10px}.lbl .lg:last-child{margin-right:0}.lbl .lg i{width:12px;height:3px;display:inline-block}
-/* honesty note (guided pages; a talk says it aloud) */
-#scale{position:absolute;right:20px;top:calc(var(--capB,80px) + 8px);z-index:6;max-width:46vw;padding:5px 9px;border:1px solid var(--line2);border-radius:var(--radius);background:var(--glass);font:600 12px/1.25 var(--font-ui);color:var(--ink3);opacity:0;transition:opacity .4s;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* honesty note: the right end of the title band's eyebrow row (guided pages; a talk says it aloud) */
+#scale{position:absolute;right:40px;top:calc(22px + var(--sat));z-index:6;max-width:min(46vw,640px);font:600 12px/13px var(--font-ui);letter-spacing:.02em;color:var(--ink3);opacity:0;transition:opacity .4s;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
 #scale.on{opacity:1}
-#scale .dot{display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:7px;vertical-align:1px}
+#scale .dot{display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:7px;vertical-align:0}
 body[data-format=talk] #scale{display:none!important}
-/* title band: eyebrow + headline at the top; the sub reads under it on guided pages */
+body.bare #scale{opacity:0!important}
+/* title band: one fixed line in both formats, the eyebrow over a headline that fits on one line; what more there is to say goes on the stage */
 #cap{position:absolute;left:0;right:0;top:0;padding:calc(22px + var(--sat)) 40px 14px;background:var(--bg0);border-bottom:1px solid var(--line2);text-align:left;z-index:5;pointer-events:none;opacity:0;transition:opacity .3s}
 #cap.on{opacity:1}
-#cap .eb{display:flex;align-items:center;gap:10px;font:700 13px/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:11px}
+#cap .eb{display:flex;align-items:center;gap:10px;height:13px;font:700 13px/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:11px;padding-right:min(48vw,660px);white-space:nowrap;overflow:hidden}
 #cap .eb:before{content:"";flex:none;width:11px;height:11px;background:var(--accent)}
-#cap .hl{font:700 clamp(25px,2.9vw,54px)/1.13 var(--font-display);letter-spacing:-.012em;color:var(--ink);text-wrap:balance;max-width:1500px}
-#cap .sub{margin-top:9px;max-width:1100px;font:400 clamp(15px,1.2vw,19px)/1.42 var(--font-ui);color:var(--ink2)}
-body[data-format=talk] #cap .sub{display:none!important}
+#cap .eb.empty{visibility:hidden}
+#cap .hl{font:700 clamp(25px,2.9vw,54px)/1.13 var(--font-display);line-height:calc(clamp(25px,2.9vw,54px) * 1.13);height:calc(clamp(25px,2.9vw,54px) * 1.13);letter-spacing:-.012em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}   /* the line box keeps the full size when a long headline shrinks: the band never changes height */
+#cap .sub{display:none!important}
 #cap .eb,#cap .hl,#cap .sub{transition:opacity .3s cubic-bezier(.2,.7,.2,1),transform .3s cubic-bezier(.2,.7,.2,1)}
 #cap.swap .eb,#cap.swap .hl,#cap.swap .sub{opacity:0;transform:translateY(6px)}
 #cap .term{pointer-events:auto}
@@ -98,10 +115,8 @@ body.cutting :is(#cap,#card,#scale,#orbhint,#ctl,#dbar,.nav),body.cover :is(#cap
 #tip p{margin:0;font:400 14px/1.45 var(--font-ui);color:var(--ink2)}
 .lnk{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-top:10px;font:600 13px/1 var(--font-ui);color:var(--accent)}
 .lnk:hover{text-decoration:underline}
-/* number card (guided pages) */
-#card{position:absolute;right:20px;top:calc(var(--pillB,80px) + 12px);width:340px;max-height:calc(100vh - var(--pillB,80px) - 90px);overflow:auto;z-index:5;padding:16px 18px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line2);opacity:0;transform:translateX(14px);transition:opacity .4s,transform .4s;pointer-events:none}
-#card.on{opacity:1;transform:none;pointer-events:auto}
-body[data-format=talk] #card{display:none!important}
+/* the old side card: no longer shown in either format (numbers go where they belong: X.callout, X.inset, slides) */
+#card{display:none!important}
 .kick{font:700 11px/1.25 var(--font-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
 .ctitle{font:700 21px/1.15 var(--font-display);margin:6px 0 10px}
 /* mode panel */
@@ -142,6 +157,7 @@ body:not([data-state=tour]) #ctl,body.cutting #ctl,body.still #ctl{opacity:0;poi
 #ctlB{min-width:108px;padding:0 10px 0 8px}
 #ctlI{width:12px;height:12px;display:inline-flex;flex:none}
 #ctlI.play{width:0;height:0;border-left:11px solid var(--accent);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent}
+#ctlI.rew{width:0;height:0;border-right:11px solid var(--accent);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent}
 #ctlI.pause{border-left:3.5px solid var(--ink);border-right:3.5px solid var(--ink);width:11px;height:12px}
 #ctlI.done{background:var(--ink3);width:10px;height:10px}
 #ctlR{font-size:15px;padding:0 8px}
@@ -171,7 +187,7 @@ body[data-format=guided][data-state=tour] #navR{background:var(--play-bg);color:
 body.notes[data-state=tour] #notes:not(.empty){display:block}
 #jump{position:fixed;right:24px;bottom:calc(52px + var(--sab));z-index:81;background:var(--hero-bg);color:var(--hero-ink);font:700 22px/1 var(--font-ui);padding:12px 16px;border-radius:var(--radius);display:none}
 #jump.on{display:block}#jump small{display:block;font:600 12px/1.2 var(--font-ui);opacity:.7;margin-top:6px}
-#hint{position:fixed;left:50%;top:calc(var(--hdrB,80px) + 14px);transform:translateX(-50%);z-index:60;padding:8px 16px;border-radius:var(--radius);background:var(--hero-bg);color:var(--hero-ink);font:600 14px/1 var(--font-ui);opacity:0;transition:opacity .3s;pointer-events:none}
+#hint{position:fixed;left:50%;top:calc(var(--hdrB,80px) + 14px);transform:translateX(-50%);z-index:60;padding:8px 16px;border-radius:var(--radius);background:var(--hero-bg);color:var(--hero-ink);font:600 14px/1.35 var(--font-ui);width:max-content;max-width:min(560px,calc(100vw - 32px));text-align:center;opacity:0;transition:opacity .3s;pointer-events:none}
 #hint.on{opacity:1}
 #rot{position:fixed;inset:0;z-index:90;background:var(--bg0);display:none;place-items:center;text-align:center;padding:24px}
 #rot.on{display:grid}
@@ -296,8 +312,8 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
   #cap .eb{font-size:10.5px;margin-bottom:7px}
   #cap .hl{font-size:clamp(18px,5.2vw,25px)}
   #cap .sub{font-size:14px}
-  #scale{left:8px;right:8px;max-width:none;white-space:normal}
-  #card{left:8px;right:8px;width:auto;max-height:34vh;padding:12px 14px}
+  #scale{right:16px;top:calc(12px + var(--sat));max-width:52vw;font-size:10.5px;line-height:10.5px}
+  #cap .eb{padding-right:54vw;height:10.5px}
   #panel{left:8px;right:8px;width:auto;top:auto;bottom:calc(12px + var(--sab));max-height:52vh}
   #panel header h2{font-size:19px}
   #dock{left:8px;right:8px;transform:none;bottom:calc(10px + var(--sab));overflow-x:auto;scrollbar-width:none}
@@ -2359,7 +2375,7 @@ const THEME = C.meta.theme === 'dark' ? 'dark' : 'light', FORMAT = C.meta.format
 document.documentElement.dataset.pageTheme = THEME; document.documentElement.lang = LANG; document.body.dataset.format = FORMAT;   // data-page-theme: the engine's own attribute, so a host that marks data-theme (the Claude app in dark mode does) cannot flip the page
 const P = {}, T = {}, TAU = {}, BASE = {};
 const X = window.X = {
-  C, P, T, TAU, t: 0, dt: 1 / 60, mode: null, idx: -1, playing: false, ready: false, version: '2.2',
+  C, P, T, TAU, t: 0, ts: 0, rate: 1, dt: 1 / 60, mode: null, idx: -1, playing: false, ready: false,   // t: the page's clock; ts: the stage's clock, which follows the playback rate (rate: J/L, -4 … 4)
   format: FORMAT, theme: THEME, light: THEME === 'light', lang: LANG, hold: C.meta.advance !== 'auto',   // hold: a beat stays on its last frame until the next move (both formats; meta.advance "auto" plays on)
   reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
   pointer: {x: -9999, y: -9999, down: false, over: false, clicked: false, sx: 0, sy: 0},
@@ -2374,10 +2390,10 @@ const I18N = {
     yourGuess: 'Your guess', lockIn: 'Lock in my guess', spotOn: 'Spot on.', close2: 'Close.', notQuite: 'Not quite.', answer: 'Answer',
     question: 'Question', chapter: 'Chapter', playing: 'PLAYING', paused: 'PAUSED', done: 'DONE', doneNext: 'DONE · → NEXT', cardNext: '→ START',
     slides: 'SLIDES', goTo: 'Go to', gridHint: 'Enter to go · Esc to close', close: 'Close', titleCard: 'Title', laser: 'LASER', laserKey: 'Laser pointer (P)', gridKey: 'All slides (G)',
-    homeKey: 'Back to the title (Esc)', fullKey: 'Full screen (F)', replayKey: 'Replay this beat (R)', scrubHint: 'Drag to scrub through this beat', prev: 'Previous', next: 'Next',
+    homeKey: 'Back to the title (Esc)', fullKey: 'Full screen (F)', fsHome: 'On an iPhone, Safari keeps its bars: tap Share, then Add to Home Screen, and open the page from there to fill the screen.', fsNo: 'This frame does not allow full screen. Open the page on its own.', replayKey: 'Replay this beat (R)', scrubHint: 'Drag to scrub through this beat', prev: 'Previous', next: 'Next',
     rotate: 'Turn your phone sideways', rotateSub: 'The slides are 16:9. Tap to dismiss.', enterToGo: 'Enter to go', holdOn: 'Hold each beat: → to advance', holdOff: 'Auto-advance', modesCue: 'Hands-on modes',
     keys: 'Keys', kNext: 'Next slide (a chapter card is a slide of its own)', kPrev: 'Previous slide', kPlay: 'Play / pause the animation',
-    kScrub: 'Back / forward 3 s (Shift: 8 s)', kReplay: 'Replay this beat', kNumKey: 'number + Enter', kNum: 'Go to that slide (0 = the title)', kModes: 'Open a mode', kGrid: 'All slides',
+    kScrub: 'Play backward / forward: press again for 2×, 4× (Shift: jump 3 s)', kShuttleKey: 'J · K · L', rewinding: 'REWIND', kReplay: 'Replay this beat', kNumKey: 'number + Enter', kNum: 'Go to that slide (0 = the title)', kModes: 'Open a mode', kGrid: 'All slides',
     noPage: 'No slide {n}: they run from 0 to {N}',
     kLaser: 'Laser pointer', kNotes: 'Speaker notes', kAuto: 'Auto-advance on / off', kFull: 'Full screen', kEsc: 'Back to the title', kHelp: 'This list',
     touchHelp: 'On a tablet or phone: swipe left or right, or tap ‹ ›.', orbit: 'drag to turn · scroll or pinch to zoom · double-click to reset',
@@ -2746,8 +2762,8 @@ function computeView(snap) {
   const sai = $('#sai'), insT = sai ? sai.offsetHeight : 0, insB = sai ? sai.offsetWidth : 0;
   let y = 16 + insT, x = 16, r = 16, b = 16 + insB, capB = 16 + insT;
   if (capOn) { const cr = cap.getBoundingClientRect(); if (cr.height > 4) { capB = cr.bottom; y = Math.max(y, cr.bottom + 10); } }
-  let pillB = capB; const sc = $('#scale'); if (sc && sc.classList.contains('on') && getComputedStyle(sc).display !== 'none') { const pb = sc.getBoundingClientRect().bottom; pillB = Math.max(capB, pb); y = Math.max(y, pb + 6); }
-  const hdr = y;   // the header stack (caption, pill): the panel and the hint hang from it; the pill hangs from the caption alone and the card from the pill, so nothing moves the edge it is measured from
+  const pillB = capB;   // the honesty note sits inside the band's eyebrow row, so the header is the band alone
+  const hdr = y;   // the panel and the hint hang from the header; its height is the same on every beat (one line)
   if (st === 'tour') b = 48 + insB;
   else if (dock && !dock.classList.contains('hide') && getComputedStyle(dock).opacity > 0.1) b = Math.max(b, S.h - dock.getBoundingClientRect().top + 12);
   if (m) {
@@ -2799,6 +2815,7 @@ X.label = (key, x, y, html, o = {}) => {
   if (!el._w) { el.style.display = ''; el._w = el.offsetWidth; el._hh = el.offsetHeight; el._mk = el._h + '|' + el._c; }   // measured on first appearance, so it can negotiate at once
   if (el._col !== (o.color || '')) { el.style.setProperty('--lc', o.color || ''); el._col = o.color || ''; }
   let ax = o.ax ?? 0.5, ay = o.ay ?? 0.5;   // anchor point within the label box: 0 = left/top, 0.5 = centre, 1 = right/bottom
+  const x0 = x, y0 = y;   // the point the label is about (a leader runs back to it)
   const a = o.alpha ?? 1, w = el._w || 0, h = el._hh || 0, box = (px, py, qx, qy) => [px - qx * w, py - qy * h, px - qx * w + w, py - qy * h + h];
   if (o.cands && w && a > 0) {   // negotiate even while fading in, so the label does not jump when it appears         // negotiate: the first candidate [dx, dy, ax?, ay?] clear of labels placed earlier this frame and of avoid boxes
     const off = b => (b[2] - b[0]) * (b[3] - b[1]) - Math.max(0, Math.min(b[2], S.w - 6) - Math.max(b[0], 6)) * Math.max(0, Math.min(b[3], S.h - 6) - Math.max(b[1], 6));   // the part of a candidate past the screen edge counts as overlap
@@ -2811,13 +2828,71 @@ X.label = (key, x, y, html, o = {}) => {
   if (w && a > 0.01) LBOX.push(box(x, y, ax, ay));   // every visible label claims its box, so later negotiating labels steer around it
   el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(${-ax * 100}%,${-ay * 100}%)`;
   el.style.opacity = a; el.style.display = ''; el._f = lframe;
+  if (o.leader && w) {   // a hairline from the point to the label's nearest edge, with a dot on the point
+    let ln = el._ln; if (!ln) { ln = el._ln = document.createElement('div'); ln.className = 'ldr'; ln.innerHTML = '<i></i>'; labelsEl.insertBefore(ln, labelsEl.firstChild); }
+    const b = box(x, y, ax, ay), px = Math.min(Math.max(x0, b[0] - 3), b[2] + 3), py = Math.min(Math.max(y0, b[1] - 3), b[3] + 3), ang = Math.atan2(py - y0, px - x0);
+    const r0 = Math.max(0, o.leaderR || 0), sx = x0 + Math.cos(ang) * r0, sy = y0 + Math.sin(ang) * r0, len = Math.max(0, Math.hypot(px - sx, py - sy));   // from the thing's edge (leaderR), not its centre
+    if (ln._col !== (o.color || '')) { ln.style.setProperty('--lc', o.color || ''); ln._col = o.color || ''; }
+    ln.style.width = len.toFixed(1) + 'px'; ln.style.transform = `translate(${sx.toFixed(1)}px,${sy.toFixed(1)}px) rotate(${ang.toFixed(4)}rad)`;
+    ln.style.opacity = (a * 0.8).toFixed(3); ln.style.display = ''; ln._f = lframe;
+  }
 };
 function sweepLabels() {   // hide labels not placed this frame; re-measure (once, after all writes) only those whose content or class changed
   for (const el of LBL.values()) {
+    if (el._ln && (el._f !== lframe || el._ln._f !== lframe) && el._ln.style.display !== 'none') el._ln.style.display = 'none';
     if (el._f !== lframe) { if (el.style.display !== 'none') el.style.display = 'none'; }
     else if (el._mk !== el._h + '|' + el._c) { el._w = el.offsetWidth; el._hh = el.offsetHeight; el._mk = el._h + '|' + el._c; }
   }
 }
+
+/* ---------------------------------------------------------------- callouts: a number where the thing it measures is, when it happens
+   X.callout(key, x, y, {v, u, k, st, color, at, until, side, r, size, alpha, drop}): x, y the point on screen (project a world point),
+   r the radius of the thing there on screen (the callout and its leader keep clear of it);
+   v a number, a string, or "=name" for X.vals.name; u its unit; k a short caption under it; st a status word, only where it changes
+   how to read the number; at/until in beat progress (0..1): the callout comes in as the motion reaches it and goes after; in a
+   mode it shows while called. It negotiates its side like a label and draws a hairline back to the point. */
+const CALL_SIDES = d => ({right: [[d + 18, -(d * 0.6 + 10), 0, 1], [d + 18, d * 0.6 + 10, 0, 0]], left: [[-d - 18, -(d * 0.6 + 10), 1, 1], [-d - 18, d * 0.6 + 10, 1, 0]], top: [[0, -d - 22, 0.5, 1]], bottom: [[0, d + 22, 0.5, 0]]});   // d: the radius of the thing on screen
+X.callout = (key, x, y, o = {}) => {
+  let a = o.alpha ?? 1; const cur = X._cur, p = o.p ?? (cur && X.idx >= 0 ? cur.p : null), f = o.fade ?? 0.035;
+  if (p != null && o.at != null) a *= U.clamp((p - o.at + f) / f);
+  if (p != null && o.until != null) a *= U.clamp((o.until + f - p) / f);
+  if (!(a > 0.01)) { const el = LBL.get(key); if (el) el.style.display = 'none'; return; }
+  const v = typeof o.v === 'string' && o.v[0] === '=' ? X.val(o.v.slice(1)) : typeof o.v === 'number' ? X.fmt.n(o.v) : (o.v ?? ''), col = o.color || '';
+  const cc = col && X.sk && X.sk.readable ? X.sk.col(X.sk.readable(col, 'bg0', 3)) : '';
+  const st = cc ? ` style="color:${cc}"` : '';
+  const html = `<span class="v"${st}>${v}</span>${o.u ? `<span class="u"${st}>${o.u}</span>` : ''}${o.st ? `<span class="st">${o.st}</span>` : ''}${o.k ? `<span class="k">${md(o.k)}</span>` : ''}`;
+  const SD = CALL_SIDES(Math.max(0, o.r || 0)), order = o.side && SD[o.side] ? [o.side] : [];
+  const cands = o.cands || [...order, ...['right', 'left', 'top', 'bottom'].filter(s => !order.includes(s))].flatMap(s => SD[s]);
+  X.label(key, x, y, html, {cls: 'callout' + (o.size ? ' ' + o.size : ''), color: col, alpha: a, cands, leader: true, leaderR: o.r || 0, drop: o.drop});
+};
+/* insets: a flat panel in screen space beside the subject (never a panel inside the 3D world), for what the stage cannot say by itself:
+   a chart of the motion on stage, a short listing, a comparison that grows as the beat runs. X.inset(g, o, draw) inside world.draw
+   (or a mode's draw), after the 3D primitives. o.at 'tl' | 'tr' | 'bl' | 'br' | 't' | 'b' | 'l' | 'r' | [fx, fy] (fractions of
+   S.view) | 'auto' (the spot that covers least of o.avoid, screen boxes such as the subject, and of the labels placed so far);
+   o.w, o.h in px (≤ 1: fractions of S.view); o.alpha; o.frame (default true: paper, a hairline, the accent square). draw(g, w, h)
+   draws in the panel's own coordinates (X.sk and X.chart work there, sizes in px) and may return links [[px, py, sx, sy, color], ...]:
+   hairlines from a point in the panel (a curve's current value) to a point on screen (the part it measures). Returns the rect. */
+X.inset = (g, o, draw) => {
+  const V = S.view, a = U.clamp(o.alpha ?? 1); if (a <= 0.01) return null;
+  const W0 = Math.round(o.w <= 1 ? o.w * V.w : (o.w || 360)), H0 = Math.round(o.h <= 1 ? o.h * V.h : (o.h || 220)), m = o.margin ?? 14;
+  const spots = {tl: [V.x + m, V.y + m], tr: [V.x + V.w - W0 - m, V.y + m], bl: [V.x + m, V.y + V.h - H0 - m], br: [V.x + V.w - W0 - m, V.y + V.h - H0 - m],
+    t: [V.cx - W0 / 2, V.y + m], b: [V.cx - W0 / 2, V.y + V.h - H0 - m], l: [V.x + m, V.cy - H0 / 2], r: [V.x + V.w - W0 - m, V.cy - H0 / 2]};
+  let at = o.at || 'auto';
+  if (at === 'auto') { const av = (o.avoid || []).concat(LBOX), ovl = b => av.reduce((s, c) => s + Math.max(0, Math.min(b[2], c[2]) - Math.max(b[0], c[0])) * Math.max(0, Math.min(b[3], c[3]) - Math.max(b[1], c[1])), 0);
+    let least = Infinity; for (const k of ['tr', 'tl', 'br', 'bl', 'r', 'l']) { const [sx, sy] = spots[k], v = ovl([sx, sy, sx + W0, sy + H0]); if (v < least - 1) { least = v; at = k; } } }
+  const [X0, Y0] = (Array.isArray(at) ? [V.x + at[0] * V.w, V.y + at[1] * V.h] : spots[at] || spots.tr).map(Math.round);
+  let links = null; g.save(); g.globalAlpha *= a;
+  if (o.frame !== false) { g.fillStyle = X.col('bg0'); g.fillRect(X0, Y0, W0, H0); g.strokeStyle = X.col('line2'); g.lineWidth = 1; g.strokeRect(X0 + 0.5, Y0 + 0.5, W0 - 1, H0 - 1); g.fillStyle = X.col('accent'); g.fillRect(X0, Y0, 9, 9); }
+  g.translate(X0, Y0);
+  try { links = draw(g, W0, H0); } catch (e) { report(e, 'inset'); }
+  g.restore();
+  if (Array.isArray(links)) { g.save(); g.globalAlpha *= a * 0.85; g.lineWidth = 1.2;
+    for (const [px, py, sx, sy, col] of links) { if (![px, py, sx, sy].every(Number.isFinite)) continue; const c = col || X.col('ink3'); g.strokeStyle = c; g.fillStyle = c;
+      g.beginPath(); g.moveTo(X0 + px, Y0 + py); g.lineTo(sx, sy); g.stroke(); g.beginPath(); g.arc(X0 + px, Y0 + py, 3, 0, 7); g.fill(); g.beginPath(); g.arc(sx, sy, 3.5, 0, 7); g.fill(); }
+    g.restore(); }
+  if (a > 0.05 && !X._thumb) LBOX.push([X0, Y0, X0 + W0, Y0 + H0]);   // negotiating labels steer around the panel
+  return {x: X0, y: Y0, w: W0, h: H0};
+};
 
 /* ---------------------------------------------------------------- params: every visual quantity is a tweened number */
 X.base = obj => { for (const k in obj) { BASE[k] = +obj[k]; if (!(k in P)) { P[k] = +obj[k]; T[k] = +obj[k]; } } };
@@ -2861,20 +2936,31 @@ function setCaption(eb, hl, sub) {
   if (hl && key === capNow && el.classList.contains('on')) return;            // the same caption again: nothing to animate (live loops call X.say often)
   const shape = k => k.replace(/[−-]?\d[\d.,]*/g, '#');
   if (hl && capNow && el.classList.contains('on') && !el.classList.contains('swap') && shape(key) === shape(capNow)) {   // only numbers changed: update in place, no swap
-    capNow = key; el.querySelector('.eb').innerHTML = md(eb || ''); el.querySelector('.hl').innerHTML = md(hl); el.querySelector('.sub').innerHTML = md(sub || ''); return;
+    capNow = key; el.querySelector('.eb').innerHTML = md(eb || ''); el.querySelector('.hl').innerHTML = md(hl); el.querySelector('.sub').innerHTML = md(sub || ''); const hlE = el.querySelector('.hl'); if (hlE.scrollWidth > hlE.clientWidth + 1) fitHeadline(); return;   // a live readout refits only when it outgrows the line
   }
   capNow = hl ? key : null; const tok = ++capTok;
   $('#scrim').classList.toggle('on', !!hl);
   if (!hl) { el.classList.remove('on'); computeView(); return; }
   const put = () => {
     if (tok !== capTok) return;
-    el.querySelector('.eb').innerHTML = md(eb || ''); el.querySelector('.eb').style.display = eb ? '' : 'none';
+    el.querySelector('.eb').innerHTML = md(eb || ''); el.querySelector('.eb').classList.toggle('empty', !eb);   // an empty eyebrow keeps its row: the band is the same height on every beat
     el.querySelector('.hl').innerHTML = md(hl);
-    el.querySelector('.sub').innerHTML = md(sub || ''); el.querySelector('.sub').style.display = sub ? '' : 'none';
-    el.classList.remove('swap'); computeView();
+    el.querySelector('.sub').innerHTML = md(sub || '');   // kept for the notes (N); never shown in the band
+    el.classList.remove('swap'); fitHeadline(); computeView();
   };
   if (el.classList.contains('on')) { el.classList.add('swap'); setTimeout(put, 230); } else { put(); el.classList.add('on'); computeView(); }
 }
+/* the headline stays on one line: it shrinks to fit, down to a floor; a headline that still does not fit is cut with an ellipsis
+   and recorded (X._capFit.over), which QA reports as an error: say it shorter and put the rest on the stage */
+function fitHeadline() {
+  const el = $('#cap .hl'); if (!el || !el.textContent) return;
+  el.style.fontSize = '';
+  const base = parseFloat(getComputedStyle(el).fontSize) || 40, floor = Math.max(20, base * 0.85); let fs = base;
+  for (let k = 0; k < 16 && el.scrollWidth > el.clientWidth + 1 && fs > floor; k++) { fs = Math.max(floor, fs * 0.95); el.style.fontSize = fs.toFixed(1) + 'px'; }
+  X._capFit = {text: el.textContent, base: Math.round(base), size: Math.round(fs), over: el.scrollWidth > el.clientWidth + 1};
+}
+if (document.fonts) { document.fonts.ready.then(() => fitHeadline()); document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', () => fitHeadline()); }
+addEventListener('resize', () => fitHeadline());
 X.say = (eb, hl, sub) => setCaption(eb, hl, sub);
 function setScale(text) { const el = $('#scale'); if (!text) { el.classList.remove('on'); return; } el.innerHTML = '<span class="dot"></span>' + md(text); el.classList.add('on'); }
 X.scaleNote = setScale;
@@ -2917,7 +3003,7 @@ function goto(i, p = 0) {
   hideHandoff(); hideTip();
   const prev = X._cur; if (prev && prev.def.exit) safe(() => prev.def.exit(P), 'scene.exit');
   const beat = C.tour[i], def = X._scenes[beat.id] || {};
-  X.idx = i; X._cur = {beat, def, p, k: -1};
+  X.idx = i; X._cur = {beat, def, p, k: -1}; X.rate = 1;   // every beat starts at normal speed
   applyTargets(targetsFor(def, p));
   if (def.snap) X.snap(def.snap);
   if (def.enter) safe(() => def.enter(P, beat), 'scene.enter ' + beat.id);
@@ -2932,7 +3018,7 @@ X.goto = goto;
 X.gotoScene = id => { const i = C.tour.findIndex(b => b.id === id); if (i >= 0) { goto(i); X.playing = false; ppIcon(); } };
 X.play = () => { if (X.idx < 0) goto(0); X.playing = true; ppIcon(); };
 X.pause = () => { X.playing = false; ppIcon(); };
-function togglePlay() { if (X.idx < 0) { goto(0); X.playing = true; } else X.playing = !X.playing; ppIcon(); }
+function togglePlay() { if (X.idx < 0) { goto(0); X.playing = true; } else X.playing = !X.playing; X.rate = 1; ppIcon(); }   // play and pause always return to normal speed
 function next() { deckNext(); }
 function prevScene() { deckPrev(); }
 function leaveTour() {
@@ -3659,7 +3745,16 @@ function advance() { if (X.idx < C.tour.length - 1) { const i = X.idx + 1; goto(
 X.deck = {next: deckNext, prev: deckPrev, start: startTour, cut: () => ({on: !!DK.cut.ch, held: !!(DK.cut.ch && DK.cut.held), a: cutA()}), opaque: () => DK.opaque, key: () => DK.key, rect: () => deckRect(), xf: () => DK.xf,
   page: () => pageNow(), pages: () => PAGES.length, go: n => goPage(n)};   // pages: 0 the title, then every chapter card and beat
 function replay() { if (X.idx < 0) return; cutClear(); X.seek(X.idx, 0); X.play(); }
-function scrub(sec) { const c = X._cur; if (!c || X.idx < 0) return; const was = X.playing, dur = c.beat.dur || 7; X.seek(X.idx, U.clamp(c.p + sec / dur, 0, 0.999)); if (was) X.play(); }
+function scrub(sec) { const c = X._cur; if (!c || X.idx < 0) return; const was = X.playing, r = X.rate, dur = c.beat.dur || 7; X.seek(X.idx, U.clamp(c.p + sec / dur, 0, 0.999)); if (was) { X.play(); X.rate = r; } }
+/* J and L, as in a video editor: L plays forward, and each further L doubles the speed up to 4×; J plays backward the same way;
+   K or Space pauses. The beat's progress, its tweens and the stage clock (draw's t) follow the rate; a rewind stops at the beat's start. */
+function shuttle(dir) {
+  const c = X._cur; if (!c || X.idx < 0) return;
+  if (DK.cut.ch && DK.waiting()) { if (dir > 0) deckNext(); return; }
+  if (!X.playing || Math.sign(X.rate) !== dir) { if (dir > 0 && c.p >= 0.999) { c.p = 0; c.k = -1; } X.rate = dir; X.play(); }
+  else X.rate = dir * Math.min(4, Math.abs(X.rate) * 2);
+}
+X.shuttle = shuttle;
 function toggleHold() { X.hold = !X.hold; toast2(X.hold ? tx('holdOn') : tx('holdOff')); }
 
 /* ---------------------------------------------------------------- what the deck shows now */
@@ -3728,7 +3823,7 @@ function drawTitle(x, w, h) {
    Bottom right on every cover, above the corner buttons: the cover photo's credit, then the stamp that names the engine
    and its author. A page's own X.slide('title') gets the stamp too (its photo credit goes at X.deck.creditY()).
    meta.stamp: false leaves the stamp off. */
-X.version = /^\d/.test('2.6.0') ? '2.6.0' : '';   // build_explorable.py writes the skill's version (SKILL.md) here
+X.version = /^\d/.test('2.7.0') ? '2.7.0' : '';   // build_explorable.py writes the skill's version (SKILL.md) here
 const STAMP = ['Built with ', 'paper-explorable' + (X.version ? ' ' + X.version : ''), ', a tool by Chanyoung Moon'];
 X.stamp = () => STAMP.join('');
 const stampOn = () => (C.meta || {}).stamp !== false;
@@ -3835,8 +3930,8 @@ function deckOnBeat() {
 let ctlLast = '';
 const ctlState = () => { const c = X._cur; if (!c || X.idx < 0) return 'none'; if (DK.cut.ch && DK.waiting()) return 'card'; if (!X.playing) return 'pause'; return c.p >= 0.999 ? 'done' : 'play'; };
 function ctlFrame() {
-  const s = ctlState(), p = X._cur ? U.clamp(X._cur.p) : 0;
-  if (s !== ctlLast) { ctlLast = s; $('#ctlI').className = s === 'none' || s === 'card' ? '' : s; $('#ctlT').textContent = s === 'play' ? tx('playing') : s === 'pause' ? tx('paused') : s === 'done' ? (X.hold ? tx('doneNext') : tx('done')) : s === 'card' ? tx('cardNext') : ''; }
+  const s = ctlState(), p = X._cur ? U.clamp(X._cur.p) : 0, r = X.rate || 1, key = s + r;
+  if (key !== ctlLast) { ctlLast = key; $('#ctlI').className = s === 'none' || s === 'card' ? '' : s === 'play' && r < 0 ? 'rew' : s; $('#ctlT').textContent = s === 'play' ? (r < 0 ? tx('rewinding') : tx('playing')) + (Math.abs(r) !== 1 ? ' ' + Math.abs(r) + '×' : '') : s === 'pause' ? tx('paused') : s === 'done' ? (X.hold ? tx('doneNext') : tx('done')) : s === 'card' ? tx('cardNext') : ''; }
   $('#ctlBar i').style.width = (p * 100).toFixed(2) + '%'; $('#ctlBar b').style.left = (p * 100).toFixed(2) + '%';
 }
 
@@ -3887,16 +3982,21 @@ document.documentElement.addEventListener('mouseleave', () => { lIn = false; lki
 const laser = v => { lOn = !!v; $('#laserBtn').classList.toggle('on', lOn); document.body.classList.toggle('laser', lOn); lfit(); lkick(); };
 X.laser = laser;
 let toastT = 0;
-function toast2(s) { const t = $('#hint'); t.textContent = s; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 1700); }
+function toast2(s, ms) { const t = $('#hint'); t.textContent = s; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), ms || 1700); }
 const KEYS = () => [
-  ['→ · PageDown', tx('kNext')], ['← · PageUp', tx('kPrev')], ['Space · K', tx('kPlay')], ['J · L', tx('kScrub')], ['R', tx('kReplay')],
+  ['→ · PageDown', tx('kNext')], ['← · PageUp', tx('kPrev')], ['Space · K', tx('kPlay')], ['J · K · L', tx('kScrub')], ['R', tx('kReplay')],
   [tx('kNumKey'), tx('kNum')], ['G', tx('kGrid')], ['P', tx('kLaser')], ['N', tx('kNotes')], ['A', tx('kAuto')], ['F', tx('kFull')], ['Esc', tx('kEsc')], ['?', tx('kHelp')]];
 function buildHelp() { $('#help .in').innerHTML = `<h3>${tx('keys')}</h3>` + KEYS().map(([k, v]) => `<div class="r"><kbd>${k}</kbd><span>${v}</span></div>`).join('') + `<p class="tch">${tx('touchHelp')}</p>` + `<p class="stamp">${STAMP[0]}<b>${STAMP[1]}</b>${STAMP[2]}</p>`; }   // the stamp also closes the key list, so a page without a cover names its engine too
 
 /* ---------------------------------------------------------------- full screen, touch, rotate hint, idle cursor */
 const FSE = document.documentElement, canFS = !!(FSE.requestFullscreen || FSE.webkitRequestFullscreen);
 const isFS = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
-function toggleFS() { try { if (isFS()) (document.exitFullscreen || document.webkitExitFullscreen).call(document); else (FSE.requestFullscreen || FSE.webkitRequestFullscreen).call(FSE); } catch (e) { /* not allowed here */ } }
+const standalone = () => !!(navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone), (display-mode: fullscreen)').matches));   // opened from the Home Screen: no browser bars to hide
+function toggleFS() {
+  if (!canFS) { toast2(tx('fsHome'), 7000); return; }   // Safari on an iPhone lets a page fill the screen only when it is opened from the Home Screen
+  const no = () => toast2(tx('fsNo'), 4000);              // e.g. a frame that does not allow full screen
+  try { if (isFS()) (document.exitFullscreen || document.webkitExitFullscreen).call(document); else { const r = (FSE.requestFullscreen || FSE.webkitRequestFullscreen).call(FSE); if (r && r.catch) r.catch(no); } } catch (e) { no(); }
+}
 const isTouch = () => matchMedia('(pointer: coarse)').matches || ('ontouchstart' in window && navigator.maxTouchPoints > 0);
 let sw = null;
 addEventListener('pointerdown', e => { if (e.pointerType !== 'touch') return; if (e.target.closest && e.target.closest('#panel,#dock,#grid,#hand,#help,#ctl,#dbar,.nav,button,input,a,.term,#tip')) { sw = null; return; } sw = {x: e.clientX, y: e.clientY, t: performance.now()}; }, {passive: true, capture: true});
@@ -3924,8 +4024,8 @@ function onKey(e) {
   else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); deckPrev(); }
   else if (k === ' ') { e.preventDefault(); if (st === 'home') startTour(); else if (DK.cut.ch && DK.waiting()) deckNext(); else togglePlay(); }
   else if ((k === 'k' || k === 'K') && st === 'tour') { if (DK.cut.ch && DK.waiting()) deckNext(); else togglePlay(); }
-  else if (k === 'j' || k === 'J') scrub(e.shiftKey ? -8 : -3);
-  else if (k === 'l' || k === 'L') scrub(e.shiftKey ? 8 : 3);
+  else if (k === 'j' || k === 'J') { if (e.shiftKey) scrub(-3); else shuttle(-1); }
+  else if (k === 'l' || k === 'L') { if (e.shiftKey) scrub(3); else shuttle(1); }
   else if ((k === 'r' || k === 'R') && st === 'tour') replay();
   else if (k === 'p' || k === 'P') laser(!lOn);
   else if (k === 'g' || k === 'G') gridOpen();
@@ -3950,7 +4050,7 @@ function deckBuild() {
   $('#laserBtn').innerHTML = '<i></i>' + tx('laser'); $('#laserBtn').title = tx('laserKey'); $('#laserBtn').addEventListener('click', e => { e.stopPropagation(); laser(!lOn); e.currentTarget.blur(); });
   $('#gridBtn').innerHTML = '<i>' + '<b></b>'.repeat(9) + '</i>' + tx('slides'); $('#gridBtn').title = tx('gridKey'); $('#gridBtn').addEventListener('click', gridOpen); $('#pnum').addEventListener('click', gridOpen);
   $('#homeBtn').title = tx('homeKey'); $('#homeBtn').innerHTML = X.icons.home; $('#homeBtn').addEventListener('click', () => home());
-  if (canFS) { $('#fsBtn').title = tx('fullKey'); $('#fsBtn').innerHTML = X.icons.full; $('#fsBtn').addEventListener('click', toggleFS); } else $('#fsBtn').remove();
+  if ((canFS || isTouch()) && !standalone()) { $('#fsBtn').title = tx('fullKey'); $('#fsBtn').innerHTML = X.icons.full; $('#fsBtn').addEventListener('click', e => { e.stopPropagation(); toggleFS(); e.currentTarget.blur(); }); } else $('#fsBtn').remove();   // phones too: in landscape the browser's bars take a third of the screen
   $('#navL').innerHTML = X.icons.prev; $('#navR').innerHTML = X.icons.next; $('#navL').setAttribute('aria-label', tx('prev')); $('#navR').setAttribute('aria-label', tx('next'));
   $('#navL').addEventListener('click', deckPrev); $('#navR').addEventListener('click', deckNext);
   $('#dockcue').innerHTML = `${X.icons.up}<span>${tx('modesCue')}</span>`;
@@ -4256,6 +4356,7 @@ X.chart = spec => {
         gg.stroke(); gg.setLineDash([]);
       }
       pts.forEach((p, i) => {
+        if (se.marker === 'none' || se.size === 0) return;   // a dense curve (a recorded signal) draws as a line alone
         if (i > upto + 1e-6 && n > 1) return;
         const pop = n > 1 ? U.clamp((upto - i) * 3 + 1) : U.clamp(rv); const rr = (se.size || 5) * (0.4 + 0.6 * pop);
         (MARK[se.marker || 'circ'] || MARK.circ)(gg, SX(p[0]), SY(p[1]), rr);
@@ -4272,6 +4373,12 @@ X.chart = spec => {
     });
     (s.notes || []).forEach(nt => { if ((nt.reveal ?? 1) <= 0.01) return; gg.globalAlpha = (o.alpha ?? 1) * (nt.reveal ?? 1); const x = SX(nt.x), y = SY(nt.y); gg.fillStyle = nt.color || ink2; gg.font = `${nt.weight || 500} ${(nt.size || 12) * FS}px ${fui}`; gg.textAlign = nt.align || 'left'; gg.textBaseline = 'middle'; gg.fillText(nt.text, x + (nt.dx || 0), y + (nt.dy || 0)); gg.globalAlpha = o.alpha ?? 1; });
     (s.brackets || []).forEach(bk => { if ((bk.reveal ?? 1) <= 0.01) return; const x = SX(bk.x) + (bk.dx || 0), ya = SY(bk.y0), yb = SY(bk.y1), yc = U.lerp(ya, yb, bk.reveal ?? 1); gg.globalAlpha = (o.alpha ?? 1); gg.strokeStyle = bk.color || cInk; gg.lineWidth = 1.5; gg.beginPath(); gg.moveTo(x - 5, ya); gg.lineTo(x, ya); gg.lineTo(x, yc); gg.lineTo(x - 5, yc); gg.stroke(); if ((bk.reveal ?? 1) > 0.9) { gg.fillStyle = bk.color || cInk; gg.font = `600 ${(bk.size || 15) * FS}px ${X.col('font-display')}`; gg.textAlign = 'left'; gg.textBaseline = 'middle'; gg.fillText(bk.text, x + 8, (ya + yb) / 2); } });
+    if (o.cursor != null && Number.isFinite(o.cursor)) {   // a playhead at x = o.cursor (the motion's clock), with each series' value marked on it
+      const cx = SX(Math.min(s.x.max, Math.max(s.x.min, o.cursor))); gg.globalAlpha = (o.alpha ?? 1) * 0.85; gg.strokeStyle = o.cursorColor || cInk; gg.lineWidth = 1.2;
+      gg.beginPath(); gg.moveTo(cx, y1); gg.lineTo(cx, y0); gg.stroke();
+      s.series.forEach(se => { if (se.hidden || (se.reveal ?? 1) < 0.999) return; const pt = ch.at(o.cursor, se); if (!pt) return; gg.globalAlpha = o.alpha ?? 1; gg.fillStyle = X.col('bg0'); gg.beginPath(); gg.arc(pt[0], pt[1], 5.5, 0, 7); gg.fill(); gg.fillStyle = se.color || cInk; gg.beginPath(); gg.arc(pt[0], pt[1], 4, 0, 7); gg.fill(); });
+      gg.globalAlpha = o.alpha ?? 1;
+    }
     const hv = o.hover;
     if (hv) {
       const x = SX(hv.p[0]), y = SY(hv.p[1]); gg.globalAlpha = 1;
@@ -4284,6 +4391,12 @@ X.chart = spec => {
       lines.forEach((l, i) => { gg.fillStyle = i === 0 ? (hv.se.color || X.col('tip-ink')) : i === 1 ? X.col('tip-ink') : ink3; gg.font = `${i ? 500 : 600} ${12 * FS}px ${fui}`; gg.textAlign = 'left'; gg.textBaseline = 'top'; gg.fillText(l, tx + 10, ty + 7 + i * 17); });
     }
     gg.restore();
+  };
+  ch.at = (xv, se = 0) => {   // where a series is at x = xv, in the coordinates the chart was last drawn in (for a cursor, or a link to the stage)
+    if (!ch.map) return null; const S0 = typeof se === 'number' ? ch.spec.series[se] : se; if (!S0 || !S0.pts.length) return null;
+    const pts = S0.pts; let i = 0; while (i < pts.length - 1 && pts[i + 1][0] < xv) i++;
+    const p0 = pts[i], p1 = pts[Math.min(pts.length - 1, i + 1)], f = p1[0] === p0[0] ? 0 : Math.min(1, Math.max(0, (xv - p0[0]) / (p1[0] - p0[0])));
+    return [ch.map.SX(U.lerp(p0[0], p1[0], f)), ch.map.SY(U.lerp(p0[1], p1[1], f)), U.lerp(p0[1], p1[1], f)];
   };
   ch.pick = (px, py, maxd = 18) => {
     if (!ch.map) return null; let best = null, bd = maxd;
@@ -4346,27 +4459,29 @@ function frame(now) {
   let dt = (now - last) / 1000; last = now; if (!(dt > 0)) dt = 1 / 60; dt = Math.min(dt, 0.05);
   { const a = X._fitSnap ? 1 : 1 - Math.exp(-dt / 0.12); ORB.yaw += (ORB.ty - ORB.yaw) * a; ORB.pitch += (ORB.tp - ORB.pitch) * a; ORB.zoom += (ORB.tz - ORB.zoom) * a; }   // orbit eases toward the reader's drag, and back when released
   X.dt = dt; X.t += dt; lframe++; LBOX.length = 0; CTEXT.length = 0; X._p3n = 0; X._prj = 0; X._camsLast = X._cams || []; X._cams = [];
-  for (const id of ['cap', 'card']) { const e = document.getElementById(id); if (e && e.classList.contains('on')) { const r = e.getBoundingClientRect(); if (r.width) LBOX.push([r.left, r.top, r.right, r.bottom]); } }   // negotiating labels keep clear of the caption and the card   // before any update() so labels drawn there survive the sweep; label boxes start empty
-  const cur = X._cur;
+  { const e = document.getElementById('cap'); if (e && e.classList.contains('on')) { const r = e.getBoundingClientRect(); if (r.width) LBOX.push([r.left, r.top, r.right, r.bottom]); } }   // negotiating labels keep clear of the title band   // before any update() so labels drawn there survive the sweep; label boxes start empty
+  const cur = X._cur, run = !!(cur && X.idx >= 0 && X.playing && !DK.waiting()), rate = run ? (X.rate || 1) : 1, sdt = dt * Math.abs(rate);   // the shuttle (J/L) scales the stage's time: the beat's progress, its tweens and draw's t; the chrome keeps real time
+  X.ts += dt * rate;
   if (cur && X.idx >= 0) {
-    if (X.playing && !DK.waiting()) {
-      cur.p += dt / (cur.beat.dur || 7);
+    if (run) {
+      cur.p += rate * dt / (cur.beat.dur || 7);
       if (cur.p >= 1) { if (X.hold || X.reduced) { cur.p = 1; } else advance(); }
+      else if (cur.p <= 0 && rate < 0) { cur.p = 0; X.pause(); X.rate = 1; }   // a rewind stops at the beat's start
     }
     const c2 = X._cur;
     if (c2) {
       if (c2.def.keys) { let n = 0; for (const [kt] of c2.def.keys) if (c2.p >= kt) n++; if (n !== c2.k) { c2.k = n; applyTargets(targetsFor(c2.def, c2.p)); } }
-      if (c2.def.update) safe(() => c2.def.update(c2.p, P, dt), 'scene.update ' + c2.beat.id);
+      if (c2.def.update) safe(() => c2.def.update(c2.p, P, rate < 0 ? 0 : sdt), 'scene.update ' + c2.beat.id);   // while rewinding, a model stepped in update() holds still; what is computed from p plays backward
       progressUI();
     }
   }
   if (X.mode && X._mdef && X._mdef.update) safe(() => X._mdef.update(P, dt), 'mode.update ' + X.mode);
   for (const k in T) { if (!Number.isFinite(T[k])) { X.nanCount++; continue; } if (!Number.isFinite(P[k])) P[k] = T[k];   // a NaN never sticks in a tween
-    const tau = TAU[k] ?? 0.5; const a = tau <= 0 ? 1 : 1 - Math.exp(-dt / tau); P[k] += (T[k] - P[k]) * a; if (Math.abs(T[k] - P[k]) < 1e-6) P[k] = T[k]; }
+    const tau = TAU[k] ?? 0.5; const a = tau <= 0 ? 1 : 1 - Math.exp(-sdt / tau); P[k] += (T[k] - P[k]) * a; if (Math.abs(T[k] - P[k]) < 1e-6) P[k] = T[k]; }
   if (S.vt) { const a = 1 - Math.exp(-dt / 0.35); for (const k of ['x', 'y', 'w', 'h', 'cx', 'cy']) S.view[k] += (S.vt[k] - S.view[k]) * a; }
   g.setTransform(S.dpr, 0, 0, S.dpr, 0, 0); g.clearRect(0, 0, S.w, S.h);
   const gw = GLR.on && GLR.ok() ? GLR.begin(S.dpr, S.w, S.h) : g;   // on the GPU: the page draws on the layered context (2D before the first 3D primitive goes under the scene, after it over)
-  if (X._world && X._world.draw && !(DK.opaque && !X._fitSnap)) safe(() => X._world.draw(gw, S, P, X.t, dt), 'world.draw');   // under an opaque slide or chapter card the stage rests
+  if (X._world && X._world.draw && !(DK.opaque && !X._fitSnap)) safe(() => X._world.draw(gw, S, P, X.ts, sdt), 'world.draw');   // t is the stage's clock (it follows J/L)   // under an opaque slide or chapter card the stage rests
   if (gw !== g) { safe(() => GLR.end(S.w, S.h), 'gpu'); GLR.endFrame(); }
   if ((P._dim || 0) > 0.001) { g.setTransform(S.dpr, 0, 0, S.dpr, 0, 0); g.fillStyle = U.rgba(X.col('bg0'), P._dim * 0.8); g.fillRect(0, 0, S.w, S.h); }
   safe(() => deckFrame(dt), 'deck');
