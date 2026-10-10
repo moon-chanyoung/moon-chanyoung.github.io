@@ -5,6 +5,15 @@ intro: |
 
   How to loosen that bottleneck is a question I keep coming back to, and these explainers are one attempt at an answer. Each starts from something I wanted to understand myself, a lecture topic, a paper, or a question I got curious about, and turns it into a page you can see and play with. I do not know yet what the best answer looks like, but building these is how I am trying to find out.
 items:
+  - title: "Getting the Caffeine Out"
+    subtitle: "How decaf coffee beans are made"
+    url: "/decaf/"
+    thumb: "decaf.jpg"
+    kind: "Curiosity"
+    date: "Oct 2026"
+    context: "A personal question"
+    text: "I love coffee, but even a single morning cup keeps me up at night. Before switching to decaf for good, I wanted to know how the caffeine actually gets out of the bean."
+    tags: ["Swiss Water", "Supercritical CO₂", "Solvent extraction"]
   - title: "Why Are GPUs Fast?"
     subtitle: "From one core to the data center"
     url: "/gpu/"
