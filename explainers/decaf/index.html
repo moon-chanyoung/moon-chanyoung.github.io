@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="generator" content="paper-explorable 2.7.1">
+<meta name="generator" content="paper-explorable 2.7.8">
 <title>Getting the caffeine out</title>
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
 <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
@@ -2117,10 +2117,26 @@ X.label = (key, x, y, html, o = {}) => {
   if (o.cands && w && a > 0) {   // negotiate even while fading in, so the label does not jump when it appears         // negotiate: the first candidate [dx, dy, ax?, ay?] clear of labels placed earlier this frame and of avoid boxes
     const off = b => (b[2] - b[0]) * (b[3] - b[1]) - Math.max(0, Math.min(b[2], S.w - 6) - Math.max(b[0], 6)) * Math.max(0, Math.min(b[3], S.h - 6) - Math.max(b[1], 6));   // the part of a candidate past the screen edge counts as overlap
     const over = b => off(b) + LBOX.reduce((sum, c) => sum + Math.max(0, Math.min(b[2], c[2] + 4) - Math.max(b[0], c[0] - 4)) * Math.max(0, Math.min(b[3], c[3] + 2) - Math.max(b[1], c[1] - 2)), 0);   // a 4 px gap, as QA requires: touching labels read as one
-    let pick = null, least = Infinity;
-    for (const c of o.cands) { const v = over(box(x + c[0], y + c[1], c[2] ?? ax, c[3] ?? ay)); if (v === 0) { pick = c; least = 0; break; } if (v < least) { least = v; pick = c; } }
-    if (least > 0 && o.drop) { el.style.display = 'none'; el._f = lframe; return; }   // no clear spot: a secondary label steps out rather than overlap
-    x += pick[0]; y += pick[1]; ax = pick[2] ?? ax; ay = pick[3] ?? ay;             // else the candidate that overlaps least
+    const C = o.cands, ov = C.map(c => over(box(x + c[0], y + c[1], c[2] ?? ax, c[3] ?? ay)));
+    let best = 0; for (let i = 0; i < C.length; i++) { if (ov[i] === 0) { best = i; break; } if (ov[i] < ov[best]) best = i; }   // the first clear candidate, else the one that overlaps least
+    /* stickiness: a label that was on screen last frame keeps its spot while that spot stays clear. When the spot gets covered
+       it moves only to a clear spot, or to one far less covered (half), and only once the cover has lasted 0.4 s or covers half
+       the label; it goes back to a spot it prefers only after that spot has stayed clear for 1.2 s. Without this a label beside
+       something that moves (a swinging arm, a walking body's box) flips sides every few frames and reads as blinking. A snap
+       (QA, a seek) places it at once. */
+    const dt0 = Math.min(X.dt || 1 / 60, 0.1), live = el._f === lframe - 1 && el._ci != null && el._ci < C.length && !X._fitSnap;
+    let ci = best;
+    if (live) { const prev = el._ci; ci = prev;
+      if (ov[prev] === 0) { el._blk = 0; el._ret = best < prev && ov[best] === 0 ? (el._ret || 0) + dt0 : 0; if (el._ret > 1.2) { ci = best; el._ret = 0; } }
+      else { el._blk = (el._blk || 0) + dt0; el._ret = 0; const better = ov[best] === 0 || ov[best] < ov[prev] * 0.5;
+        if (better && (el._blk >= 0.4 || ov[prev] > w * h / 2)) { ci = best; el._blk = 0; } } }
+    else { el._blk = 0; el._ret = 0; }
+    if (ov[ci] > 0 && o.drop && !(live && ci === el._ci && el._blk > 0 && el._blk < 0.4)) { el.style.display = 'none'; el._f = lframe; el._ci = null; return; }   // no clear spot: a secondary label steps out rather than overlap (after the same grace)
+    const c = C[ci], tx = c[0], ty = c[1], tax = c[2] ?? ax, tay = c[3] ?? ay;
+    // a change of spot slides (about 0.1 s) instead of jumping; a label that has just appeared, or a snap, takes its spot at once
+    if (!live || el._ox == null) { el._ox = tx; el._oy = ty; el._oax = tax; el._oay = tay; }
+    else { const k = 1 - Math.exp(-dt0 / 0.09); el._ox += (tx - el._ox) * k; el._oy += (ty - el._oy) * k; el._oax += (tax - el._oax) * k; el._oay += (tay - el._oay) * k; }
+    el._ci = ci; x += el._ox; y += el._oy; ax = el._oax; ay = el._oay;
   }
   if (w && a > 0.01) LBOX.push(box(x, y, ax, ay));   // every visible label claims its box, so later negotiating labels steer around it
   el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(${-ax * 100}%,${-ay * 100}%)`;
@@ -2157,7 +2173,7 @@ X.callout = (key, x, y, o = {}) => {
   const v = typeof o.v === 'string' && o.v[0] === '=' ? X.val(o.v.slice(1)) : typeof o.v === 'number' ? X.fmt.n(o.v) : (o.v ?? ''), col = o.color || '';
   const cc = col && X.sk && X.sk.readable ? X.sk.col(X.sk.readable(col, 'bg0', 3)) : '';
   const st = cc ? ` style="color:${cc}"` : '';
-  const html = `<span class="v"${st}>${v}</span>${o.u ? `<span class="u"${st}>${o.u}</span>` : ''}${o.st ? `<span class="st">${o.st}</span>` : ''}${o.k ? `<span class="k">${md(o.k)}</span>` : ''}`;
+  const html = `<span class="v"${st}>${v}</span>${o.u ? `<span class="u"${st}>${o.u}</span>` : ''}${o.st ? `<span class="st">${o.st}</span>` : ''}${o.k ? `<span class="k">${md(o.k).replace(/\n/g, '<br>')}</span>` : ''}`;
   const SD = CALL_SIDES(Math.max(0, o.r || 0)), order = o.side && SD[o.side] ? [o.side] : [];
   const cands = o.cands || [...order, ...['right', 'left', 'top', 'bottom'].filter(s => !order.includes(s))].flatMap(s => SD[s]);
   X.label(key, x, y, html, {cls: 'callout' + (o.size ? ' ' + o.size : ''), color: col, alpha: a, cands, leader: true, leaderR: o.r || 0, drop: o.drop});
@@ -3120,7 +3136,7 @@ function drawTitle(x, w, h) {
    Bottom right on every cover, above the corner buttons: the cover photo's credit, then the stamp that names the engine
    and its author. A page's own X.slide('title') gets the stamp too (its photo credit goes at X.deck.creditY()).
    meta.stamp: false leaves the stamp off. */
-X.version = /^\d/.test('2.7.1') ? '2.7.1' : '';   // build_explorable.py writes the skill's version (SKILL.md) here
+X.version = /^\d/.test('2.7.8') ? '2.7.8' : '';   // build_explorable.py writes the skill's version (SKILL.md) here
 const STAMP = ['Built with ', 'paper-explorable' + (X.version ? ' ' + X.version : ''), ', a tool by Chanyoung Moon'];
 X.stamp = () => STAMP.join('');
 const stampOn = () => (C.meta || {}).stamp !== false;
@@ -3308,11 +3324,26 @@ addEventListener('pointermove', wake, {passive: true}); addEventListener('pointe
 
 /* ---------------------------------------------------------------- keys */
 function jumpBuf(show) { const j = $('#jump'); if (!show) { DK.buf = ''; j.classList.remove('on'); return; } j.innerHTML = `→ ${DK.buf}<small>${tx('enterToGo')}</small>`; j.classList.add('on'); clearTimeout(DK.bufT); DK.bufT = setTimeout(() => jumpBuf(false), 3500); }
+/* the key a shortcut means, whatever script the keyboard types: a Latin layout keeps its own characters (AZERTY's A stays A);
+   a key that types another script (Korean Hangul 'ㅏ', Japanese kana, Cyrillic, Greek …) or that an input method holds back
+   ('Process', 'Unidentified') falls back to its physical key, so K is K with Hangul input on too. Shortcuts stay shown and
+   documented in English. A page that reads keys for its own controls uses it as X.keyOf(e). */
+const KEY_NAMED = {Space: ' ', Enter: 'Enter', NumpadEnter: 'Enter', Escape: 'Escape', Backspace: 'Backspace', ArrowLeft: 'ArrowLeft', ArrowRight: 'ArrowRight', ArrowUp: 'ArrowUp', ArrowDown: 'ArrowDown', PageUp: 'PageUp', PageDown: 'PageDown'};
+function keyOf(e) {
+  const k = e.key || '', c = e.code || '';
+  if (k.length === 1 && k.charCodeAt(0) < 128) return k;                                     // printable ASCII, as the layout gives it
+  if (k.length > 1 && k !== 'Process' && k !== 'Unidentified' && k !== 'Dead') return k;      // named keys: Enter, Escape, ArrowLeft …
+  if (/^Key[A-Z]$/.test(c)) return e.shiftKey ? c[3] : c[3].toLowerCase();
+  if (/^(Digit|Numpad)[0-9]$/.test(c)) return c[c.length - 1];
+  if (c === 'Slash') return e.shiftKey ? '?' : '/';
+  return KEY_NAMED[c] || k;
+}
+X.keyOf = keyOf;
 function onKey(e) {
   if (e.target.closest && e.target.closest('input,textarea,select')) return;
-  if ($('#grid').classList.contains('on')) { if (e.key === 'Escape') gridClose(); else if (/^[0-9]$/.test(e.key)) { const inp = $('#gridIn'); inp.focus(); inp.value += e.key; } e.preventDefault(); return; }
+  if ($('#grid').classList.contains('on')) { const kg = keyOf(e); if (kg === 'Escape') gridClose(); else if (/^[0-9]$/.test(kg)) { const inp = $('#gridIn'); inp.focus(); inp.value += kg; } e.preventDefault(); return; }
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  const k = e.key, st = document.body.dataset.state;
+  const k = keyOf(e), st = document.body.dataset.state;
   if (/^[0-9]$/.test(k)) { DK.buf = (DK.buf + k).slice(-3); jumpBuf(true); e.preventDefault(); return; }   // number + Enter goes to that page, in both formats and from anywhere (0 = the title)
   if (DK.buf && k === 'Enter') { const n = parseInt(DK.buf, 10); jumpBuf(false); if (!goPage(n)) toast2(tx('noPage').replace('{n}', n).replace('{N}', PAGES.length)); e.preventDefault(); return; }
   if (DK.buf && k === 'Backspace') { DK.buf = DK.buf.slice(0, -1); if (DK.buf) jumpBuf(true); else jumpBuf(false); e.preventDefault(); return; }
@@ -3748,6 +3779,28 @@ cv.addEventListener('pointerup', e => { PTS.delete(e.pointerId); pinch0 = 0; if 
 cv.addEventListener('pointerleave', () => { X.pointer.over = false; });
 addEventListener('resize', resize);
 $('#help').addEventListener('click', () => $('#help').classList.remove('on'));
+
+/* ---------------------------------------------------------------- the beat clock
+   X.clock(id) -> {t, dt}: a beat's own time in seconds, for motion that belongs to the beat (a walk, a swing, a flow):
+   - the current beat: t = p × dur. It stops when the beat holds at its end or the reader pauses, runs backward in a
+     rewind (J), and jumps with a seek or a scrub; dt is its change since the last frame (negative in a rewind, 0 when still);
+   - a beat whose layer is still fading out, or one drawn under a mode: its clock runs on from where it was, at real time;
+   - a thumbnail (the slide grid, a term's picture): t = 0.8 × dur, dt = 0.
+   X.ts, the t that world.draw gets, keeps running at all times: keep it for ambient motion (a pulse, an idle sway) that
+   should go on while the beat holds. Asked twice in a frame, X.clock gives the same answer. */
+const BCK = {}, durOf = id => { const b = C.tour.find(b2 => b2.id === id); return (b && b.dur) || 7; };
+X.clock = id => {
+  if (X._thumb) return {t: 0.8 * durOf(id), dt: 0};
+  const cur = X._cur, isCur = !!(cur && cur.beat && cur.beat.id === id && X.idx >= 0 && !X.modeId);
+  const c = BCK[id] || (BCK[id] = {t: null, f: -9, dt: 0, cur: false});
+  if (c.f === lframe) return {t: c.t, dt: c.dt};
+  const prev = c.t, fresh = prev === null || c.f < lframe - 1 || c.cur !== isCur;   // a clock that was not running last frame, or changed regime, starts with dt 0
+  if (isCur) c.t = U.clamp(cur.p) * (cur.beat.dur || durOf(id));
+  else c.t = (prev ?? 0.8 * durOf(id)) + (fresh ? 0 : Math.min(X.dt || 0, 0.1));
+  c.dt = fresh ? 0 : c.t - prev; c.f = lframe; c.cur = isCur;
+  return {t: c.t, dt: c.dt};
+};
+X.beatTime = () => X._cur && X._cur.beat ? X.clock(X._cur.beat.id).t : 0;
 
 /* ---------------------------------------------------------------- frame loop */
 let last = performance.now();
@@ -5396,6 +5449,7 @@ function placeMols(cc, turn, t, lift, p, nb) {
   return out;
 }
 function cellBeat(g, S, P, t, al) {
+  t = X.clock('cell').t;   // the beat's own clock: the molecules settle when the beat ends
   const p = prog('cell'), M0 = MAIN;
   const fit = M0.L.map(q => [q[0], 0, q[1]]);
   const pr = K.cam(S, P, {yaw: 0.1, pitch: 1.2, zoom: 0.16, focus: [M0.cc[0], 4, M0.cc[1]], f: 170, ox: 0, oy: 0, fit, fitBox: [0.2, 0.02, 0.8, 0.98], fitMargin: 0.0, fitKey: 'c1cell'});
@@ -5834,7 +5888,7 @@ function drawLeak(g, S, P, t) {
 [() => stallSeries(), () => leakDots(), () => coreRun(), () => coreT97(), () => coreT999()].forEach((f, i) => setTimeout(() => { try { f(); } catch (e) {} }, 2700 + 350 * i));
 K.LAYERS.push({alpha: 'Lch2', draw(g, S, P, t, dt) {
   const b = Math.round(P.c2Beat);
-  if (b === 1) drawPair(g, S, P, t); else if (b === 2) drawStall(g, S, P, t); else if (b === 3) drawCore(g, S, P, t); else if (b === 4) drawLeak(g, S, P, t);
+  if (b === 1) drawPair(g, S, P, X.clock('pair').t); else if (b === 2) drawStall(g, S, P, t); else if (b === 3) drawCore(g, S, P, t); else if (b === 4) drawLeak(g, S, P, t);
 }});
 scene('pair', 1, CAM.pairEdge);
 scene('stall', 2, CAM.stall, {enter() { stallSeries(); }, update(p) { driveStall(stallRun(), p); }});
@@ -6398,9 +6452,9 @@ function battery(g, S, P, t, dt, al, p) {
 /* ================= the layer and the scenes ================= */
 LAYERS.push({alpha: 'Lch3', draw(g, S, P, t, dt) {
   const v = Math.round(P.c3v), al = P.Lch3, p = prog();
-  if (v === 1 && K.ifaceDraw) K.ifaceDraw(g, S, P, t, dt, al, p);
+  if (v === 1 && K.ifaceDraw) { const c = X.clock('interface'); K.ifaceDraw(g, S, P, c.t, c.dt, al, p); }
   else if (v === 2) battery(g, S, P, t, dt, al, p);
-  else if (v === 3 && K.stripDraw) K.stripDraw(g, S, P, t, dt, al, p);
+  else if (v === 3 && K.stripDraw) { const c = X.clock('strip'); K.stripDraw(g, S, P, c.t, c.dt, al, p); }
 }});
 Object.assign(CAM, {
   interface: {yaw: 0.0, pitch: 0.22, lz: LN(0.032), fx: 0, fy: 0, fz: 10, lf: LN(420), ox: 0, oy: 0},
@@ -7061,6 +7115,7 @@ function dial(g, pr, c, r, frac, al, ticks, nums, unit) {          // a round di
     const u = pr(c[0], c[1] + r * 0.45, c[2]); X.ctext(g, unit, u[0], u[1] + 4, {font: '700 11px ' + SK.font('ui'), color: C('ink2'), align: 'center', alpha: al}); }
 }
 function glass(g, S, P, t, dt, al) {
+  ({t, dt} = X.clock('glass'));   // the beat's own clock
   const p = prog(), st = glassState(p), pr = K.cam(S, P, {fit: [[-11.6, -11.9, -1], [11.6, -11.9, -1], [-11.6, 9.8, -1], [11.6, 9.8, -1]], fitBox: [0.3, 0.015, 0.84, 0.99], fitMargin: 0.04, fitKey: 'glass'}), eye = K.eye(pr), Rw = W.Rw;
   /* the body: a steel drum behind its flange, the flange face bolted round the window */
   for (let k = 0; k < 44; k++) { const a0 = 2 * Math.PI * k / 44, a1 = a0 + 2 * Math.PI / 44, am = (a0 + a1) / 2, nr = [Math.cos(am), -Math.sin(am), 0], c = [W.Rb * Math.cos(am), -W.Rb * Math.sin(am), 4];
@@ -7617,6 +7672,7 @@ const chart = () => CH || (CH = X.chart({x: {log: true, min: HMIN, max: HMAX, ti
 const curvePts = (tab, h) => { const o = [[HMIN, 100 * leftAt(tab, HMIN)]]; for (const [hh, l] of tab) { if (hh <= HMIN) continue; if (hh > h) break; o.push([hh, 100 * l]); } if (h > HMIN) o.push([h, 100 * leftAt(tab, h)]); return o; };
 
 function draw(g, S, P, t, dt) {
+  ({t, dt} = X.clock('cold'));   // the beat's own clock
   const al = P.v_cold_L; if (al < 0.01) return;
   const p = prog(), h = hOf(p), Tb = tables();
   const fit = [[-XC - HW - 4, -HF - 2, 0], [XC + HW + 4, -HF - 2, 0], [-XC - HW - 4, -HF - 2, D + 8], [XC + HW + 4, -HF - 2, D + 8], [-XC - HW - 4, HC + 2, 0], [XC + HW + 4, HC + 2, 0]];
