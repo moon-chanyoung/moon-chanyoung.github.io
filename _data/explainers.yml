@@ -5,6 +5,15 @@ intro: |
 
   How to loosen that bottleneck is a question I keep coming back to, and these explainers are one attempt at an answer. Each starts from something I wanted to understand myself, a lecture topic, a paper, or a question I got curious about, and turns it into a page you can see and play with. I do not know yet what the best answer looks like, but building these is how I am trying to find out.
 items:
+  - title: "MyoAssist 1.0"
+    subtitle: "One body, two controllers"
+    url: "/myoassist/"
+    thumb: "myoassist.jpg"
+    kind: "Paper"
+    date: "Oct 2026"
+    context: "Robbins, Son et al., bioRxiv preprint (2026)"
+    text: "I am interested in simulating exoskeletons and brain-computer interfaces, and I wanted to try a tool that can actually do it. Before using MyoAssist, I read the paper to understand how it lets a person's controller and a device's controller drive one simulated body."
+    tags: ["Musculoskeletal simulation", "Exoskeleton", "MuJoCo"]
   - title: "Getting the Caffeine Out"
     subtitle: "How decaf coffee beans are made"
     url: "/decaf/"
