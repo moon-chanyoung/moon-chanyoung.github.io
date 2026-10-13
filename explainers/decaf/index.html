@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="generator" content="paper-explorable 2.10.0">
+<meta name="generator" content="paper-explorable 2.11.1">
 <title>Getting the caffeine out</title>
 <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
 <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
@@ -154,6 +154,8 @@ body:not([data-state=tour]) #ctl,body.cutting #ctl,body.still #ctl{opacity:0;poi
 .db{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:7px;height:28px;padding:0 10px;border:1px solid var(--line2);border-radius:var(--radius);background:var(--glass);font:700 11.5px/1 var(--font-ui);letter-spacing:.07em;color:var(--ink);white-space:nowrap}
 .db:hover{border-color:var(--ink)}
 .db svg{width:15px;height:15px}
+:root:lang(ko) body{word-break:keep-all;overflow-wrap:break-word}   /* Korean: words wrap whole (Hangul comes from the system's Korean face) */
+:root:is(:lang(ko),:lang(ja),:lang(zh)) :is(#cap .eb,.kick,#dockcue,#play,.db,#grid .ch,#hand .eb,.sec,.stat .k,.st,.lbl.callout .st){letter-spacing:.02em}   /* the wide tracking of Latin caps spreads Hangul and kanji apart */
 #ctlB{min-width:108px;padding:0 10px 0 8px}
 #ctlI{width:12px;height:12px;display:inline-flex;flex:none}
 #ctlI.play{width:0;height:0;border-left:11px solid var(--accent);border-top:6.5px solid transparent;border-bottom:6.5px solid transparent}
@@ -305,6 +307,15 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
 #help .tch{margin:12px 0 0;font:400 13px/1.4 var(--font-ui);color:var(--ink3)}
 #help .stamp{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line);font:400 12px/1.4 var(--font-ui);color:var(--ink3)}
 #help .stamp b{font-weight:600}
+#langpick{position:absolute;inset:0;z-index:46;display:none;place-items:center;background:rgba(0,0,0,.45)}   /* the language chooser (T) */
+#langpick.on{display:grid}
+#langpick .in{background:var(--glass-hi);border:1px solid var(--line2);border-radius:var(--radius);color:var(--ink);padding:22px 24px 16px;min-width:min(320px,92vw);box-shadow:0 12px 40px rgba(0,0,0,.25)}
+#langpick h3{margin:0 0 12px;font:700 20px/1 var(--font-display);color:var(--ink);display:flex;align-items:center;gap:10px}
+#langpick h3:before{content:"";width:12px;height:12px;background:var(--accent)}
+#langpick button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;padding:12px 12px;border-top:1px solid var(--line);font:600 17px/1.2 var(--font-ui);color:var(--ink)}
+#langpick button:hover,#langpick button.hi{background:var(--soft)}
+#langpick button.cur:after{content:"";width:10px;height:10px;background:var(--accent);flex:none}
+#langpick .hint{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);font:400 12.5px/1.4 var(--font-ui);color:var(--ink3)}
 /* tablets and phones */
 @media (max-width:1100px){ #ctlBar{width:170px} }
 @media (max-width:760px){
@@ -393,6 +404,7 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
   <div id="hand"><div class="in"><div class="eb"></div><h3></h3><p></p><div class="chips"></div></div></div>
   <div id="tip" role="tooltip"></div>
   <div id="help"><div class="in"></div></div>
+  <div id="langpick" role="dialog" aria-modal="true"><div class="in"></div></div>
   <div id="grid"></div>
   <div id="jump"></div>
   <div id="hint"></div>
@@ -2304,7 +2316,1268 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
    "item": "Fast/slow-metabolizer gene tests (CYP1A2 rs762551)",
    "reason": "In the twin study one variant near CYP1A2 explained 8% of the variation across all twins; the genes beat says that instead of sorting people by one letter."
   }
- ]
+ ],
+ "i18n": {
+  "ko": {
+   "Every number, where it comes from, and what the pictures simplify.": "모든 숫자와 그 출처, 그리고 그림이 단순화한 것.",
+   "Caffeine in a {0} mL regular café americano in Korea.": "한국의 일반 카페 아메리카노 {0} mL 한 잔에 든 카페인.",
+   "MFDS figure cited by Gyeonggi {0}": "경기도 {0} 자료에 인용된 식약처(MFDS) 수치",
+   "{0} mg/L × {1} L": "{0} mg/L × {1} L",
+   "Caffeine in a {0} mL decaf café drink: the average for café-made decaf coffee in a survey of {1} decaf products sold in Gyeonggi province ({2}).": "디카페인 카페 음료 {0} mL 한 잔에 든 카페인: 경기도에서 판매된 디카페인 제품 {1}종 조사({2}) 중 카페에서 만든 디카페인 커피의 평균.",
+   "Gyeonggi Health & Environment Research Institute {0} via twig{1}": "경기도보건환경연구원 {0}(twig{1}에서 재인용)",
+   "{0} mg/L × {1} L; {2} / {3} = {4} cups": "{0} mg/L × {1} L; {2} / {3} = {4}잔",
+   "{0} g": "{0} g",
+   "Mass of one green arabica bean (robusta {0} g).": "아라비카 생두 한 알의 무게(로부스타는 {0} g).",
+   "Bicho et al. {0} review": "Bicho et al. {0} 리뷰 논문",
+   "Caffeine in green arabica, dry basis (wild accessions mean {0}%; Ethiopian range {1}–{2}%).": "건조 중량 기준 아라비카 생두의 카페인(야생 수집 계통 평균 {0}%; 에티오피아산 범위 {1}–{2}%).",
+   "Illy & Viani via Schenker {0}; Ky et al. {1}; Silvarolla et al. {2}": "Illy & Viani(Schenker {0}에서 재인용); Ky et al. {1}; Silvarolla et al. {2}",
+   "Caffeine in green robusta, dry basis (Campa {0} mean {1}%, range {2}–{3}%).": "건조 중량 기준 로부스타 생두의 카페인(Campa {0} 평균 {1}%, 범위 {2}–{3}%).",
+   "Illy & Viani via Schenker {0}; Campa et al. {1}": "Illy & Viani(Schenker {0}에서 재인용); Campa et al. {1}",
+   "Caffeine in one green arabica bean.": "아라비카 생두 한 알에 든 카페인.",
+   "this page": "이 페이지",
+   "{0} g × ({1} − {2} water) × {3}% = {4} mg": "{0} g × ({1} − 수분 {2}) × {3}% = {4} mg",
+   "≤ {0}% dry matter": "건조 중량의 {0}% 이하",
+   "Decaf limit for green and roasted coffee in Germany (KaffeeV §{0}({1})), Canada, and Korea from {2} Jan {3}; also a USDA purchasing specification.": "독일(KaffeeV §{0}({1}))과 캐나다, 그리고 {3}년 1월 {2}일부터 한국에서 쓰는 생두·원두 디카페인 기준. USDA 구매 규격이기도 하다.",
+   "KaffeeV; CFIA Vol. {0} §{1}; MFDS notice No. {2}-{3}; USDA A-A-{4}B": "KaffeeV; CFIA Vol. {0} §{1}; 식약처(MFDS) 고시 제{2}-{3}호; USDA A-A-{4}B",
+   "The {0}% line for one arabica bean.": "아라비카 생두 한 알에 적용한 {0}% 기준선.",
+   "{0} g dry × {1}%": "건조 중량 {0} g × {1}%",
+   "≥ {0}% removed": "{0}% 이상 제거",
+   "Korea's decaf labelling rule until {0} Dec {1}; Japan's industry code uses the same {2}%.": "{1}년 12월 {0}일까지 적용되는 한국의 디카페인 표시 기준이며, 일본 업계 규약도 같은 {2}% 기준을 쓴다.",
+   "MFDS labelling standard (until {0}); Japanese fair-competition code": "식약처(MFDS) 표시기준({0}년까지); 일본 공정경쟁규약",
+   "{0} mg ({1}%)": "{0} mg ({1}%)",
+   "A typical robusta bean after {0}% removal: legal under the old Korean rule, over the {1} line.": "{0}%를 제거한 일반적인 로부스타 생두 한 알: 한국의 옛 기준으로는 합법이지만 {1}년 기준선은 넘는다.",
+   "{0} mg × {1}; {2}% × {3}": "{0} mg × {1}; {2}% × {3}",
+   "US labelling rules define no caffeine limit for decaf (a USDA purchasing spec sets {0}% for government buying); \"{1}% removed\" is a trade convention.": "미국 표시 규정은 디카페인의 카페인 한도를 정하지 않는다(USDA 구매 규격은 정부 구매용으로 {0}%를 정한다). \"{1}% 제거\"는 업계 관행이다.",
+   "eCFR Title {0} search; FDA consumer page; USDA AMS A-A-{1}B ({2})": "eCFR Title {0} 검색; FDA 소비자 안내 페이지; USDA AMS A-A-{1}B ({2})",
+   "{0} t → {1} t": "{0} t → {1} t",
+   "Korean decaf imports (green + roasted), {0} → {1}.": "한국의 디카페인 커피 수입량(생두 + 원두), {0}년 → {1}년.",
+   "UN Comtrade (Korea-reported, HS {0} + {1})": "UN Comtrade(한국 보고 기준, HS {0} + {1})",
+   "{0} per caffeine": "카페인 하나당 {0}개",
+   "Sucrose ({0}) plus chlorogenic acid ({1}) molecules per caffeine molecule in green arabica.": "아라비카 생두에서 카페인 분자 하나당 자당({0})과 클로로겐산({1}) 분자를 합한 수.",
+   "Illy & Viani via Schenker {0}": "Illy & Viani(Schenker {0}에서 재인용)",
+   "{0}/{1} and {2}/{3} vs {4}/{5} mmol per {6} g": "{6} g당 {0}/{1} 및 {2}/{3} 대 {4}/{5} mmol",
+   "Caffeine stacks on chlorogenic acid as a {0}:{1} complex; a caffeine–potassium chlorogenate crystal was isolated from green beans.": "카페인은 클로로겐산에 {0}:{1} 복합체로 포개진다. 생두에서 카페인–클로로겐산칼륨 결정이 분리되었다.",
+   "Horman & Viani {0}; Martin et al., Phytochemistry {1}:{2} ({3}/{4})": "Horman & Viani {0}; Martin et al., Phytochemistry {1}:{2} ({3}/{4})",
+   "Cell-wall thickness in green coffee endosperm (walls {0}% of cell area in arabica, {1}% in robusta).": "생두 배젖의 세포벽 두께(세포 면적 중 벽 비율: 아라비카 {0}%, 로부스타 {1}%).",
+   "Crisafulli et al., ASIC {0}": "Crisafulli et al., ASIC {0}",
+   "≈ {0} million": "≈ {0}백만",
+   "Cells in one bean, for an assumed cell {0} µm across; no measured cell size for green coffee was found.": "세포 지름을 {0} µm로 가정한 생두 한 알의 세포 수. 생두 세포 크기의 실측값은 찾지 못했다.",
+   "{0} cm³ ÷ ({1} µm)³ = {2} million ({3}–{4} million for {5}–{6} µm cells); the {7} µm cell is illustrative": "{0} cm³ ÷ ({1} µm)³ = {2}백만({5}–{6} µm 세포면 {3}–{4}백만); {7} µm 세포는 예시용이다",
+   "dry = stuck": "건조 = 안 빠짐",
+   "Dry caffeine salts hardly dissolve in volatile solvents; dry CO₂ does not take up dry caffeine.": "건조한 카페인 염은 휘발성 용매에 거의 녹지 않는다. 건조한 CO₂는 건조한 카페인을 녹여 가지 않는다.",
+   "US {0} ({1}); US {2} (Zosel)": "US {0} ({1}); US {2} (Zosel)",
+   "{0}–{1}% water": "수분 {0}–{1}%",
+   "Bean water during extraction: {0}–{1}% (DCM), {2}% (CO₂ plant), {3}–{4}% (liquid CO₂).": "추출 중 생두 수분: {0}–{1}%(염화메틸렌), {2}%(CO₂ 공장), {3}–{4}%(액체 CO₂).",
+   "US {0}; De Marco et al. {1}; US {2}": "US {0}; De Marco et al. {1}; US {2}",
+   "≈ {0}% then stuck": "≈ {0}%에서 멈춤",
+   "Removal in still water with {0} parts water to {1} of beans levels off near three-quarters.": "물을 갈지 않고 생두 {1}에 물 {0}의 비율로 담가 두면, 제거율이 4분의 3 근처에서 더 오르지 않는다.",
+   "equilibrium {0}/({1}+{2}) of the caffeine stays; model reaches {3}% at {4} h (its pace set by the ultrasound-fitted water diffusivity)": "평형에서 카페인의 {0}/({1}+{2})이 남는다; 모델은 {4}시간에 {3}%에 이른다(속도는 초음파 보조 실험에 맞춘 물속 확산 계수가 정한다)",
+   "{0} h · {1} h": "{0} h · {1} h",
+   "Model times to {0}% and {1}% removal in water at {2} °C changed hourly, with the diffusivity fitted to an ultrasound-assisted lab run.": "{2} °C 물을 매시간 갈 때 {0}%·{1}% 제거까지 걸리는 모델 계산 시간. 확산 계수는 초음파 보조 실험실 실험에 맞췄다.",
+   "this page's model, fitted to Bawornruttanaboonya et al. {0}: ultrasound-assisted extraction of robusta beans, {1}% at {2} h (their model: {3}% at {4} h)": "이 페이지의 모델, Bawornruttanaboonya et al. {0}에 맞춤: 로부스타 생두의 초음파 보조 추출, {2}시간에 {1}%(그 논문 모델: {4}시간에 {3}%)",
+   "ultrasound cut that study's times by {0}–{1}%, so plain water alone would take longer than shown": "그 연구에서 초음파가 시간을 {0}–{1}% 줄였으므로, 물만 쓰면 여기 보인 것보다 더 오래 걸릴 것이다",
+   "{0}e-{1} – {2}e-{3} m²/s": "{0}e-{1} – {2}e-{3} m²/s",
+   "Measured diffusivity of caffeine in green beans; this page's calibrated values ({0}e-{1} at {2} °C to {3}e-{4} at {5} °C) fall in or near it.": "생두 속 카페인의 실측 확산 계수. 이 페이지가 보정한 값({2} °C에서 {0}e-{1}부터 {5} °C에서 {3}e-{4}까지)은 그 범위 안이나 근처에 있다.",
+   "Bichsel {0}; Espinoza-Pérez {1}; Huamaní-Meléndez {2}": "Bichsel {0}; Espinoza-Pérez {1}; Huamaní-Meléndez {2}",
+   "the page's plain-water value ({0}e-{1} at {2} °C) is fitted to an ultrasound-assisted lab run (Bawornruttanaboonya et al. {3}) and the supercritical-CO₂ value ({4}e-{5} at {6} °C) is carried from it by temperature; the other methods are fitted to their own sources": "이 페이지의 물 추출 값({2} °C에서 {0}e-{1})은 초음파 보조 실험실 실험(Bawornruttanaboonya et al. {3})에 맞췄고, 초임계 CO₂ 값({6} °C에서 {4}e-{5})은 그 값에서 온도로 환산했다; 나머지 방법은 각자의 출처에 맞췄다",
+   "{0} kJ/mol": "{0} kJ/mol",
+   "Activation energy behind the page's temperature knob (published fits: {0} and {1} kJ/mol).": "이 페이지의 온도 다이얼에 쓰인 활성화 에너지(발표된 피팅값: {0}·{1} kJ/mol).",
+   "R ln(D_water,{0} °C / D_liquidCO₂,{1} °C) / ({2}/{3} − {4}/{5}), with D_water fitted to an ultrasound-assisted run; it makes diffusion {6}× faster at {7} °C than at {8} °C (the cold beat's {9}× fewer hops); the published {10}–{11} kJ/mol would give {12}× to {13}×": "R ln(D_water,{0} °C / D_liquidCO₂,{1} °C) / ({2}/{3} − {4}/{5}), D_water는 초음파 보조 실험에 맞춘 값; 이 값이면 확산이 {8} °C보다 {7} °C에서 {6}× 빠르다(차가운 CO₂ 장면에서 {9}× 적은 걸음); 발표된 {10}–{11} kJ/mol이면 {12}×에서 {13}×가 된다",
+   "≈ {0}% sugar kept": "당분 ≈ {0}% 남음",
+   "Sugar left when {0}% of the caffeine has gone into plain water, changed hourly.": "카페인의 {0}%가 매시간 갈아 주는 물로 빠져나갔을 때 남는 당분.",
+   "sugar diffuses at {0}× caffeine's rate (free-water ratio, illustrative)": "당분은 카페인의 {0}× 속도로 확산한다(물속 확산 계수 비, 예시값)",
+   "Direct methylene chloride: {0}% bean water, {1} °C, {2} bar, solvent {3}:{4}, five countercurrent columns.": "염화메틸렌 직접법: 생두 수분 {0}%, {1} °C, {2} bar, 용매 {3}:{4}, 향류 칼럼 다섯 개.",
+   "US {0} example (P&G, {1})": "US {0} 실시예(P&G, {1})",
+   "The same five columns with solvent and beans moving the same way.": "같은 칼럼 다섯 개에서 용매와 생두가 같은 방향으로 움직일 때.",
+   "sucrose −{0}%, CGA −{1}%": "자당 −{0}%, 클로로겐산 −{1}%",
+   "One industrial methylene-chloride decaf arabica vs regular, green beans (trigonelline −{0}%).": "염화메틸렌으로 공업 처리한 디카페인 아라비카 한 시료와 일반 커피의 생두 비교(트리고넬린 −{0}%).",
+   "Toci, Farah & Trugo {0}": "Toci, Farah & Trugo {0}",
+   "Boiling point of methylene chloride (ethyl acetate {0} °C).": "염화메틸렌의 끓는점(에틸 아세테이트는 {0} °C).",
+   "PubChem; NIST": "PubChem; NIST",
+   "{0}–{1} °C, {2}–{3} h": "{0}–{1} °C, {2}–{3} h",
+   "Steam stripping after the solvent cycle.": "용매 순환 뒤 증기 스트리핑(증기로 용매를 빼냄).",
+   "US {0}": "US {0}",
+   "{0} ppm · {1} mg/kg": "{0} ppm · {1} mg/kg",
+   "Methylene chloride limits in decaf roasted coffee: US and EU.": "디카페인 원두의 염화메틸렌 한도: 미국과 EU.",
+   "{0} CFR {1}(c); Directive {2}/{3}/EC": "{0} CFR {1}(c); Directive {2}/{3}/EC",
+   "median {0} mg/kg": "중앙값 {0} mg/kg",
+   "Methylene chloride in {0} EU retail decafs ({1}–{2} µg/kg); industry authors (decaffeinators and the German coffee association).": "EU에서 시판되는 디카페인 커피 {0}종의 염화메틸렌({1}–{2} µg/kg). 저자가 업계 소속이다(카페인 제거 업체와 독일 커피 협회).",
+   "Fabian et al. {0}": "Fabian et al. {0}",
+   "no decision": "결정 없음",
+   "FDA reopened comments on the petition to delist methylene chloride until {0} Jun {1}; no decision found by {2} Oct {3}.": "FDA는 염화메틸렌을 허용 목록에서 빼 달라는 청원에 대해 {1}년 6월 {0}일까지 의견 접수를 재개했다. {3}년 10월 {2}일까지 결정은 찾지 못했다.",
+   "{0} FR {1}": "{0} FR {1}",
+   "Indirect method: water with ~{0}% coffee solids, eight extractors at ~{1} °C, caffeine washed out of the water by solvent.": "간접법: 커피 고형분이 약 {0}% 든 물, 약 {1} °C의 추출기 여덟 개, 용매로 물속 카페인을 씻어 냄.",
+   "US {0} (General Foods, filed {1})": "US {0}(General Foods, {1}년 출원)",
+   "{0}–{1} h; ≤ {2}%": "{0}–{1} h; ≤ {2}%",
+   "Swiss Water cycle time and its \"{0}% caffeine-free\" claim (also worded as \"removes {1}%\"); its illustration's {2}% → {3}% is labelled \"for example only\", in about {4} h.": "스위스 워터 공정의 한 주기 시간과 \"{0}% 카페인 프리\" 주장(\"{1}% 제거\"라고도 씀). 자체 도해의 {2}% → {3}%(약 {4}시간)에는 \"예시일 뿐\"이라는 표시가 있다.",
+   "Swiss Water company descriptions; J.L. Lennard Swiss Water PDF (company)": "Swiss Water 회사 설명 자료; J.L. Lennard Swiss Water PDF(회사 자료)",
+   "≈ {0}%": "≈ {0}%",
+   "Non-caffeine solubles lost in Swiss Water's own illustration (solubles {0} → {1}%, insolubles {2} → {3}%).": "스위스 워터 자체 도해에서 빠져나간 카페인 외 수용성 성분(수용성 {0} → {1}%, 불용성 {2} → {3}%).",
+   "J.L. Lennard Swiss Water PDF (company)": "J.L. Lennard Swiss Water PDF(회사 자료)",
+   "insolubles held constant: ({0} − {1}) / {2}": "불용성 성분을 일정하게 둠: ({0} − {1}) / {2}",
+   "{0} t, {1} m³, {2} bar, {3} °C, {4} h": "{0} t, {1} m³, {2} bar, {3} °C, {4} h",
+   "Industrial supercritical CO₂ batch reaching {0}% for arabica ({1} h for robusta).": "아라비카에서 {0}%에 이르는 공장 규모 초임계 CO₂ 배치(로부스타는 {1}시간).",
+   "De Marco, Riemma & Iannone, J. Supercritical Fluids {0} ({1}) for the {2} m³ and {3} t; De Marco et al., CET {4} ({5}) for {6} h and {7} h": "De Marco, Riemma & Iannone, J. Supercritical Fluids {0} ({1}): {2} m³, {3} t; De Marco et al., CET {4} ({5}): {6} h, {7} h",
+   "Beans in that {0} t batch.": "그 {0} t 배치에 든 생두 수.",
+   "{0} g ÷ {1} g per bean at {2}% water ({3} g dry ÷ {4}) = {5} million": "{0} g ÷ 수분 {2}%일 때 한 알당 {1} g(건조 {3} g ÷ {4}) = {5}백만",
+   "Caffeine's partition between CO₂ and water at {0} MPa (CO₂ phase over water phase); {1}–{2} at {3} °C without coffee solubles.": "{0} MPa에서 CO₂와 물 사이 카페인의 분배(CO₂ 쪽 ÷ 물 쪽). 커피 수용성 성분이 없을 때 {3} °C에서 {1}–{2}.",
+   "Pietsch, Lübeck University of Applied Sciences (ISASF {0})": "Pietsch, Lübeck University of Applied Sciences (ISASF {0})",
+   "Caffeine removed from the CO₂ by the water-wash column.": "물 세척 칼럼이 CO₂에서 빼내는 카페인.",
+   "De Marco et al., Chemical Engineering Transactions {0} ({1})": "De Marco et al., Chemical Engineering Transactions {0} ({1})",
+   "{0} kg/kg": "{0} kg/kg",
+   "CO₂ the page's model must circulate per kg of beans to reach {0}% in {1} h (patent range {2}–{3}).": "이 페이지의 모델이 {1}시간에 {0}%에 이르려면 생두 1 kg당 순환시켜야 하는 CO₂ 양(특허 범위 {2}–{3}).",
+   "this page's model; US {0}": "이 페이지의 모델; US {0}",
+   "the bean's {0} °C diffusivity is carried from the ultrasound-fitted water run by the page's {1} kJ/mol": "생두의 {0} °C 확산 계수는 초음파 보조 물 실험에 맞춘 값에서 이 페이지의 {1} kJ/mol로 환산했다",
+   "{0} · {1} kg/m³": "{0} · {1} kg/m³",
+   "CO₂ density at {0} °C, {1} bar and at {2} °C, {3} bar.": "{0} °C, {1} bar와 {2} °C, {3} bar에서의 CO₂ 밀도.",
+   "Span–Wagner equation of state (the one the NIST WebBook uses), via CoolProp": "Span–Wagner 상태 방정식(NIST WebBook이 쓰는 식), CoolProp으로 계산",
+   "computed at the two plant points; at {0}–{1} °C and {2}–{3} bar the liquid ranges {4}–{5} kg/m³": "두 공장 조건에서 계산; {0}–{1} °C, {2}–{3} bar에서 액체는 {4}–{5} kg/m³",
+   "Liquid CO₂ at {0}–{1} bar, {2}–{3} °C, to ≤ {4}% caffeine.": "{0}–{1} bar, {2}–{3} °C의 액체 CO₂로 카페인 {4}% 이하까지.",
+   "US {0}; Square Mile {1}; kaffeemacher": "US {0}; Square Mile {1}; kaffeemacher",
+   "≈ {0} h": "≈ {0} h",
+   "This page's CO₂ plant run at {0} °C instead of {1} °C, to {2}%.": "이 페이지의 CO₂ 공장을 {1} °C 대신 {0} °C로 돌려 {2}%까지 갈 때.",
+   "diffusion {0}× slower than at {1} °C by the page's {2} kJ/mol; published activation energies of {3}–{4} kJ/mol would make it {5}× to {6}× slower": "이 페이지의 {2} kJ/mol로는 확산이 {1} °C 때보다 {0}× 느리다; 발표된 활성화 에너지 {3}–{4} kJ/mol이면 {5}×에서 {6}× 느려진다",
+   "{0}–{1} mg / {2} fl oz": "{0}–{1} mg / {2} fl oz",
+   "Typical decaf brewed coffee.": "보통의 디카페인 내린 커피.",
+   "FDA consumer page": "FDA 소비자 안내 페이지",
+   "{0}–{1} mg / {2} oz": "{0}–{1} mg / {2} oz",
+   "Ten decaf coffees from US outlets; decaf espresso {0}–{1} mg per shot.": "미국 매장의 디카페인 커피 10종. 디카페인 에스프레소는 한 샷에 {0}–{1} mg.",
+   "McCusker et al. {0}": "McCusker et al. {0}",
+   "Caffeine in AC{0} arabica beans ({1}% in mature endosperm), with {2} mg/g theobromine.": "AC{0} 아라비카 커피콩의 카페인(성숙한 배젖에서는 {1}%). 테오브로민은 {2} mg/g 들어 있다.",
+   "Silvarolla et al. {0}; Benatti et al. {1}": "Silvarolla et al. {0}; Benatti et al. {1}",
+   "{0}–{1} mg · {2} mg": "{0}–{1} mg · {2} mg",
+   "Caffeine and theobromine in one AC{0} bean.": "AC{0} 커피콩 한 알의 카페인과 테오브로민.",
+   "{0} g dry × {1}–{2}%; {3} g × {4} mg/g": "건조 중량 {0} g × {1}–{2}%; {3} g × {4} mg/g",
+   "≈ {0}× lower": "≈ {0}× 낮음",
+   "Caffeine-synthase activity in AC{0} fruit; its transcripts ≥ {1}× lower.": "AC{0} 열매의 카페인 합성효소 활성. 그 전사체(mRNA)는 {1}× 이상 적다.",
+   "Benatti et al. {0}; Maluf et al. {1}": "Benatti et al. {0}; Maluf et al. {1}",
+   "Projected market date for IAC's naturally decaffeinated lines, on condition that the breeding work finishes in {0} and the coffee is then planted.": "IAC 천연 디카페인 계통의 예상 출시 시점. {0}년에 육종이 끝나고 그 뒤 커피를 심는다는 조건이 붙는다.",
+   "Reuters {0} (Portuguese edition, Forbes Brasil), quoting IAC's J. C. Mistro": "Reuters {0}(포르투갈어판, Forbes Brasil), IAC의 J. C. Mistro 인용",
+   "Bean caffeine across F{0} progeny of crosses between the decaffeinated AC mutants and Brazilian cultivars; the aim is clonal cultivars with at most {1}%.": "디카페인 AC 돌연변이와 브라질 재배 품종을 교배한 F{0} 자손들의 커피콩 카페인. 목표는 카페인 {1}% 이하인 클론 품종이다.",
+   "Silvarolla, Mistro, Almeida & Satorres, ASIC {0} poster": "Silvarolla, Mistro, Almeida & Satorres, ASIC {0} 포스터",
+   "Bean caffeine in C. pseudozanguebariae, C. humblotiana and the Bakossi (C. charrieriana) coffee.": "C. pseudozanguebariae, C. humblotiana, 그리고 Bakossi(C. charrieriana) 커피의 커피콩 카페인.",
+   "Campa et al. {0}; Stoffelen et al. {1}": "Campa et al. {0}; Stoffelen et al. {1}",
+   "{0} kg sugar · {1} kg carbon": "설탕 {0} kg · 활성탄 {1} kg",
+   "Before decaffeinating, {0} kg of cane sugar (with {1} kg formic acid in {2} L of water) is circulated for {3} h through a column of {4} kg of activated carbon; the treated carbon then takes up \"practically only caffeine\". Roasted caffeine fell from {5}% to {6}%.": "카페인 제거 전에 사탕수수 설탕 {0} kg(폼산 {1} kg과 함께 물 {2} L에 녹임)을 활성탄 {4} kg이 든 칼럼에 {3}시간 동안 순환시킨다. 이렇게 처리한 활성탄은 \"사실상 카페인만\" 흡착한다. 로스팅 후 카페인은 {5}%에서 {6}%로 떨어졌다.",
+   "EP {0} (Coffex AG; Fischer & Kummer, {1}), example": "EP {0}(Coffex AG; Fischer & Kummer, {1}), 실시예",
+   "burned": "태워 없앰",
+   "Swiss Water does not recover its caffeine: the carbon is regenerated in a furnace that burns it off.": "스위스 워터는 카페인을 회수하지 않는다. 활성탄을 가열로에서 재생할 때 카페인이 타서 없어진다.",
+   "The Roasters Pack, quoting Swiss Water's M. Strumpf; Coffee Review": "The Roasters Pack(Swiss Water의 M. Strumpf 인용); Coffee Review",
+   "≈ {0}% pure": "순도 ≈ {0}%",
+   "Crude caffeine from the water wash of a CO₂ decaffeination plant in Houston (Atlantic Coffee Solutions), sold on.": "휴스턴의 CO₂ 카페인 제거 공장(Atlantic Coffee Solutions)이 물 세척에서 얻어 내다 파는 정제 전 카페인.",
+   "NPR / Texas Public Radio, {0} Feb {1}": "NPR / Texas Public Radio, {0} Feb {1}",
+   "> {0} trees · {1} accessions": "> {0}그루 · 수집 계통 {1}개",
+   "Ethiopian arabica trees screened at IAC, Campinas, grown from seeds collected in Ethiopia in {0}–{1}; three plants (AC{2}–AC{3}) had about {4}% caffeine against about {5}%.": "캄피나스의 IAC에서 선별 검사한 에티오피아 아라비카 나무로, {0}–{1}년 에티오피아에서 모은 씨앗으로 키웠다. 그중 세 그루(AC{2}–AC{3})는 카페인이 약 {5}% 대비 약 {4}%였다.",
+   "Silvarolla, Mazzafera & Fazuoli, Nature {0}:{1} ({2}); Benatti et al., Bragantia {3} ({4}); Pesquisa FAPESP {5}": "Silvarolla, Mazzafera & Fazuoli, Nature {0}:{1} ({2}); Benatti et al., Bragantia {3} ({4}); Pesquisa FAPESP {5}",
+   "{0} vs {1} mg/g": "{0} vs {1} mg/g",
+   "Caffeine in the mature endosperm of Mundo Novo (ordinary arabica) against AC{0}, which holds {1} mg/g theobromine instead; sucrose in the ripe endosperm {2} vs {3} mg/g.": "문도노보(일반 아라비카)와, 카페인 대신 테오브로민이 {1} mg/g 든 AC{0}의 다 자란 배젖 속 카페인이다. 익은 배젖의 자당은 {2} 대 {3} mg/g이다.",
+   "Benatti, Silvarolla & Mazzafera, Bragantia {0}:{1} ({2})": "Benatti, Silvarolla & Mazzafera, Bragantia {0}:{1} ({2})",
+   "Caffeine's share of the bitterness of brewed coffee: an estimate. An older \"~{0}%\" figure is second-hand only.": "내린 커피의 쓴맛에서 카페인이 차지하는 몫으로, 추정치다. 더 오래된 \"~{0}%\" 수치는 2차 출처로만 전해진다.",
+   "T. Hofmann, ACS meeting press release, {0} (sciencedaily.com/releases/{1}/{2}/{3}.htm)": "T. Hofmann, ACS 학회 보도자료, {0} (sciencedaily.com/releases/{1}/{2}/{3}.htm)",
+   "An estimate as stated; drawn as the caffeine block's share of the bitterness stack's height.": "출처에 적힌 그대로의 추정치이며, 쓴맛 기둥의 높이 중 카페인 블록이 차지하는 몫으로 그렸다.",
+   "most of the bitterness": "쓴맛의 대부분",
+   "Most of coffee's bitterness forms in roasting: chlorogenic-acid lactones in light to medium roasts, then {0}-vinylcatechol oligomers (phenylindanes) in dark roasts. Roast degree, not caffeine, sets most of the bitterness.": "커피 쓴맛의 대부분은 로스팅에서 생긴다. 약하게~중간으로 볶으면 클로로겐산 락톤이, 이어 강하게 볶으면 {0}-비닐카테콜 올리고머(페닐인단)가 생긴다. 쓴맛의 대부분을 정하는 것은 카페인이 아니라 로스팅 정도다.",
+   "Frank, Zehentbauer & Hofmann {0}, Eur. Food Res. Technol. {1}:{2}; Blumberg et al. {3}, J. Agric. Food Chem. {4}:{5}": "Frank, Zehentbauer & Hofmann {0}, Eur. Food Res. Technol. {1}:{2}; Blumberg et al. {3}, J. Agric. Food Chem. {4}:{5}",
+   "Drawn as the rest of the stack ({0}% − {1}%); how it splits between the two families depends on the roast and is not drawn.": "기둥의 나머지 부분({0}% − {1}%)으로 그렸다. 이것이 두 물질군에 어떻게 나뉘는지는 로스팅에 따라 달라서 그리지 않았다.",
+   "In coffee, caffeine's bitterness is masked: melanoidins at natural levels halve it, and tasters noticed added caffeine only at about {0}× the normal dose.": "커피 속에서는 카페인의 쓴맛이 가려진다. 원래 들어 있는 수준의 멜라노이딘이 그 쓴맛을 절반으로 줄이고, 시음자들은 더한 카페인을 보통 양의 약 {0}×에서야 알아챘다.",
+   "Gigl, Kreissl & Frank {0}, J. Agric. Food Chem. {1}:{2} (doi.org/{3}/acs.jafc.{4}c{5}); the {6}× is from its press release": "Gigl, Kreissl & Frank {0}, J. Agric. Food Chem. {1}:{2} (doi.org/{3}/acs.jafc.{4}c{5}); {6}×는 논문 보도자료에서 나왔다",
+   "−{0}% sucrose": "자당 −{0}%",
+   "One industrial dichloromethane (solvent) decaf arabica from Brazil against the regular, green beans: sucrose −{0}% (from {1} g/{2} g dry), chlorogenic acids −{3}%, trigonelline −{4}%. Robusta: sucrose −{5}%.": "공장에서 디클로로메탄(용매)으로 만든 브라질산 디카페인 아라비카 하나를 일반 커피와 생두 상태로 비교했다. 자당 −{0}%(건조 중량 기준 {1} g/{2} g에서), 클로로겐산 −{3}%, 트리고넬린 −{4}%였다. 로부스타는 자당 −{5}%였다.",
+   "Toci, Farah & Trugo {0}, Química Nova {1}:{2}": "Toci, Farah & Trugo {0}, Química Nova {1}:{2}",
+   "One sample. The sucrose block shrinks to {0}% of its height.": "시료 하나다. 자당 블록은 원래 높이의 {0}%로 줄어든다.",
+   "higher in decaf": "디카페인이 더 많음",
+   "Volatile acids were higher in decaf than in regular across {0} matched pairs (GC×GC-TOFMS peak areas), as were furans, ketones and aldehydes; a trained espresso panel ({1}) found decaf more acidic (directions only; lot and method not stated). Against that, {2} blind cuppers found \"no acidity\" in one same-lot solvent decaf (one sample, no statistics). Sucrose is the main green-bean precursor of formic, acetic, glycolic and lactic acids, yet the measured acids did not fall with it.": "짝지은 {0}쌍에서 휘발성 산은 일반 커피보다 디카페인에서 더 많았고(GC×GC-TOFMS 피크 면적), 퓨란·케톤·알데하이드도 마찬가지였다. 훈련된 에스프레소 패널({1})은 디카페인의 산미가 더 강하다고 평가했다(차이의 방향만; 로트와 방법은 밝히지 않음). 반면 블라인드 커핑 평가자 {2}명은 같은 로트로 만든 용매 디카페인 하나를 \"산미 없음\"으로 평가했다(시료 하나, 통계 없음). 자당은 생두 속 포름산·아세트산·글리콜산·젖산의 주된 전구체인데도, 측정된 산은 자당을 따라 줄지 않았다.",
+   "Zou et al. {0}, Molecules {1}:{2}; Cusielo et al. {3}, J. Food Sci. {4}:e{5}; Abrahão et al. {6}, Pesq. Agropec. Bras. {7}:{8}; Ginz et al. {9}, Eur. Food Res. Technol. {10}:{11}": "Zou et al. {0}, Molecules {1}:{2}; Cusielo et al. {3}, J. Food Sci. {4}:e{5}; Abrahão et al. {6}, Pesq. Agropec. Bras. {7}:{8}; Ginz et al. {9}, Eur. Food Res. Technol. {10}:{11}",
+   "The acids block grows a little (to {0}× its height) as the decaf's other blocks shrink: the direction is measured, the amount illustrative (peak areas give no single factor). No path is drawn from the sucrose to it.": "디카페인의 다른 블록이 줄어드는 동안 산 블록은 조금 커진다(원래 높이의 {0}×로). 방향은 측정값이고 양은 예시다(피크 면적으로는 하나의 배율이 나오지 않는다). 자당에서 이 블록으로 가는 경로는 그리지 않았다.",
+   "sucrose → flavour": "자당 → 향미",
+   "\"Much of the characteristic flavor\" of coffee is \"due to sucrose degradation products\"; beans that kept their sucrose tasted \"more flavorful\".": "커피 \"특유의 향미 중 상당 부분\"은 \"자당 분해 산물 때문\"이다. 자당을 지킨 커피콩은 \"향미가 더 풍부\"한 맛이 났다.",
+   "US {0} (General Foods, {1})": "US {0} (General Foods, {1})",
+   "The path from the sucrose to the caramel block (the sugar-derived flavour), which shrinks to {0}% of its height with the sucrose: an illustrative amount.": "자당에서 캐러멜 블록(당에서 생긴 향미)으로 가는 경로다. 캐러멜 블록은 자당과 함께 원래 높이의 {0}%로 줄어드는데, 이 양은 예시다.",
+   "{0} of {1} pyrazines lower": "피라진 {1}종 중 {0}종 적음",
+   "Decaf against regular, {0} matched pairs (GC×GC-TOFMS): {1} of {2} pyrazines significantly lower in decaf (nutty, roasty, chocolate notes); pyrroles, phenols and lactones lower; furans, acids, ketones and aldehydes higher. Peak areas.": "디카페인과 일반 커피를 짝지은 {0}쌍으로 비교했다(GC×GC-TOFMS). 디카페인에서 피라진 {2}종 중 {1}종이 유의하게 적었고(견과 향, 볶은 향, 초콜릿 향), 피롤·페놀·락톤은 적었으며, 퓨란·산·케톤·알데하이드는 많았다. 피크 면적 기준이다.",
+   "Zou et al. {0}, Molecules {1}:{2}": "Zou et al. {0}, Molecules {1}:{2}",
+   "{0} slabs, one per pyrazine; the {1} shrink to half: the middle of {2}–{3}×, alkylpyrazines in retail decafs against regular (Pickard et al. {4}, not the same beans), an illustrative amount.": "판은 피라진마다 한 장씩, {0}장이다. 디카페인에서 적었던 {1}종의 판은 절반으로 줄어든다. 절반은 시판 디카페인 알킬피라진의 일반 커피 대비 {2}–{3}×의 중간이며(Pickard et al. {4}, 같은 커피콩 아님), 예시값이다.",
+   "Agtron {0}–{1} vs {2}": "Agtron {0}–{1} vs {2}",
+   "Roast colour: decaf beans roasted {0} min reached Agtron {1}–{2} (lower is darker); regular beans roasted {3} min reached {4}. Decaf green beans arrive already brown.": "로스팅 색: {0}분 볶은 디카페인 커피콩은 Agtron {1}–{2}(낮을수록 어두움)에, {3}분 볶은 일반 커피콩은 {4}에 이르렀다. 디카페인 생두는 들어올 때부터 이미 갈색이다.",
+   "Lee & Kim {0}, Korean J. Food Preserv. {1}:{2}": "Lee & Kim {0}, Korean J. Food Preserv. {1}:{2}",
+   "different lots, so not a same-bean comparison": "서로 다른 로트라서 같은 커피콩끼리의 비교가 아니다",
+   "Alkylpyrazines (roasty, nutty notes) in retail decaf coffees ran {0}–{1}× the regular's. Retail samples, not the same beans.": "시판 디카페인 커피의 알킬피라진(볶은 향, 견과 향)은 일반 커피의 {0}–{1}×였다. 시판 시료이며, 같은 커피콩끼리의 비교가 아니다.",
+   "Pickard et al. {0}, J. Agric. Food Chem. {1}:{2}": "Pickard et al. {0}, J. Agric. Food Chem. {1}:{2}",
+   "Rings drawn over the decaf stack: pyrazines at half the regular's density (retail decaf alkylpyrazines run {0}–{1}× regular). The counts are a picture, not a measurement. No acids are drawn: sucrose is their main precursor, but measured volatile acids were higher in decaf (Zou {2}).": "디카페인 기둥 위에 그린 고리는 피라진을 일반 커피의 절반 밀도로 나타낸다(시판 디카페인의 알킬피라진은 일반 커피의 {0}–{1}×). 개수는 그림일 뿐 측정값이 아니다. 산은 그리지 않았다. 자당이 산의 주된 전구체이지만, 측정된 휘발성 산은 디카페인에서 더 많았기 때문이다(Zou {2}).",
+   "Pickard et al. {0}, J. Agric. Food Chem. {1}:{2}; Zou et al. {3}, Molecules {4}:{5}": "Pickard et al. {0}, J. Agric. Food Chem. {1}:{2}; Zou et al. {3}, Molecules {4}:{5}",
+   "{0} = middle of {1}–{2}": "{0} = {1}–{2}의 중간",
+   "{0} vs {1}": "{0} vs {1}",
+   "Blind ratings on Coffee Review's {0}-point scale, one producer: four decafs averaged {1}, three undecaffeinated coffees of the same producer and process {2}; its editor estimates decaf runs {3}–{4} points lower.": "생산자 한 곳, Coffee Review {0}점 척도의 블라인드 평점이다. 디카페인 네 종은 평균 {1}점, 같은 생산자·가공 방식의 카페인을 빼지 않은 커피 세 종은 {2}점이었다. 이 매체 편집자는 디카페인이 {3}–{4}점 낮게 나온다고 추정한다.",
+   "Davids {0}, coffeereview.com (decaf coffees {1})": "Davids {0}, coffeereview.com (디카페인 커피 {1})",
+   "none published": "발표된 것 없음",
+   "No blinded or peer-reviewed tasting has compared decaffeination methods on one lot; the one public same-lot comparison (James Hoffmann's Decaf Project: one Colombian lot as undecaffeinated, Swiss Water, ethyl acetate and CO₂, Dec {0}) released no results.": "블라인드이거나 동료 심사를 거친 시음 가운데 한 로트로 카페인 제거 방법들을 비교한 것은 없다. 공개된 유일한 같은 로트 비교(James Hoffmann의 Decaf Project: 콜롬비아 로트 하나를 카페인 그대로, 스위스 워터, 에틸 아세테이트, CO₂로, {0}년 12월)는 결과를 내놓지 않았다.",
+   "Talking Crow Coffee Roasters, on The Decaf Project": "Talking Crow Coffee Roasters, The Decaf Project 관련",
+   "{0} min in {1} s": "{0}분을 {1}초로",
+   "The roast clock runs ten roast minutes in the beat's {0} seconds; the bean colours between the measured end points, and the bean-probe needles, are drawn, not measured.": "로스팅 시계는 로스팅 10분을 이 장면의 {0}초 동안 돌린다. 측정된 양 끝 사이의 커피콩 색과 커피콩 탐침 바늘은 측정값이 아니라 그린 것이다.",
+   "≈ {0} mg": "≈ {0} mg",
+   "Caffeine left in one green arabica bean after {0}% of it is removed.": "카페인의 {0}%를 빼낸 뒤 아라비카 생두 한 알에 남는 카페인이다.",
+   "claims mg-bean, dcm (US {0}) and co{1}-batch (De Marco et al. {2})": "mg-bean, dcm (US {0}), co{1}-batch (De Marco et al. {2}) 항목",
+   "{0} mg × ({1} − {2}) = {3} mg; the count between {4} and {5} follows this page's CO₂ model ({6}% at its calibrated {7} h)": "{0} mg × ({1} − {2}) = {3} mg. {4}에서 {5}까지 변하는 숫자는 이 페이지의 CO₂ 모델을 따른다(보정 기준인 {7} h에서 {6}%).",
+   "caffeine kept": "카페인 유지",
+   "Caffeine stays stable through coffee roasting while the chlorogenic acids fall; only much harsher roasting degrades it.": "커피를 로스팅하는 동안 클로로겐산은 줄지만 카페인은 안정적으로 남는다. 훨씬 더 세게 볶아야만 카페인이 분해된다.",
+   "Ludwig et al. {0}, Food & Function, doi:{1}/c{2}fo{3}c": "Ludwig et al. {0}, Food & Function, doi:{1}/c{2}fo{3}c",
+   "rises while awake": "깨어 있는 동안 증가",
+   "Adenosine builds up in the brain the longer we stay awake and damps nerve cells; adenosine antagonists such as caffeine decrease sleep.": "아데노신은 깨어 있는 시간이 길수록 뇌에 쌓이고 신경세포의 활동을 가라앉힌다. 카페인 같은 아데노신 차단제는 잠을 줄인다.",
+   "University of Helsinki Sleep Team (Porkka-Heiskanen et al. {0})": "University of Helsinki Sleep Team (Porkka-Heiskanen et al. {0})",
+   "a brake": "브레이크",
+   "Adenosine holds back the release of several brain messengers (glutamate, dopamine, noradrenaline, acetylcholine, serotonin); blocking its receptors releases them.": "아데노신은 뇌의 여러 신호 물질(글루탐산, 도파민, 노르아드레날린, 아세틸콜린, 세로토닌)의 분비를 억누른다. 그 수용체를 막으면 이 물질들이 분비된다.",
+   "FSANZ {0}, P{1} safety assessment": "FSANZ {0}, P{1} 안전성 평가",
+   "adenosine receptors": "아데노신 수용체",
+   "At normal dietary intakes, the only significant action of caffeine is blocking adenosine receptors.": "평소 먹고 마시는 양에서 카페인이 하는 의미 있는 작용은 아데노신 수용체를 막는 것 하나뿐이다.",
+   "{0}–{1} mg/L": "{0}–{1} mg/L",
+   "Caffeine blocks adenosine A{0} and A{1} receptors at blood serum levels between {2} and {3} mg/L.": "카페인은 혈청 농도가 {2}에서 {3} mg/L 사이일 때 아데노신 A{0}, A{1} 수용체를 막는다.",
+   "FSANZ {0}, P{1} safety assessment (citing Ådén {2})": "FSANZ {0}, P{1} 안전성 평가(Ådén {2} 인용)",
+   "{0} h ({1}–{2} h)": "{0} h ({1}–{2} h)",
+   "Caffeine's half-life in healthy adults: about four hours on average, two to eight hours across people.": "건강한 성인의 카페인 반감기는 평균 약 4시간이고, 사람에 따라 2–8시간이다.",
+   "EFSA {0}": "EFSA {0}",
+   "{0} min": "{0} min",
+   "Caffeine is absorbed from the stomach and small intestine within {0} minutes of drinking it.": "카페인은 마신 뒤 {0}분 안에 위와 소장에서 흡수된다.",
+   "{0}–{1} L/kg": "{0}–{1} L/kg",
+   "Caffeine spreads through the body's water: a volume of distribution of {0}–{1} mL per kg of body weight.": "카페인은 몸속 수분 곳곳으로 퍼진다. 분포 용적은 체중 1 kg당 {0}–{1} mL다.",
+   "first-order": "1차 소실",
+   "Caffeine leaves at a fixed fraction per hour (first-order elimination) at intakes up to {0} mg/kg.": "섭취량이 {0} mg/kg 이하이면 카페인은 매시간 일정한 비율씩 몸에서 빠져나간다(1차 소실).",
+   "{0} / {1} / {2} mg": "{0} / {1} / {2} mg",
+   "Caffeine still in a {0} kg body at {1} pm from {2} mg drunk at {3} pm, at half-lives of {4}, {5} and {6} hours.": "오후 {3}시에 {2} mg을 마시면 오후 {1}시에 체중 {0} kg인 몸에 남는 카페인이다. 반감기 {4}, {5}, {6}시간일 때다.",
+   "one compartment; absorption {0}/h (peak ≈ {1} min); V = {2} L/kg × {3} kg; k = ln {4} / half-life": "1구획 모델; 흡수 {0}/h (최고점 ≈ {1} min); V = {2} L/kg × {3} kg; k = ln {4} / 반감기",
+   "{0} mg/L": "{0} mg/L",
+   "Peak blood level from one {0} mg decaf ({1} kg, half-life {2} h): under the {3} mg/L where receptor blocking begins. One cup; cups add up.": "체중 {1} kg, 반감기 {2} h일 때 {0} mg짜리 디카페인 한 잔의 혈중 최고 농도로, 수용체 차단이 시작되는 {3} mg/L보다 낮다. 한 잔 기준이며 잔 수만큼 더해진다.",
+   "same model as s-bed": "s-bed와 같은 모델",
+   "A single {0} mg dose of caffeine may affect sleep in some adults, particularly close to bedtime.": "카페인 {0} mg 1회 섭취는 일부 성인의 수면에 영향을 줄 수 있으며, 특히 취침 시각에 가까울 때 그렇다.",
+   "Share of caffeine metabolism done by one liver enzyme, CYP{0}A{1} ({2}% of systemic clearance in another estimate).": "카페인 대사 가운데 간 효소 하나인 CYP{0}A{1}가 맡는 몫이다(다른 추정으로는 전신 청소율의 {2}%).",
+   "FSANZ {0}, P{1} safety assessment (citing Arnaud {2}); Grzegorzewski et al. {3}": "FSANZ {0}, P{1} 안전성 평가(Arnaud {2} 인용); Grzegorzewski et al. {3}",
+   "In twins who did not smoke or take hormonal contraceptives, {0}% of the variation in caffeine exposure (AUC) was genetic; across the whole group, one variant near CYP{1}A{2} (rs{3}) explained {4}%.": "흡연하지 않고 호르몬 피임제를 쓰지 않은 쌍둥이에서 카페인 노출량(AUC) 개인차의 {0}%는 유전에서 비롯됐다. 전체 집단에서는 CYP{1}A{2} 근처의 변이 하나(rs{3})가 {4}%를 설명했다.",
+   "Matthaei et al. {0}": "Matthaei et al. {0}",
+   "Smoking speeds caffeine clearance by {0}% by inducing CYP{1}A{2}; caffeine levels rise after quitting.": "흡연은 CYP{1}A{2}를 늘려 카페인 청소율을 {0}% 높인다. 금연 후에는 카페인 농도가 오른다.",
+   "Zevin & Benowitz {0}, tabulated by UCSF Rx for Change {1}": "Zevin & Benowitz {0}, UCSF Rx for Change {1}의 표로 정리",
+   "{0} → {1} h": "{0} → {1} h",
+   "Caffeine half-life in {0} matched controls vs users of low-dose oestrogen pills; clearance {1} vs {2} mL/min/kg.": "짝지은 대조군 {0}명과 저용량 에스트로겐 피임약 복용자의 카페인 반감기 비교다. 청소율은 {1} 대 {2} mL/min/kg이다.",
+   "Abernethy & Todd {0}": "Abernethy & Todd {0}",
+   "{0} h, {1} h": "{0} h, {1} h",
+   "Caffeine half-life in pregnancy: unchanged in the first trimester, about {0} h by week {1} and up to {2} h by the end.": "임신 중 카페인 반감기: 임신 첫 3개월에는 그대로이고, {1}주까지 약 {0} h, 임신 막바지에는 최대 {2} h에 이른다.",
+   "Caffeine half-life before and during fluvoxamine, an antidepressant that blocks CYP{0}A{1} ({2} volunteers; clearance {3} → {4} mL/min).": "CYP{0}A{1}를 막는 항우울제인 플루복사민의 복용 전과 복용 중 카페인 반감기다(자원자 {2}명; 청소율 {3} → {4} mL/min).",
+   "Jeppesen et al. {0}": "Jeppesen et al. {0}",
+   "up to {0} h": "최대 {0} h",
+   "Caffeine half-life in newborns; clearance reaches adult levels by {0}–{1} months.": "신생아의 카페인 반감기다. 청소율은 생후 {0}–{1}개월이면 성인 수준에 이른다.",
+   "TT": "TT",
+   "People with the TT genotype at ADORA{0}A rs{1} were more prone to caffeine-induced anxiety ({2} people, caffeine vs placebo, double blind).": "ADORA{0}A rs{1} 유전자형이 TT인 사람은 카페인으로 인한 불안을 더 쉽게 겪었다({2}명, 카페인 대 위약, 이중맹검).",
+   "Rogers et al. {0}": "Rogers et al. {0}",
+   "ADORA{0}A": "ADORA{0}A",
+   "Variants of ADORA{0}A, the gene for the A{1}A receptor, change caffeine's effects on anxiety, sleep and vigilance.": "A{1}A 수용체를 만드는 유전자인 ADORA{0}A의 변이는 카페인이 불안, 수면, 각성도에 미치는 효과를 바꾼다.",
+   "FSANZ {0}, P{1} safety assessment (citing Childs {2}; Yang {3}; Bodenmann {4})": "FSANZ {0}, P{1} 안전성 평가(Childs {2}; Yang {3}; Bodenmann {4} 인용)",
+   "tolerance": "내성",
+   "Frequent use builds substantial tolerance to caffeine's anxiety effect; in people who rarely drink it, caffeine did not raise alertness.": "자주 섭취하면 카페인의 불안 효과에 상당한 내성이 생긴다. 카페인을 거의 마시지 않는 사람에게서는 카페인이 또렷함을 높이지 않았다.",
+   "later, shorter, lighter": "더 늦고, 짧고, 얕은 잠",
+   "Caffeine prolongs sleep latency, shortens sleep time, increases light sleep and decreases deep sleep; REM sleep is least affected.": "카페인은 잠들기까지 걸리는 시간을 늘리고, 수면 시간을 줄이며, 얕은 잠을 늘리고 깊은 잠을 줄인다. 렘수면은 영향을 가장 덜 받는다.",
+   "What the liver makes of caffeine: paraxanthine (~{0}%), theobromine (~{1}%) and theophylline (~{2}%), each caffeine with one methyl removed.": "간은 카페인을 파라잔틴(약 {0}%), 테오브로민(약 {1}%), 테오필린(약 {2}%)으로 바꾼다. 셋 다 카페인에서 메틸기 하나가 떨어져 나간 분자다.",
+   "FSANZ {0}, P{1} safety assessment (citing Singh et al. {2})": "FSANZ {0}, P{1} 안전성 평가(Singh et al. {2} 인용)",
+   "The kidneys reabsorb about {0}% of caffeine; only slightly over {1}% leaves in urine unchanged in adults.": "콩팥은 카페인의 약 {0}%를 다시 흡수한다. 성인에서 바뀌지 않은 채 소변으로 나가는 양은 {1}%를 조금 넘을 뿐이다.",
+   "FSANZ {0}, P{1} safety assessment (citing Arnaud {2})": "FSANZ {0}, P{1} 안전성 평가(Arnaud {2} 인용)",
+   "CYP{0}A{1} activity in pregnancy, first to third trimester, against non-pregnant levels.": "임신 초기·중기·말기의 CYP{0}A{1} 효소 활성을 임신하지 않았을 때와 비교한 값이다.",
+   "FSANZ {0}, P{1} safety assessment (citing Tracy et al. {2})": "FSANZ {0}, P{1} 안전성 평가(Tracy et al. {2} 인용)",
+   "back to baseline": "원래 수준 회복",
+   "In daily (medium/high) consumers, going without caffeine lowered alertness and brought headache; caffeine only returned alertness to baseline.": "매일 마시는 사람(섭취량 중간·많음)은 카페인 없이 지내자 또렷함이 떨어지고 두통이 생겼다. 카페인은 또렷함을 원래 수준으로 되돌렸을 뿐이다.",
+   "no gain": "향상 없음",
+   "In non/low consumers caffeine did not increase alertness; their anxiety response was larger than daily consumers', whatever their genotype.": "안 마시거나 적게 마시는 사람에게 카페인은 또렷함을 높이지 않았다. 이들의 불안 반응은 유전자형과 관계없이 매일 마시는 사람보다 컸다.",
+   "{0} · {1} · {2} · {3} · {4} mg": "{0} · {1} · {2} · {3} · {4} mg",
+   "Caffeine left at {0} pm from {1} mg at {2} pm ({3} kg) at half-lives of {4}, {5}, {6}, {7} (late pregnancy, up to) and {8} h (on fluvoxamine).": "오후 {2}시에 마신 {1} mg 가운데 오후 {0}시에 남은 카페인 양이다(체중 {3} kg). 반감기는 각각 {4}, {5}, {6}, {7}(임신 말기, 최대치), {8}시간(플루복사민 복용 시)이다.",
+   "same model as s-bed; {0} am: <{1}, {2}, {3}, {4}, {5} mg": "s-bed와 같은 모델. 오전 {0}시: <{1}, {2}, {3}, {4}, {5} mg",
+   "crosses into the brain": "뇌로 들어감",
+   "Caffeine is found in all body fluids and readily crosses the blood-brain barrier (and the placenta).": "카페인은 모든 체액에 들어 있으며 혈액뇌장벽을 쉽게 통과한다(태반도 통과한다).",
+   "Oral caffeine is fully absorbed: about {0}% from the stomach, the rest from the small intestine, within {1} minutes.": "입으로 먹은 카페인은 {1}분 안에 모두 흡수된다. 약 {0}%는 위에서, 나머지는 소장에서 흡수된다.",
+   "Caffeine's leftovers leave mainly in urine; caffeine itself is about {0}% reabsorbed by the kidneys.": "카페인이 분해되고 남은 물질은 주로 소변으로 나간다. 카페인 자체는 콩팥에서 약 {0}%가 다시 흡수된다.",
+   "ATP's core": "ATP의 중심 부분",
+   "Adenosine is the core of ATP, the cells' energy molecule; on its receptors it damps nerve-cell activity.": "아데노신은 ATP(세포의 에너지 분자)의 중심 부분이다. 자기 수용체에 붙으면 신경세포의 활동을 가라앉힌다.",
+   "University of Helsinki Sleep Team (Porkka-Heiskanen et al.)": "헬싱키 대학교 수면 연구팀(Porkka-Heiskanen et al.)",
+   "basal forebrain": "기저전뇌",
+   "With long waking, adenosine rises in the basal forebrain and quiets the cells that keep the cortex awake; it is lower during sleep.": "오래 깨어 있으면 기저전뇌의 아데노신이 늘어나, 대뇌 피질을 깨어 있게 하는 세포들을 잠잠하게 만든다. 자는 동안에는 아데노신이 더 적다.",
+   "faster, not smarter": "빨라질 뿐 똑똑해지지는 않음",
+   "After a night without caffeine, daily drinkers were sleepier, less alert and slower; caffeine restored them. In people who rarely drink it, caffeine cut sleepiness but raised anxiety and jitters, which cancelled the gain: no sharper mentally. Tapping and reaction speed rose in both groups.": "카페인 없이 하룻밤을 보낸 뒤 매일 마시는 사람은 더 졸리고, 덜 또렷하고, 더 느렸다. 카페인은 이들을 원래대로 되돌렸다. 거의 안 마시는 사람에게 카페인은 졸음을 줄였지만 불안과 초조함을 키웠고, 이것이 이득을 상쇄해 머리가 더 맑아지지는 않았다. 손가락 두드리기 속도와 반응 속도는 두 집단 모두 빨라졌다.",
+   "Rogers et al. {0} ({1} people, double blind)": "Rogers et al. {0} ({1}명, 이중맹검)",
+   "At least {0} mg of caffeine per serving increases alertness and attention in adults.": "한 번에 카페인을 {0} mg 이상 섭취하면 성인의 또렷함과 주의력이 높아진다.",
+   "EFSA {0} (EFSA Journal {1}({2}):{3}), cited in EU Council doc {4}/{5}": "EFSA {0} (EFSA Journal {1}({2}):{3}), EU 이사회 문서 {4}/{5}에서 인용",
+   "≈ {0}–{1} mg": "≈ {0}–{1} mg",
+   "The receptor-blocking range of {0}–{1} mg per litre of blood is about {2}–{3} mg of caffeine in a {4} kg body.": "수용체를 막는 범위(혈액 리터당 {0}–{1} mg)는 체중 {4} kg인 몸에서 카페인 약 {2}–{3} mg에 해당한다.",
+   "{0} and {1} mg/L × {2} L/kg × {3} kg": "{0} 및 {1} mg/L × {2} L/kg × {3} kg",
+   "{0} mg per kg (about {1} mg at {2} kg) had a negligible effect on sleep in healthy young men who drank {3}–{4} cups of coffee a day.": "하루 커피 {3}–{4}잔을 마시는 건강한 젊은 남성에게 체중 kg당 {0} mg(체중 {2} kg이면 약 {1} mg)은 수면에 무시할 만한 영향만 주었다.",
+   "FSANZ {0}, P{1} safety assessment (citing Turnbull et al. {2})": "FSANZ {0}, P{1} 안전성 평가(Turnbull et al. {2} 인용)",
+   "Clear, dose-related effects of caffeine on sleep at {0} to {1} mg.": "카페인 {0}–{1} mg에서는 수면에 뚜렷한 영향이 나타났고, 그 크기는 용량에 따라 달랐다.",
+   "The bean is modelled as its middle cross-section on a {0} mm grid; diffusion along its length is ignored.": "생두는 가운데 단면 하나를 {0} mm 격자로 나눠 모델링한다. 길이 방향의 확산은 무시한다.",
+   "Each method's diffusivity is calibrated so the model reaches that method's sourced removal at its sourced time; the curves between are the model's.": "방법마다 확산 계수를 보정해, 모델이 출처에 나온 시간에 출처에 나온 제거율에 이르게 한다. 그 사이의 곡선은 모델이 계산한 것이다.",
+   "Plain water's diffusivity is fitted to one ultrasound-assisted lab run on robusta beans ({0}% out at {1} h, {2} °C, water changed during the run; Bawornruttanaboonya et al. {3}) and used for arabica. Ultrasound cut that study's times by {4}–{5}%, so plain water alone would be slower than shown.": "맹물의 확산 계수는 로부스타 생두에 초음파를 곁들인 실험실 실험 한 번({1}시간에 {0}% 제거, {2} °C, 실험 중 물 교체; Bawornruttanaboonya et al. {3})에 맞췄고, 이를 아라비카에도 쓴다. 그 연구에서 초음파는 걸린 시간을 {4}–{5}% 줄였으므로, 맹물만으로는 보이는 것보다 느릴 것이다.",
+   "The temperature knob uses an activation energy of {0} kJ/mol, worked out from that water fit and the liquid-CO₂ fit; it also carries the water fit to the {1} °C CO₂ plant. It makes diffusion {2}× slower at {3} °C than at {4} °C (the cold beat's hops); published activation energies of {5}–{6} kJ/mol would give {7}× to {8}×.": "온도 조절 손잡이는 활성화 에너지 {0} kJ/mol을 쓴다. 이 값은 위의 물 실험에 맞춘 값과 액체 CO₂에 맞춘 값에서 구했으며, 물에 맞춘 값을 {1} °C CO₂ 공장으로 옮기는 데에도 쓴다. 이 값이면 확산이 {4} °C보다 {3} °C에서 {2}× 느리다(차가운 CO₂ 장면의 걸음 수). 발표된 활성화 에너지 {5}–{6} kJ/mol이라면 {7}×에서 {8}×가 된다.",
+   "Robusta uses arabica's cross-section; its diffusivity is calibrated once, on supercritical CO₂'s robusta time ({0} h against {1} h for arabica), and assumed for every method.": "로부스타는 아라비카의 단면을 그대로 쓴다. 확산 계수는 초임계 CO₂의 로부스타 처리 시간({0}시간, 아라비카는 {1}시간)에 한 번 보정하고, 모든 방법에서 같다고 가정한다.",
+   "Sugar and chlorogenic acid are modelled to diffuse at {0}× caffeine's rate; how much each bath keeps shows each method's design, not measured losses.": "당분과 클로로겐산은 카페인의 {0}× 속도로 확산한다고 모델링했다. 추출액마다 이들을 얼마나 남기는지는 각 방법의 설계를 보여 줄 뿐, 측정한 손실이 아니다.",
+   "The solvents' sugar partition is set at {0} (sugar barely dissolves in them), so \"sugar stays behind\" and \"turns sugar away\" are the model's design, not a measurement. The one measured methylene-chloride decaf (Toci et al. {1}, one sample) had {2}% less sucrose than regular beans; the study does not say which step removed it.": "용매의 당분 분배 계수는 {0}으로 두었다(당분은 용매에 거의 녹지 않는다). 그래서 \"당분은 남는다\"와 \"당분은 밀어낸다\"는 측정이 아니라 모델의 설계다. 측정된 염화메틸렌 디카페인은 하나뿐이며(Toci et al. {1}, 시료 하나), 일반 커피콩보다 자당이 {2}% 적었다. 어느 단계에서 빠졌는지는 그 연구에 나오지 않는다.",
+   "Molecules, cells, bubbles and carbon pores are drawn far larger than life; a cell shows its molecules in their real ratio, not their real number.": "분자, 세포, 기포, 활성탄 구멍은 실제보다 훨씬 크게 그렸다. 세포 속 분자는 실제 개수가 아니라 실제 비율로 보여 준다.",
+   "Cells are drawn {0} µm across, an illustrative size: no measured cell size for green coffee was found (the {1} µm wall is measured), so the count of about {2} million cells per bean is illustrative too.": "세포는 폭 {0} µm로 그렸는데, 설명용 크기다. 생두의 세포 크기를 잰 자료는 찾지 못했다(세포벽 두께 {1} µm는 측정값이다). 그래서 생두 한 알에 세포가 약 {2}백만 개라는 수도 설명용이다.",
+   "Dots and glyphs count caffeine at a stated scale ({0} dot = {1} mg in the cups, {2} mg in the bean, {3}/{4} of the bean's caffeine in the core; {5} glyph = {6}% of its bean's dry mass on the decaf line); relief heights show concentration.": "점과 기호는 밝혀 둔 축척으로 카페인을 센다(잔에서는 점 {0}개 = {1} mg, 생두에서는 {2} mg, 중심부에서는 생두 카페인의 {3}/{4}; 디카페인 기준선에서는 기호 {5}개 = 그 생두 건조 중량의 {6}%). 높낮이는 농도를 나타낸다.",
+   "The battery beat lines its five columns up by the age of their beans and moves the line up one every {0} h; a real plant switches valves and its columns stay put. The plant mode draws pipes and valves schematically. The five columns and the {1}-hour cycle follow one patent example.": "다섯 칼럼 장면은 생두가 들어간 지 오래된 순서로 칼럼을 세우고, {0}시간마다 줄을 한 칸씩 옮긴다. 실제 공장은 밸브를 바꾸고 칼럼은 제자리에 있다. 공장 모드는 배관과 밸브를 단순화해 그린다. 칼럼 다섯 개와 {1}시간 주기는 특허 실시예 하나를 따른다.",
+   "In the taste chapter only the caffeine's ≈{0}% share of the bitterness (an estimate) sets a height; the caramel block's shrink to {1}%, the halved pyrazine slabs, the acids' small growth and the roasters' in-between colours, probe needles and plumes are illustrative.": "맛을 다룬 장에서 높이를 정하는 값은 쓴맛 중 카페인의 몫 ≈{0}%(추정치)뿐이다. 캐러멜 블록이 {1}%로 줄어드는 것, 절반이 된 피라진 판, 산이 조금 늘어나는 것, 로스터의 중간 색, 탐침 바늘, 연기 기둥은 설명용이다.",
+   "Machines are schematic: sizes come from the sources where given ({0} m³ vessel, {1} t, {2} kg of carbon); shapes and pipework are drawn.": "기계는 개략도다. 크기는 출처에 있으면 그 값을 썼고({0} m³ 용기, {1} t, 활성탄 {2} kg), 모양과 배관은 그려 넣은 것이다.",
+   "Process times are patent examples and company statements, not independent measurements; real plants vary by bean and lot.": "공정 시간은 특허 실시예와 회사 발표에서 온 값이며, 독립적인 측정값이 아니다. 실제 공장에서는 생두와 로트에 따라 달라진다.",
+   "Caffeine in the body is one well-mixed compartment: absorbed so the peak comes about {0} minutes after the cup, then cleared at a fixed fraction per hour, in a {1} kg adult with {2} L of body water per kg.": "몸속 카페인은 고르게 섞인 통 하나로 본다. 마시고 약 {0}분 뒤 정점이 오도록 흡수되고, 이후 시간마다 일정한 비율로 제거된다. 체중 {1} kg, kg당 체내 수분 {2} L인 성인 기준이다.",
+   "The {0}–{1} mg/L band is where the FSANZ review places caffeine's receptor blocking; its edges are soft, not lines.": "{0}–{1} mg/L 띠는 FSANZ 검토 보고서가 카페인이 수용체를 막는다고 보는 범위다. 띠의 경계는 선이 아니라 흐릿하다.",
+   "One receptor stands for adenosine's receptors: caffeine blocks both A{0} and A{1}A (FSANZ {2}); the bars 'how tired you are / feel' are drawn from the scene, not measured.": "수용체 하나로 아데노신 수용체들을 대표했다. 카페인은 A{0}, A{1}A 둘 다 막는다(FSANZ {2}). '실제 피곤함 / 느끼는 피곤함' 막대는 장면에 맞춰 그린 것이지 측정값이 아니다.",
+   "In the liver and clearance beats a handful of enzymes stand for millions; their number is drawn in proportion to how fast each body clears caffeine ({0} / half-life).": "간 장면과 제거 속도 장면에서는 효소 몇 개가 수백만 개를 대신한다. 효소 수는 몸마다 카페인을 없애는 속도({0} / 반감기)에 비례해 그렸다.",
+   "The tolerance gauges show only the direction of each change (Rogers et al. {0}, abstract); the study's effect sizes were not read.": "내성 게이지는 각 변화의 방향만 보여 준다(Rogers et al. {0}, 초록). 이 연구의 효과 크기는 읽지 않았다.",
+   "The body map is schematic: organs and vessels are simplified, and {0} dots stand for the {1} mg of one cup.": "몸 지도는 개략도다. 장기와 혈관은 단순화했고, 점 {0}개가 한 잔의 {1} mg을 나타낸다.",
+   "In the adenosine beat a few nerve cells stand for millions, and the firing rate and adenosine level are drawn to show the direction of the change, not measured.": "아데노신 장면에서는 신경세포 몇 개가 수백만 개를 대신한다. 발화 빈도와 아데노신 수치는 측정한 값이 아니라 변화의 방향을 보여 주도록 그렸다.",
+   "§{0} Caffeine content of green beans": "§{0} 생두의 카페인 함량",
+   "§{0} Caffeine chlorogenate complex and where caffeine sits": "§{0} 카페인·클로로겐산 복합체와 카페인의 자리",
+   "§{0} Caffeine molecule and solubility": "§{0} 카페인 분자와 용해도",
+   "§{0} Moistening beans before extraction": "§{0} 추출 전 생두 적시기",
+   "§{0} Extraction kinetics and diffusion": "§{0} 추출 속도와 확산",
+   "§{0} What else leaves the bean": "§{0} 생두에서 함께 빠지는 것들",
+   "§{0} Roselius benzene process": "§{0} Roselius 벤젠 공정",
+   "§{0} Direct solvent methylene chloride": "§{0} 염화메틸렌 직접 용매법",
+   "§{0} Solvent residue limits and the US petition": "§{0} 용매 잔류 한도와 미국 청원",
+   "§{0} Indirect solvent European method": "§{0} 간접 용매법(유럽식)",
+   "§{0} Ethyl acetate sugarcane process": "§{0} 에틸 아세테이트 사탕수수 공정",
+   "§{0} Swiss Water Process": "§{0} 스위스 워터 공정",
+   "§{0} Mountain Water Process": "§{0} 마운틴 워터 공정",
+   "§{0} Supercritical carbon dioxide": "§{0} 초임계 이산화탄소",
+   "§{0} Liquid carbon dioxide CR{1}": "§{0} 액체 이산화탄소 CR{1}",
+   "§{0} Coffee oil triglyceride process": "§{0} 커피 오일(트리글리세리드) 공정",
+   "§{0} Fate of the extracted caffeine": "§{0} 뽑아낸 카페인의 행방",
+   "§{0} Legal definitions of decaf": "§{0} 디카페인의 법적 정의",
+   "§{0} Caffeine left in a cup": "§{0} 한 잔에 남은 카페인",
+   "§{0} Decaf market and Korean imports": "§{0} 디카페인 시장과 한국 수입량",
+   "§{0} Caffeine biosynthesis pathway": "§{0} 카페인 생합성 경로",
+   "§{0} Why plants make caffeine": "§{0} 식물이 카페인을 만드는 이유",
+   "§{0} Naturally low caffeine arabica AC{1} and Laurina": "§{0} 천연 저카페인 아라비카 AC{1}과 Laurina",
+   "§{0} Caffeine free wild species": "§{0} 카페인 없는 야생종",
+   "§{0} Gene silencing and editing": "§{0} 유전자 침묵과 유전자 편집",
+   "§{0} Bean anatomy": "§{0} 커피콩의 구조",
+   "§{0} Roasting decaf beans": "§{0} 디카페인 생두 로스팅",
+   "Taste of decaf: bitterness, flavour, roast colour and blind scores": "디카페인의 맛: 쓴맛, 향미, 로스팅 색, 블라인드 점수",
+   "Table {0} Extraction kinetics anchors (removal vs hours)": "표 {0} 추출 속도 기준점(시간별 제거율)",
+   "Table {0} Composition changes after decaffeination": "표 {0} 카페인 제거 후 성분 변화",
+   "Table {0} Korea decaf imports {1}-{2}": "표 {0} 한국 디카페인 수입량 {1}-{2}",
+   "Table {0} Bean caffeine by Coffea species": "표 {0} Coffea 종별 커피콩 카페인",
+   "Caffeine sensitivity (added {0} Oct {1}: EFSA {2}, FSANZ {3} and five studies)": "카페인 민감도({1}년 10월 {0}일 추가: EFSA {2}, FSANZ {3}, 연구 다섯 편)",
+   "The seawater-shipment origin story of decaf": "바닷물에 젖은 화물에서 디카페인이 나왔다는 기원설",
+   "No ship, port or year is given anywhere, and the {0} patents describe dry steam, ammonia and benzene instead: treated as a legend.": "배, 항구, 연도가 어디에도 나오지 않고, {0}년 특허들은 그 대신 건조 증기, 암모니아, 벤젠을 쓴다고 적었다. 그래서 전설로 다루었다.",
+   "Brand sales figures (Starbucks Korea cups, chain spending)": "브랜드 판매 수치(Starbucks Korea 판매 잔 수, 체인점 지출액)",
+   "Company and survey figures with no bearing on how decaf is made.": "디카페인을 만드는 방법과 관계없는 회사·설문 수치다.",
+   "The {0} US court ruling on EPA's methylene chloride rule": "EPA의 염화메틸렌 규제에 대한 {0}년 미국 법원 판결",
+   "It concerns non-food uses; decaf residues are regulated by the FDA.": "식품이 아닌 용도에 관한 판결이다. 디카페인의 잔류물은 FDA가 규제한다.",
+   "Sensory comparisons between decaffeination methods": "카페인 제거 방법 간 맛 비교",
+   "The taste and roast beats compare decaf with regular coffee; no blinded tasting of the methods on one lot has been published (The Decaf Project, {0}, released no results), as the roast beat says.": "맛 장면과 로스팅 장면은 디카페인을 일반 커피와 비교한다. 로스팅 장면에서 말하듯, 같은 로트를 여러 방법으로 처리해 블라인드로 시음한 결과는 발표된 적이 없다(The Decaf Project, {0}, 결과 미공개).",
+   "Fast/slow-metabolizer gene tests (CYP{0}A{1} rs{2})": "빠른·느린 대사형 유전자 검사(CYP{0}A{1} rs{2})",
+   "In the twin study one variant near CYP{0}A{1} explained {2}% of the variation across all twins; the genes beat says that instead of sorting people by one letter.": "쌍둥이 연구에서 CYP{0}A{1} 근처의 변이 하나는 전체 쌍둥이에서 나타난 차이의 {2}%를 설명했다. 유전자를 다루는 장면은 사람을 글자 하나로 가르는 대신 이 점을 말한다.",
+   "Compiled from patents ({0}–{1}), EU, US, Korean and Canadian rules, peer-reviewed studies and NIST data": "특허({0}–{1}), EU·미국·한국·캐나다 규정, 동료 심사 연구, NIST 데이터를 모아 정리",
+   ". “": ". “",
+   "Decaffeination of coffee: processes, rules, measurements and plants (research dossier)": "커피의 카페인 제거: 공정, 규정, 측정, 공장(연구 자료집)",
+   ".”": ".”",
+   "Dossier, {0} Oct {1}": "자료집, {1}년 10월 {0}일",
+   "Decaf": "디카페인",
+   "Getting the caffeine out": "카페인 빼내기",
+   "How decaf coffee beans are made": "디카페인 커피콩이 만들어지는 과정",
+   "Researched by a coffee addict who can't handle caffeine": "카페인은 못 견디는 커피 중독자가 조사함",
+   "October {0}": "{0}년 10월",
+   "Tree to glass": "나무에서 잔까지",
+   "From tree to iced americano, decaf makes one extra stop.": "나무에서 아이스 아메리카노까지, 디카페인은 한 곳 더 들른다.",
+   "not to scale; beans drawn {0}× life size": "실제 비율 아님, 커피콩은 실물의 {0}배로 그림",
+   "Where it goes": "카페인이 가는 곳",
+   "Why we get sleepy": "졸음이 오는 이유",
+   "What caffeine does": "카페인이 하는 일",
+   "How it leaves": "몸에서 나가는 길",
+   "Same cup, five livers": "같은 잔, 다섯 개의 간",
+   "Why it hits harder": "더 세게 오는 이유",
+   "So, why you?": "그래서, 왜 나만?",
+   "Where beans come from": "커피콩이 오는 곳",
+   "Where it came from": "카페인이 온 곳",
+   "The decaf line": "디카페인 기준선",
+   "Inside one cell": "한 세포 속",
+   "Water first": "물이 먼저",
+   "Downhill only": "내리막으로만",
+   "The core": "중심부",
+   "The catch": "함정",
+   "Three answers": "세 가지 답",
+   "A solvent": "용매",
+   "Five columns": "추출탑 다섯 개",
+   "Steam it off": "증기로 빼내기",
+   "Full water": "성분이 꽉 찬 물",
+   "Why sugar stays": "당분이 남는 이유",
+   "A {0} patent": "{0}년 특허",
+   "Squeezed CO₂": "압축한 CO₂",
+   "Nine tonnes": "9톤",
+   "The handoff": "넘겨주기",
+   "Heat, not density": "밀도가 아니라 온도",
+   "Built in the seed": "씨앗이 만드는 카페인",
+   "{0} trees": "나무 {0}그루",
+   "What the cup loses": "커피가 잃는 것",
+   "Roaster and tasters": "로스팅과 시음",
+   "The scoreboard": "점수판",
+   "In the cup": "잔 속",
+   "decaf": "디카페인",
+   "regular": "일반",
+   "cherries": "커피 체리",
+   "green beans": "생두",
+   "decaf plant": "디카페인 공장",
+   "roaster": "로스터",
+   "coffee machine · grinds and brews": "커피 머신 · 갈아서 내림",
+   "mg": "mg",
+   "caffeine in one green arabica bean": "아라비카 생두 한 알의 카페인",
+   "{0} mg": "{0} mg",
+   "removed": "제거",
+   "roasting keeps it": "로스팅해도 그대로",
+   "regular · {0} mL": "일반 커피 · {0} mL",
+   "decaf · average of {0} sold in Gyeonggi": "디카페인 · 경기도 판매 {0}종 평균",
+   "schematic body; {0} dot = {1} mg; counts: model": "몸은 모식도, 점 {0}개 = {1} mg, 개수는 모델값",
+   "{0} pm · {1} mg": "오후 {0}시 · {1} mg",
+   "one iced americano": "아이스 아메리카노 한 잔",
+   "{0}:{1} pm": "오후 {0}:{1}",
+   "caffeine in you": "몸속 카페인",
+   "mg in you": "몸속 mg",
+   "{0} mg near bedtime: can disturb sleep\nin some people (EFSA {1})": "잘 무렵 {0} mg: 일부 사람의\n잠을 방해할 수 있음 (EFSA {1})",
+   "{0} mg in one go: enough to perk you up\n(EFSA {1})": "한 번에 {0} mg: 정신이 또렷해지는 양\n(EFSA {1})",
+   "≈{0}–{1} mg in you:": "몸속 ≈{0}–{1} mg:",
+   "blocks some adenosine receptors": "아데노신 수용체 일부를 막음",
+   "{0}–{1} mg: clearly disturbs sleep": "{0}–{1} mg: 잠을 확실히 방해",
+   "doses taken at once; people differ, so no single line": "한 번에 섭취한 양; 사람마다 달라 단일 기준선은 없음",
+   "in you now": "지금 몸속",
+   "Brain": "뇌",
+   "Liver": "간",
+   "Kidneys": "콩팥",
+   "stomach": "위",
+   "about {0}% taken in here": "여기서 약 {0}% 흡수",
+   "small intestine": "소장",
+   "Within an hour, your blood carries the cup everywhere, brain included.": "한 시간 안에 혈액이 커피를 온몸으로, 뇌까지 나른다.",
+   "the rest here": "나머지는 여기서",
+   "liver": "간",
+   "blood vessels": "혈관",
+   "red out, blue back": "빨강 나감, 파랑 복귀",
+   "heart": "심장",
+   "brain": "뇌",
+   "grey: caffeine": "회색: 간이",
+   "the liver has snipped": "잘라낸 카페인",
+   "kidneys": "콩팥",
+   "urine": "소변",
+   "bladder": "방광",
+   "all of it absorbed": "모두 흡수되기까지",
+   "within {0} minutes": "{0}분 이내",
+   "crosses into the brain: there it blocks adenosine (next)": "뇌로 넘어가, 거기서 아데노신을 막음 (다음 장면)",
+   "breaks it down: about half every {0} hours (average)": "분해함: {0}시간마다 약 절반씩 (평균)",
+   "the leftovers leave in urine; caffeine itself is sent back into the blood (about {0}%)": "부산물은 소변으로 나가고, 카페인 자체는 혈액으로 되돌아감 (약 {0}%)",
+   "{0} mg: still blocking some receptors,\nbelow the {1} mg that perks you up": "{0} mg: 아직 일부 수용체를 막고 있지만,\n정신이 또렷해지는 {1} mg에는 못 미침",
+   "schematic; a few cells stand for millions": "모식도, 세포 몇 개로 수백만 개를 나타냄",
+   "<span style=\"font-size:17px\">a wake-keeping area at the base of the brain</span><br><span style=\"font-size:12px;opacity:.75\">(the basal forebrain)</span>": "<span style=\"font-size:17px\">뇌 밑부분에서 깨어 있게 하는 영역</span><br><span style=\"font-size:12px;opacity:.75\">(기저 전뇌)</span>",
+   "<span style=\"font-size:17px\">these cells help keep the cortex<br>(the brain’s outer layer) awake</span>": "<span style=\"font-size:17px\">피질(뇌의 바깥층)이 깨어 있도록<br>돕는 세포들</span>",
+   "<span style=\"font-size:17px\">long firing uses ATP, the cell’s energy,<br>faster than it’s remade; its core,<br>adenosine, builds up outside</span>": "<span style=\"font-size:17px\">오래 신호를 쏘면 ATP(세포의 에너지)가<br>재생보다 빨리 소모되고, 그 핵심인<br>아데노신이 세포 밖에 쌓임</span>",
+   "<span style=\"font-size:17px\">asleep, the adenosine falls</span>": "<span style=\"font-size:17px\">잠들면 아데노신이 줄어듦</span>",
+   "<span style=\"font-size:17px\">caffeine takes adenosine’s seat on these cells</span>": "<span style=\"font-size:17px\">카페인이 이 세포들에서 아데노신 자리를 차지함</span>",
+   "<b>{0}:{1} am</b>": "<b>오전 {0}:{1}</b>",
+   "how tired you are": "실제 피곤함",
+   "a ‘stay awake’ signal": "‘깨어 있어’ 신호",
+   "adenosine": "아데노신",
+   "awake:": "깨어 있을 때:",
+   "these cells fire": "이 세포가 신호를 쏨",
+   "firing uses up": "쏠수록 줄어드는",
+   "energy (ATP)": "에너지(ATP)",
+   "builds up": "쌓임",
+   "the cells slow:": "세포가 느려짐:",
+   "you feel sleepy": "졸음이 옴",
+   "sleep:": "잘 때:",
+   "adenosine falls": "아데노신 감소",
+   "a feedback loop": "피드백 루프",
+   "(University of Helsinki Sleep Team)": "(University of Helsinki Sleep Team)",
+   "<span style=\"font-size:17px\">nerve cell</span>": "<span style=\"font-size:17px\">신경세포</span>",
+   "<span style=\"font-size:17px\">fibre to the cortex</span>": "<span style=\"font-size:17px\">피질로 뻗은 신경 섬유</span>",
+   "The longer you're awake, the more adenosine slows your brain.": "오래 깨어 있을수록 아데노신이 뇌를 더 느리게 한다.",
+   "<span style=\"font-size:17px\">adenosine</span>": "<span style=\"font-size:17px\">아데노신</span>",
+   "<b>{0}:{1} pm</b>": "<b>오후 {0}:{1}</b>",
+   "<b>{0} pm</b>": "<b>오후 {0}시</b>",
+   "<b>{0} am</b>": "<b>오전 {0}시</b>",
+   "schematic: bars illustrative, molecules ~{0}⁷×": "모식도: 막대는 예시, 분자는 약 {0}⁷배 확대",
+   "how tired you feel": "느끼는 피곤함",
+   "<span style=\"font-size:17px\">one adenosine receptor, on one of those cells</span>": "<span style=\"font-size:17px\">그 세포 중 하나에 있는 아데노신 수용체 하나</span>",
+   "gap between nerve cells": "신경세포 사이의 틈",
+   "<span style=\"font-size:17px\">‘stay awake’ signals</span>": "<span style=\"font-size:17px\">‘깨어 있어’ 신호</span>",
+   "<span style=\"font-size:17px\">adenosine piles up, can’t land</span>": "<span style=\"font-size:17px\">아데노신이 쌓여도 내려앉지 못함</span>",
+   "<span style=\"font-size:17px\">a little caffeine leaves</span>": "<span style=\"font-size:17px\">카페인이 조금 떨어져 나감</span>",
+   "<span style=\"font-size:17px\">{0} pm: caffeine still on some receptors</span>": "<span style=\"font-size:17px\">오후 {0}시: 일부 수용체엔 아직 카페인</span>",
+   "<span style=\"font-size:17px\">how much is left depends on your liver</span>": "<span style=\"font-size:17px\">얼마나 남는지는 간에 달려 있음</span>",
+   "Caffeine hides your tiredness; it doesn't take it away.": "카페인은 피곤함을 가릴 뿐, 없애지는 않는다.",
+   "adenosine receptor": "아데노신 수용체",
+   "iced americano": "아이스 아메리카노",
+   "<span style=\"font-size:17px\">same double-ring core: fits, switches nothing</span>": "<span style=\"font-size:17px\">같은 이중 고리 뼈대: 꼭 맞지만 아무것도 켜지 않음</span>",
+   "caffeine": "카페인",
+   "hidden by caffeine": "카페인이 가린 만큼",
+   "feeling less tired = feeling more alert": "덜 피곤하게 느낌 = 더 또렷하게 느낌",
+   "caffeine can make sleep come later,": "카페인은 잠이 늦게 오게 하고,",
+   "shorter, lighter, with less deep sleep": "잠을 짧고 얕게, 깊은 잠은 적게 만들 수 있음",
+   "schematic; molecules far larger than life": "모식도, 분자는 실제보다 훨씬 크게 그림",
+   "a liver enzyme": "간 효소",
+   "(CYP{0}A{1}) · does over {2}% of it": "(CYP{0}A{1}) · {2}% 넘게 처리",
+   "Your liver breaks caffeine down by snipping off a methyl.": "간은 메틸기 하나를 잘라 카페인을 분해한다.",
+   "caffeine with one methyl snipped off": "메틸기 하나가 잘린 카페인",
+   "a cousin molecule the kidneys can flush": "콩팥이 내보낼 수 있는 사촌뻘 분자",
+   "to the kidneys, then urine": "콩팥을 거쳐 소변으로",
+   "about {0}%": "약 {0}%",
+   "of caffeine is sent back into the blood": "카페인이 혈액으로 되돌아감",
+   "one liver cell": "간세포 하나",
+   "½": "½",
+   "by {0}:{1} pm": "오후 {0}시 {1}분까지",
+   "¼": "¼",
+   "left at {0} pm": "오후 {0}시 잔량",
+   "schematic; enzymes drawn ∝ clearing speed": "모식도, 효소는 처리 속도에 비례해 그림",
+   "<b>fast liver</b><br>{0} h": "<b>빠른 간</b><br>{0} h",
+   "<b>average</b><br>{0} h": "<b>평균</b><br>{0} h",
+   "<b>slow liver</b><br>{0} h": "<b>느린 간</b><br>{0} h",
+   "<b>late pregnancy</b><br>up to {0} h": "<b>임신 후기</b><br>최대 {0} h",
+   "<b>on one antidepressant</b><br>(fluvoxamine) · {0} h": "<b>특정 항우울제 복용</b><br>(플루복사민) · {0} h",
+   "smokers: caffeine<br>cleared {0}% faster": "흡연자: 카페인을<br>{0}% 더 빨리 처리",
+   "birth-control pill: slower<br>({0} h vs {1} h)": "경구 피임약: 더 느림<br>({0} h vs {1} h)",
+   "late pregnancy: enzyme<br>slowed by two-thirds": "임신 후기: 효소가<br>3분의 2만큼 느려짐",
+   "the medicine<br>blocks the enzyme": "약이<br>효소를 막음",
+   "Same {0} pm cup: {1} mg left at bedtime, or {2}.": "같은 오후 {0}시 한 잔, 잘 때 {1} mg 또는 {2} mg 남는다.",
+   "in twins who didn't smoke or take the pill: {0}% of the difference inherited": "담배를 안 피우고 경구 피임약도 안 먹은 쌍둥이: 차이의 {0}%가 유전",
+   "turned-down enzymes": "약해진 효소",
+   "half-life: hours to clear half": "반감기: 절반을 처리하는 시간",
+   "blocked enzymes": "막힌 효소",
+   "snipped leftovers": "잘라낸 부산물",
+   "fast liver · {0}": "빠른 간 · {0}",
+   "average · {0}": "평균 · {0}",
+   "slow liver · {0}": "느린 간 · {0}",
+   "late pregnancy · {0}": "임신 후기 · {0}",
+   "{0} mg in one go: enough": "한 번에 {0} mg: 정신이",
+   "to perk you up (EFSA {0})": "또렷해지는 양 (EFSA {0})",
+   "{0} mg near bedtime: can disturb": "잘 무렵 {0} mg: 일부 사람의",
+   "sleep in some people (EFSA {0})": "잠을 방해할 수 있음 (EFSA {0})",
+   "fluvoxamine · {0}": "플루복사민 · {0}",
+   "one café decaf": "카페 디카페인 한 잔",
+   "direction only; two studies, ~{0} people each": "방향만 나타냄, 연구 2편, 각각 약 {0}명",
+   "{0} am": "오전 {0}시",
+   "drinks coffee daily": "매일 마시는 사람",
+   "your normal": "평소 수준",
+   "rarely drinks it": "거의 안 마시는 사람",
+   "{0}:{1} am": "오전 {0}:{1}",
+   "jittery": "초조함",
+   "a night without caffeine:": "카페인 없이 보낸 밤:",
+   "more tired than normal": "평소보다 더 피곤함",
+   "Rarely drink it? Caffeine trades sleepiness for jitters.": "거의 안 마신다면? 카페인은 졸음을 초조함으로 바꾼다.",
+   "the cup": "한 잔",
+   "the cup only undoes the dip": "한 잔은 처진 만큼만 메울 뿐",
+   "a bit less sleepy": "조금 덜 졸림",
+   "the jitters cancel the gain": "초조함이 이득을 상쇄함",
+   "born with a touchier receptor version:": "더 예민한 수용체 변이를 타고나면:",
+   "more jittery still": "한층 더 초조함",
+   "Neither got sharper than a rested normal: faster at simple tasks, not smarter (Rogers {0}).": "둘 다 푹 쉰 평소보다 나아지지 않았다. 단순한 일이 빨라질 뿐, 더 똑똑해지지는 않는다(Rogers {0}).",
+   "Drink it daily and the jitters mostly fade:": "매일 마시면 초조함은 대부분 사라진다. 이것이",
+   "tolerance.": "내성이다.",
+   "a summary; not medical advice": "요약일 뿐, 의학적 조언 아님",
+   "a slow liver:": "간이 느림:",
+   "mostly inherited": "대부분 유전",
+   "the birth-control pill, late pregnancy, some medicines": "경구 피임약, 임신 후기, 일부 약은",
+   "slow it more": "더 느리게 함",
+   "smoking": "흡연은",
+   "speeds it up": "더 빠르게 함",
+   "you rarely drink it:": "거의 안 마심:",
+   "no tolerance, so jitters come": "내성이 없어 초조함이 옴",
+   "born with a touchier receptor": "더 예민한 수용체를 타고남",
+   "a smaller body:": "몸집이 작음:",
+   "same cup, higher level": "같은 잔에도 농도가 더 높음",
+   "It stays longer": "더 오래 남는다",
+   "It stays longer in you, or it hits you harder.": "몸에 더 오래 남거나, 더 세게 온다.",
+   "It hits harder": "더 세게 온다",
+   "Fewer milligrams help in every case:": "어느 경우든 밀리그램이 적을수록 낫다.",
+   "a café decaf has about": "카페 디카페인은 약",
+   "{0} mg,": "{0} mg으로",
+   "{0}/{1} of a regular.": "일반 커피의 {0}/{1}이다.",
+   "Next: how decaf takes the caffeine out.": "다음: 디카페인이 카페인을 빼내는 방법.",
+   "Chapter {0}": "{0}장",
+   "Why some feel it more": "왜 누구는 더 세게 느낄까",
+   "What caffeine does, and why it lasts longer in some bodies": "카페인이 하는 일, 그리고 어떤 몸에서 더 오래 남는 이유",
+   "An explorable built from a research dossier compiled on {0} October {1}: process patents, regulations, laboratory and consumer-agency measurements, and plant biology. Every number carries its source and status. The moving pictures come from a small diffusion model of one bean's cross-section, calibrated so each method reaches its sourced removal at its sourced time. The chapter on why some people feel caffeine more adds two food-safety reviews (EFSA {2}, FSANZ {3}) and five studies, read on {4} October {5}.": "공정 특허, 규정, 실험실과 소비자 기관의 측정값, 식물 생물학을 담은 조사 자료({1}년 10월 {0}일 정리)로 만든 인터랙티브 해설이다. 모든 숫자에 출처와 상태를 표시했다. 움직이는 그림은 커피콩 한 알 단면의 작은 확산 모델에서 나오며, 각 방법이 출처에 적힌 제거율을 출처에 적힌 시간에 달성하도록 보정했다. 카페인을 더 세게 느끼는 사람이 있는 이유를 다룬 장에는 식품 안전 검토 보고서 두 편(EFSA {2}, FSANZ {3})과 연구 다섯 편을 더했다({5}년 10월 {4}일 열람).",
+   "How do you take caffeine out of a bean and keep the coffee?": "커피콩에서 카페인만 빼고 커피는 어떻게 지킬까?",
+   "One green bean, followed through water, solvents, carbon and CO₂, to a plant that barely makes caffeine.": "생두 한 알을 따라 물, 용매, 활성탄, CO₂를 거쳐 카페인을 거의 만들지 않는 커피나무까지 간다.",
+   "Your turn": "직접 해 보기",
+   "Cherry": "체리",
+   "Seed": "씨앗",
+   "Bean": "생두",
+   "One coffee cherry": "커피 체리 한 알",
+   "arabica, ripe on the branch": "가지에서 익은 아라비카",
+   "from fruit to bean": "열매에서 생두까지",
+   "One cherry": "체리 한 알",
+   "the fruit": "열매",
+   "Each coffee cherry holds two seeds: the beans.": "커피 체리 하나에는 씨앗이 둘, 바로 커피콩이다.",
+   "a real one, cut in half": "실물을 반으로 자른 것",
+   "the same, drawn": "같은 것을 그림으로",
+   "Two seeds": "씨앗 두 개",
+   "inside, face to face": "안에서 서로 마주 봄",
+   "skin": "껍질",
+   "pulp": "과육",
+   "parchment": "속껍질",
+   "seed: the bean": "씨앗: 커피콩",
+   "Dried and hulled: green beans": "말려서 껍질을 벗기면 생두",
+   "one seed, one bean": "씨앗 하나가 생두 하나",
+   "Green beans": "생두",
+   "the seeds, dried and hulled": "말려서 껍질을 벗긴 씨앗",
+   "{0} dot = {1} mg of caffeine": "점 {0}개 = 카페인 {1} mg",
+   "{0} mm": "{0} mm",
+   "It came from [[green-bean|beans]] like this one: {0} g, {1} mg.": "이런 [[green-bean|생두]]에서 왔다. {0} g, {1} mg.",
+   "Green bean": "생두",
+   "arabica · {0} g bean · {1}% caffeine, dry": "아라비카 · 생두 {0} g · 카페인 {1}%(건조 중량)",
+   "robusta · {0} g · {1}%": "로부스타 · {0} g · {1}%",
+   "{0} glyph = {1}% of its bean's dry mass": "카페인 그림 {0}개 = 생두 건조 중량의 {1}%",
+   "Decaf may keep [[dry-basis|0.1%]]: {0} of {1} arabica caffeines go.": "디카페인은 [[dry-basis|0.1%]]까지: 아라비카 카페인 {1}개 중 {0}개를 뺀다.",
+   "Dry basis": "건조 중량 기준",
+   "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">arabica</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0}</span>": "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">아라비카</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0}</span>",
+   "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">robusta</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0}</span>": "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">로부스타</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0}</span>",
+   "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">arabica</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">= {1}%</span></span>": "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">아라비카</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">= {1}%</span></span>",
+   "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">robusta</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">= {1}%</span></span>": "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">로부스타</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">= {1}%</span></span>",
+   "<b style=\"font-size:16px\">≥ {0}% removed</b>": "<b style=\"font-size:16px\">{0}% 이상 제거</b>",
+   "Korea until {0} · Japan": "한국 {0}년까지 · 일본",
+   "<b style=\"font-size:16px\">≤ {0}% left</b>": "<b style=\"font-size:16px\">{0}% 이하 남음</b>",
+   "Korea from {0} · Germany · Canada": "한국 {0}년부터 · 독일 · 캐나다",
+   "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">arabica</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">of {1}</span></span>": "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">아라비카</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">/ {1}</span></span>",
+   "= {0}% of the dry bean": "= 건조 중량의 {0}%",
+   "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">robusta</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">of {1}</span></span>": "<span style=\"font:600 13px/1.3 var(--font-ui);color:#1f1f1f\">로부스타</span><br><span style=\"font:700 26px/1 var(--font-display);color:#c1320a\">{0} <span style=\"font:600 15px/1 var(--font-ui);color:#1f1f1f\">/ {1}</span></span>",
+   "{0}% out: what plants aim for": "{0}% 제거: 공장의 목표",
+   "{0}% out": "{0}% 제거",
+   "molecules drawn far larger than life": "분자는 실제보다 훨씬 크게 그림",
+   "In each cell, one caffeine sits among seven sugars and [[cga|acids]].": "세포마다 카페인 하나가 당분·[[cga|산]] 일곱 개 사이에 있다.",
+   "Chlorogenic acid": "클로로겐산",
+   "stacked on a chlorogenic acid": "클로로겐산 위에 겹쳐 있음",
+   "sucrose": "자당",
+   "per caffeine, by molecule count": "카페인 하나당, 분자 수 기준",
+   "chlorogenic acid": "클로로겐산",
+   "per caffeine, its partner included": "카페인 하나당, 짝 포함",
+   "µm": "µm",
+   "cell wall · cell size illustrative": "세포벽 · 세포 크기는 예시",
+   "Take out the orange one. Keep the seven.": "주황색 하나는 빼고, 일곱은 남긴다.",
+   "dry solvent": "물 없는 용매",
+   "dry: “hardly soluble at all”": "물 없이: “거의 녹지 않음”",
+   "{0} patent": "{0}년 특허",
+   "Dry, caffeine stays stacked on its partner; water pries it loose.": "마른 채로는 카페인이 짝에 붙어 있고, 물이 떼어 낸다.",
+   "water in the bean": "생두 속 수분",
+   "plants use {0}–{1}%": "공장에선 {0}–{1}%",
+   "water": "물",
+   "hours shown in seconds": "몇 시간을 몇 초로 압축",
+   "{0} °C": "{0} °C",
+   "still water": "고인 물",
+   "In still water, [[diffusion|caffeine stops leaving]] once the water catches up.": "고인 물이 따라잡으면 [[diffusion|카페인이 더 빠져나오지 않는다]].",
+   "Diffusion": "확산",
+   "caffeine level  ·  {0}% = a green bean": "카페인 농도  ·  {0}% = 생두",
+   "{0} h": "{0} h",
+   "in the bean": "생두 속",
+   "in the bath": "물속",
+   "downhill": "내리막",
+   "stalled": "멈춤",
+   "model": "모델",
+   "the bath has caught up with the bean": "물이 생두를 따라잡음",
+   "flowing again": "다시 흐름",
+   "fresh water every hour": "매시간 새 물로 교체",
+   "{0} dot = {1}/{2} of the bean’s caffeine": "점 {0}개 = 생두 카페인의 {1}/{2}",
+   "caffeine still inside": "아직 남은 카페인",
+   "lab run used ultrasound; plain soaking {0}–{1}% slower": "실험은 초음파 사용, 그냥 담그면 {0}–{1}% 느림",
+   "from the rim": "겉에서",
+   "from the core": "속에서",
+   "{0} hop": "{0}걸음",
+   "{0} mm · ≈ {1} s": "{0} mm · ≈ {1} s",
+   "<b>{0}</b> of {1} still inside": "<b>{0}</b>/{1} 아직 안에",
+   "rim · <b>{0}</b> hops": "겉 · <b>{0}</b>걸음",
+   "core · <b>{0}</b> hops": "속 · <b>{0}</b>걸음",
+   "Caffeine leaves the rim in minutes and the core in hours.": "카페인은 겉에선 몇 분, 속에선 몇 시간 만에 빠진다.",
+   "min": "min",
+   "rim · {0} hops · typical": "겉 · {0}걸음 · 보통",
+   "h": "h",
+   "core · {0} hops · typical": "속 · {0}걸음 · 보통",
+   "first {0}%": "처음 {0}%",
+   "last {0}%, as long": "마지막 {0}%도 그만큼",
+   "{0} hours in {1} s · sugar from the model": "{0}시간을 {1}초로 · 당분은 모델 값",
+   "Plain water takes the sugar out along with the caffeine.": "맹물은 카페인과 함께 당분까지 빼낸다.",
+   "left in the bean": "생두에 남은 양",
+   "plain water at {0} °C, changed every hour": "{0} °C 맹물, 매시간 교체",
+   "sugar": "당분",
+   "{0} dot = {1}% of the bean’s caffeine or sugar, leaving": "나가는 점 {0}개 = 생두 카페인 또는 당분의 {1}%",
+   "caffeine left": "남은 카페인",
+   "sugar left": "남은 당분",
+   "{0} patent: water “leaches green solubles”": "{0}년 특허: 물이 “생두의 녹는 성분을 우려낸다”",
+   "stand-ins · beans {0}× · sugar from the model": "상징물 · 생두 {0}× · 당분은 모델 값",
+   "Three ways to keep the sugar in, and one way around.": "당분을 남기는 방법 셋, 그리고 우회로 하나.",
+   "a solvent": "용매",
+   "water full of coffee": "커피가 가득 녹은 물",
+   "squeezed CO₂": "압축한 CO₂",
+   "a seed without": "무카페인 씨앗",
+   "the three methods first wet the beans": "세 방법 모두 먼저 생두를 적심",
+   "out in {0} h": "{0} h에 제거",
+   "{0}–{1} h": "{0}–{1} h",
+   "company": "업체",
+   "≈{0}%": "≈{0}%",
+   "caffeine as grown": "타고난 카페인",
+   "wet cells of the bean": "생두의 젖은 세포",
+   "methylene chloride": "염화메틸렌",
+   "{0} µm": "{0} µm",
+   "Caffeine crosses into [[dcm|methylene chloride]]; sugar stays behind.": "카페인은 [[dcm|염화메틸렌]]으로 넘어가고, 당분은 남는다.",
+   "Methylene chloride": "염화메틸렌",
+   "caffeine across": "넘어간 카페인",
+   "sugar across: {0}": "넘어간 당분: {0}",
+   "sugar turns back": "당분은 되돌아감",
+   "{0} h in {1} s · beans {2}× · log gauges": "{0}시간을 {1}초로 · 생두 {2}× · 로그 눈금 게이지",
+   "<b style=\"font-size:14px\">{0}%</b>": "<b style=\"font-size:14px\">{0}%</b>",
+   "caffeine: <span style=\"color:#912607\">beans</span> → <span style=\"color:#6222b4\">solvent</span>": "카페인: <span style=\"color:#912607\">생두</span> → <span style=\"color:#6222b4\">용매</span>",
+   "<b>{0} h</b>": "<b>{0} h</b>",
+   "clean solvent": "새 용매",
+   "to the still": "증류기로",
+   "our batch": "우리 배치",
+   "beans": "생두",
+   "[[countercurrent|Clean solvent meets the oldest beans]]; {0}% out in ten hours.": "[[countercurrent|새 용매가 오래 담근 생두부터 거쳐]] 10시간에 {0}%를 뺀다.",
+   "Countercurrent": "향류",
+   "done": "완료",
+   "new batch · every {0} h": "새 배치 · {0}시간마다",
+   "a real plant switches valves, not columns": "실제 공장은 칼럼 대신 밸브를 전환",
+   "out": "제거",
+   "our batch · {0} h · patent example": "우리 배치 · {0} h · 특허 예시",
+   "{0} hours of steaming shown in {1} s": "증기 처리 {0}시간을 {1}초로",
+   "methylene chloride boils": "염화메틸렌 끓는점",
+   "<b>{0} °C</b>": "<b>{0} °C</b>",
+   "steam rises through the bed": "증기가 생두 사이로 올라감",
+   "the solvent leaves with it": "용매도 함께 빠져나감",
+   "[[steam-strip|Steam]] drives the {0} °C [[solvent]] out of the beans.": "[[steam-strip|증기]]가 {0} °C에서 끓는 [[solvent|용매]]를 생두에서 몰아낸다.",
+   "Steam stripping": "증기 스트리핑",
+   "Solvent": "용매",
+   "ethyl acetate boils": "에틸 아세테이트 끓는점",
+   "methylene chloride left in decaf (mg/kg)": "디카페인에 남은 염화메틸렌 (mg/kg)",
+   "US limit {0}": "미국 한도 {0}",
+   "EU limit {0}": "EU 한도 {0}",
+   "median in EU shops {0}": "EU 매장 중앙값 {0}",
+   "{0} samples; industry authors": "시료 {0}개, 저자는 업계 소속",
+   "{0}–{1} °C": "{0}–{1} °C",
+   "steam": "증기",
+   "{0}-hour soaks shown in {1}–{2} s · plant schematic": "{0}시간 담금을 {1}–{2}초로 · 공장 개략도",
+   "<b>batch {0}</b>": "<b>배치 {0}</b>",
+   "<b>{0}</b>": "<b>{0}</b>",
+   "<i style=\"display:inline-block;width:5px;height:12px;margin-right:5px;vertical-align:-1px;background:#d9380b\"></i>caffeine left&nbsp;&nbsp; <i style=\"display:inline-block;width:5px;height:12px;margin-right:5px;vertical-align:-1px;background:#06963b\"></i>sugar left&nbsp; <span style=\"font:700 9.5px/1 var(--font-ui);letter-spacing:.1em;text-transform:uppercase;color:#6b6b6b\">model</span>": "<i style=\"display:inline-block;width:5px;height:12px;margin-right:5px;vertical-align:-1px;background:#d9380b\"></i>남은 카페인&nbsp;&nbsp; <i style=\"display:inline-block;width:5px;height:12px;margin-right:5px;vertical-align:-1px;background:#06963b\"></i>남은 당분&nbsp; <span style=\"font:700 9.5px/1 var(--font-ui);letter-spacing:.1em;text-transform:uppercase;color:#6b6b6b\">모델</span>",
+   "fresh water": "새 물",
+   "The first batch is thrown away; its [[gce|water]] is kept.": "첫 배치는 버리고, 담갔던 [[gce|물]]은 남긴다.",
+   "Green coffee extract": "생두 추출액",
+   "<b style=\"font-size:15px\">{0}%</b>": "<b style=\"font-size:15px\">{0}%</b>",
+   "activated carbon": "활성탄",
+   "discarded": "폐기",
+   "its sugar went into the water": "당분은 물로 넘어감",
+   "green coffee extract: everything but caffeine": "생두 추출액: 카페인만 빼고 전부",
+   "General Foods' {0} solvent version: ≈{1}% solids": "General Foods {0}년 용매 방식: 고형분 ≈{1}%",
+   "sugar kept": "당분은 그대로",
+   "the water already holds it": "물에 이미 들어 있음",
+   "One in eight": "여덟 중 하나",
+   "What decaf must take out, and what it must leave": "디카페인이 빼야 할 것과 남겨야 할 것",
+   "Water, and why it is slow": "물, 그리고 느린 이유",
+   "Water frees caffeine, fills up, and reaches the middle last": "물은 카페인을 떼어 내고, 곧 가득 차며, 속에는 가장 늦게 닿는다",
+   "Answer {0}": "해법 {0}",
+   "A liquid that takes caffeine and turns sugar away": "카페인은 받고 당분은 돌려보내는 액체",
+   "Water full of coffee": "커피가 가득 녹은 물",
+   "Water that already holds everything except caffeine": "카페인 말고는 이미 다 녹아 있는 물",
+   "height = what's left · {0} h in {1} s": "높이 = 남은 양 · {0}시간을 {1}초로",
+   "Sugar is level inside and out; only caffeine runs downhill.": "당분은 안팎이 평평하고 카페인만 내리막으로 흐른다.",
+   "<b style=\"font-size:16px\">caffeine</b>": "<b style=\"font-size:16px\">카페인</b>",
+   "<b style=\"font-size:16px\">sugar</b>": "<b style=\"font-size:16px\">당분</b>",
+   "the water: no caffeine": "물: 카페인 없음",
+   "the water: full of sugar": "물: 당분 가득",
+   "{0}–{1} h, company example": "{0}–{1} h, 업체 예시",
+   "solubles": "가용 성분",
+   "company example": "업체 예시",
+   "pore drawn schematically · counts illustrative": "기공은 모식도 · 개수는 예시",
+   "<b>plain carbon</b>": "<b>일반 활성탄</b>",
+   "<b>soaked in sugar first</b>": "<b>설탕에 먼저 적심</b>",
+   "<span class=\"lg\"><i style=\"background:#d9380b\"></i>caffeine</span><br><span class=\"lg\"><i style=\"background:#06963b\"></i>sugar</span><br><span class=\"lg\"><i style=\"background:#7a4222\"></i>chlorogenic acid</span><br><span class=\"lg\"><i style=\"background:#83cb9d\"></i>sugar soaked in first</span>": "<span class=\"lg\"><i style=\"background:#d9380b\"></i>카페인</span><br><span class=\"lg\"><i style=\"background:#06963b\"></i>당분</span><br><span class=\"lg\"><i style=\"background:#7a4222\"></i>클로로겐산</span><br><span class=\"lg\"><i style=\"background:#83cb9d\"></i>먼저 적셔 둔 설탕</span>",
+   "the same coffee water reaches both": "같은 커피 물이 양쪽으로",
+   "{0} kg": "{0} kg",
+   "cane sugar": "설탕",
+   "run through {0} kg of carbon first · Coffex patent": "활성탄 {0} kg에 먼저 흘려보냄 · Coffex 특허",
+   "Activated carbon: a lump and powder": "활성탄: 덩어리와 가루",
+   "[[carbon|Carbon]] soaked in sugar first catches practically only caffeine.": "설탕에 먼저 적신 [[carbon|활성탄]]은 사실상 카페인만 잡는다.",
+   "Activated carbon": "활성탄",
+   "{0}<span class=\"u\" style=\"color:#d9380b\">caffeine</span><br><span style=\"color:#34642b\">{1}</span><span class=\"u\" style=\"color:#34642b\">sugars and acids</span><br>": "{0}<span class=\"u\" style=\"color:#d9380b\">카페인</span><br><span style=\"color:#34642b\">{1}</span><span class=\"u\" style=\"color:#34642b\">당분과 산</span><br>",
+   "caught by this grain": "이 알갱이가 잡은 것",
+   "no room: the sugar flows on": "자리 없음: 당분은 흘러감",
+   "sugar caught": "당분이 잡힘",
+   "caffeine takes a free site": "카페인이 빈자리를 차지",
+   "the coffee loses sugars and acids": "커피는 당분과 산을 잃음",
+   "its sugars and acids flow on": "당분과 산은 그대로 흘러감",
+   "of carbon in one column": "활성탄 · 칼럼 하나 분량",
+   "this grain is one of them · Coffex patent": "이 알갱이도 그중 하나 · Coffex 특허",
+   "caffeine burned": "카페인은 태움",
+   "when the carbon is cleaned · Swiss Water": "활성탄을 깨끗이 할 때 · Swiss Water",
+   "heating shown in seconds": "가열 시간은 몇 초로 압축",
+   "bar": "bar",
+   "°C": "°C",
+   "liquid": "액체",
+   "gas": "기체",
+   "CO₂ · pressure against temperature": "CO₂ · 온도에 따른 압력",
+   "{0} bar": "{0} bar",
+   "solid": "고체",
+   "supercritical": "초임계",
+   "Past {0} °C and {1} bar, CO₂ becomes one [[supercritical|dense fluid]].": "{0} °C, {1} bar를 넘으면 CO₂는 하나의 [[supercritical|고밀도 유체]]가 된다.",
+   "Supercritical CO₂": "초임계 CO₂",
+   "{0} °C · {1} bar": "{0} °C · {1} bar",
+   "the critical point": "임계점",
+   "one phase": "단일 상(相)",
+   "kg/m³": "kg/m³",
+   "{0} °C · {1} bar, as in the plant": "{0} °C · {1} bar, 공장 조건",
+   "{0} hours shown in {1} s": "{0}시간을 {1}초로",
+   "{0} m": "{0} m",
+   "CO₂ and caffeine to the wash tower": "CO₂와 카페인은 세척탑으로",
+   "CO₂ in, washed": "씻긴 CO₂ 유입",
+   "Nine tonnes of beans sit in {0}-bar CO₂ for {1} hours.": "생두 9톤이 {0} bar CO₂에 {1}시간 잠겨 있다.",
+   "m³ · {0} t of wet beans": "m³ · 젖은 생두 {0} t",
+   "left in this bean · {0} h at {1} bar, {2} °C": "이 생두에 남은 양 · {1} bar, {2} °C에서 {0} h",
+   "≈{0}": "≈{0}",
+   "million beans": "백만 알",
+   "out · {0} h": "제거 · {0} h",
+   "robusta: {0} h": "로부스타: {0} h",
+   "bubbles drawn far larger than life": "기포는 실제보다 훨씬 크게 그림",
+   "<span class=\"lg\"><i style=\"background:#b9bbbe\"></i>CO₂ bubble</span><span class=\"lg\"><i style=\"background:#0f65e0\"></i>water drop</span><span class=\"lg\"><i style=\"background:#d9380b\"></i>caffeine</span>": "<span class=\"lg\"><i style=\"background:#b9bbbe\"></i>CO₂ 기포</span><span class=\"lg\"><i style=\"background:#0f65e0\"></i>물방울</span><span class=\"lg\"><i style=\"background:#d9380b\"></i>카페인</span>",
+   "caffeines in the CO₂": "개의 카페인이 CO₂에",
+   "In the tower, caffeine leaves the CO₂ for falling water.": "세척탑에서 카페인은 CO₂를 떠나 흘러내리는 물로 간다.",
+   "in the water": "개가 물에",
+   "caffeine in the CO₂": "개의 카페인이 CO₂에",
+   "as much per volume in the water": "부피당 물에 더 많음",
+   "at rest · [[partition]] K {0}–{1} → {2}–{3}×": "가만히 두면 · [[partition|분배]] 계수 K {0}–{1} → {2}–{3}×",
+   "Partition": "분배",
+   "CO₂ and caffeine from the beans": "생두에서 나온 CO₂와 카페인",
+   "washed out": "씻겨 나감",
+   "the CO₂ goes back to the beans almost clean": "CO₂는 거의 깨끗한 채 생두로 돌아감",
+   "WHAT THE TOTE HOLDS": "통에 담긴 것",
+   "This is caffeine": "이것이 카페인",
+   "Pure caffeine crystals": "순수한 카페인 결정",
+   "pure": "순도",
+   "sold as crude caffeine · a Houston plant": "정제 전 카페인으로 판매 · 휴스턴의 한 공장",
+   "Cold liquid CO₂ is denser than hot CO₂ at {0} bar. Which decaffeinates faster?": "{0} bar에서 찬 액체 CO₂는 뜨거운 CO₂보다 밀도가 높다. 어느 쪽이 카페인을 더 빨리 뺄까?",
+   "Where is the slow step: in the CO₂, or inside the bean?": "느린 단계는 CO₂ 쪽일까, 생두 안쪽일까?",
+   "molecules far larger than life · days in seconds": "분자는 실제보다 훨씬 크게 · 며칠을 몇 초로",
+   "<b style=\"font-size:26px;letter-spacing:-.01em\">{0} °C</b>": "<b style=\"font-size:26px;letter-spacing:-.01em\">{0} °C</b>",
+   "CO₂ · <b>{0}</b> kg/m³": "CO₂ · <b>{0}</b> kg/m³",
+   "liquid CO₂ · <b>{0}</b> kg/m³": "액체 CO₂ · <b>{0}</b> kg/m³",
+   "the bean’s outer cells": "생두의 바깥 세포",
+   "bean surface": "생두 표면",
+   "caffeine left in the bean": "생두에 남은 카페인",
+   "<span class=\"lg\"><i style=\"background:#d9380b\"></i>caffeine</span><span class=\"lg\"><i style=\"background:#50565c\"></i>CO₂</span>": "<span class=\"lg\"><i style=\"background:#d9380b\"></i>카페인</span><span class=\"lg\"><i style=\"background:#50565c\"></i>CO₂</span>",
+   "Hot CO₂ finishes in {0} hours; cold takes about a week.": "뜨거운 CO₂는 {0}시간, 찬 것은 일주일쯤 걸린다.",
+   "fewer hops": "더 적은 걸음",
+   "than at {0} °C": "{0} °C보다",
+   "▸▸ {0} h": "▸▸ {0} h",
+   "▸▸ {0} days": "▸▸ {0}일",
+   "{0}–{1} days": "{0}–{1}일",
+   "CR{0}, a real liquid-CO₂ plant": "CR{0}, 실제 액체 CO₂ 공장",
+   "{0} days": "{0}일",
+   "out · ≈{0} h": "제거 · ≈{0} h",
+   "<b>ordinary arabica</b>": "<b>일반 아라비카</b>",
+   "xanthosine": "잔토신",
+   "<b>AC{0}</b>": "<b>AC{0}</b>",
+   "① XMT puts a methyl on N{0}": "① XMT가 N{0}에 메틸을 붙임",
+   "The seed adds three [[methyl|methyls]]; in AC{0} the third rarely lands.": "씨앗은 [[methyl|메틸]]을 셋 붙이는데, AC{0}은 셋째가 잘 안 붙는다.",
+   "Methyl group": "메틸기",
+   "{0}-methylxanthosine": "{0}-메틸잔토신",
+   "② the ribose comes off": "② 리보스가 떨어져 나감",
+   "{0}-methylxanthine": "{0}-메틸잔틴",
+   "③ theobromine synthase: N{0}": "③ 테오브로민 합성효소: N{0}",
+   "theobromine": "테오브로민",
+   "④ caffeine synthase: N{0}": "④ 카페인 합성효소: N{0}",
+   "≈{0}×": "≈{0}×",
+   "weaker": "약함",
+   "caffeine synthase in AC{0}": "AC{0}의 카페인 합성효소",
+   "mg/g caffeine": "mg/g 카페인",
+   "Mundo Novo, ordinary arabica": "문도 노보, 일반 아라비카",
+   "one in {0}": "{0}개 중 하나",
+   "an ordinary arabica seed": "일반 아라비카 씨앗",
+   "an AC{0} seed": "AC{0} 씨앗",
+   "mg/g": "mg/g",
+   "[[theobromine]] · AC{0} · Benatti et al. {1}": "[[theobromine|테오브로민]] · AC{0} · Benatti et al. {1}",
+   "Theobromine": "테오브로민",
+   "layout illustrative": "배치는 예시",
+   "accessions": "계통",
+   "seeds from Ethiopia, {0}": "에티오피아산 씨앗, {0}년",
+   "Testing over {0} trees found three nearly caffeine-free.": "{0}그루 넘게 검사해 카페인이 거의 없는 셋을 찾았다.",
+   "trees tested": "그루 검사",
+   "AC{0}": "AC{0}",
+   "AC{0}–AC{1} · vs {2}% in ordinary arabica": "AC{0}–AC{1} · 일반 아라비카는 {2}%",
+   "over {0}": "{0}여",
+   "projected": "예상",
+   "breeding lines, {0}\non sale {1} if finished in {2}": "개량 중인 계통, {0}년\n{2}년에 완성되면 {1}년 출시",
+   "flavour stack illustrative; beans {0}× life size": "향미 블록은 예시 · 생두는 {0}× 확대",
+   "Decaf loses a little bitterness and some roasty, caramel flavour.": "디카페인은 쓴맛과 볶은 향, 캐러멜 향미를 조금 잃는다.",
+   "bitterness": "쓴맛",
+   "estimate": "추정",
+   "<b>formed in roasting</b><br>chlorogenic-acid lactones<br>phenylindanes (dark roasts)": "<b>로스팅 중 생성</b><br>클로로겐산 락톤<br>페닐인단(다크 로스트)",
+   "removed in decaf": "디카페인에선 빠짐",
+   "the normal dose": "평소 양",
+   "before tasters noticed\nadded caffeine": "카페인을 이만큼 넣어야\n시음자가 알아챔",
+   "acidity · aroma": "산미 · 향",
+   "volatile acids": "휘발성 산",
+   "caramel": "캐러멜",
+   "in the roast": "로스팅 중에",
+   "pyrazines (roasty, nutty)": "피라진(볶은 향, 고소함)",
+   "<b>sucrose</b><br>green beans": "<b>자당</b><br>생두",
+   "one sample": "시료 하나",
+   "solvent decaf": "용매 디카페인",
+   "{0} of {1}": "{1} 중 {0}",
+   "pyrazines": "피라진",
+   "lower in decaf": "디카페인이 더 적음",
+   "higher": "더 많음",
+   "in decaf": "(디카페인)",
+   "Zou {0}": "Zou {0}",
+   "{0} roast min in {1} s · plumes illustrative": "로스팅 {0}분을 {1}초로 · 연기는 예시",
+   "<b>regular</b><br>{0} min": "<b>일반 커피</b><br>{0}분",
+   "<b>decaf</b><br>{0} min": "<b>디카페인</b><br>{0}분",
+   "already brown": "이미 갈색",
+   "Decaf roasts darker, faster; blind tasters score it slightly lower.": "디카페인은 더 짙게 빨리 볶이고, 블라인드 점수는 살짝 낮다.",
+   "<span class=\"lg\"><i style=\"background:#5a3620\"></i>pyrazines (roasty, nutty)</span>": "<span class=\"lg\"><i style=\"background:#5a3620\"></i>피라진(볶은 향, 고소함)</span>",
+   "different beans": "서로 다른 원두",
+   "retail decafs vs regular": "시판 디카페인 대 일반 커피",
+   "Agtron": "Agtron",
+   "roast colour": "로스팅 색",
+   "a different lot": "다른 로트",
+   "points": "점",
+   "blind · {0} regular coffees": "블라인드 · 일반 커피 {0}종",
+   "{0} decafs · same producer": "디카페인 {0}종 · 같은 생산자",
+   "No blinded tasting has compared the methods on one lot.": "같은 로트로 여러 공정을 비교한 블라인드 시음은 없다.",
+   "{0} h in {1} s · caffeine: model · sugar: sources": "{0}시간을 {1}초로 · 카페인: 모델 · 당분: 문헌값",
+   "No study compares the methods on one lot of beans.": "같은 로트의 생두로 여러 공정을 비교한 연구는 없다.",
+   "<b>solvent</b>": "<b>용매</b>",
+   "<b>water full of coffee</b>": "<b>커피로 가득한 물</b>",
+   "<b>squeezed CO₂</b>": "<b>압축한 CO₂</b>",
+   "<b>grown without</b>": "<b>처음부터 없이</b>",
+   "Each answer leaves a little caffeine and changes something else.": "답마다 카페인이 조금 남고, 다른 무언가도 바뀐다.",
+   "caffeine out": "카페인 제거",
+   "<b>solvent</b><br><span style=\"font-weight:500;color:var(--ink2)\">recovered</span>": "<b>용매</b><br><span style=\"font-weight:500;color:var(--ink2)\">회수</span>",
+   "<b>water full of coffee</b><br><span style=\"font-weight:500;color:var(--ink2)\">burned</span>": "<b>커피로 가득한 물</b><br><span style=\"font-weight:500;color:var(--ink2)\">태움</span>",
+   "company figure": "업체 수치",
+   "<b>squeezed CO₂</b><br><span style=\"font-weight:500;color:var(--ink2)\">sold, ≈{0}% pure (a Houston plant)</span>": "<b>압축한 CO₂</b><br><span style=\"font-weight:500;color:var(--ink2)\">판매, 순도 ≈{0}% (휴스턴의 한 공장)</span>",
+   "not measured": "측정 없음",
+   "robusta {0} h": "로부스타 {0} h",
+   "<b>grown without</b><br><span style=\"font-weight:500;color:var(--ink2)\">barely made</span>": "<b>처음부터 없이</b><br><span style=\"font-weight:500;color:var(--ink2)\">거의 안 만듦</span>",
+   "mg/g sucrose": "mg/g 자당",
+   "Mundo Novo: {0} · ripe seeds\na plant difference, not a loss": "문도 노보: {0} · 익은 씨앗\n손실이 아니라 식물의 차이",
+   "{0} dot = {1} mg; dots stacked to be counted": "점 {0}개 = {1} mg · 셀 수 있게 쌓음",
+   "empty cup": "빈 잔",
+   "{0} café decafs": "디카페인 {0}잔",
+   "Eighteen café decafs hold the caffeine of one regular.": "카페 디카페인 18잔이면 일반 커피 한 잔의 카페인이다.",
+   "{0} mg/L · {1} mL": "{0} mg/L · {1} mL",
+   "mg each": "mg씩",
+   "their caffeine": "모인 카페인",
+   "{0} × {1} mg = {2} mg": "{0} × {1} mg = {2} mg",
+   "A dense fluid that carries caffeine to water": "카페인을 물로 실어 나르는 고밀도 유체",
+   "Grown without": "처음부터 카페인 없이",
+   "A coffee tree that barely makes caffeine": "카페인을 거의 만들지 않는 커피나무",
+   "What changes in the cup": "잔에서 달라지는 것",
+   "What decaf keeps, what it loses, and what tasters found": "디카페인이 지키는 것과 잃는 것, 시음자들이 알아낸 것",
+   "What's left": "남은 것",
+   "What each answer costs, and what reaches the cup": "답마다 치르는 대가와 잔에 닿는 것",
+   "Now run a decaf plant yourself.": "이제 디카페인 공장을 직접 돌려 보자.",
+   "Change the bath, the heat and the water; break one design choice; or test a lot against the {0} line.": "담금액과 온도, 수분을 바꾸거나, 설계 하나를 망가뜨리거나, 한 로트를 {0}년 기준선으로 시험해 보자.",
+   "Run a plant": "공장 돌리기",
+   "Break it": "망가뜨리기",
+   "Pass the line": "기준선 통과",
+   "Measured": "측정값",
+   "Every method": "모든 방법",
+   "Terms": "용어",
+   "Fine print": "출처와 주석",
+   "Pick a bath and a bean, set the heat and the water, and watch one bean's caffeine leave.": "담금액과 생두를 고르고 온도와 수분을 맞춘 뒤, 한 알의 카페인이 빠져나가는 모습을 지켜보세요.",
+   "Temperature": "온도",
+   "Water in the beans": "생두 속 수분",
+   "time": "시간",
+   "sugar + acids kept": "남은 당분·산",
+   "the bath's design, not a measured loss": "실측 손실이 아니라 담금액 설계에서 나온 값",
+   "Plain water": "맹물",
+   "Ethyl acetate": "에틸 아세테이트",
+   "Solvent tower": "용매 탑",
+   "Swiss Water": "스위스 워터",
+   "CO₂ {0} bar": "CO₂ {0} bar",
+   "Liquid CO₂": "액체 CO₂",
+   "Bath": "담금액",
+   "Arabica {0}%": "아라비카 {0}%",
+   "Robusta {0}%": "로부스타 {0}%",
+   "Restart": "다시 시작",
+   "Calibrated to Swiss Water's own example, {0}% → {1}%, reached here at {2} h (company: {3}–{4} h).": "스위스 워터 자체 예시({0}% → {1}%)에 맞춰 보정했다. 여기서는 {2}시간에 도달한다(회사 수치: {3}–{4}시간).",
+   "Run a plant · Swiss Water (carbon)": "공장 돌리기 · 스위스 워터(활성탄)",
+   "Coffee-loaded water; carbon takes the caffeine.": "커피 성분이 가득한 물에서 카페인은 활성탄이 가져간다.",
+   "{0}% of dry weight": "건조 중량의 {0}%",
+   "Still above the {0}% line.": "아직 {0}% 기준선 위에 있다.",
+   "activated carbon<br>caffeine taken <b>{0} mg</b> per bean": "활성탄<br>생두 한 알당 카페인 <b>{0} mg</b> 흡착",
+   "caffeine <b>{0} mg</b>": "카페인 <b>{0} mg</b>",
+   "sugar <b>{0}%</b>": "당분 <b>{0}%</b>",
+   "beans in water already full of coffee": "이미 커피 성분이 가득한 물에 잠긴 생두",
+   "caffeine left in this bean · log scale": "이 생두에 남은 카페인 · 로그 눈금",
+   "sourced run": "출처 데이터",
+   "hours": "시간",
+   "{0}% line": "{0}% 기준선",
+   "Fitted to an ultrasound-assisted lab run (robusta, {0} °C): {1}% out after {2} h. Ultrasound cut that study's times {3}–{4}%.": "초음파 보조 실험실 실험(로부스타, {0} °C, {2}시간 뒤 {1}% 제거)에 맞춰 피팅했다. 그 연구에서 초음파는 시간을 {3}–{4}% 줄였다.",
+   "<b>{0} h</b> · caffeine left <b>{1} mg</b>": "<b>{0} h</b> · 남은 카페인 <b>{1} mg</b>",
+   "Calibrated to P&G's patent: {0}% out in {1} h at {2} °C, five columns.": "P&G 특허({2} °C, 칼럼 다섯 개, {1}시간에 {0}% 제거)에 맞춰 보정했다.",
+   "{0} h<br><b>{1} mg</b>": "{0} h<br><b>{1} mg</b>",
+   "fresh solvent": "새 용매",
+   "still: solvent back, caffeine stays": "증류기: 용매는 회수, 카페인은 남음",
+   "Calibrated to P&G's accelerated process: {0}% in {1} h at {2} °C.": "P&G의 가속 공정({2} °C, {1}시간에 {0}% 제거)에 맞춰 보정했다.",
+   "Calibrated to General Foods ({0}): {1}% in {2} h.": "General Foods({0}, {2}시간에 {1}% 제거)에 맞춰 보정했다.",
+   "solvent drops fall through the water<br>and take its caffeine": "용매 방울이 물속으로 떨어지며<br>카페인을 가져간다",
+   "Run a plant · Water + solvent tower": "공장 돌리기 · 물 + 용매 탑",
+   "Coffee-loaded water; a solvent tower takes the caffeine.": "커피 성분이 가득한 물에서 카페인은 용매 탑이 가져간다.",
+   "Diffusion carried from the ultrasound-fitted water run by temperature; CO₂ flow calibrated to {0}% in {1} h (an industrial batch).": "확산은 초음파 보조 물 실험에 피팅한 값을 온도로 환산해 썼고, CO₂ 흐름은 {1}시간에 {0}% 제거(산업용 배치 1건)에 맞춰 보정했다.",
+   "one bean · caffeine <b>{0} mg</b>": "생두 한 알 · 카페인 <b>{0} mg</b>",
+   "<b>{0} m³</b> · {1} t of wet beans<br>{2} bar · {3} °C · <b>{4} h</b>": "<b>{0} m³</b> · 적신 생두 {1} t<br>{2} bar · {3} °C · <b>{4} h</b>",
+   "water wash tower": "물 세척탑",
+   "crude caffeine": "정제 전 카페인",
+   "Run a plant · Supercritical CO₂": "공장 돌리기 · 초임계 CO₂",
+   "Supercritical CO₂ ferries caffeine to a water tower.": "초임계 CO₂가 카페인을 물 세척탑으로 실어 나른다.",
+   "Calibrated to CR{0}'s liquid process: ≤{1}% after {2}–{3} days.": "CR{0}의 액체 CO₂ 공정({2}–{3}일 뒤 {1}% 이하)에 맞춰 보정했다.",
+   "Run a plant · Liquid CO₂": "공장 돌리기 · 액체 CO₂",
+   "Cold liquid CO₂: dense, but slow.": "차가운 액체 CO₂는 밀도는 높지만 느리다.",
+   "Each experiment removes one design choice from a working plant. Watch what it costs.": "실험마다 잘 돌아가는 공장에서 설계 요소 하나를 뺀다. 그 대가를 지켜보세요.",
+   "No wetting": "적시기 생략",
+   "No carbon": "활성탄 없음",
+   "Co-current": "같은 방향",
+   "Cold CO₂": "저온 CO₂",
+   "Experiment": "실험",
+   "Each experiment starts from the working plant and changes one thing. Live values from this page's model.": "실험마다 잘 돌아가는 공장에서 출발해 한 가지만 바꾼다. 값은 이 페이지의 모델이 실시간으로 계산한다.",
+   "Plain water, no coffee in it": "커피 성분이 없는 맹물",
+   "Break it · the working design": "망가뜨리기 · 정상 설계",
+   "Coffee-full water: only caffeine has anywhere to go.": "커피 성분이 가득한 물에서는 카페인만 빠져나갈 곳이 있다.",
+   "**Working design**": "**정상 설계**",
+   "Skip the wetting": "적시기 건너뛰기",
+   "Take the carbon out": "활성탄 빼기",
+   "The carbon keeps the water caffeine-poor, so caffeine keeps leaving.": "활성탄이 물속 카페인을 낮게 유지하므로 카페인이 계속 빠져나간다.",
+   "Solvent the same way as the beans": "용매를 생두와 같은 방향으로",
+   "Run the CO₂ plant cold": "CO₂ 공장을 저온으로 돌리기",
+   "At {0} °C, {1}% is out in {2} hours.": "{0} °C에서는 {2}시간이면 {1}%가 빠진다.",
+   "**Broken:** run the co₂ plant cold": "**고장:** CO₂ 공장을 저온으로 돌리기",
+   "Break it · Same plant at {0} °C": "망가뜨리기 · 같은 공장, {0} °C",
+   "At {0} °C caffeine crawls through the bean: about a week.": "{0} °C에서는 카페인이 생두 속을 기어가듯 움직여 약 1주일이 걸린다.",
+   "Will this lot pass Korea's {0} rule? Decide before the bean is weighed.": "이 로트는 한국의 {0}년 기준을 통과할까? 생두를 재기 전에 판단해 보세요.",
+   "score": "점수",
+   "Made-up practice lots inside the measured ranges for each species. Rule: MFDS notice No. {0}-{1}, from {2} January {3}. [[caffeine-free|\"99.9% caffeine-free\"]] means at most {4}% left.": "연습용으로 지어낸 로트이며, 값은 종마다 측정된 범위 안에 있다. 기준: 식약처(MFDS) 고시 제{0}-{1}호, {3}년 1월 {2}일부터 시행. [[caffeine-free|\"99.9% 카페인 프리\"]]는 남은 카페인이 최대 {4}%라는 뜻이다.",
+   "{0}% caffeine-free": "{0}% 카페인 프리",
+   "**Lot {0} of {1}.** A arabica lot at **{2}%** caffeine goes through a process that removes **{3}%**. Does it pass the {4} rule?": "**로트 {0}/{1}.** 카페인 **{2}%**인 아라비카 로트가 **{3}%**를 제거하는 공정을 거친다. {4}년 기준을 통과할까?",
+   "Passes": "통과",
+   "Fails": "탈락",
+   "Will this lot be legal decaf in Korea from {0}?": "이 로트는 {0}년부터 한국에서 디카페인으로 인정될까?",
+   "caffeine, % of the bean's dry weight (log scale)": "카페인, 생두 건조 중량 대비 %(로그 눈금)",
+   "lot {0}": "로트 {0}",
+   "arabica": "아라비카",
+   "robusta": "로부스타",
+   "lot {0} of {1}": "로트 {0}/{1}",
+   "starts at {0}%": "처음 {0}%",
+   "process removes {0}%": "공정 제거율 {0}%",
+   "passes or fails?": "통과? 탈락?",
+   "what {0}% removal leaves": "{0}% 제거 후 남는 양",
+   "after the process": "공정 후",
+   "The sourced numbers behind the page: speeds, cups, sugar, rules and imports.": "이 페이지의 근거가 된 출처 수치: 속도, 커피 한 잔, 당분, 기준, 수입량.",
+   "How fast": "속도",
+   "Rules": "기준",
+   "What else left": "함께 빠진 것",
+   "Species": "커피 종",
+   "Korea": "한국",
+   "Statuses: patents and company figures are **stated**; the industrial batch is **reported**; lab and agency data are **measured**.": "상태: 특허와 회사 수치는 **주장(stated)**, 산업용 배치는 **보고(reported)**, 실험실과 기관 데이터는 **측정(measured)**이다.",
+   "Model curves against every sourced run with a time and a result.": "모델 곡선을 시간과 결과가 함께 나온 모든 출처 데이터와 비교한다.",
+   "caffeine left in the bean, % of start (log) against hours (log): one panel per method": "시간(로그)에 따른 생두 속 남은 카페인(처음 대비 %, 로그): 방법마다 패널 하나",
+   "{0}% in {1} h": "{1} h에 {0}%",
+   "ultrasound lab, {0}": "초음파 실험실, {0}",
+   "computing…": "계산 중…",
+   "P&G patent": "P&G 특허",
+   "shorter run": "짧게 돌린 예",
+   "Water + solvent tower": "물 + 용매 탑",
+   "General Foods": "General Foods",
+   "Swiss Water (carbon)": "스위스 워터(활성탄)",
+   "Coffex patent": "Coffex 특허",
+   "{0} t batch": "{0} t 배치",
+   "{0} bar, {1} °C": "{0} bar, {1} °C",
+   "Zosel patent": "Zosel 특허",
+   "CR{0}": "CR{0}",
+   "How to read": "읽는 법",
+   "this page's model": "이 페이지의 모델",
+   "the run it is calibrated to": "보정에 쓴 데이터",
+   "other sourced runs: checks": "다른 출처 데이터: 검증용",
+   "the other methods": "다른 방법들",
+   "{0}% removed": "{0}% 제거",
+   "Battery lines stop where the batch": "칼럼 방식 곡선은 배치가",
+   "leaves the last column.": "마지막 칼럼을 나오면 끝난다.",
+   "Measured decaf drinks, scaled to a {0} mL cup.": "실측한 디카페인 음료를 {0} mL 한 잔 기준으로 환산했다.",
+   "one arabica bean": "아라비카 생두 한 알",
+   "green: {0} mg": "생두 {0} mg",
+   "decaf: {0}–{1} mg": "디카페인 {0}–{1} mg",
+   "{0}% out · the {1}% line": "{0}% 제거 · {1}% 기준선",
+   "caffeine per {0} mL cup (mg)": "{0} mL 한 잔당 카페인(mg)",
+   "regular americano, Korea": "일반 아메리카노, 한국",
+   "MFDS average ×{0} L": "식약처 평균 ×{0} L",
+   "café decafs, Gyeonggi": "카페 디카페인, 경기도",
+   "Gyeonggi {0}, {1} decaf products": "경기도 {0}, 디카페인 제품 {1}종",
+   "bottled decaf, Korea": "병에 든 디카페인, 한국",
+   "consumer agency {0}: {1}–{2} mg/{3} mL": "소비자원 {0}: {1}–{2} mg/{3} mL",
+   "{0}–{1} mg": "{0}–{1} mg",
+   "decaf brewed, US (FDA)": "내린 디카페인, 미국(FDA)",
+   "{0}–{1} mg per {2} mL": "{2} mL당 {0}–{1} mg",
+   "decaf, US outlets": "디카페인, 미국 매장",
+   "McCusker {0}: {1}–{2} mg per {3} mL": "McCusker {0}: {3} mL당 {1}–{2} mg",
+   "Ranges converted to {0} mL; per-volume figures as measured. Sensitive drinkers can notice about {1} mg (Griffiths, via UF {2}).": "범위는 {0} mL로 환산했고, 부피당 수치는 측정값 그대로다. 민감한 사람은 약 {1} mg을 알아챌 수 있다(Griffiths, UF {2} 재인용).",
+   "What counts as decaf, and what {0}% and {1}% removal leave in one bean.": "어디까지가 디카페인인지, 그리고 {0}%와 {1}%를 제거하면 생두 한 알에 얼마가 남는지.",
+   "caffeine in one green bean (mg, log scale)": "생두 한 알의 카페인(mg, 로그 눈금)",
+   "{0}% out: {1} mg": "{0}% 제거 {1} mg",
+   "what counts as decaf": "디카페인의 기준",
+   "Korea, until {0}": "한국, {0}년까지",
+   "Korea, from {0} Jan {1}": "한국, {1}년 1월 {0}일부터",
+   "≤ {0}% left": "≤ {0}% 남음",
+   "Germany · Canada": "독일 · 캐나다",
+   "EU-wide": "EU 전체",
+   "instant only: ≤ {0}%": "인스턴트만: ≤ {0}%",
+   "Japan (industry code)": "일본(업계 규약)",
+   "USA": "미국",
+   "no FDA definition": "FDA 정의 없음",
+   "\"{0}% removed\" is a trade convention; US labelling rules set no decaf limit.": "\"{0}% 제거\"는 업계 관행이다. 미국 표시 규정에는 디카페인 한도가 없다.",
+   "Korea imported {0} t of decaf in {1}, {2}× its {3} volume.": "한국의 {1}년 디카페인 수입량은 {0} t으로, {3}년의 {2}배다.",
+   "Bean caffeine: Illy & Viani via Schenker {0} · rules: MFDS notice {1}-{2}, KaffeeV §{3}, CFIA Vol. {4}, Dir. {5}/{6}/EC · imports: UN Comtrade": "생두 카페인: Illy & Viani, Schenker {0} 재인용 · 기준: 식약처 고시 {1}-{2}, KaffeeV §{3}, CFIA Vol. {4}, Dir. {5}/{6}/EC · 수입: UN Comtrade",
+   "Measured composition changes; one study per row.": "실측한 성분 변화로, 한 줄에 연구 하나씩이다.",
+   "change after decaffeination, % (green beans)": "카페인 제거 후 변화, %(생두)",
+   "methylene chloride decaf, arabica": "염화메틸렌 디카페인, 아라비카",
+   "chlorogenic acids": "클로로겐산",
+   "same sample": "같은 시료",
+   "trigonelline": "트리고넬린",
+   "lipids": "지질",
+   "non-caffeine solubles": "카페인 외 수용성 성분",
+   "Swiss Water's own illustration (derived)": "스위스 워터 자체 도해(도출값)",
+   "water decaf, arabica: concentrated as others left": "물 방식 디카페인, 아라비카: 다른 성분이 빠지며 농축됨",
+   "Rows {0}–{1}: Toci, Farah & Trugo {2} (one industrial sample; conditions not reported) · row {3}: Swiss Water (company) · row {4}: Farah et al. {5}": "{0}–{1}행: Toci, Farah & Trugo {2}(산업 시료 1개, 조건 미기재) · {3}행: 스위스 워터(회사 자료) · {4}행: Farah et al. {5}",
+   "No published study compares the methods on one lot of beans.": "같은 로트의 생두로 여러 공정을 비교한 연구는 발표된 적이 없다.",
+   "Decaf green beans also look darker and roast faster (Swiss Water roasting guide, {0}).": "디카페인 생두는 색도 더 어둡고 더 빨리 로스팅된다(스위스 워터 로스팅 가이드, {0}).",
+   "Bean caffeine across coffee species, against the {0}% line.": "커피 종별 생두 카페인을 {0}% 기준선과 비교한다.",
+   "caffeine in the bean, % of dry weight (bar: typical · line: range)": "생두 속 카페인, 건조 중량의 %(막대: 대표값 · 선: 범위)",
+   "C. canephora (robusta)": "C. canephora(로부스타)",
+   "C. arabica": "C. arabica",
+   "C. liberica": "C. liberica",
+   "C. racemosa": "C. racemosa",
+   "Laurina (Bourbon Pointu)": "Laurina (Bourbon Pointu)",
+   "C. eugenioides": "C. eugenioides",
+   "AC{0} arabica": "AC{0} 아라비카",
+   "C. mauritiana": "C. mauritiana",
+   "C. salvatrix": "C. salvatrix",
+   "C. humblotiana": "C. humblotiana",
+   "C. pseudozanguebariae": "C. pseudozanguebariae",
+   "Bakossi (C. charrieriana)": "Bakossi (C. charrieriana)",
+   "Campa et al. {0}; Silvarolla et al. {1}, {2}; Benatti et al. {3}; Tango & Carvalho {4}; Baumann et al. {5}; Raharimalala et al. {6}": "Campa et al. {0}; Silvarolla et al. {1}, {2}; Benatti et al. {3}; Tango & Carvalho {4}; Baumann et al. {5}; Raharimalala et al. {6}",
+   "Decaf imports by year.": "연도별 디카페인 수입량.",
+   "Korea: decaf coffee imports, tonnes (green + roasted)": "한국의 디카페인 커피 수입량, 톤(생두 + 원두)",
+   "{0}× in nine years; decaf was {1}% of coffee imports by weight in {2} ({3}% in {4}). Source: UN Comtrade, Korea-reported.": "9년 새 {0}배로 늘었다. {2}년 디카페인은 무게 기준 커피 수입량의 {1}%였다({4}년에는 {3}%). 출처: UN Comtrade, 한국 보고 기준.",
+   "Eleven ways to take caffeine out of coffee, or never put it in. Each one sets up its machine.": "커피에서 카페인을 빼거나 아예 넣지 않는 열한 가지 방법이다. 하나를 고르면 그 장치가 차려진다.",
+   "Benzene (Roselius)": "벤젠(로젤리우스)",
+   "Ethyl acetate (\"sugarcane\")": "에틸 아세테이트(\"사탕수수\")",
+   "Indirect solvent": "간접 용매",
+   "Mountain Water": "마운틴 워터",
+   "Coffee oil": "커피 오일",
+   "AC{0} arabica (grown)": "AC{0} 아라비카(재배)",
+   "Gene silencing": "유전자 침묵",
+   "**{0} idea; Canada since {1}–{2}** · Delta, British Columbia": "**{0}년 착안, 캐나다에서 {1}–{2}년부터** · 브리티시컬럼비아주 델타",
+   "Green coffee extract, cleaned by activated carbon; no solvent.": "생두 추출액을 활성탄으로 정화하며, 용매는 쓰지 않는다.",
+   "result": "결과",
+   "Caffeine: burned when the carbon is regenerated.": "카페인: 활성탄을 재생할 때 태운다.",
+   "Every method · Swiss Water": "모든 방법 · 스위스 워터",
+   "Every term, with a moving picture.": "모든 용어를 움직이는 그림으로.",
+   "The coffee seed before roasting. Every decaffeination method works on green beans.": "로스팅 전의 커피 씨앗이다. 카페인 제거는 어느 방법이든 생두 단계에서 한다.",
+   "A share of the bean's water-free weight: {0}% caffeine is {1} g per {2} g dry.": "물을 뺀 커피콩 무게 대비 비율이다. 카페인 {0}%는 건조 중량 {2} g당 {1} g이다.",
+   "Coffee's main acids, {0}% of a dry arabica bean. Caffeine stacks on them one to one.": "커피의 주된 산으로, 아라비카 생두 건조 중량의 {0}%다. 카페인은 이 산에 1 대 1로 겹쳐 붙는다.",
+   "Molecules spreading from crowded to sparse; doubling the distance makes it take four times as long.": "분자가 빽빽한 곳에서 성긴 곳으로 퍼지는 것이다. 거리가 두 배면 시간은 네 배 걸린다.",
+   "How a solute splits between two liquids at rest. Caffeine prefers water to CO₂ by {0}–{1} to {2}.": "녹은 물질이 가만히 둔 두 액체에 나뉘는 비율이다. 카페인은 CO₂보다 물을 {0}–{1} 대 {2}로 더 좋아한다.",
+   "A liquid that dissolves something. For decaf, one that takes caffeine but not sugar.": "무언가를 녹이는 액체다. 디카페인용은 카페인은 가져가고 당분은 남긴다.",
+   "Dichloromethane (DCM), a chlorinated solvent that boils at {0} °C. Limits: {1} ppm US, {2} mg/kg EU.": "디클로로메탄(DCM)이라고도 하는 염소계 용매로, {0} °C에서 끓는다. 허용 한도: 미국 {1} ppm, EU {2} mg/kg.",
+   "A fruity ester that boils at {0} °C. Called \"sugarcane\" decaf when its ethanol comes from cane.": "{0} °C에서 끓는, 과일 향 나는 에스터다. 원료 에탄올이 사탕수수에서 오면 \"사탕수수\" 디카페인이라 부른다.",
+   "Beans and liquid travel opposite ways, so the cleanest liquid always meets the cleanest beans.": "생두와 액체가 서로 반대로 움직여서, 가장 깨끗한 액체가 늘 가장 깨끗한 생두와 만난다.",
+   "Steam pushed through the beans to carry off a solvent that boils below water.": "생두 사이로 증기를 밀어 넣어, 물보다 낮은 온도에서 끓는 용매를 실어 내는 것이다.",
+   "Water already loaded with everything soluble in green coffee except caffeine; Swiss Water's bath.": "생두의 녹는 성분 중 카페인만 빼고 전부 이미 녹아 있는 물이다. 스위스 워터 공정의 담금물이다.",
+   "Charcoal riddled with tiny pores that hold caffeine pulled from water.": "미세한 구멍이 숭숭 뚫린 숯으로, 물에서 끌어낸 카페인을 구멍에 붙잡아 둔다.",
+   "At most {0}% caffeine left by weight. Swiss Water also says \"removes {1}%\"; the rules count what's left.": "남은 카페인이 무게 기준 최대 {0}%다. 스위스 워터는 \"{1}% 제거\"라고도 하지만, 규정은 남은 양을 센다.",
+   "Above {0} °C and {1} bar CO₂ is one phase: dense like a liquid, runny like a gas.": "{0} °C, {1} bar를 넘은 CO₂는 하나의 상태다. 액체처럼 빽빽하고 기체처럼 잘 흐른다.",
+   "One carbon with three hydrogens. The plant adds three to a purine ring to make caffeine.": "탄소 하나에 수소 셋이 붙은 것이다. 식물은 퓨린 고리에 이것을 세 개 붙여 카페인을 만든다.",
+   "Caffeine minus one methyl group: cocoa's alkaloid, and where the AC{0} plant mostly stops.": "카페인에서 메틸기 하나가 빠진 것이다. 코코아의 알칼로이드로, AC{0} 커피나무는 대개 여기서 멈춘다.",
+   "Switching a gene off; in coffee, the gene for the enzyme that adds caffeine's second methyl.": "유전자를 꺼 버리는 것이다. 커피에서는 카페인의 두 번째 메틸을 붙이는 효소의 유전자를 끈다.",
+   "Adenosine": "아데노신",
+   "The core of ATP, the cells' energy molecule. It builds up while you are awake and quiets wake-keeping nerve cells.": "ATP(세포의 에너지 분자)의 핵심 부분이다. 깨어 있는 동안 쌓여, 잠을 쫓는 신경세포를 잠잠하게 한다.",
+   "Adenosine receptor": "아데노신 수용체",
+   "A protein in a nerve cell's surface with a pocket open to the outside. Adenosine switches it on; caffeine fits and switches nothing.": "신경세포 표면에 박힌 단백질로, 바깥쪽으로 열린 주머니가 있다. 아데노신은 이것을 켜고, 카페인은 들어맞지만 아무것도 켜지 않는다.",
+   "Half-life": "반감기",
+   "The hours it takes the body to clear half the caffeine in it: about {0} on average in healthy adults, {1} to {2} across people.": "몸이 체내 카페인의 절반을 없애는 데 걸리는 시간이다. 건강한 성인은 평균 약 {0}시간, 사람에 따라 {1}~{2}시간이다.",
+   "CYP{0}A{1}": "CYP{0}A{1}",
+   "The liver enzyme that does over {0}% of caffeine's breakdown, snipping off one methyl at a time.": "카페인 분해를 {0}% 넘게 맡는 간 효소로, 메틸을 하나씩 잘라 낸다.",
+   "Tolerance": "내성",
+   "A drug's effect fading with regular use. People who drink coffee daily get less anxiety from a cup than people who rarely drink it.": "약물을 꾸준히 쓰면 효과가 약해지는 현상이다. 커피를 매일 마시는 사람은 거의 안 마시는 사람보다 한 잔에 덜 불안해진다.",
+   "green": "생두",
+   "roasted": "원두",
+   "caffeine, dry basis": "카페인, 건조 기준",
+   "caffeine, as weighed": "카페인, 실측 기준",
+   "same caffeine, more water": "카페인은 같고 물만 더 많음",
+   "on chlorogenic acid": "클로로겐산 위에",
+   "flat rings meet": "평평한 고리 만남",
+   "thin": "얇음",
+   "{0}% left": "{0}% 남음",
+   "twice as thick": "두 배 두꺼움",
+   "time to {0}% out": "{0}% 빠지는 시간",
+   "thick": "두꺼움",
+   "CO₂": "CO₂",
+   "caffeine at rest": "가만히 둔 카페인",
+   "water : CO₂": "물 : CO₂",
+   "here {0} : {1}": "여기 {0} : {1}",
+   "bean": "생두",
+   "solvent →": "용매 →",
+   "CH₂Cl₂": "CH₂Cl₂",
+   "two chlorines (violet)": "염소 두 개(보라)",
+   "boils at {0} °C": "끓는점 {0} °C",
+   "CH₃COOC₂H₅": "CH₃COOC₂H₅",
+   "an ester; oxygens red": "에스터, 산소는 빨강",
+   "solvent: clean in, loaded out": "용매: 깨끗이 넣고 진하게 뺌",
+   "beans: loaded in, clean out": "생두: 카페인째 넣고 깨끗이 뺌",
+   "steam in": "증기 유입",
+   "steam + solvent out": "증기 + 용매 배출",
+   "solvent left in beans {0}%": "생두에 남은 용매 {0}%",
+   "water with sugar and acids, no caffeine": "당분과 산은 있고 카페인은 없는 물",
+   "water →": "물 →",
+   "carbon": "활성탄",
+   "caffeine held: {0}": "붙잡힌 카페인: {0}",
+   "sugar passes": "당분은 통과",
+   "{0} parts of bean": "커피콩 {0}등분",
+   "{0} caffeine": "카페인 {0}",
+   "{0}% of the weight": "무게의 {0}%",
+   "arabica: {0}": "아라비카: {0}",
+   "liquid under gas": "기체 아래 액체",
+   "critical point: {0} °C, {1} bar": "임계점: {0} °C, {1} bar",
+   "a sealed tube, heated": "밀봉한 관을 가열",
+   "CH₃ = C + {0} H": "CH₃ = C + {0} H",
+   "{0} of {1} added": "{0}/{1} 붙음",
+   "three methyls": "메틸기 세 개",
+   "C₈H₁₀N₄O₂": "C₈H₁₀N₄O₂",
+   "two methyls": "메틸기 두 개",
+   "C₇H₈N₄O₂": "C₇H₈N₄O₂",
+   "XMT": "XMT",
+   "MXMT": "MXMT",
+   "DXMT": "DXMT",
+   "MXMT off": "MXMT 끔",
+   "{0}-methyl-": "{0}-메틸",
+   "xanthine": "잔틴",
+   "NH₂": "NH₂",
+   "ribose": "리보스",
+   "{0} pm": "오후 {0}시",
+   "builds up while awake": "깨어 있는 동안 쌓임",
+   "switches it on": "수용체를 켬",
+   "fits, stays off": "들어맞되 꺼짐",
+   "one cup": "한 잔",
+   "half-lives": "반감기",
+   "half-life, h": "반감기, h",
+   "the pill · {0} h": "피임약 · {0} h",
+   "the liver enzyme that clears caffeine": "카페인을 없애는 간 효소",
+   "drinks it daily": "매일 마심",
+   "anxious, after the same cup": "같은 한 잔을 마신 뒤 불안감",
+   "late pregnancy · up to {0} h": "임신 후기 · 최대 {0} h",
+   "{0} half-life: {1}/{2}": "반감기 {0}번: {1}/{2}",
+   "stacked flat, {0} : {1}": "납작하게 포개짐, {0} : {1}",
+   "Run a plant · Ethyl acetate": "공장 돌리기 · 에틸 아세테이트",
+   "Run a plant · Methylene chloride": "공장 돌리기 · 염화메틸렌",
+   "The same battery, hotter and faster.": "같은 다섯 칼럼, 더 뜨겁고 더 빠르게.",
+   "Fresh solvent meets the oldest beans.": "새 용매가 가장 오래 담근 생두부터 만난다.",
+   "Countercurrent: the cleanest solvent meets the cleanest beans.": "향류: 가장 깨끗한 용매가 가장 깨끗한 생두를 만난다."
+  }
+ }
 }
 </script>
 <script>
@@ -2318,7 +3591,8 @@ const $ = (s, r = document) => r.querySelector(s);
 const C = JSON.parse($('#content').textContent);
 C.tour = C.tour || []; C.modes = C.modes || []; C.terms = C.terms || []; C.meta = C.meta || {};
 /* the page's look and pace: light (default) or dark; "guided" (a reader drives it, default) or "talk" (a speaker drives it) */
-const THEME = C.meta.theme === 'dark' ? 'dark' : 'light', FORMAT = C.meta.format === 'talk' ? 'talk' : 'guided', LANG = (C.meta.lang || 'en').toLowerCase();
+const THEME = C.meta.theme === 'dark' ? 'dark' : 'light', FORMAT = C.meta.format === 'talk' ? 'talk' : 'guided', SRC_LANG = (C.meta.lang || 'en').toLowerCase();
+let LANG = SRC_LANG;   // the language shown: the page's own (meta.lang), or one of its translations (content.i18n), switched live with X.setLang
 document.documentElement.dataset.pageTheme = THEME; document.documentElement.lang = LANG; document.body.dataset.format = FORMAT;   // data-page-theme: the engine's own attribute, so a host that marks data-theme (the Claude app in dark mode does) cannot flip the page
 const P = {}, T = {}, TAU = {}, BASE = {};
 const X = window.X = {
@@ -2346,12 +3620,80 @@ const I18N = {
     touchHelp: 'On a tablet or phone: swipe left or right, or tap ‹ ›.', orbit: 'drag to turn · scroll or pinch to zoom · double-click to reset',
     st_measured: 'The authors measured it on real systems.', st_simulated: 'Produced by a simulator or emulator, not by hardware.', st_projected: 'An expectation or extrapolation, not a measurement.',
     st_derived: 'Computed here from numbers in the source.', st_stated: 'Asserted in the source; no data shown for it.', st_reported: 'A result from a cited study, relayed by the source; the method is in the original.',
-    st_illustrative: 'A teaching picture or toy model, not data.', st_target: 'A goal or budget the authors set out to meet; not a result.', scene: 'Scene'}
+    st_illustrative: 'A teaching picture or toy model, not data.', st_target: 'A goal or budget the authors set out to meet; not a result.', scene: 'Scene',
+    langTitle: 'Language', langHint: '↑ ↓ to move · Enter to choose · Esc to close', kLang: 'Choose the language', tourPos: 'Tour {n} / {N}', stampA: 'Built with ', stampB: ', a tool by Chanyoung Moon', srcTip: 'Where this is in the paper'},
+  /* the engine's words in Korean, for a page translated into Korean (a page may override any of them with X.strings('ko', {...})) */
+  ko: {play: '재생', playTour: '투어 재생', explore: '둘러보기', replayTour: '투어 다시 보기', yourTurn: '직접 해 볼 차례', tryIt: '이제 직접 해 보세요.', backTo: '돌아가기 · ',
+    seeIt: '투어에서 보기', legend: '라벨의 뜻', legendNote: '라벨에 마우스를 올리면 뜻이 보여요. 쪽 번호는 원문의 위치예요.', numbers: '이 페이지의 숫자',
+    simplified: '일부러 단순하게 그린 것', whereLives: '원문의 각 부분이 나오는 곳', notCovered: '여기서 다루지 않은 것', source: '원문', openSource: '원문 열기',
+    yourGuess: '내 예상', lockIn: '이 값으로 정하기', spotOn: '정확해요.', close2: '거의 맞았어요.', notQuite: '조금 달라요.', answer: '정답',
+    question: '질문', chapter: '챕터', playing: '재생 중', paused: '일시정지', done: '끝', doneNext: '끝 · → 다음', cardNext: '→ 시작',
+    slides: '슬라이드', goTo: '이동', gridHint: 'Enter 이동 · Esc 닫기', close: '닫기', titleCard: '표지', laser: '레이저', laserKey: '레이저 포인터 (P)', gridKey: '모든 슬라이드 (G)',
+    homeKey: '표지로 (Esc)', fullKey: '전체 화면 (F)', fsHome: 'iPhone의 Safari는 주소창을 숨기지 않아요. 공유 → 홈 화면에 추가를 누른 뒤 홈 화면에서 열면 화면을 꽉 채워요.', fsNo: '이 창에서는 전체 화면을 쓸 수 없어요. 페이지를 따로 열어 주세요.', replayKey: '이 장면 다시 (R)', scrubHint: '끌어서 이 장면 안을 이동', prev: '이전', next: '다음',
+    rotate: '휴대폰을 가로로 돌려 주세요', rotateSub: '슬라이드는 16:9예요. 탭하면 닫혀요.', enterToGo: 'Enter로 이동', holdOn: '장면마다 멈춤: →로 넘기기', holdOff: '자동으로 넘기기', modesCue: '직접 해 보기',
+    keys: '단축키', kNext: '다음 슬라이드 (챕터 표지도 한 장)', kPrev: '이전 슬라이드', kPlay: '애니메이션 재생 / 일시정지',
+    kScrub: '뒤로 / 앞으로 재생: 다시 누르면 2배, 4배 (Shift: 3초씩 건너뛰기)', kShuttleKey: 'J · K · L', rewinding: '되감기', kReplay: '이 장면 다시', kNumKey: '숫자 + Enter', kNum: '그 슬라이드로 (0 = 표지)', kModes: '모드 열기', kGrid: '모든 슬라이드',
+    noPage: '{n}번 슬라이드는 없어요: 0부터 {N}까지예요',
+    kLaser: '레이저 포인터', kNotes: '발표자 노트', kMarks: '용어 밑줄 켜기 / 끄기', marksOn: '용어 밑줄 켬', marksOff: '용어 밑줄 끔', kAuto: '자동 넘기기 켜기 / 끄기', kFull: '전체 화면', kEsc: '표지로', kHelp: '이 목록',
+    touchHelp: '태블릿이나 휴대폰에서는 왼쪽·오른쪽으로 밀거나 ‹ › 를 누르세요.', orbit: '끌어서 돌리기 · 스크롤이나 핀치로 확대 · 더블클릭으로 원위치',
+    st_measured: '저자들이 실제 시스템에서 잰 값.', st_simulated: '하드웨어가 아니라 시뮬레이터나 에뮬레이터로 얻은 값.', st_projected: '측정이 아니라 예상이나 외삽.',
+    st_derived: '원문의 숫자로 여기서 계산한 값.', st_stated: '원문이 주장만 하고 데이터는 보여 주지 않은 것.', st_reported: '원문이 인용한 다른 연구의 결과. 방법은 그 연구에 있어요.',
+    st_illustrative: '데이터가 아니라 설명용 그림이나 단순화한 모형.', st_target: '저자들이 맞추려고 세운 목표나 예산. 결과가 아니에요.', scene: '장면',
+    stn_measured: '측정', stn_simulated: '시뮬레이션', stn_projected: '예상', stn_derived: '계산', stn_stated: '주장', stn_reported: '인용', stn_illustrative: '예시', stn_target: '목표',
+    langTitle: '언어', langHint: '↑ ↓ 이동 · Enter 선택 · Esc 닫기', kLang: '언어 고르기', tourPos: '투어 {n} / {N}', stampA: '', stampB: ' · 문찬영이 만든 도구', srcTip: '원문에서의 위치'}
 };
 const tx = k => { const t = I18N[LANG] || I18N.en; return t[k] ?? I18N.en[k] ?? k; };
 X.tx = tx;
-X.strings = (lang, map) => { I18N[lang] = Object.assign(I18N[lang] || {}, map); };   // a page in another language adds the engine's words in it (keys as in I18N.en), before X.start()
+X.strings = (lang, map) => { I18N[lang] = Object.assign(I18N[lang] || {}, map); I18.chromeK = ''; };   // (called by page code, after the engine has loaded)   // a page in another language adds the engine's words in it (keys as in I18N.en), before X.start()
 X.L = map => (map && typeof map === 'object') ? (map[LANG] ?? map.en ?? Object.values(map)[0]) : map;   // the page's own strings: X.L({en: '…', ko: '…'})
+
+/* ---------------------------------------------------------------- languages: a page in one language, or with translations it switches live
+   content.i18n = {ko: {key: translation}} (build_explorable.py writes it from src/i18n/ko.json). A key is a string the viewer
+   sees, as the page's code or content hands it to the engine, with every number outside tags and [[term]] markup written
+   {0}, {1}, … in order: "{0} mg left at {1} pm" serves every number, and a translation may move them ("밤 {1}시에 {0} mg").
+   Every string on its way to the screen passes X.tr: the band, panels, labels, callouts, the deck kit, X.ctext, charts and
+   any canvas fillText or measureText, so page code needs no change. Text a page splits itself (its own wrapping, letter by
+   letter) is translated whole first with X.tr(s). A page without translations installs none of this. */
+const I18 = X._i18n = {dict: (C.i18n && typeof C.i18n === 'object') ? C.i18n : {}, memo: new Map(), out: new Set(), lines: new Set(), rec: null, miss: new Set(), on: false, mute: 0, gen: 0, chrome: new Set(), chromeK: ''};
+const LANG_NAMES = {en: ['EN', 'English'], ko: ['한', '한국어'], ja: ['日', '日本語'], zh: ['中', '中文'], de: ['DE', 'Deutsch'], fr: ['FR', 'Français'], es: ['ES', 'Español'], it: ['IT', 'Italiano'], pt: ['PT', 'Português']};
+X.langName = (l, short) => { const n = LANG_NAMES[l]; return n ? n[short ? 0 : 1] : String(l).toUpperCase(); };
+X.langs = [SRC_LANG, ...Object.keys(I18.dict).filter(l => l[0] !== '_' && l !== SRC_LANG && I18.dict[l] && typeof I18.dict[l] === 'object' && Object.keys(I18.dict[l]).length)];
+const TPL_SPLIT = /(<[^>]*>|\[\[[^\]]*\]\])/, TPL_NUM = /[0-9]+(?:[.,][0-9]+)*/g, NOTXT = /^[\s\d.,:;%+\-−–—×·/()°'"!?#*=<>[\]{}|~^&$@_\\…‹›←→↑↓↺⏸▶]*$/;
+const tplOf = s => { const nums = []; const key = s.split(TPL_SPLIT).map((part, i) => i % 2 ? part : part.replace(TPL_NUM, m => '{' + (nums.push(m) - 1) + '}')).join(''); return [key, nums]; };
+X._tplOf = tplOf;
+const trOne = (s, D) => { const [key, nums] = tplOf(s), t = D[key]; return typeof t === 'string' && t !== '' ? (nums.length ? t.replace(/\{(\d+)\}/g, (m, i) => nums[+i] ?? m) : t) : null; };
+const trTrim = (s, D) => { const r = trOne(s, D); if (r != null) return r; const m = /^(\s*)([\s\S]*?)(\s*)$/.exec(s); if (m && (m[1] || m[3]) && m[2]) { const q = trOne(m[2], D); if (q != null) return m[1] + q + m[3]; } return null; };
+const trAll = (s, D) => {   // the whole string (also without its outer spaces); else, for HTML, each run of text between its tags
+  const r = trTrim(s, D); if (r != null || s.indexOf('<') < 0) return r;
+  let hit = false; const out = s.split(/(<[^>]*>)/).map((part, i) => { if (i % 2 || !part || NOTXT.test(part)) return part; const q = trTrim(part, D); if (q != null) { hit = true; return q; } return part; }).join('');
+  return hit ? out : null;
+};
+const where = () => X.idx >= 0 && C.tour[X.idx] ? C.tour[X.idx].id : X.modeId ? 'mode:' + X.modeId : (document.body.dataset.state || 'home');
+const chromeHas = s => { if (I18.chromeK !== LANG) { I18.chromeK = LANG; I18.chrome = new Set([...Object.values(I18N.en), ...Object.values(I18N[LANG] || {})].filter(v => typeof v === 'string')); } return I18.chrome.has(s); };   // the engine's own words are already in the language shown
+X.tr = (s, kind = 'dom') => {
+  if (typeof s !== 'string' || !s || I18.mute || NOTXT.test(s) || I18.out.has(s) || I18.lines.has(s) || chromeHas(s)) return s;
+  if (I18.rec) { const key = tplOf(s.trim() || s)[0]; let e = I18.rec.get(key); if (!e) I18.rec.set(key, e = {s, kind, at: new Set()}); e.at.add(where()); }   // keyed without outer spaces: the lookup tries the bare string too
+  if (LANG === SRC_LANG) return s;
+  let r = I18.memo.get(s); if (r !== undefined) return r;
+  const t = trAll(s, I18.dict[LANG] || {});
+  if (t == null) { r = s; if (I18.rec) I18.miss.add(tplOf(s)[0]); } else { r = t; I18.out.add(t); }
+  if (I18.memo.size > 20000) { I18.memo.clear(); I18.out.clear(); }
+  I18.memo.set(s, r); return r;
+};
+const TR = (s, kind) => I18.on ? X.tr(s, kind) : s;
+const trLine = s => { if (I18.on && typeof s === 'string' && s) I18.lines.add(s); return s; };   // a piece cut from a string already looked up (a wrapped line, an upper-cased label): drawn as it is
+function i18nHooks() {   // once, and only for a page with translations (or while its strings are being collected): every canvas string goes through X.tr
+  if (I18.on) return; I18.on = true;
+  const P2 = CanvasRenderingContext2D.prototype, fT = P2.fillText, sT = P2.strokeText, mT = P2.measureText;
+  P2.fillText = function (s, x, y, w) { if (typeof s === 'string') s = X.tr(s, 'canvas'); return arguments.length > 3 ? fT.call(this, s, x, y, w) : fT.call(this, s, x, y); };
+  P2.strokeText = function (s, x, y, w) { if (typeof s === 'string') s = X.tr(s, 'canvas'); return arguments.length > 3 ? sT.call(this, s, x, y, w) : sT.call(this, s, x, y); };
+  P2.measureText = function (s) { return mT.call(this, typeof s === 'string' ? X.tr(s, 'canvas') : s); };
+}
+I18.record = on => { if (on) { i18nHooks(); I18.rec = new Map(); I18.miss = new Set(); I18.memo.clear(); I18.out.clear(); } else I18.rec = null; return I18.rec; };   // the string collector and QA: every string looked up from now on, and the ones with no translation
+if (X.langs.length > 1) i18nHooks();
+{ let want = null; try { const q = new URLSearchParams(location.search).get('lang'); if (q) want = q.toLowerCase(); } catch (e) { /* no URL */ }
+  if (!want || !X.langs.includes(want)) { try { want = localStorage.getItem('paper-explorable:lang'); } catch (e) { want = null; } }
+  if (want && want !== SRC_LANG && X.langs.includes(want)) { LANG = want; X.lang = want; document.documentElement.lang = want; } }   // ?lang=ko, else the viewer's last choice, else the page's own language
 
 /* ---------------------------------------------------------------- utilities */
 const U = X.u = {
@@ -2403,11 +3745,11 @@ X.fmt = {
 };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const TERMS = Object.fromEntries(C.terms.map(t => [t.id, t]));
-const md = X.md = s => esc(s || '').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]([.,;:!?)’”]?)/g, (m, id, txt, punct) => {
+const md = X.md = s => esc(TR(s || '')).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]([.,;:!?)’”]?)/g, (m, id, txt, punct) => {
   id = id.trim(); const t = TERMS[id];
   if (!t) { console.warn('[explorable] unknown term: ' + id); return txt || id; }
-  // no display text: use the term name, lower-cased mid-sentence unless it is an acronym (use [[id|Text]] at sentence start or for proper nouns)
-  const shown = txt || (/^[A-Z][a-z]/.test(t.term) ? t.term[0].toLowerCase() + t.term.slice(1) : t.term);
+  // no display text: use the term name, lower-cased mid-sentence unless it is an acronym (use [[id|Text]] at sentence start or for proper nouns); a translated name as it is
+  const nm = TR(t.term), shown = txt || (nm !== t.term ? nm : /^[A-Z][a-z]/.test(t.term) ? t.term[0].toLowerCase() + t.term.slice(1) : t.term);
   const btn = `<button class="term" data-t="${id}">${shown}</button>`;
   return punct ? `<span class="nw">${btn}${punct}</span>` : btn;   // a button is an inline block: keep the punctuation on its line
 });
@@ -2427,9 +3769,9 @@ const h = X.h = (tag, attrs = {}, ...kids) => {
     else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
     else if (k === 'html') el.innerHTML = v;
     else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2), v);
-    else if (v !== false && v != null) el.setAttribute(k, v === true ? '' : v);
+    else if (v !== false && v != null) el.setAttribute(k, v === true ? '' : (k === 'title' || k === 'placeholder') ? TR(String(v)) : v);
   }
-  for (const c of kids.flat()) if (c != null && c !== false) el.append(c.nodeType ? c : document.createTextNode(String(c)));
+  for (const c of kids.flat()) if (c != null && c !== false) el.append(c.nodeType ? c : document.createTextNode(TR(String(c))));
   return el;
 };
 const I = (d, extra = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" ${extra}>${d}</svg>`;
@@ -2814,6 +4156,7 @@ X.live = fn => { const gen = X._gen; const tick = () => { if (X._gen !== gen) re
 /* canvas text that negotiating labels and QA can see (axis names, row labels, readouts drawn in a chart): prefer X.label for
    anything that could collide; use this when the text must live on the canvas. o: {font, color, align, baseline, alpha} */
 X.ctext = (g, text, x, y, o = {}) => {
+  if (I18.on && typeof text === 'string') text = X.tr(text, 'canvas');
   g.save(); g.font = o.font || '500 11px ' + (getComputedStyle(document.documentElement).getPropertyValue('--font-ui') || 'system-ui'); g.fillStyle = o.color || '#9aa6b5';
   g.textAlign = o.align || 'left'; g.textBaseline = o.baseline || 'alphabetic'; g.globalAlpha = o.alpha ?? 1; g.fillText(text, x, y);
   const m = g.measureText(text), w = m.width, up = m.actualBoundingBoxAscent || 9, dn = m.actualBoundingBoxDescent || 3; g.restore();
@@ -2822,6 +4165,7 @@ X.ctext = (g, text, x, y, o = {}) => {
 };   // keep negotiating labels (o.cands) off this screen box [x0, y0, x1, y1], e.g. a dot or marker
 X.label = (key, x, y, html, o = {}) => {
   if (X._thumb) return;                                   // thumbnails of the stage draw no labels
+  if (I18.on) html = X.tr(html, 'label');
   if (!(Number.isFinite(x) && Number.isFinite(y))) { X.nanCount++; const e0 = LBL.get(key); if (e0) e0.style.display = 'none'; return; }   // a label at NaN is hidden, not placed at 0,0
   let el = LBL.get(key);
   if (!el) { el = document.createElement('div'); labelsEl.appendChild(el); LBL.set(key, el); el._h = null; el._c = null; el._col = null; }
@@ -2888,13 +4232,14 @@ X.callout = (key, x, y, o = {}) => {
   if (p != null && o.at != null) a *= U.clamp((p - o.at + f) / f);
   if (p != null && o.until != null) a *= U.clamp((o.until + f - p) / f);
   if (!(a > 0.01)) { const el = LBL.get(key); if (el) el.style.display = 'none'; return; }
-  const v = typeof o.v === 'string' && o.v[0] === '=' ? X.val(o.v.slice(1)) : typeof o.v === 'number' ? X.fmt.n(o.v) : (o.v ?? ''), col = o.color || '';
+  const v = typeof o.v === 'string' && o.v[0] === '=' ? X.val(o.v.slice(1)) : typeof o.v === 'number' ? X.fmt.n(o.v) : TR(o.v ?? '', 'label'), col = o.color || '';
+  if (I18.on) { o = Object.assign({}, o, {u: TR(o.u, 'label'), st: TR(o.st, 'label')}); }   // each part looked up on its own; the caption (k) through md
   const cc = col && X.sk && X.sk.readable ? X.sk.col(X.sk.readable(col, 'bg0', 3)) : '';
   const st = cc ? ` style="color:${cc}"` : '';
   const html = `<span class="v"${st}>${v}</span>${o.u ? `<span class="u"${st}>${o.u}</span>` : ''}${o.st ? `<span class="st">${o.st}</span>` : ''}${o.k ? `<span class="k">${md(o.k).replace(/\n/g, '<br>')}</span>` : ''}`;
   const SD = CALL_SIDES(Math.max(0, o.r || 0)), order = o.side && SD[o.side] ? [o.side] : [];
   const cands = o.cands || [...order, ...['right', 'left', 'top', 'bottom'].filter(s => !order.includes(s))].flatMap(s => SD[s]);
-  X.label(key, x, y, html, {cls: 'callout' + (o.size ? ' ' + o.size : ''), color: col, alpha: a, cands, leader: true, leaderR: o.r || 0, drop: o.drop});
+  X.label(key, x, y, trLine(html), {cls: 'callout' + (o.size ? ' ' + o.size : ''), color: col, alpha: a, cands, leader: true, leaderR: o.r || 0, drop: o.drop});
 };
 /* insets: a flat panel in screen space beside the subject (never a panel inside the 3D world), for what the stage cannot say by itself:
    a chart of the motion on stage, a short listing, a comparison that grows as the beat runs. X.inset(g, o, draw) inside world.draw
@@ -2995,8 +4340,9 @@ addEventListener('resize', () => fitHeadline());
 X.say = (eb, hl, sub) => setCaption(eb, hl, sub);
 function setScale(text) { const el = $('#scale'); if (!text) { el.classList.remove('on'); return; } el.innerHTML = '<span class="dot"></span>' + md(text); el.classList.add('on'); }
 X.scaleNote = setScale;
-X.status = st => h('span', {class: 'st', style: `--c:var(--st-${st || 'illustrative'})`, title: STATUS[st] || ''}, st || 'illustrative');
-X.srcChip = ref => ref ? h('span', {class: 'src', title: 'Where this is in the paper'}, h('span', {html: X.icons.doc}), ref) : null;
+const stName = st => (I18N[LANG] || {})['stn_' + st] ?? st;   // the status word shown: English as written, or its name in the language shown
+X.status = st => h('span', {class: 'st', style: `--c:var(--st-${st || 'illustrative'})`, title: STATUS[st] || ''}, trLine(stName(st || 'illustrative')));
+X.srcChip = ref => ref ? h('span', {class: 'src', title: tx('srcTip')}, h('span', {html: X.icons.doc}), ref) : null;
 function genericCard(sp) {
   const f = document.createDocumentFragment();
   if (sp.kicker) f.append(h('div', {class: 'kick'}, sp.kicker));
@@ -3015,10 +4361,10 @@ function setCard(def, beat) {
 X.card = el => $('#card');
 
 /* ---------------------------------------------------------------- tour */
-function segs() {
-  const box = $('#segs'); if (box.childElementCount === C.tour.length) return;
+function segs(force) {
+  const box = $('#segs'); if (box.childElementCount === C.tour.length && !force) return;
   box.innerHTML = '';
-  C.tour.forEach((b, i) => box.append(h('button', {class: 'sg', 'aria-label': tx('scene') + ' ' + (i + 1) + ': ' + b.eyebrow, onclick: () => { goto(i); }}, h('i', {}, h('b')))));
+  C.tour.forEach((b, i) => box.append(h('button', {class: 'sg', 'aria-label': tx('scene') + ' ' + (i + 1) + ': ' + TR(b.eyebrow || ''), onclick: () => { goto(i); }}, h('i', {}, h('b')))));
 }
 function progressUI() {
   const bs = $('#segs').children;
@@ -3062,7 +4408,7 @@ function endTour() { leaveTour(); showHandoff(); }
 /* ---------------------------------------------------------------- handoff ("Now try it yourself") */
 function showHandoff() {
   const H = C.handoff || {}, el = $('#hand');
-  el.querySelector('.eb').textContent = H.eyebrow || tx('yourTurn');
+  el.querySelector('.eb').textContent = H.eyebrow ? TR(H.eyebrow) : tx('yourTurn');
   el.querySelector('h3').innerHTML = md(H.headline || tx('tryIt'));
   el.querySelector('p').innerHTML = md(H.sub || '');
   const chips = el.querySelector('.chips'); chips.innerHTML = '';
@@ -3449,7 +4795,7 @@ void main() {
     if ((k === 'fill' || k === 'stroke') && args[0] && typeof args[0] === 'object') { RB[0] = RB[1] = -1e9; RB[2] = RB[3] = 1e9; return; }   // a Path2D: its extent is not known here
     if (k === 'fill' || k === 'stroke') { if (PB[2] < PB[0]) return; growRB(t, PB[0], PB[1], PB[2], PB[3], (k === 'stroke' ? cur.lineWidth * sc / 2 + 1 : 1) + glow); return; }
     if (k === 'fillRect' || k === 'strokeRect') { growRB(t, args[0], args[1], args[0] + args[2], args[1] + args[3], (k === 'strokeRect' ? cur.lineWidth * sc / 2 + 1 : 1) + glow); return; }
-    if (k === 'fillText' || k === 'strokeText') { const fs = parseFloat(/(\d+(?:\.\d+)?)px/.exec(cur.font || '')?.[1] || 16), L = fs * 0.62 * String(args[0]).length + fs; growRB(t, args[1] - L, args[2] - fs * 1.4, args[1] + L, args[2] + fs * 1.4, 2 + glow); return; }
+    if (k === 'fillText' || k === 'strokeText') { const fs = parseFloat(/(\d+(?:\.\d+)?)px/.exec(cur.font || '')?.[1] || 16), str = I18.on && typeof args[0] === 'string' ? X.tr(args[0], 'canvas') : String(args[0]); let em = 0; for (let q = 0; q < str.length; q++) em += str.charCodeAt(q) >= 0x2E80 ? 1 : 0.62; const L = fs * em + fs; growRB(t, args[1] - L, args[2] - fs * 1.4, args[1] + L, args[2] + fs * 1.4, 2 + glow); return; }   // the text as it will be drawn (translated); a CJK character is a full em wide
     if (k === 'drawImage') { const n = args.length, im = args[0], dx = n >= 9 ? args[5] : args[1], dy = n >= 9 ? args[6] : args[2], dw = n >= 9 ? args[7] : n >= 5 ? args[3] : (im.width || 0), dh = n >= 9 ? args[8] : n >= 5 ? args[4] : (im.height || 0); growRB(t, dx, dy, dx + dw, dy + dh, 1 + glow); return; }
     RB[0] = RB[1] = -1e9; RB[2] = RB[3] = 1e9;   // putImageData and the rest: the whole stage
   }
@@ -3711,11 +5057,12 @@ X.photoCredit = name => { const p = X.photos[name]; return p ? (p.credit || '') 
 
 /* ---------------------------------------------------------------- slide kit: text, rules, frames, images on a 1600 × 900 frame */
 const SK = X.sk = {};
+const CJK = /[\u2E80-\u9FFF\uAC00-\uD7AF\uF900-\uFAFF\uFF00-\uFFEF]/;   // Hangul, kana, CJK ideographs, full-width forms
 const FONTC = {};
 SK.font = role => FONTC[role] || (FONTC[role] = (getComputedStyle(document.documentElement).getPropertyValue(role === 'mono' ? '--font-mono' : role === 'display' ? '--font-display' : '--font-ui').trim() || 'system-ui, sans-serif'));
 const ALIAS = {body: 'ink2', mute: 'ink3', hair: 'line2', faint: 'line'};
 SK.col = c => { if (!c) return X.col('ink'); if (c[0] === '#' || /^(rgb|hsl)/.test(c)) return c; return X.col(ALIAS[c] || c); };
-SK.plain = s => String(s ?? '').replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (m, a, b) => b || ((TERMS[a] || {}).term || a)).replace(/\*\*([^*]+)\*\*/g, '$1');
+SK.plain = s => trLine(TR(String(s ?? ''), 'slide').replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (m, a, b) => b || TR((TERMS[a] || {}).term || a)).replace(/\*\*([^*]+)\*\*/g, '$1'));   // looked up whole (markup and all), then plain
 const skReg = (x, text, bx0, by0, bx1, by1, col) => {   // the box, in CSS pixels on screen, for QA's overlap, budget and contrast checks
   if (X._thumb || DK.noReg || (x.globalAlpha ?? 1) < 0.05) return;
   const m = x.getTransform(), d = DK.dpr || 1, P2 = (px, py) => [(m.a * px + m.c * py + m.e) / d, (m.b * px + m.d * py + m.f) / d];
@@ -3723,19 +5070,21 @@ const skReg = (x, text, bx0, by0, bx1, by1, col) => {   // the box, in CSS pixel
 };
 SK.reg = (x, text, x0, y0, x1, y1, col) => skReg(x, text, x0, y0, x1, y1, SK.col(col));   // a page's own text helper registers what it drew (frame coordinates), so QA can read it
 SK.t = (x, s, X0, Y0, size = 28, col = 'ink', wt = 400, al = 'left', font = 'ui', ls = 0) => {
-  s = String(s); const c = SK.col(col); x.textAlign = al; x.textBaseline = 'alphabetic'; x.fillStyle = c; x.font = `${wt} ${size}px ${SK.font(font)}`;
+  s = TR(String(s), 'slide'); const c = SK.col(col); if (ls && CJK.test(s)) ls = Math.round(ls * 0.2); x.textAlign = al; x.textBaseline = 'alphabetic'; x.fillStyle = c; x.font = `${wt} ${size}px ${SK.font(font)}`;   // caps tracking would spread Hangul and kanji apart
   if (ls) x.letterSpacing = ls + 'px'; x.fillText(s, X0, Y0); const w = x.measureText(s).width; if (ls) x.letterSpacing = '0px';
   const x0 = al === 'center' ? X0 - w / 2 : (al === 'right' || al === 'end') ? X0 - w : X0; skReg(x, s, x0, Y0 - size * 0.78, x0 + w, Y0 + size * 0.22, c); return w;
 };
 SK.w = (x, s, size = 28, wt = 400, font = 'ui') => { x.font = `${wt} ${size}px ${SK.font(font)}`; return x.measureText(String(s)).width; };
-SK.cap = (x, s, X0, Y0, col = 'ink3', size = 18, al = 'left') => SK.t(x, String(s).replace(/[^µμ]+/g, m => m.toUpperCase()), X0, Y0, size, col, 700, al, 'ui', Math.round(size * 0.1));   // µ stays lower case
+SK.cap = (x, s, X0, Y0, col = 'ink3', size = 18, al = 'left') => SK.t(x, trLine(TR(String(s), 'slide').replace(/[^µμ]+/g, m => m.toUpperCase())), X0, Y0, size, col, 700, al, 'ui', Math.round(size * 0.1));   // µ stays lower case; looked up before it is upper-cased
 SK.wrap = (x, s, maxW, size = 28, wt = 400, font = 'ui') => {
-  x.font = `${wt} ${size}px ${SK.font(font)}`; const out = [];
-  for (const seg of String(s).split('\n')) { let cur = '';
+  s = TR(String(s), 'slide');   // looked up whole, before it is cut into lines (the pieces measured on the way are not looked up)
+  x.font = `${wt} ${size}px ${SK.font(font)}`; const out = []; I18.mute++;
+  try { for (const seg of String(s).split('\n')) { let cur = '';
     for (let w of seg.split(' ')) {
       while (x.measureText(w).width > maxW && w.length > 1) { let k = w.length - 1; while (k > 1 && x.measureText(w.slice(0, k)).width > maxW) k--; if (cur) { out.push(cur); cur = ''; } out.push(w.slice(0, k)); w = w.slice(k); }   // a long word or a run of CJK: break by characters
       const t = cur ? cur + ' ' + w : w; if (x.measureText(t).width > maxW && cur) { out.push(cur); cur = w; } else cur = t; }
-    out.push(cur); }
+    out.push(cur); } } finally { I18.mute--; }
+  if (I18.on) out.forEach(trLine);
   return out;
 };
 SK.para = (x, s, X0, Y0, maxW, size = 28, col = 'ink2', wt = 400, lh = 1.42, font = 'ui') => { const ls = SK.wrap(x, s, maxW, size, wt, font); ls.forEach((l, i) => SK.t(x, l, X0, Y0 + i * size * lh, size, col, wt, 'left', font)); return Y0 + ls.length * size * lh; };   // returns the baseline of the next line
@@ -3775,7 +5124,7 @@ SK.img = (x, im, X0, Y0, W, H, o = {}) => { if (typeof im === 'string') im = X.p
   const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height, fit = o.fit || 'cover', s0 = fit === 'contain' ? Math.min(W / iw, H / ih) : Math.max(W / iw, H / ih), s = s0 * (o.zoom || 1);
   if (fit === 'contain' && !o.zoom) { x.drawImage(im, X0 + (W - iw * s) / 2, Y0 + (H - ih * s) / 2, iw * s, ih * s); return true; }
   const sw = W / s, sh = H / s; x.drawImage(im, (iw - sw) * (o.fx ?? 0.5), (ih - sh) * (o.fy ?? 0.5), sw, sh, X0, Y0, W, H); return true; };
-SK.credit = (x, s, X0, Y0, al = 'left', col = 'ink3', maxW = 1560, size = 14) => { const ls = SK.wrap(x, s, maxW, size), n0 = CTEXT.length; ls.forEach((l, i) => SK.t(x, l, X0, Y0 - (ls.length - 1 - i) * size * 1.3, size, col, 400, al)); for (let k = n0; k < CTEXT.length; k++) CTEXT[k].credit = true; };   // a credit keeps its author's own script
+SK.credit = (x, s, X0, Y0, al = 'left', col = 'ink3', maxW = 1560, size = 14) => { I18.mute++; try { const ls = SK.wrap(x, s, maxW, size), n0 = CTEXT.length; ls.forEach((l, i) => SK.t(x, l, X0, Y0 - (ls.length - 1 - i) * size * 1.3, size, col, 400, al)); for (let k = n0; k < CTEXT.length; k++) CTEXT[k].credit = true; } finally { I18.mute--; } };   // a credit keeps its author's own script (never translated)
 /* ---------------- lockups: the pieces professional decks are built from (NVIDIA, Apple, IBM Carbon, the FT; see visual-system.md)
    eyebrow: the accent square and a caps label · stat: a big number with its unit on the same baseline, an eyebrow above and a label below
    block: a fill-first box (tone muted | accent | hero | outline | tint) holding a title and a line · head: a rule with a caps label, opening a column
@@ -3949,9 +5298,9 @@ function drawTitle(x, w, h) {
    Bottom right on every cover, above the corner buttons: the cover photo's credit, then the stamp that names the engine
    and its author. A page's own X.slide('title') gets the stamp too (its photo credit goes at X.deck.creditY()).
    meta.stamp: false leaves the stamp off. */
-X.version = /^\d/.test('2.10.0') ? '2.10.0' : '';   // build_explorable.py writes the skill's version (SKILL.md) here
-const STAMP = ['Built with ', 'paper-explorable' + (X.version ? ' ' + X.version : ''), ', a tool by Chanyoung Moon'];
-X.stamp = () => STAMP.join('');
+X.version = /^\d/.test('2.11.1') ? '2.11.1' : '';   // build_explorable.py writes the skill's version (SKILL.md) here
+const stampParts = () => [tx('stampA'), 'paper-explorable' + (X.version ? ' ' + X.version : ''), tx('stampB')];   // in the language shown
+X.stamp = () => stampParts().join('');
 const stampOn = () => (C.meta || {}).stamp !== false;
 function coverB(h) {   // the stamp's baseline on the cover's frame: level with the date, raised only where the corner buttons would reach it
   let B = h - 62; const d = !X._thumb && $('#dbar'), r = d && d.getBoundingClientRect(), f = DK.xf;
@@ -3960,8 +5309,8 @@ function coverB(h) {   // the stamp's baseline on the cover's frame: level with 
 }
 X.deck.creditY = () => coverB(900) - (stampOn() ? 22 : 0);   // where a page's own cover puts its photo credit (right-aligned at w - 24)
 function drawStamp(x, R, B, ink) {   // the tool's name and version a little heavier, so the line reads as one credit (and QA reads it as one)
-  const ws = STAMP.map((s, i) => SK.w(x, s, 14, i === 1 ? 600 : 400)), tw = ws[0] + ws[1] + ws[2], nr = DK.noReg; let x0 = R - tw; DK.noReg = true;
-  try { STAMP.forEach((s, i) => { SK.t(x, s, x0, B, 14, ink, i === 1 ? 600 : 400); x0 += ws[i]; }); } finally { DK.noReg = nr; }
+  const STAMP = stampParts(); I18.mute++; const ws = STAMP.map((s, i) => SK.w(x, s, 14, i === 1 ? 600 : 400)), tw = ws[0] + ws[1] + ws[2], nr = DK.noReg; let x0 = R - tw; DK.noReg = true;
+  try { STAMP.forEach((s, i) => { SK.t(x, s, x0, B, 14, ink, i === 1 ? 600 : 400); x0 += ws[i]; }); } finally { DK.noReg = nr; I18.mute--; }
   const n0 = CTEXT.length; skReg(x, STAMP.join(''), R - tw, B - 14 * 0.78, R, B + 14 * 0.22, SK.col(ink)); for (let k = n0; k < CTEXT.length; k++) CTEXT[k].credit = true;
   return tw;
 }
@@ -3981,7 +5330,7 @@ const INKC = document.createElement('canvas'); INKC.width = 48; INKC.height = 8;
 function coverCredits(x, w, h, own) {
   const M = C.meta || {}, live = !X._thumb, B = coverB(h), R = w - 24, photo = !own && M.cover && X.photo(M.cover) ? X.photoCredit(M.cover) : '', st = stampOn();
   if (!photo && !st) return;
-  const top = B - (photo && st ? 22 : 0) - 14, wide = Math.max(st ? SK.w(x, STAMP.join(''), 14, 600) : 0, photo ? Math.min(1560, SK.w(x, photo, 14)) : 0);
+  I18.mute++; const top = B - (photo && st ? 22 : 0) - 14, wide = Math.max(st ? SK.w(x, X.stamp(), 14, 600) : 0, photo ? Math.min(1560, SK.w(x, photo, 14)) : 0); I18.mute--;
   let a = 1;
   if (live) {   // the dock rises over the corner when the pointer nears the bottom: the credits step aside until it goes
     const f = DK.xf, dk = $('#dock'), dr = dk && dk.getBoundingClientRect(), up = dk && parseFloat(getComputedStyle(dk).opacity) > 0.05;
@@ -4009,7 +5358,7 @@ function drawChapter(x, W, H, ch, a) {
   const L = Math.max(48, W * 0.085), big = Math.max(34, Math.min(96, W * 0.058)), cy = H * 0.52, sq = Math.round(big * 0.2);
   x.fillStyle = X.col('accent'); x.fillRect(L, cy - big * 1.32 - sq + 2, sq, sq);
   x.textAlign = 'left'; x.textBaseline = 'alphabetic'; x.fillStyle = X.col('accent'); x.font = `700 ${Math.round(big * 0.27)}px ${SK.font('ui')}`; x.letterSpacing = Math.round(big * 0.03) + 'px';
-  x.fillText((ch.label || tx('chapter') + ' ' + ch.n).toUpperCase(), L + sq + Math.round(big * 0.18), cy - big * 1.32); x.letterSpacing = '0px';
+  { const lab = trLine((ch.label ? TR(ch.label, 'slide') : tx('chapter') + ' ' + ch.n).toUpperCase()); if (CJK.test(lab)) x.letterSpacing = '0px'; x.fillText(lab, L + sq + Math.round(big * 0.18), cy - big * 1.32); } x.letterSpacing = '0px';
   x.fillStyle = X.col('hero-ink'); x.font = `700 ${Math.round(big)}px ${SK.font('display')}`; x.fillText(SK.plain(ch.title || ''), L - big * 0.04, cy);
   if (ch.sub) { x.fillStyle = heroInk(0.7); x.font = `400 ${Math.round(big * 0.38)}px ${SK.font('ui')}`; x.fillText(SK.plain(ch.sub), L, cy + big * 0.78); }
   x.restore();
@@ -4072,7 +5421,7 @@ function thumbFor(i, cvs) {
     else { const th = X.sceneThumb(b.id); if (th) th(g2, w, hh, X.t); } } catch (e) { /* a thumbnail never breaks the grid */ } finally { X._thumb = false; DK.noReg = false; }
 }
 const thumbDraw = (c, fn) => { const g2 = c.getContext('2d'), s = Math.min(c.width / 1600, c.height / 900); X._thumb = true; DK.noReg = true; try { g2.save(); g2.scale(s, s); fn(g2); g2.restore(); } finally { X._thumb = false; DK.noReg = false; } };
-const chName = ch => (ch.label || tx('chapter') + ' ' + ch.n) + ' · ' + SK.plain(ch.title || '');
+const chName = ch => trLine((ch.label ? TR(ch.label) : tx('chapter') + ' ' + ch.n) + ' · ' + SK.plain(ch.title || ''));
 function gridOpen() {
   const gd = $('#grid');
   if (!gridBuilt) { gridBuilt = true;
@@ -4093,6 +5442,7 @@ function gridOpen() {
   const cur = gd.querySelector('.cd.cur'); if (cur) cur.scrollIntoView({block: 'center'});
   const pump = () => { if (!gd.classList.contains('on')) return; for (let k = 0; k < 3 && gridQ.length; k++) { const f = gridQ.shift(); try { f(); } catch (e) { /* skip */ } } if (gridQ.length) requestAnimationFrame(pump); }; requestAnimationFrame(pump);
 }
+function gridReset() { const on = $('#grid').classList.contains('on'); gridBuilt = false; gridQ = []; $('#grid').innerHTML = ''; if (on) gridOpen(); }   // after a language change
 function gridClose() { $('#grid').classList.remove('on'); const ae = document.activeElement; if (ae && ae.blur && $('#grid').contains(ae)) ae.blur(); }
 
 /* ---------------------------------------------------------------- laser pointer (PowerPoint's red dot), notes, help, toasts */
@@ -4113,8 +5463,8 @@ X.marks = on => { if (on !== undefined) setMarks(on); return DK.marks; };
 function toast2(s, ms) { const t = $('#hint'); t.textContent = s; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), ms || 1700); }
 const KEYS = () => [
   ['→ · PageDown', tx('kNext')], ['← · PageUp', tx('kPrev')], ['Space · K', tx('kPlay')], ['J · K · L', tx('kScrub')], ['R', tx('kReplay')],
-  [tx('kNumKey'), tx('kNum')], ['G', tx('kGrid')], ['P', tx('kLaser')], ['N', tx('kMarks')], ['S', tx('kNotes')], ['A', tx('kAuto')], ['F', tx('kFull')], ['Esc', tx('kEsc')], ['?', tx('kHelp')]];
-function buildHelp() { $('#help .in').innerHTML = `<h3>${tx('keys')}</h3>` + KEYS().map(([k, v]) => `<div class="r"><kbd>${k}</kbd><span>${v}</span></div>`).join('') + `<p class="tch">${tx('touchHelp')}</p>` + `<p class="stamp">${STAMP[0]}<b>${STAMP[1]}</b>${STAMP[2]}</p>`; }   // the stamp also closes the key list, so a page without a cover names its engine too
+  [tx('kNumKey'), tx('kNum')], ['G', tx('kGrid')], ['P', tx('kLaser')], ['N', tx('kMarks')], ['S', tx('kNotes')], ['A', tx('kAuto')], ['F', tx('kFull')], ...(X.langs.length > 1 ? [['T', tx('kLang') + ': ' + X.langs.map(l => X.langName(l)).join(' · ')]] : []), ['Esc', tx('kEsc')], ['?', tx('kHelp')]];
+function buildHelp() { $('#help .in').innerHTML = `<h3>${tx('keys')}</h3>` + KEYS().map(([k, v]) => `<div class="r"><kbd>${k}</kbd><span>${v}</span></div>`).join('') + `<p class="tch">${tx('touchHelp')}</p>` + `<p class="stamp">${stampParts()[0]}<b>${stampParts()[1]}</b>${stampParts()[2]}</p>`; }   // the stamp also closes the key list, so a page without a cover names its engine too
 
 /* ---------------------------------------------------------------- full screen, touch, rotate hint, idle cursor */
 const FSE = document.documentElement, canFS = !!(FSE.requestFullscreen || FSE.webkitRequestFullscreen);
@@ -4157,6 +5507,11 @@ X.keyOf = keyOf;
 function onKey(e) {
   if (e.target.closest && e.target.closest('input,textarea,select')) return;
   if ($('#grid').classList.contains('on')) { const kg = keyOf(e); if (kg === 'Escape') gridClose(); else if (/^[0-9]$/.test(kg)) { const inp = $('#gridIn'); inp.focus(); inp.value += kg; } e.preventDefault(); return; }
+  if ($('#langpick').classList.contains('on')) { const kl = keyOf(e);   // the chooser takes the keys while it is open
+    if (kl === 'ArrowDown' || kl === 'ArrowRight') langHi(1); else if (kl === 'ArrowUp' || kl === 'ArrowLeft') langHi(-1);
+    else if (kl === 'Enter' || kl === ' ') { const l = X.langs[LP.hi]; langPick(false); X.setLang(l); }
+    else if (kl === 'Escape' || kl === 't' || kl === 'T') langPick(false);
+    e.preventDefault(); return; }
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   const k = keyOf(e), st = document.body.dataset.state;
   if (/^[0-9]$/.test(k)) { DK.buf = (DK.buf + k).slice(-3); jumpBuf(true); e.preventDefault(); return; }   // number + Enter goes to that page, in both formats and from anywhere (0 = the title)
@@ -4176,32 +5531,56 @@ function onKey(e) {
   else if (k === 's' || k === 'S') { DK.notes = !DK.notes; document.body.classList.toggle('notes', DK.notes); }
   else if (k === 'a' || k === 'A') toggleHold();
   else if ((k === 'f' || k === 'F') && canFS) toggleFS();
+  else if ((k === 't' || k === 'T') && X.langs.length > 1) langPick(true);
   else if (k === 'Escape') { if (tip.classList.contains('on')) hideTip(); else if ($('#help').classList.contains('on')) $('#help').classList.remove('on'); else home(); }
   else if (k === '?') $('#help').classList.toggle('on');
 }
+
+/* ---------------------------------------------------------------- the words on the deck's own buttons (again after a language change) */
+function deckLabels() {
+  $('#ctlR').title = tx('replayKey'); $('#ctlBar').title = tx('scrubHint'); ctlLast = '';
+  $('#laserBtn').innerHTML = '<i></i>' + tx('laser'); $('#laserBtn').title = tx('laserKey');
+  $('#gridBtn').innerHTML = '<i>' + '<b></b>'.repeat(9) + '</i>' + tx('slides'); $('#gridBtn').title = tx('gridKey');
+  $('#homeBtn').title = tx('homeKey'); const fb = $('#fsBtn'); if (fb) fb.title = tx('fullKey');
+  $('#navL').setAttribute('aria-label', tx('prev')); $('#navR').setAttribute('aria-label', tx('next'));
+  $('#dockcue').innerHTML = `${X.icons.up}<span>${tx('modesCue')}</span>`;
+  $('#rot').innerHTML = `<div>${X.icons.rotate}<b>${tx('rotate')}</b><span>${tx('rotateSub')}</span></div>`;
+}
+/* the language chooser (T): every language the page has, by its own name, the one shown marked; ↑ ↓ and Enter, or a click; Esc or T closes */
+const LP = {hi: 0};
+function langPick(open) {
+  const el = $('#langpick'); if (!el) return;
+  if (!open) { el.classList.remove('on'); return; }
+  LP.hi = Math.max(0, X.langs.indexOf(LANG));
+  el.querySelector('.in').innerHTML = `<h3>${tx('langTitle')}</h3>` + X.langs.map((l, i) => `<button type="button" data-l="${l}" lang="${l}" class="${l === LANG ? 'cur' : ''}${i === LP.hi ? ' hi' : ''}">${X.langName(l)}</button>`).join('') + `<p class="hint">${tx('langHint')}</p>`;
+  el.querySelectorAll('button').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); langPick(false); X.setLang(b.dataset.l); }));
+  el.classList.add('on');
+}
+const langHi = d => { const bs = $('#langpick').querySelectorAll('button'); if (!bs.length) return; LP.hi = (LP.hi + d + bs.length) % bs.length; bs.forEach((b, i) => b.classList.toggle('hi', i === LP.hi)); };
 
 /* ---------------------------------------------------------------- build (called from buildChrome) */
 function deckBuild() {
   document.body.classList.toggle('touch', isTouch());
   const ctl = $('#ctl'); $('#ctlB').addEventListener('click', () => { const s = ctlState(); if (s === 'card') deckNext(); else if (s === 'done') replay(); else togglePlay(); });
-  $('#ctlR').addEventListener('click', e => { e.stopPropagation(); replay(); }); $('#ctlR').title = tx('replayKey');
-  const bar = $('#ctlBar'); bar.title = tx('scrubHint'); let drag = false, was = false;
+  $('#ctlR').addEventListener('click', e => { e.stopPropagation(); replay(); });
+  const bar = $('#ctlBar'); let drag = false, was = false;
   const sc = e => { const r = bar.getBoundingClientRect(); if (X.idx >= 0) X.seek(X.idx, U.clamp((e.clientX - r.left) / r.width, 0, 0.999)); };
   bar.addEventListener('pointerdown', e => { if (X.idx < 0) return; drag = true; was = X.playing && ctlState() !== 'done'; cutClear(); bar.setPointerCapture(e.pointerId); sc(e); e.preventDefault(); });
   bar.addEventListener('pointermove', e => { if (drag) sc(e); });
   const end = e => { if (!drag) return; drag = false; try { bar.releasePointerCapture(e.pointerId); } catch (_) {} if (was) X.play(); };
   bar.addEventListener('pointerup', end); bar.addEventListener('pointercancel', end);
-  $('#laserBtn').innerHTML = '<i></i>' + tx('laser'); $('#laserBtn').title = tx('laserKey'); $('#laserBtn').addEventListener('click', e => { e.stopPropagation(); laser(!lOn); e.currentTarget.blur(); });
-  $('#gridBtn').innerHTML = '<i>' + '<b></b>'.repeat(9) + '</i>' + tx('slides'); $('#gridBtn').title = tx('gridKey'); $('#gridBtn').addEventListener('click', gridOpen); $('#pnum').addEventListener('click', gridOpen);
-  $('#homeBtn').title = tx('homeKey'); $('#homeBtn').innerHTML = X.icons.home; $('#homeBtn').addEventListener('click', () => home());
-  if ((canFS || isTouch()) && !standalone()) { $('#fsBtn').title = tx('fullKey'); $('#fsBtn').innerHTML = X.icons.full; $('#fsBtn').addEventListener('click', e => { e.stopPropagation(); toggleFS(); e.currentTarget.blur(); }); } else $('#fsBtn').remove();   // phones too: in landscape the browser's bars take a third of the screen
-  $('#navL').innerHTML = X.icons.prev; $('#navR').innerHTML = X.icons.next; $('#navL').setAttribute('aria-label', tx('prev')); $('#navR').setAttribute('aria-label', tx('next'));
+  $('#laserBtn').addEventListener('click', e => { e.stopPropagation(); laser(!lOn); e.currentTarget.blur(); });
+  $('#gridBtn').addEventListener('click', gridOpen); $('#pnum').addEventListener('click', gridOpen);
+  $('#homeBtn').innerHTML = X.icons.home; $('#homeBtn').addEventListener('click', () => home());
+  if ((canFS || isTouch()) && !standalone()) { $('#fsBtn').innerHTML = X.icons.full; $('#fsBtn').addEventListener('click', e => { e.stopPropagation(); toggleFS(); e.currentTarget.blur(); }); } else $('#fsBtn').remove();   // phones too: in landscape the browser's bars take a third of the screen
+  $('#langpick').addEventListener('click', e => { if (e.target.id === 'langpick') langPick(false); });   // a click beside the chooser closes it
+  $('#navL').innerHTML = X.icons.prev; $('#navR').innerHTML = X.icons.next;
   $('#navL').addEventListener('click', deckPrev); $('#navR').addEventListener('click', deckNext);
-  $('#dockcue').innerHTML = `${X.icons.up}<span>${tx('modesCue')}</span>`;
+  deckLabels();
   $('#stage').addEventListener('click', () => { if (document.body.dataset.state === 'home' && homeSlide()) startTour(); });   // a click on the title starts the tour, as in a slide show
   addEventListener('pointermove', e => { if (e.pointerType === 'touch') return; document.body.classList.toggle('peek', e.clientY > innerHeight - 150); }, {passive: true});   // the pointer near the bottom edge lifts the cover's dock
   document.documentElement.addEventListener('pointerleave', () => document.body.classList.remove('peek'));
-  $('#rot').innerHTML = `<div>${X.icons.rotate}<b>${tx('rotate')}</b><span>${tx('rotateSub')}</span></div>`; $('#rot').addEventListener('click', () => { $('#rot').dataset.off = '1'; rotCheck(); });
+  $('#rot').addEventListener('click', () => { $('#rot').dataset.off = '1'; rotCheck(); });
   { const q = new URLSearchParams(location.search).get('marks'), m = (C.meta || {}).marks; setMarks(q === '0' ? false : q === '1' ? true : m !== undefined ? !!m : !talk()); }
   buildHelp(); lfit();
   addEventListener('keydown', onKey);
@@ -4221,7 +5600,7 @@ function jumpFrom(modeId, go) {
 function showRet() {
   const r = $('#ret'); if (!r) return;
   if (!RET) { r.style.display = 'none'; return; }
-  r.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>' + tx('backTo') + RET.label;
+  r.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>' + tx('backTo') + esc(TR(RET.label));
   r.style.display = 'inline-flex';
   const m = $('#cap'); r.style.top = Math.round((m && m.classList.contains('on') ? m.getBoundingClientRect().bottom : 12) + 8) + 'px';   // sit below the title band
 }
@@ -4240,7 +5619,7 @@ function enterMode(id) {
   X.orbit(!(def && def.orbit === false) && meta.kind !== 'reference' && id !== 'terms' && id !== 'sources');   // modes let the reader turn the camera unless they opt out (orbit: false: a mode that drags on the stage itself)   // a mode opts in to a reader-turned camera
   applyTargets(Object.assign({}, BASE, def.set || {}));
   $('#picon').innerHTML = X.icons[meta.icon] || X.icons.target;
-  $('#ptitle').textContent = meta.title || meta.label;
+  $('#ptitle').textContent = TR(meta.title || meta.label);
   $('#plead').innerHTML = md(meta.lead || ''); $('#plead').style.display = meta.lead ? '' : 'none';
   const body = $('#pbody'); body.innerHTML = ''; body.scrollTop = 0;
   $('#panel').classList.remove('min'); $('#panel').classList.add('on');
@@ -4322,7 +5701,7 @@ const BUILTIN = {
         body.append(h('ul', {class: 'simp'}, C.omitted.map(o => h('li', {html: '<b>' + md(o.item) + '</b>' + (o.reason ? ': ' + md(o.reason) : '')}))));
       }
       body.append(h('div', {class: 'sec'}, tx('source')));
-      body.append(h('p', {class: 'ptext'}, `${pp.authors || ''}. “${pp.title || ''}.” ${pp.venue || ''}.`));
+      body.append(h('p', {class: 'ptext'}, pp.authors || '', '. “', pp.title || '', '.” ', pp.venue || '', '.'));   // each part looked up on its own
       if (pp.url) body.append(h('a', {class: 'lnk', href: pp.url, target: '_blank', rel: 'noopener'}, tx('openSource')));
     }
   }
@@ -4340,7 +5719,7 @@ function showTip(btn) {
   const t = TERMS[btn.dataset.t]; if (!t) return;
   clearTimeout(tipHide); tipTerm = t; tip.innerHTML = ''; tipCanvas = null;
   if (X.tvFor(t)) { tipCanvas = h('canvas', {class: X._tv[t.id] ? '' : 'thumb'}); tip.append(tipCanvas); }
-  tip.append(h('h4', {}, t.term), h('p', {html: esc(t.short)}));
+  tip.append(h('h4', {}, t.term), h('p', {html: esc(TR(t.short))}));
   if (t.scene && !(X._cur && X._cur.beat.id === t.scene)) tip.append(h('button', {class: 'lnk', onclick: () => { hideTip(); X.gotoScene(t.scene); }}, tx('seeIt')));
   tip.classList.add('on');
   const r = btn.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight;
@@ -4562,7 +5941,7 @@ X.chart = spec => {
 function pill() {
   const box = $('#pills'); box.innerHTML = '';
   ((C.meta && C.meta.pills) || []).forEach(p => box.append(h('span', {class: 'pill'}, h('span', {class: 'dot'}), h('span', {}, p.label + ' '), h('b', {}, p.value))));
-  const where = X.idx >= 0 ? `Tour ${X.idx + 1} / ${C.tour.length}` : X.mode ? ((C.modes.find(m => m.id === X.mode) || {}).label || '') : '';
+  const where = X.idx >= 0 ? trLine(tx('tourPos').replace('{n}', X.idx + 1).replace('{N}', C.tour.length)) : X.mode ? ((C.modes.find(m => m.id === X.mode) || {}).label || '') : '';
   if (where) box.append(h('span', {class: 'pill'}, h('b', {}, where)));
 }
 function hash() {
@@ -4575,19 +5954,37 @@ function fromHash() {
   else if (C.modes.some(x => x.id === m[2])) { enterMode(m[2]); return true; }
   return false;
 }
-function buildChrome() {
+function chromeLabels() {   // the page's words in the chrome (again after a language change)
   const meta = C.meta || {};
-  document.title = meta.title || document.title;
-  $('#title').textContent = meta.title || '';
+  document.title = TR(meta.title || '') || document.title;
+  $('#title').textContent = TR(meta.title || '');
   $('#prov').innerHTML = md(meta.provenance || '');
   const dock = $('#dock'); dock.innerHTML = '';
   C.modes.forEach(m => dock.append(h('button', {class: 'dk', 'data-m': m.id, title: m.label, onclick: () => X.mode === m.id ? home() : enterMode(m.id)}, h('span', {html: X.icons[m.icon] || X.icons.target}), m.label)));   // digits go to slides (number + Enter), so the modes are reached here
-  dock.append(h('span', {class: 'dsep'}), h('button', {id: 'play', 'aria-label': tx('playTour'), onclick: () => startTour()}, h('span', {class: 'pbx', html: X.icons.play}), tx('play')));
+  dock.append(h('span', {class: 'dsep'}), h('button', {id: 'play', 'aria-label': tx('playTour'), onclick: () => startTour()}, h('span', {class: 'pbx', html: X.icons.play}), trLine(tx('play'))));
+  $('#texit').textContent = tx('explore'); $('#orbhint').textContent = tx('orbit');
+  pill();
+}
+function buildChrome() {
+  chromeLabels();
   $('#tprev').onclick = prevScene; $('#tnext').onclick = next; $('#tpp').onclick = togglePlay; $('#texit').onclick = () => { home(); };
   $('#pmin').onclick = () => { $('#panel').classList.toggle('min'); computeView(); };
-  $('#texit').textContent = tx('explore'); $('#orbhint').textContent = tx('orbit');
-  pill(); deckBuild();
+  deckBuild();
 }
+/* ---------------------------------------------------------------- the language switch: the same beat, at the same moment, in another language */
+X.setLang = l => {
+  l = String(l || '').toLowerCase(); if (!X.langs.includes(l) || l === LANG) return false;
+  LANG = l; X.lang = l; document.documentElement.lang = l; I18.memo.clear(); I18.out.clear(); I18.lines.clear(); I18.gen++;
+  try { localStorage.setItem('paper-explorable:lang', l); } catch (e) { /* a private window keeps the choice for this visit only */ }
+  chromeLabels(); deckLabels(); buildHelp(); segs(true); gridReset(); hideTip(); capNow = null;
+  const st = document.body.dataset.state;
+  if (st === 'tour' && X._cur) { const b = X._cur.beat; setCaption(b.eyebrow, b.headline, b.sub); setScale(b.scale || ''); deckOnBeat(); }
+  else if (st === 'home') { const hk = (C.meta && C.meta.hook) || {}; if (!homeSlide()) setCaption(hk.eyebrow, hk.headline, hk.sub); }
+  else if (st === 'handoff') showHandoff();
+  else if (st === 'mode' && X.mode) { const id = X.mode, ret = RET; leaveMode(); enterMode(id); RET = ret; }   // a mode is opened again in the new language
+  pill(); showRet(); toast2(X.langName(l));
+  return true;
+};
 const PTS = new Map(); let pinch0 = 0;
 cv.addEventListener('pointermove', e => {
   if (ORB.on && PTS.has(e.pointerId)) {   // orbit: one finger or the mouse turns the camera, two fingers zoom
@@ -4639,7 +6036,7 @@ function frame(now) {
   const tf0 = performance.now();
   let dt = (now - last) / 1000; last = now; if (!(dt > 0)) dt = 1 / 60; dt = Math.min(dt, 0.05);
   { const a = X._fitSnap ? 1 : 1 - Math.exp(-dt / 0.12); ORB.yaw += (ORB.ty - ORB.yaw) * a; ORB.pitch += (ORB.tp - ORB.pitch) * a; ORB.zoom += (ORB.tz - ORB.zoom) * a; }   // orbit eases toward the reader's drag, and back when released
-  X.dt = dt; X.t += dt; lframe++; LBOX.length = 0; CTEXT.length = 0; X._p3n = 0; X._prj = 0; X._camsLast = X._cams || []; X._cams = [];
+  X.dt = dt; X.t += dt; lframe++; LBOX.length = 0; CTEXT.length = 0; I18.lines.clear(); X._p3n = 0; X._prj = 0; X._camsLast = X._cams || []; X._cams = [];
   { const e = document.getElementById('cap'); if (e && e.classList.contains('on')) { const r = e.getBoundingClientRect(); if (r.width) LBOX.push([r.left, r.top, r.right, r.bottom]); } }   // negotiating labels keep clear of the title band   // before any update() so labels drawn there survive the sweep; label boxes start empty
   const cur = X._cur, run = !!(cur && X.idx >= 0 && X.playing && !DK.waiting()), rate = run ? (X.rate || 1) : 1, sdt = dt * Math.abs(rate);   // the shuttle (J/L) scales the stage's time: the beat's progress, its tweens and draw's t; the chrome keeps real time
   X.ts += dt * rate;
