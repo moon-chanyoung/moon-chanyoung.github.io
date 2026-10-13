@@ -520,10 +520,11 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
    "src": [
     "FSANZ 2025",
     "EFSA 2015",
-    "this page's model"
+    "this page's model",
+    "EFSA 2011"
    ],
-   "status": "stated",
-   "scale": "schematic body; 1 dot = 1 mg",
+   "status": "derived",
+   "scale": "schematic body; 1 dot = 1 mg; counts: model",
    "shot": 0.97
   },
   {
@@ -559,7 +560,7 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
    "id": "liver",
    "chapter": "feel",
    "eyebrow": "How it leaves",
-   "headline": "Your liver takes caffeine apart, one methyl at a time.",
+   "headline": "Your liver breaks caffeine down by snipping off a methyl.",
    "dur": 18,
    "src": [
     "FSANZ 2025",
@@ -575,30 +576,55 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
    "chapter": "feel",
    "eyebrow": "Same cup, five livers",
    "headline": "Same 2 pm cup: 6 mg left at bedtime, or 96.",
-   "dur": 18,
+   "dur": 24,
    "src": [
     "EFSA 2015",
     "FSANZ 2025",
     "Jeppesen et al. 1996",
     "Matthaei et al. 2016",
-    "this page's model"
+    "this page's model",
+    "Zevin & Benowitz 1999 (UCSF 2025)",
+    "Abernethy & Todd 1985",
+    "EFSA 2011",
+    "Gyeonggi Health & Environment Research Institute 2023"
    ],
    "status": "derived",
    "scale": "schematic; enzymes drawn ∝ clearing speed",
-   "shot": 0.66
+   "shot": 0.97
   },
   {
    "id": "tolerance",
    "chapter": "feel",
    "eyebrow": "Why it hits harder",
-   "headline": "If you rarely drink it, caffeine brings anxiety, not alertness.",
+   "headline": "Rarely drink it? Caffeine trades sleepiness for jitters.",
    "dur": 16,
    "src": [
     "Rogers et al. 2010",
+    "Rogers et al. 2013",
     "FSANZ 2025"
    ],
    "status": "reported",
-   "scale": "direction only; one study, 379 people",
+   "scale": "direction only; two studies, ~370 people each",
+   "shot": 0.97
+  },
+  {
+   "id": "why",
+   "chapter": "feel",
+   "eyebrow": "So, why you?",
+   "headline": "It stays longer in you, or it hits you harder.",
+   "dur": 14,
+   "src": [
+    "Matthaei et al. 2016",
+    "Rogers et al. 2010",
+    "Rogers et al. 2013",
+    "FSANZ 2025",
+    "Gyeonggi Health & Environment Research Institute 2023 (via twig24)",
+    "Abernethy & Todd 1985",
+    "Jeppesen et al. 1996",
+    "Zevin & Benowitz 1999 (UCSF 2025)"
+   ],
+   "status": "reported",
+   "scale": "a summary; not medical advice",
    "shot": 0.97
   },
   {
@@ -1171,7 +1197,7 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
   {
    "id": "cyp1a2",
    "term": "CYP1A2",
-   "short": "The liver enzyme that does over 90% of caffeine's breakdown, taking off one methyl at a time.",
+   "short": "The liver enzyme that does over 90% of caffeine's breakdown, snipping off one methyl at a time.",
    "scene": "liver"
   },
   {
@@ -1933,6 +1959,42 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
    "text": "With long waking, adenosine rises in the basal forebrain and quiets the cells that keep the cortex awake; it is lower during sleep.",
    "status": "stated",
    "src": "University of Helsinki Sleep Team (Porkka-Heiskanen et al.)"
+  },
+  {
+   "id": "s-rog13",
+   "value": "faster, not smarter",
+   "text": "After a night without caffeine, daily drinkers were sleepier, less alert and slower; caffeine restored them. In people who rarely drink it, caffeine cut sleepiness but raised anxiety and jitters, which cancelled the gain: no sharper mentally. Tapping and reaction speed rose in both groups.",
+   "status": "reported",
+   "src": "Rogers et al. 2013 (369 people, double blind)"
+  },
+  {
+   "id": "s-efsa75",
+   "value": "75 mg",
+   "text": "At least 75 mg of caffeine per serving increases alertness and attention in adults.",
+   "status": "stated",
+   "src": "EFSA 2011 (EFSA Journal 9(4):2054), cited in EU Council doc 8681/16"
+  },
+  {
+   "id": "s-band-mg",
+   "value": "≈ 10–100 mg",
+   "text": "The receptor-blocking range of 0.2–2 mg per litre of blood is about 10–100 mg of caffeine in a 70 kg body.",
+   "status": "derived",
+   "src": "this page's model",
+   "basis": "0.2 and 2 mg/L × 0.7 L/kg × 70 kg"
+  },
+  {
+   "id": "s-sleep77",
+   "value": "≈ 77 mg",
+   "text": "1.1 mg per kg (about 77 mg at 70 kg) had a negligible effect on sleep in healthy young men who drank 1–4 cups of coffee a day.",
+   "status": "stated",
+   "src": "FSANZ 2025, P1056 safety assessment (citing Turnbull et al. 2016)"
+  },
+  {
+   "id": "s-sleep300",
+   "value": "300–400 mg",
+   "text": "Clear, dose-related effects of caffeine on sleep at 300 to 400 mg.",
+   "status": "stated",
+   "src": "FSANZ 2025, P1056 safety assessment (citing Turnbull et al. 2016)"
   }
  ],
  "simplifications": [
@@ -2216,7 +2278,8 @@ body.idle[data-state=tour],body.idle[data-state=tour] *{cursor:none!important}
     "tour:receptor",
     "tour:liver",
     "tour:clearance",
-    "tour:tolerance"
+    "tour:tolerance",
+    "tour:why"
    ]
   }
  ],
@@ -8798,7 +8861,7 @@ const NOW = {p: 0}, SHOT = 0.5, DUR = 20;
 const prog = () => (X._thumb ? SHOT : NOW.p);
 const lbl = (key, s, html, o) => { if (!X._thumb && s && Number.isFinite(s[0])) X.label(key, s[0], s[1], html, o); };
 const K17 = s => `<span style="font-size:17px">${s}</span>`;
-const TEAL = '#0b7285', GOLD = '#f2a900', BODY = '#cfd4da', FIB = '#c2c8cf';
+const TEAL = '#0b7285', GOLD = '#e8b008', BODY = '#c5ccd3', FIB = '#b5bdc6', DIM = 0.5;   // gold: a 'stay awake' signal; teal: adenosine
 
 /* ---------------- the day ---------------- */
 const T = {where: [0.0, 0.12], dive: [0.085, 0.17], show: [0.12, 0.19], day: [0.17, 0.7], night: [0.7, 0.84], push: [0.86, 0.97]};
@@ -8812,18 +8875,20 @@ const NT = 800, PHI = (() => { const a = new Float64Array(NT + 1); for (let k = 
 const phiAt = t => { const f = clamp(t / DUR) * NT, i = Math.min(NT - 1, Math.floor(f)); return PHI[i] + (PHI[i + 1] - PHI[i]) * (f - i); };
 const tOfPhi = v => { let lo = 0, hi = NT; if (v <= 0) return 0; if (v >= PHI[NT]) return DUR; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (PHI[m] < v) lo = m; else hi = m; } return (lo + (v - PHI[lo]) / Math.max(1e-9, PHI[hi] - PHI[lo])) * DUR / NT; };
 
-/* ---------------- the cells (schematic units; a few cells stand for millions) ---------------- */
+/* ---------------- the cells (schematic units; a few cells stand for millions): one in front, seven dimmer behind ---------------- */
 const R = K.rng(4242);
-const CELLS = [[-36, 8, -4], [-21, 16, 10], [-8, 2, -12], [6, 14, 4], [20, 4, -9], [34, 13, 7], [-28, -6, 16], [14, -5, 17]].map((c, i) => {
-  const r = 4.6 + R() * 1.4, f = 0.8 + R() * 0.45, o = R(), ph = R() * 6.28, top = [c[0], c[1] - r, c[2]];
-  const fib = []; for (let k = 0; k <= 12; k++) { const u = k / 12, y = top[1] + (-54 - top[1]) * u; fib.push([c[0] - 0.3 * c[0] * MOVE(u) + 2.2 * Math.sin(u * 5 + ph), y, c[2] * (1 - 0.4 * u) + 1.6 * Math.cos(u * 4 + ph)]); }
-  const den = []; for (let k = 0; k < 4; k++) { const a = ph + k * 1.7, d = V3.norm([Math.cos(a), 0.55 + 0.5 * R(), Math.sin(a) * 0.8]), b = V3.add(c, V3.mul(d, r * 0.9)), m = V3.add(b, V3.mul(V3.norm(V3.add(d, [0.3 * Math.sin(a * 3), 0.2, 0])), 5 + 3 * R())), e = V3.add(m, V3.mul(V3.norm(V3.add(d, [0.5 * Math.cos(a * 2), 0.4, 0.2])), 4 + 3 * R())); den.push([b, m, e]); }
-  const spots = []; for (let k = 0; k < 6; k++) { const a = ph + k * 2.4, z = -0.35 - 0.6 * R(), d = V3.norm([Math.cos(a), 0.9 * Math.sin(a), z]); spots.push({d, w: 0.35 + 0.5 * R(), ph: R()}); }
-  return {c, r, f, o, fib, den, spots, i}; });
+const SPOTS = (ph, n) => Array.from({length: n}, (_, k) => { const a = ph + k * 2.4, d = V3.norm([Math.cos(a), 0.9 * Math.sin(a), -0.4 - 0.6 * R()]); return {d, w: 0.35 + 0.5 * R(), ph: R()}; });
+const CELLS = [[-2, 8, -24, 7.4], [-34, 4, 10], [-19, 14, 22], [-5, -1, 30], [13, 12, 14], [27, 2, 24], [39, 12, 8], [-41, 15, 26]].map((c, i) => {
+  const hero = i === 0, r = c[3] || 4.6 + R() * 1.2, f = hero ? 1.1 : 0.75 + R() * 0.45, o = R(), ph = R() * 6.28, top = [c[0], c[1] - r, c[2]];
+  const fib = []; for (let k = 0; k <= 14; k++) { const u = k / 14, y = top[1] + (-56 - top[1]) * u; fib.push([c[0] - 0.25 * c[0] * MOVE(u) + 2.2 * Math.sin(u * 5 + ph), y, c[2] * (1 - 0.3 * u) + 1.4 * Math.cos(u * 4 + ph)]); }
+  const den = []; for (let k = 0; k < (hero ? 5 : 4); k++) { const a = ph + k * 1.35, d = V3.norm([Math.cos(a), 0.6 + 0.45 * R(), Math.sin(a) * 0.7]), b = V3.add(c.slice(0, 3), V3.mul(d, r * 0.9)), m = V3.add(b, V3.mul(V3.norm(V3.add(d, [0.3 * Math.sin(a * 3), 0.2, 0])), (hero ? 7 : 5) + 3 * R())), e = V3.add(m, V3.mul(V3.norm(V3.add(d, [0.5 * Math.cos(a * 2), 0.4, 0.2])), (hero ? 6 : 4) + 3 * R())); den.push([b, m, e]); }
+  return {c: c.slice(0, 3), r, f, o, fib, den, spots: SPOTS(ph, hero ? 8 : 3), hero, i}; });
+const HERO = CELLS[0];
 /* the adenosine particles: each comes out of a cell when the level reaches its rank, then stays in the space around */
-const NP = 90, PART = Array.from({length: NP}, (_, k) => { const cell = CELLS[k % 8], d = V3.norm([R() - 0.5, (R() - 0.5) * 0.9, R() - 0.5]);
+const NP = 90, PART = Array.from({length: NP}, (_, k) => { const cell = CELLS[k % 3 === 0 ? 0 : 1 + (k % 7)], d = V3.norm([R() - 0.5, (R() - 0.5) * 0.9, R() - 0.5 - (cell.hero ? 0.25 : 0)]);
   return {cell, d, dist: cell.r + 5 + R() * 15, ph: [R() * 6.28, R() * 6.28, R() * 6.28], s: 0.85 + R() * 0.45}; });
 const P_IN = PART.map((q, k) => { const v = (k + 0.5) / NP; for (let i = 0; i <= 400; i++) { const p = T.day[0] + (T.day[1] - T.day[0]) * i / 400; if (levelAt(p) >= v) return p; } return 2; });
+const TAGK = PART.findIndex((q, k) => q.cell.hero && P_IN[k] >= 0.27);      // the adenosine tagged when it first appears
 const along = (pts, u) => { const f = clamp(u) * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(f)), w = f - i; return V3.lerp(pts[i], pts[i + 1], w); };
 
 /* ---------------- 1 · the brain from the side (2D), its base ringed ---------------- */
@@ -8869,44 +8934,66 @@ function bar(x, lev) { const SK = X.sk, W = 280, BH = 16, x0 = 4, y0 = 30;
   SK.t(x, 'how tired you are', x0, y0 - 10, 16, X.shadeCol(TEAL, 0.15), 600);
   x.fillStyle = mix(C('line'), '#ffffff', 0.4); x.fillRect(x0, y0, W, BH); x.fillStyle = TEAL; x.fillRect(x0, y0, W * lev, BH); }
 
+/* ---------------- the big picture: the feedback loop, current step marked ---------------- */
+const NODES = [['awake:', 'these cells fire'], ['firing uses up', 'energy (ATP)'], ['adenosine', 'builds up'], ['the cells slow:', 'you feel sleepy'], ['sleep:', 'adenosine falls']];
+const nodeAt = p => p < 0.32 ? 0 : p < 0.47 ? 1 : p < 0.58 ? 2 : p < 0.7 ? 3 : p < 0.845 ? 4 : 0;
+function loopFig(x, w, h, cur) {
+  const SK = X.sk, cx = w / 2, cy = h / 2 - 18, RR = 86, ang = k => -PI / 2 + k * 2 * PI / 5, ink3 = C('ink3');
+  x.save(); x.strokeStyle = ink3; x.fillStyle = ink3; x.lineWidth = 1.3;
+  for (let k = 0; k < 5; k++) { const a0 = ang(k) + 0.2, a1 = ang(k + 1) - 0.2; x.beginPath(); x.arc(cx, cy, RR, a0, a1); x.stroke();
+    const ex = cx + RR * Math.cos(a1), ey = cy + RR * Math.sin(a1), tx = -Math.sin(a1), ty = Math.cos(a1);
+    x.beginPath(); x.moveTo(ex + tx * 1, ey + ty * 1); x.lineTo(ex - tx * 7 + Math.cos(a1) * 4, ey - ty * 7 + Math.sin(a1) * 4); x.lineTo(ex - tx * 7 - Math.cos(a1) * 4, ey - ty * 7 - Math.sin(a1) * 4); x.closePath(); x.fill(); }
+  for (let k = 0; k < 5; k++) { const a = ang(k), nx = cx + RR * Math.cos(a), ny = cy + RR * Math.sin(a), on = k === cur;
+    x.beginPath(); x.arc(nx, ny, on ? 7 : 4.5, 0, 2 * PI); x.fillStyle = on ? C('ink') : '#ffffff'; x.fill(); x.lineWidth = on ? 2 : 1.3; x.strokeStyle = on ? C('ink') : ink3; x.stroke();
+    if (on) { x.beginPath(); x.arc(nx, ny, 12, 0, 2 * PI); x.lineWidth = 1.5; x.stroke(); }
+    const c = Math.cos(a), sn = Math.sin(a), lx = nx + c * 18, ly = ny + sn * 18 + (sn < -0.9 ? -16 : sn > 0.5 ? 10 : -4), al = c > 0.3 ? 'left' : c < -0.3 ? 'right' : 'center';
+    NODES[k].forEach((ln, j) => SK.t(x, ln, lx, ly + j * 17, 14, on ? C('ink') : ink3, on ? 700 : 500, al)); }
+  SK.t(x, 'a feedback loop', cx, h - 22, 12, ink3, 600, 'center'); SK.t(x, '(University of Helsinki Sleep Team)', cx, h - 7, 11, ink3, 500, 'center');
+  x.restore();
+}
+
 /* ---------------- the layer ---------------- */
 const box8 = (x0, x1, y0, y1, z0, z1) => [[x0, y0, z0], [x1, y0, z0], [x0, y1, z0], [x1, y1, z0], [x0, y0, z1], [x1, y0, z1], [x0, y1, z1], [x1, y1, z1]];
-const FIT_M = box8(-46, 46, -56, 27, -18, 18), PC = CELLS[3];
+const FIT_M = box8(-44, 44, -56, 27, -28, 20), PC = HERO;
 const ctr = A => A.reduce((s, q) => V3.add(s, V3.mul(q, 1 / A.length)), [0, 0, 0]);
 const scaleBox = (A, k) => { const c = ctr(A); return A.map(q => V3.add(c, V3.mul(V3.sub(q, c), k))); };
-const FIT_P = (() => { const c = ctr(FIT_M), d = V3.sub([PC.c[0], PC.c[1] - 8, PC.c[2]], c); return scaleBox(FIT_M, 0.66).map(q => V3.add(q, d)); })();
+const FIT_P = (() => { const c = ctr(FIT_M), d = V3.sub([PC.c[0], PC.c[1] - 10, PC.c[2]], c); return scaleBox(FIT_M, 0.62).map(q => V3.add(q, d)); })();
 const fitAt = p => { const d = MOVE(lin(p, T.dive[0] + 0.02, T.show[1])), base = scaleBox(FIT_M, 1 + 2.2 * (1 - d)), u = MOVE(lin(p, ...T.push)); return base.map((q, i) => V3.lerp(q, FIT_P[i], u)); };
+function cell(g, pr, cl, a3, t, lev, pu, ph, glows, TT) {
+  const hero = cl.hero, dim = hero ? 0 : DIM, bodyC = mix(BODY, '#ffffff', dim), fibC = mix(FIB, '#ffffff', dim * 0.9), aa = a3;
+  const fibPts = cl.fib.filter((q, k) => k < 10 || pu < 0.5);
+  pr.path(g, fibPts, fibC, hero ? 7 : 3.2, aa * (1 - 0.9 * pu * (hero ? 0 : 1)));
+  // pulses: a burst leaves at each whole number of the cell's phase and runs up its fibre
+  const now = ph * cl.f + cl.o, then = phiAt(Math.max(0, t - TT)) * cl.f + cl.o, out = [];
+  for (let n = Math.floor(then) + 1; n <= Math.floor(now); n++) { const tn = tOfPhi((n - cl.o) / cl.f), age = t - tn; if (age < 0 || age > TT) continue;
+    const u = age / TT, q = along(cl.fib, u), fa = (u < 0.6 ? 1 : (1 - u) / 0.4) * (u < 0.35 ? 1 : 1 - 0.95 * pu); if (fa < 0.01) continue;
+    pr.sphere(g, q, hero ? 2.5 : 1.5, hero ? GOLD : mix(GOLD, '#ffffff', 0.35), aa * fa); glows.push([q, hero ? 6 : 3.5, GOLD, (hero ? 0.55 : 0.35) * aa * fa]); out.push({q, u}); }
+  for (const [b, m, e] of cl.den) { if (hero) { pr.capsule(g, b, m, 1.5, bodyC, aa); pr.capsule(g, m, e, 0.85, bodyC, aa); } else pr.path(g, [b, m, e], bodyC, 2.6, aa); }
+  pr.capsule(g, cl.c, V3.lerp(cl.c, cl.fib[1], hero ? 1 : 0.8), cl.r * (hero ? 0.42 : 0.3), bodyC, aa);
+  pr.sphere(g, cl.c, cl.r, bodyC, aa);
+  cl.spots.forEach(sp => { const w = ((t * sp.w * 1.6 + sp.ph) % 1 + 1) % 1, on = lev, env = w < 0.22 * on ? Math.sin(PI * w / (0.22 * on)) : 0;
+    if (env > 0.02) { const q = V3.add(cl.c, V3.mul(sp.d, cl.r + 0.5)); pr.sphere(g, q, hero ? 1.4 : 1.0, TEAL, aa * env); } });
+  return out;
+}
 function draw(g, S, P) {
   const al = P.v_adeno_L, p = prog(), t = X._thumb ? SHOT * DUR : X.clock('adenosine').t, show = !X._thumb;
-  const pr = K.cam(S, P, {fit: fitAt(p), fitBox: [0.22, 0.06, 0.98, 0.97], fitMargin: 0.02, fitKey: 'adeno'});
+  const pr = K.cam(S, P, {fit: fitAt(p), fitBox: [0.21, 0.06, 0.73, 0.97], fitMargin: 0.02, fitKey: 'adeno'});
   const hr = hourAt(p), lev = levelAt(p), sleep = ASLEEP(hr), a3 = al * lin(p, ...T.show), V = S.view;
-  const glows = [];
+  const glows = []; let heroPulses = [], tagPart = null;
   if (a3 > 0.01) {
     const ph = phiAt(t), TT = 0.9, pu = MOVE(lin(p, ...T.push));
-    /* fibres, then the pulses on them */
-    CELLS.forEach(cl => { for (let k = 0; k < cl.fib.length - 1; k++) { const fa = (k < 6 ? 1 : (12 - k) / 7) * (k < 4 ? 1 : 1 - 0.95 * pu); if (fa > 0.01) pr.capsule(g, cl.fib[k], cl.fib[k + 1], 1.05, FIB, a3 * fa); } });
-    const fire = CELLS.map(() => 0);
-    CELLS.forEach((cl, i) => { const now = ph * cl.f + cl.o, then = phiAt(Math.max(0, t - TT)) * cl.f + cl.o;
-      for (let n = Math.floor(then) + 1; n <= Math.floor(now); n++) { const tn = tOfPhi((n - cl.o) / cl.f), age = t - tn; if (age < 0 || age > TT) continue;
-        const u = age / TT, q = along(cl.fib, u), fa = (u < 0.55 ? 1 : (1 - u) / 0.45) * (u < 0.3 ? 1 : 1 - 0.95 * pu); if (fa < 0.01) continue;
-        pr.sphere(g, q, 1.9, mix(GOLD, '#fff3bf', 0.35), a3 * fa); glows.push([q, 9, GOLD, 0.9 * a3 * fa]);
-        if (age < 0.22) fire[i] = Math.max(fire[i], 1 - age / 0.22); } });
-    /* the cells: bodies (a pulse of light as each burst leaves), branches, receptor flashes on the surface */
-    CELLS.forEach((cl, i) => { const sw = 1 + 0.07 * fire[i];
-      for (const [b, m, e] of cl.den) { pr.capsule(g, b, m, 1.25, BODY, a3); pr.capsule(g, m, e, 0.7, BODY, a3); }
-      pr.capsule(g, cl.c, cl.fib[1], cl.r * 0.42, mix(BODY, '#fff8e1', 0.4 * fire[i]), a3);
-      pr.sphere(g, cl.c, cl.r * sw, mix(BODY, '#fff8e1', 0.6 * fire[i]), a3);
-      if (fire[i] > 0.02) glows.push([cl.c, cl.r * 3.2, GOLD, 0.7 * fire[i] * a3]);
-      cl.spots.forEach(sp => { const w = ((t * sp.w * 1.6 + sp.ph) % 1 + 1) % 1, on = lev, env = w < 0.22 * on ? Math.sin(PI * w / (0.22 * on)) : 0;
-        if (env > 0.02) { const q = V3.add(cl.c, V3.mul(sp.d, cl.r * sw + 0.5)); pr.sphere(g, q, 1.35, TEAL, a3 * env); glows.push([q, 6, TEAL, env * a3]); } }); });
-    /* adenosine around the cells */
-    PART.forEach((q, k) => { const v = clamp(NP * lev - k), pin = P_IN[k]; if (v <= 0.01) return; const e = p >= pin ? ENTER(lin(p, pin, pin + 0.035)) : 1;
-      const d = q.cell.r + (q.dist - q.cell.r) * e, w = [1.6 * Math.sin(0.5 * t + q.ph[0]), 1.4 * Math.sin(0.43 * t + q.ph[1]), 1.6 * Math.sin(0.37 * t + q.ph[2])];
-      pr.sphere(g, V3.add(V3.add(q.cell.c, V3.mul(q.d, d)), V3.mul(w, e)), 1.15 * q.s, TEAL, a3 * Math.min(1, v * 1.5)); });
+    for (let i = CELLS.length - 1; i >= 1; i--) cell(g, pr, CELLS[i], a3, t, lev, pu, ph, glows, TT);
+    /* adenosine around the cells (behind the front cell first, then in front) */
+    const drawPart = front => PART.forEach((q, k) => { if ((q.d[2] < 0 && q.cell.hero) !== front) return; const v = clamp(NP * lev - k), pin = P_IN[k]; if (v <= 0.01) return; const e = p >= pin ? ENTER(lin(p, pin, pin + 0.035)) : 1;
+      const d = q.cell.r + (q.dist - q.cell.r) * e, w = [1.6 * Math.sin(0.5 * t + q.ph[0]), 1.4 * Math.sin(0.43 * t + q.ph[1]), 1.6 * Math.sin(0.37 * t + q.ph[2])], at = V3.add(V3.add(q.cell.c, V3.mul(q.d, d)), V3.mul(w, e));
+      pr.sphere(g, at, (q.cell.hero ? 1.25 : 1.0) * q.s, TEAL, a3 * Math.min(1, v * 3)); if (k === TAGK) tagPart = at; });
+    drawPart(false);
+    heroPulses = cell(g, pr, HERO, a3, t, lev, pu, ph, glows, TT);
+    drawPart(true);
     for (const [q, r, col, a] of glows) { const s = pr(...q), s2 = pr(q[0] + r, q[1], q[2]); X.glow(g, s[0], s[1], Math.abs(s2[0] - s[0]), col, a); }
   }
   /* night: a soft tint over the stage */
-  if (sleep > 0.01) { g.save(); g.globalAlpha = 0.085 * sleep * al; g.fillStyle = '#1c3d73'; g.fillRect(V.x, V.y, V.w, V.h); g.restore(); }
+  if (sleep > 0.01) { g.save(); g.globalAlpha = 0.08 * sleep * al; g.fillStyle = '#1c3d73'; g.fillRect(V.x, V.y, V.w, V.h); g.restore(); }
   /* 1 · the brain from the side, zooming into its base as the cells appear */
   const ab = al * (1 - lin(p, 0.125, 0.17)), dz = lin(p, ...T.dive);
   let ring = null;
@@ -8915,29 +9002,37 @@ function draw(g, S, P) {
     brain(g, cx, cy, S0 * k, ab, t); ring = [cx + BF[0] * S0 * k, cy + BF[1] * S0 * k, 0.1 * S0 * k];
     if (K.bodyMap && dz < 0.5) { try { K.bodyMap(g, {cx: V.x + 80, cy: V.y + V.h * 0.5, h: 230, alpha: ab * (1 - 2 * dz), hi: 'brain'}); } catch (e) { /* the locator is optional */ } } }
   if (!show) return;
-  /* the clock and the bar */
+  /* the clock, the bar, the key, and where we are */
   const ck = [V.x + V.w * 0.045, V.y + V.h * 0.1], ca = al * lin(p, 0.15, 0.19);
   if (ca > 0.01) { dial(g, ck[0], ck[1], 17, hr % 24, ca); X.labelAvoid([ck[0] - 19, ck[1] - 19, ck[0] + 19, ck[1] + 19]);
     lbl('adClk', [ck[0] + 26, ck[1]], `<b>${fmtClock(hr)}</b>`, {cls: 'num', ax: 0, ay: 0.5, color: C('ink'), alpha: ca});
-    X.inset(g, {at: [0.025, 0.17], w: 300, h: 60, frame: false, alpha: ca}, x => bar(x, lev));
-    const la = al * lin(p, 0.19, 0.24); if (la > 0.01) { const bx = V.x + V.w * 0.025 + 70, by = V.y + V.h * 0.17 + 128; brain(g, bx, by, 58, la, t); X.labelAvoid([bx - 62, by - 50, bx + 62, by + 58]); } }
-  labels(pr, p, al, ring, t);
+    X.inset(g, {at: [0.025, 0.17], w: 300, h: 112, frame: false, alpha: ca}, x => { bar(x, lev); const SK = X.sk;
+      x.fillStyle = GOLD; x.beginPath(); x.arc(11, 72, 6, 0, 2 * PI); x.fill(); SK.t(x, 'a ‘stay awake’ signal', 24, 77, 15, C('ink'), 500);
+      x.fillStyle = TEAL; x.beginPath(); x.arc(11, 98, 6, 0, 2 * PI); x.fill(); SK.t(x, 'adenosine', 24, 103, 15, C('ink'), 500); });
+    const la = al * lin(p, 0.19, 0.24); if (la > 0.01) { const bx = V.x + V.w * 0.025 + 70, by = V.y + V.h * 0.17 + 186; brain(g, bx, by, 52, la, t); X.labelAvoid([bx - 56, by - 46, bx + 56, by + 52]); }
+    const lo = al * lin(p, 0.19, 0.23); if (lo > 0.01) X.inset(g, {at: [0.715, 0.06], w: 400, h: 330, frame: false, alpha: lo}, (x, w, h) => loopFig(x, w, h, nodeAt(p))); }
+  labels(g, pr, p, al, ring, t, heroPulses, tagPart);
 }
 
-function labels(pr, p, al, ring, t) {
+function labels(g, pr, p, al, ring, t, heroPulses, tagPart) {
   const win = (a, b, c, d) => lin(p, a, b) * (1 - lin(p, c, d));
-  if (ring) { const wa = al * win(0.015, 0.035, 0.085, 0.1);
-    lbl('adWhere', [ring[0], ring[1] + ring[2] + 8], K17('a wake-keeping area at the base of the brain') + '<br><span style="font-size:12px;opacity:.75">(the basal forebrain)</span>', {cls: 'plain big', ax: 0.5, ay: 0, color: X.shadeCol(TEAL, 0.2), alpha: wa, cands: [[0, 0, 0.5, 0], [ring[2] + 20, -10, 0, 0.5]]});
-    lbl('adCortex', [ring[0] + ring[2] * 3, ring[1] - ring[2] * 5.6], 'cortex', {cls: 'plain', ax: 0.5, ay: 1, color: C('ink2'), alpha: wa, cands: [[0, 0, 0.5, 1]], drop: true}); }
-  // the cells: what they do
-  const top = pr(-6, -52, 0), cq = pr(-50, -12, 0);
-  lbl('adCtx', top, 'up to the cortex', {cls: 'plain', ax: 0.5, ay: 1, color: C('ink2'), alpha: al * win(0.18, 0.21, 0.84, 0.87), cands: [[0, -4, 0.5, 1], [0, 18, 0.5, 1]], drop: true});
-  const side = [[-12, 0, 1, 0.5], [-12, 44, 1, 0.5], [-12, -44, 1, 0.5]];
-  lbl('adKeep', cq, K17('these cells keep the rest<br>of the brain awake'), {cls: 'plain big', ax: 1, ay: 0.5, color: C('ink'), alpha: al * win(0.19, 0.22, 0.3, 0.33), cands: side});
-  const fq = cq;
-  lbl('adAtp', fq, K17('each burst spends ATP, the cell’s energy;<br>its core, adenosine, is left outside'), {cls: 'plain big', ax: 1, ay: 0.5, color: X.shadeCol(TEAL, 0.2), alpha: al * win(0.32, 0.35, 0.47, 0.5), cands: side});
-  lbl('adQuiet', fq, K17('adenosine quiets the cells<br>that keep you awake'), {cls: 'plain big', ax: 1, ay: 0.5, color: X.shadeCol(TEAL, 0.2), alpha: al * win(0.5, 0.53, 0.68, 0.71), cands: side});
-  lbl('adNight', fq, K17('asleep, the adenosine clears'), {cls: 'plain big', ax: 1, ay: 0.5, color: C('ink'), alpha: al * win(0.715, 0.735, 0.84, 0.86), cands: side});
+  if (ring) { const wa = al * win(0.045, 0.065, 0.085, 0.1);
+    lbl('adWhere', [ring[0], ring[1] + ring[2] + 8], K17('a wake-keeping area at the base of the brain') + '<br><span style="font-size:12px;opacity:.75">(the basal forebrain)</span>', {cls: 'plain big', ax: 0.5, ay: 0, color: X.shadeCol(TEAL, 0.2), alpha: wa, cands: [[0, 0, 0.5, 0], [ring[2] + 20, -10, 0, 0.5]]}); }
+  /* a label with a hairline leader to the thing it names */
+  const lead = (key, at, dx, dy, html, ax, color, a, big) => { if (!at || a <= 0.01) return; const s = pr(...at); if (!Number.isFinite(s[0])) return;
+    g.save(); g.globalAlpha = a; g.strokeStyle = C('ink3'); g.lineWidth = 1; g.beginPath(); g.moveTo(s[0], s[1]); g.lineTo(s[0] + dx * 0.92, s[1] + dy * 0.92); g.stroke(); g.restore();
+    lbl(key, [s[0] + dx, s[1] + dy], big ? K17(html) : html, {cls: big ? 'plain big' : 'plain', ax, ay: 0.5, color, alpha: a, cands: [[0, 0, ax, 0.5]]}); };
+  const named = win(0.195, 0.215, 0.33, 0.35);
+  lead('adCell', V3.add(HERO.c, [HERO.r * 0.8, 0, -2]), 70, 34, 'nerve cell', 0, C('ink'), al * named, true);
+  lead('adFib', along(HERO.fib, 0.55), 64, -6, 'fibre to the cortex', 0, C('ink'), al * named, true);
+  const sig = heroPulses.find(o => o.u > 0.15 && o.u < 0.6);
+  if (sig) lead('adSig', sig.q, -70, -20, 'a ‘stay awake’ signal', 1, X.shadeCol(GOLD, 0.45), al * win(0.2, 0.22, 0.29, 0.31), true);
+  if (tagPart) lead('adTag', tagPart, -64, 26, 'adenosine', 1, X.shadeCol(TEAL, 0.2), al * win(P_IN[TAGK], P_IN[TAGK] + 0.02, P_IN[TAGK] + 0.09, P_IN[TAGK] + 0.11), true);
+  // the story, at one spot to the left of the cells
+  const V = X.S.view, cq = [V.x + V.w * 0.735, V.y + V.h * 0.5], side = [[0, 0, 0, 0], [0, 40, 0, 0]];
+  lbl('adKeep', cq, K17('these cells help keep the cortex<br>(the brain’s outer layer) awake'), {cls: 'plain big', ax: 0, ay: 0, color: C('ink'), alpha: al * win(0.235, 0.255, 0.33, 0.35), cands: side});
+  lbl('adAtp', cq, K17('long firing uses ATP, the cell’s energy,<br>faster than it’s remade; its core,<br>adenosine, builds up outside'), {cls: 'plain big', ax: 0, ay: 0, color: X.shadeCol(TEAL, 0.2), alpha: al * win(0.35, 0.37, 0.56, 0.59), cands: side});
+  lbl('adNight', cq, K17('asleep, the adenosine falls'), {cls: 'plain big', ax: 0, ay: 0, color: C('ink'), alpha: al * win(0.715, 0.735, 0.84, 0.86), cands: side});
   const sq = pr(...V3.add(PC.c, [0, PC.r + 4, -PC.r]));
   lbl('adSeat', sq, K17('caffeine takes adenosine’s seat on these cells'), {cls: 'plain big', ax: 0.5, ay: 0, color: X.shadeCol(C('c1'), 0.3), alpha: al * lin(p, 0.9, 0.93), cands: [[0, 16, 0.5, 0], [0, 50, 0.5, 0], [0, -60, 0.5, 1]]});
 }
@@ -9121,9 +9216,9 @@ K.bodyMap = (x, o = {}) => {
   const aw = px(o.vessel ?? 2.2);
   x.lineCap = 'round'; x.lineJoin = 'round';
   x.strokeStyle = COL.vein; x.lineWidth = aw; x.beginPath();
-  [JUG[0], JUG[1], SVC, IVC, ILV[0], ILV[1], REN_V[0], REN_V[1], HEP_V, PORTAL, STOM_V].forEach(v => trace(x, v)); x.stroke();
+  [JUG[0], JUG[1], SVC, IVC, ILV[0], ILV[1], REN_V[0], REN_V[1], PORTAL, STOM_V].forEach(v => trace(x, v)); x.stroke();
   x.strokeStyle = fade(-60, 0, COL.art); x.beginPath(); SUB.forEach(v => trace(x, v)); x.stroke();
-  x.strokeStyle = COL.art; x.beginPath(); [ART_UP, CAR[0], CAR[1], CER[0], CER[1], AORTA, ILIAC[0], ILIAC[1], HEP_A, REN_A[0], REN_A[1], MES].forEach(v => trace(x, v)); x.stroke();
+  x.strokeStyle = COL.art; x.beginPath(); [ART_UP, CAR[0], CAR[1], CER[0], CER[1], AORTA, ILIAC[0], ILIAC[1], REN_A[0], REN_A[1], MES].forEach(v => trace(x, v)); x.stroke();
   /* the heart, beating, with its great vessels: the aorta's arch and the big vein from the head */
   x.globalAlpha = A0 * dimOf('heart');
   tube(x, [[-23, -198], [-19, -164, -14, -140, -10, -116]], COL.vein, '#4d6a8e', 8, px(1));
@@ -9257,7 +9352,7 @@ function dotAt(D, t) {   // → [x, y, grey 0..1] in body units
 const counts = t => { let gone = 0, inside = 0; for (const D of DOTS) { if (t >= D.te) gone++; if (t >= D.tMouth) inside++; } return {gone, orange: inside - gone}; };
 
 /* ---------------- the slide ---------------- */
-const BODY = {cx: 352, cy: 452, h: 856};
+const BODY = {cx: 384, cy: 450, h: 868};
 const clockText = hrs => { const m = Math.floor(hrs * 60 + 1e-6), H24 = 14 + Math.floor(m / 60), mm = m % 60, H12 = ((H24 + 11) % 12) + 1; return H12 + ':' + String(mm).padStart(2, '0') + (H24 % 24 < 12 ? ' am' : ' pm'); };
 function glass(x, F, s, a) {   // a small iced americano, tipped toward the mouth
   if (a <= 0.01) return; const [gx, gy] = F(GLASS.at);
@@ -9278,19 +9373,51 @@ function leader(x, from, to, text, a, o = {}) {   // a thin line from the organ 
   x.restore(); }
 function clockFace(x, cx, cy, r, hrs) {
   x.save(); x.strokeStyle = SK.col('ink3'); x.lineWidth = 2; x.beginPath(); x.arc(cx, cy, r, 0, TAU); x.stroke();
-  x.fillStyle = SK.col('ink3'); for (let k = 0; k < 12; k++) { const a = k / 12 * TAU; x.beginPath(); x.arc(cx + Math.sin(a) * (r - 7), cy - Math.cos(a) * (r - 7), k % 3 ? 1.4 : 2.4, 0, TAU); x.fill(); }
+  x.fillStyle = SK.col('ink3'); for (let k = 0; k < 12; k++) { const a = k / 12 * TAU; x.beginPath(); x.arc(cx + Math.sin(a) * (r - 6), cy - Math.cos(a) * (r - 6), k % 3 ? 1.3 : 2.2, 0, TAU); x.fill(); }
   const hh = 2 + hrs, aH = hh / 12 * TAU, aM = hrs * TAU;
-  x.strokeStyle = SK.col('ink'); x.lineCap = 'round'; x.lineWidth = 4; x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.sin(aH) * r * 0.5, cy - Math.cos(aH) * r * 0.5); x.stroke();
-  x.lineWidth = 2.5; x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.sin(aM) * r * 0.78, cy - Math.cos(aM) * r * 0.78); x.stroke();
-  x.fillStyle = SK.col('ink'); x.beginPath(); x.arc(cx, cy, 3.5, 0, TAU); x.fill(); x.restore(); }
+  x.strokeStyle = SK.col('ink'); x.lineCap = 'round'; x.lineWidth = 3.5; x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.sin(aH) * r * 0.5, cy - Math.cos(aH) * r * 0.5); x.stroke();
+  x.lineWidth = 2.3; x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx + Math.sin(aM) * r * 0.78, cy - Math.cos(aM) * r * 0.78); x.stroke();
+  x.fillStyle = SK.col('ink'); x.beginPath(); x.arc(cx, cy, 3.2, 0, TAU); x.fill(); x.restore(); }
 
-const ST = [{p: 0.30, end: 0.45, name: 'Brain', hi: 'brain', text: 'crosses into the brain:\nthis is where it acts'},
-            {p: 0.45, end: 0.60, name: 'Liver', hi: 'liver', text: 'the liver takes it apart:\nabout half every 4 hours (average)'},
-            {p: 0.60, end: 0.90, name: 'Kidneys', hi: 'kidneys', text: 'the leftovers leave in urine;\ncaffeine itself is sent back (98%)'}];
+/* "how much is enough to matter": the gauge beside the counter (the clearance beat draws the same values and words) */
+const TEAL = '#0b7285', CAF_INK = X.u.mix(X.col('c1'), '#000000', 0.28);   // caffeine's orange, dark enough to read on the teal band
+const GG = {x: 960, w: 12, y0: 624, k: 3.2, tx: 1104, x1: 1570};
+const gy = m => GG.y0 - GG.k * m;
+const T100 = DOTS[DOSE - 100 - 1].te, T75 = DOTS[DOSE - 75 - 1].te;          // when the counter falls through 100 and 75 mg
+const flash = (t, tX) => t < tX - 0.1 || t > tX + 1.2 ? 0 : Math.sin(Math.PI * clamp((t - tX + 0.1) / 1.3));
+function gauge(x, t, mg, fin, ga) {
+  x.save(); x.globalAlpha *= ga;
+  x.fillStyle = X.u.rgba(TEAL, 0.085); x.fillRect(GG.x - 6, gy(100), GG.x1 - GG.x + 6, gy(10) - gy(100));
+  x.fillStyle = '#e9ecef'; x.fillRect(GG.x, gy(120), GG.w, gy(0) - gy(120));
+  x.fillStyle = X.u.rgba(TEAL, 0.4); x.fillRect(GG.x, gy(100), GG.w, gy(10) - gy(100));
+  x.fillStyle = X.col('c1'); x.fillRect(GG.x, gy(mg), GG.w, gy(0) - gy(mg));
+  for (const m of [0, 25, 50, 75, 100]) { x.fillStyle = SK.col('ink3'); x.fillRect(GG.x - 8, gy(m) - 0.75, 6, 1.5); SK.t(x, String(m), GG.x - 12, gy(m) + 6, 17, 'ink3', 500, 'right'); }
+  SK.t(x, 'mg in you', GG.x + GG.w / 2, gy(0) + 30, 16, 'ink3', 500, 'center');
+  for (const [m, text, tX] of [[100, '100 mg near bedtime: can disturb sleep\nin some people (EFSA 2015)', T100], [75, '75 mg in one go: enough to perk you up\n(EFSA 2011)', T75]]) {
+    const L = flash(t, tX);
+    x.save(); x.strokeStyle = SK.col(L > 0.05 ? 'ink' : 'ink3'); x.lineWidth = 1.3 + 1.7 * L; if (L < 0.5) x.setLineDash([6, 5]);
+    x.beginPath(); x.moveTo(GG.x - 4, gy(m)); x.lineTo(GG.x + GG.w + 3, gy(m)); x.moveTo(GG.tx - 8, gy(m)); x.lineTo(GG.x1, gy(m)); x.stroke(); x.restore();   // a gap where the marker's label passes
+    const ls = SK.wrap(x, text, GG.x1 - GG.tx, 18, 600);
+    ls.forEach((l, i) => SK.t(x, l, GG.tx, gy(m) - 9 - (ls.length - 1 - i) * 23, 18, L > 0.3 ? 'ink' : 'ink2', L > 0.3 ? 700 : 500, 'left')); }
+  SK.t(x, '≈10–100 mg in you:', GG.tx, gy(46) - 6, 18, TEAL, 700, 'left'); SK.t(x, 'blocks some adenosine receptors', GG.tx, gy(46) + 17, 18, TEAL, 700, 'left');
+  SK.arrow(x, GG.x + GG.w / 2, gy(120) - 4, GG.x + GG.w / 2, gy(120) - 34, 'ink3', 2, null, {});
+  SK.t(x, '300–400 mg: clearly disturbs sleep', GG.x + 26, gy(120) - 15, 18, 'ink2', 500, 'left');
+  SK.t(x, 'doses taken at once; people differ, so no single line', GG.tx, gy(0) + 30, 16, 'ink3', 400, 'left');
+  /* the marker: in you now, following the counter */
+  const my = gy(mg), mx = GG.x + GG.w;
+  x.fillStyle = X.col('c1'); x.beginPath(); x.moveTo(mx + 2, my); x.lineTo(mx + 13, my - 7); x.lineTo(mx + 13, my + 7); x.closePath(); x.fill();
+  if (fin < 0.99) { x.save(); x.globalAlpha *= 1 - fin; SK.t(x, 'in you now', mx + 18, my + 6.5, 18, CAF_INK, 700, 'left'); x.restore(); }
+  if (fin > 0.01) { x.save(); x.globalAlpha *= fin; SK.wrap(x, mg + ' mg: still blocking some receptors,\nbelow the 75 mg that perks you up', GG.x1 - mx - 18, 19, 700)
+      .forEach((l, i) => SK.t(x, l, mx + 18, my + 7 + i * 24 + 6 * (1 - fin), 19, CAF_INK, 700, 'left')); x.restore(); }
+  x.restore(); }
+
+const ST = [{p: 0.30, end: 0.45, name: 'Brain', hi: 'brain', text: 'crosses into the brain: there it blocks adenosine (next)'},
+            {p: 0.45, end: 0.60, name: 'Liver', hi: 'liver', text: 'breaks it down: about half every 4 hours (average)'},
+            {p: 0.60, end: 0.90, name: 'Kidneys', hi: 'kidneys', text: 'the leftovers leave in urine; caffeine itself is sent back into the blood (about 98%)'}];
 const LAB = [   // organ labels arrive as the dots reach each part: [name, body point, label point (frame), p]
-  ['stomach', [128, 30], [610, 470], 0.035], ['small intestine', [108, 300], [610, 700], 0.09], ['blood vessels', [72, 440], [610, 826], 0.12],
-  ['heart', [56, -84], [610, 360], 0.14], ['brain', [-62, -440], [210, 84], 0.19], ['liver', [-150, 52], [120, 500], 0.23],
-  ['kidneys', [-134, 186], [120, 612], 0.27], ['bladder', [-40, 446], [120, 836], 0.29]];
+  ['stomach', [128, 30], [662, 470], 0.035], ['small intestine', [108, 300], [662, 700], 0.09], ['liver', [-150, 52], [204, 482], 0.11],
+  ['blood vessels', [72, 440], [662, 826], 0.13], ['heart', [56, -84], [662, 362], 0.15], ['brain', [-62, -440], [290, 70], 0.19],
+  ['kidneys', [-134, 186], [204, 611], 0.27], ['urine', [-74, 330], [198, 726], 0.28], ['bladder', [-40, 446], [180, 840], 0.29]];
 
 X.slide('body', (x, w, h, st) => {
   const p = clamp(st.p ?? 1), t = p * DUR, hrs = hOf(p), s = BODY.h / 1000;
@@ -9311,42 +9438,42 @@ X.slide('body', (x, w, h, st) => {
     SK.t(x, 'one iced americano', g[0] + 34, g[1] + 32 + 8 * (1 - lm), 18, 'ink3', 500, 'left'); x.restore(); }
   /* organ labels */
   for (const [name, bp, lp, pa] of LAB) { const a = lin(p, pa, pa + 0.03);
-    const sub = name === 'stomach' ? '20% taken in here' : name === 'small intestine' ? 'the rest here' : null, keep = name === 'blood vessels';
-    leader(x, F(bp), lp, name, a, {sub: keep ? 'red out, blue back' : sub && p < 0.43 && a > 0.5 ? sub : null}); }
+    const sub = name === 'stomach' ? 'about 20% taken in here' : name === 'small intestine' ? 'the rest here' : null;
+    leader(x, F(bp), lp, name, a, {sub: name === 'blood vessels' ? 'red out, blue back' : sub && p < 0.43 && a > 0.5 ? sub : null}); }
+  /* the key for the grey dots, under the liver's label, from the moment the first one appears */
+  const gk = ENTER(lin(p, 0.11, 0.14));
+  if (gk > 0.01) { x.save(); x.globalAlpha *= gk; const l1 = 'grey: caffeine', l2 = 'the liver has snipped', kx = 198, w1 = SK.w(x, l1, 18, 500);
+    x.fillStyle = '#979ea5'; x.beginPath(); x.arc(kx - w1 - 11, 507, 4.2, 0, TAU); x.fill();
+    SK.t(x, l1, kx, 513, 18, 'ink3', 500, 'right'); SK.t(x, l2, kx, 535, 18, 'ink3', 500, 'right'); x.restore(); }
   /* the absorption note at the gut */
   const ab = ENTER(lin(p, 0.2, 0.23)) * (1 - lin(p, 0.4, 0.43));
-  if (ab > 0.01) { x.save(); x.globalAlpha *= ab; SK.t(x, 'all of it absorbed', 610, 760 + 8 * (1 - ab), 22, 'ink', 700, 'left'); SK.t(x, 'within 45 minutes', 610, 788 + 8 * (1 - ab), 22, 'ink', 700, 'left'); x.restore(); }
+  if (ab > 0.01) { x.save(); x.globalAlpha *= ab; SK.t(x, 'all of it absorbed', 662, 604 + 8 * (1 - ab), 20, 'ink', 700, 'left'); SK.t(x, 'within 45 minutes', 662, 630 + 8 * (1 - ab), 20, 'ink', 700, 'left'); x.restore(); }
   /* the dots: grey under, orange over; a white edge keeps each one separate on the organs */
   const og = [], gr = [];
   for (const D of DOTS) { if (t < D.t0 && p > 0.1) continue; const [bx, by, g] = dotAt(D, t); if (!(by < 505)) continue;
     const q = F([bx, by]), a = by > 470 ? 1 - (by - 470) / 35 : 1; if (a <= 0.02) continue; (g > 0.5 ? gr : og).push([q[0], q[1], a, g]); }
-  const R0 = 4;
   const draw = (L, col, r) => { x.fillStyle = 'rgba(255,255,255,0.9)'; x.beginPath(); L.forEach(([qx, qy, a]) => { if (a > 0.6) { x.moveTo(qx + r + 1.2, qy); x.arc(qx, qy, r + 1.2, 0, TAU); } }); x.fill();
     x.fillStyle = col; L.forEach(([qx, qy, a]) => { x.globalAlpha = a; x.beginPath(); x.arc(qx, qy, r, 0, TAU); x.fill(); }); x.globalAlpha = 1; };
-  draw(gr, '#979ea5', 3.4); draw(og, X.col('c1'), R0);
+  draw(gr, '#979ea5', 3.4); draw(og, X.col('c1'), 4);
   /* caffeine sent back at a kidney */
   const sb = S && cur === 2 ? ENTER(lin(p, 0.63, 0.66)) * hiA : 0;
-  if (sb > 0.01) { const k = F([-150, 150]); x.save(); x.globalAlpha *= sb; SK.arrow(x, k[0] + 34, k[1] + 70, k[0] + 4, k[1] + 26, X.col('c1'), 3, null, {route: 'arc', bend: -0.7, p: sb});
-    x.restore(); }
-  /* the right side: the clock, the counter, the stations */
-  const RX = 790;
-  clockFace(x, RX + 50, 140, 50, hrs);
-  SK.t(x, clockText(hrs), RX + 122, 158, 46, 'ink', 700, 'left');
-  const cn = counts(t), NX = 1150;
-  SK.eyebrow(x, 'caffeine in you', NX, 84, {size: 20});
-  const fin = ENTER(lin(p, 0.9, 0.94));
-  SK.num(x, String(cn.orange), 'mg', NX - 4, 184, 104, fin > 0.5 ? 'accent-ink' : 'ink', 'ink3', 'left');
-  const ga = lin(p, 0.11, 0.14);
-  if (ga > 0.01) { x.save(); x.globalAlpha *= ga; SK.eyebrow(x, 'taken apart', NX + 270, 84, {size: 18, sq: '#8d949b'}); SK.num(x, String(cn.gone), 'mg', NX + 268, 152, 50, 'ink2', 'ink3', 'left'); x.restore(); }
-  if (fin > 0.01) { x.save(); x.globalAlpha *= fin; SK.t(x, 'still in you at 11 pm (average adult)', NX, 232 + 6 * (1 - fin), 24, 'accent-ink', 700, 'left'); x.restore(); }
-  SK.rule(x, RX, 274, 1560, 'line', 2);
-  ST.forEach((Sx, k) => { const y = 370 + k * 176, on = p >= Sx.p, a = ENTER(lin(p, Sx.p, Sx.p + 0.03)), now = k === cur;
+  if (sb > 0.01) { const k = F([-150, 150]); x.save(); x.globalAlpha *= sb; SK.arrow(x, k[0] + 34, k[1] + 70, k[0] + 4, k[1] + 26, X.col('c1'), 3, null, {route: 'arc', bend: -0.7, p: sb}); x.restore(); }
+  /* the right side: the clock, the counter on its gauge, the stations */
+  clockFace(x, 868, 100, 36, hrs);
+  SK.t(x, clockText(hrs), 868, 172, 28, 'ink', 700, 'center');
+  const cn = counts(t), fin = ENTER(lin(p, 0.9, 0.94));
+  SK.eyebrow(x, 'caffeine in you', GG.x - 4, 62, {size: 20});
+  SK.num(x, String(cn.orange), 'mg', GG.x - 8, 152, 92, fin > 0.5 ? 'accent-ink' : 'ink', 'ink3', 'left');
+  gauge(x, t, cn.orange, fin, 1);
+  SK.rule(x, 836, 680, 1570, 'line', 2);
+  const SX = [836, 1081, 1326], SY = 722;
+  ST.forEach((Sx, k) => { const X0 = SX[k], on = p >= Sx.p, a = ENTER(lin(p, Sx.p, Sx.p + 0.03)), now = k === cur;
     x.save(); x.globalAlpha *= on ? 1 : 0.42;
     const pop = on ? 1 + 0.28 * Math.sin(Math.PI * lin(p, Sx.p, Sx.p + 0.025)) : 1;   // the badge pops as its station lights
-    x.fillStyle = SK.col(on ? (now ? 'ink' : 'ink2') : 'line2'); x.beginPath(); x.arc(RX + 16, y - 12, 16 * pop, 0, TAU); x.fill();
-    SK.t(x, String(k + 1), RX + 16, y - 5, 19, '#ffffff', 700, 'center');
-    SK.t(x, Sx.name, RX + 48, y, 38, on ? 'ink' : 'ink3', 700, 'left'); x.restore();
-    if (a > 0.01) { x.save(); x.globalAlpha *= a; SK.wrap(x, Sx.text, 720, 27, 500).slice(0, 2).forEach((l, i) => SK.t(x, l, RX + 48, y + 44 + i * 35 + 10 * (1 - a), 27, now || p >= 0.9 ? 'ink' : 'ink2', 500, 'left')); x.restore(); } });
+    x.fillStyle = SK.col(on ? (now ? 'ink' : 'ink2') : 'line2'); x.beginPath(); x.arc(X0 + 14, SY - 10, 14 * pop, 0, TAU); x.fill();
+    SK.t(x, String(k + 1), X0 + 14, SY - 3.5, 17, '#ffffff', 700, 'center');
+    SK.t(x, Sx.name, X0 + 38, SY, 28, on ? 'ink' : 'ink3', 700, 'left'); x.restore();
+    if (a > 0.01) { x.save(); x.globalAlpha *= a; SK.wrap(x, Sx.text, 232, 20, 500).slice(0, 5).forEach((l, i) => SK.t(x, l, X0, SY + 36 + i * 26 + 8 * (1 - a), 20, now || p >= 0.9 ? 'ink' : 'ink2', 500, 'left')); x.restore(); } });
 });
 X.scene('body', {slide: 'body', state: p => ({p: X._thumb ? 1 : p})});
 })();
@@ -9354,21 +9481,26 @@ X.scene('body', {slide: 'body', state: p => ({p: X._thumb ? 1 : p})});
 /* ============ feel · liver + clearance · "how it leaves" and "same cup, five livers" (one layer, v_liver_L) ============
    One camera across two beats, in schematic units (the cell plate is 50 across; molecules and enzymes are drawn far larger than life).
    liver:
-   1. Close up on one CYP1A2 enzyme in a liver cell (a protein of merged lobes, muted warm grey-brown, a pocket with its heme: a dark-red
-      disc and an iron dot). A caffeine molecule (the page's purine, orange) drifts into the pocket, the enzyme closes on it, the N3
-      methyl snaps off and flies away, and the molecule leaves as paraxanthine (grey, 84%). Two quicker ones: N1 off, theobromine (12%);
-      N7 off, theophylline (4%) (s-metab). CYP1A2 does over 90% of it (s-cyp).
-   2. A kidney (a dark-red bean) comes in: the leftovers pass through it on to urine; a caffeine molecule bounces back: 98% of
-      caffeine is sent back (s-kidney), so only the liver clears it. A locator (K.bodyMap, when the page has it) shows liver, then kidneys.
-   3. Pull back to the whole cell: four enzymes; the 2 pm cup arrives from the blood vessel at the back as 117 dots (1 dot = 1 mg) and
-      the clock runs to 11 pm. A dot leaves when the model's amount drops below its rank: it moves to an enzyme, a methyl pops, it turns
-      grey and goes back to the blood. Fewer left, fewer caught: each halving ticks at the counter. 26 mg at 11 pm.
+   1. Close up on one liver enzyme (CYP1A2) in a liver cell: a protein of merged lobes of different sizes, muted warm grey-brown, a
+      pocket with its iron centre at the back (kept unremarkable). A body locator (K.bodyMap) shows where the liver is. A caffeine
+      molecule (the page's purine, orange) drifts into the pocket, the enzyme closes on it, one methyl snaps off and pops away, and the
+      molecule leaves changed: "caffeine with one methyl snipped off", "a cousin molecule the kidneys can flush" (s-metab: the three
+      products are paraxanthine 84%, theobromine 12%, theophylline 4%; their names stay off the screen). Two quicker ones.
+   2. The locator rings the kidneys; the last leftover molecule heads off toward them ("to the kidneys, then urine"), and at the
+      kidneys: about 98% of caffeine is sent back into the blood (s-kidney), so only the liver clears it.
+   3. Pull back to the whole cell ("one liver cell", "blood vessel"): four enzymes; the 2 pm cup arrives from the blood vessel at the
+      back as 117 dots (1 dot = 1 mg) and the clock runs to 11 pm. A dot leaves when the model's amount drops below its rank: it moves
+      to an enzyme, a methyl pops, it turns grey and goes back to the blood. Each halving ticks at the counter; 26 mg at 11 pm.
    clearance:
    4. The camera keeps pulling back: the cell is one of five, five bodies, the same cup, with working enzyme drawn in proportion to
       clearing speed (1/t½): 2 h (8 enzymes), 4 h (4), 8 h (2), 18 h late pregnancy (4, three turned down: −65%, s-preg-act),
-      31 h on fluvoxamine (4, blockers in their pockets; 107 → 21 mL/min). Notes: smoking +56% (s-smoke), the pill 5.4 → 7.9 h
-      (s-pill), mostly genes, 89% in twins (s-twins).
-   5. The race: one clock 2 pm → 11 pm, the five numbers land big (6 · 26 · 55 · 83 · 96 mg), then on to 7 am.
+      31 h on one antidepressant, fluvoxamine (4, each plugged by a grey blocker; s-fluvox). Notes: smokers 56% faster (s-smoke), the pill
+      7.9 h vs 5.4 h (s-pill), in twins 89% of the difference inherited (s-twins). Name marks one at a time.
+   5. The race: one clock 2 pm → 11 pm, the five numbers land big (6 · 26 · 55 · 83 · 96 mg).
+   6. "Is that a lot?": the cells move left and the five numbers drop as dots onto a scale of mg in you (0–120): the 10–100 mg band
+      where caffeine blocks some adenosine receptors (s-band-mg), 75 mg in one go perks you up (s-efsa75), 100 mg near bedtime can
+      disturb sleep in some people (s-sleep100), 300–400 mg clearly disturbs sleep (s-sleep300, off the top), one café decaf 6.6 mg
+      (cup-dec); doses taken at once, people differ. One change at a time.
    The model (facts file): one compartment, ka 4.5 /h, V = 0.7 L/kg × 70 kg = 49 L, k = ln 2 / t½; numbers are computed live.
    Everything is a function of the current beat's progress on X.clock(beat), so it holds, rewinds and seeks. */
 (() => {
@@ -9380,7 +9512,7 @@ const FUI = () => C('font-ui') || 'Inter, system-ui, sans-serif';
 const LAYERS = K.LAYERS = K.LAYERS || [];
 X.base({v_liver_L: 0, lvB: 0}); X.tau({v_liver_L: 0.5});
 K.OFF.v_liver_L = 0;
-const SHOT = [0.18, 0.66];
+const SHOT = [0.18, 0.97];
 /* which of the two beats is on stage, and its progress */
 const now = P => { const b = X._cur && X._cur.beat, id = b && (b.id === 'liver' || b.id === 'clearance') ? b.id : (P.lvB > 0.5 ? 'clearance' : 'liver');
   const k = id === 'clearance' ? 1 : 0; if (X._thumb) return {k, p: SHOT[k]};
@@ -9404,8 +9536,8 @@ const LANES = [
   {th: 4, n: 4, name: 'average', sub: '4 h'},
   {th: 8, n: 2, name: 'slow liver', sub: '8 h'},
   {th: 18, n: 4, down: 3, name: 'late pregnancy', sub: 'up to 18 h'},
-  {th: 31, n: 4, blocked: true, name: 'on some antidepressants', sub: '31 h'}];
-const ENZ_COL = {main: '#a39282', L: '#ab9b8b', R: '#9f8e7e', T: '#b2a393', B: '#988777', bk: '#a69686'}, HEME = '#8f1d21', IRON = '#343a40', BLOCK = '#6c757d';
+  {th: 31, n: 4, blocked: true, name: 'on one antidepressant', sub: '(fluvoxamine) · 31 h'}];
+const ENZ_COL = {main: '#a39282', L: '#ab9b8b', R: '#9f8e7e', T: '#b2a393', B: '#988777', bk: '#a69686'}, HEME = '#8f1d21', IRON = '#343a40', BLOCK = '#5c636a';
 const PLATE = '#f3ebe4', PLATE_S = '#e3d6cb', NUC = '#e6d6ca', BLOOD = '#e9b9b5';
 const POCK = [0, -3.1, -3.35];
 LANES.forEach((L, i) => {
@@ -9428,19 +9560,18 @@ const HERO = LANES[1].enz[0];   // the front enzyme of the average cell
 
 /* ---------------- drawing pieces ---------------- */
 const hexPts = (cx, y, cz, r) => { const o = []; for (let k = 0; k < 6; k++) { const a = PI / 6 + k * PI / 3; o.push([cx + r * Math.cos(a), y, cz + r * Math.sin(a)]); } return o; };
-function cell(g, pr, L, al, ra) {
-  pr.prism(g, hexPts(L.x, 0.06, 0, RC), [0, 2.4, 0], PLATE, al, {side: PLATE_S, edge: false});
-  if (ra > 0.01) { pr.disc(g, [L.x + 1, -0.02, 3], [0, -1, 0], 6.6, NUC, ra, null);
-    pr.capsule(g, [L.x - RC * 0.86, -1.6, RC * 0.98], [L.x + RC * 0.86, -1.6, RC * 0.98], 1.9, BLOOD, ra); }   // the nucleus; the blood vessel along the back
+function cell(g, pr, L, al, ra, pa = al) {
+  if (pa > 0.01) pr.prism(g, hexPts(L.x, 0.06, 0, RC), [0, 2.4, 0], PLATE, pa, {side: PLATE_S, edge: false});
+  if (ra > 0.01) pr.capsule(g, [L.x - RC * 0.86, -1.6, RC * 0.98], [L.x + RC * 0.86, -1.6, RC * 0.98], 1.9, BLOOD, ra);   // the blood vessel along the back
 }
 /* one CYP1A2: lobes around a pocket that opens to the front (−z), the heme at its back; sq closes it; o: down, blocked, lift (blocker) */
 function enzyme(g, pr, q, e, sq, al, o = {}) {
   const b = e.b, P = v => [b[0] + v[0], b[1] + v[1], b[2] + v[2]], dn = o.down ? 0.55 : 0, col = c => (dn ? mix(c, '#e9ecef', dn) : c);
-  const parts = [[[0, -3.0, 0.9], 2.6, 'main'], [[-3.25 + 0.75 * sq, -3.0, -1.3 - 0.6 * sq], 1.75, 'L'], [[3.25 - 0.75 * sq, -3.0, -1.3 - 0.6 * sq], 1.75, 'R'], [[0, -5.5 + 0.5 * sq, -0.2 - 0.4 * sq], 1.7, 'T'],
-    [[0, -1.1, -0.6], 1.45, 'B'], [[-1.8, -3.5, 2.4], 2.1, 'bk'], [[1.9, -2.6, 2.3], 2.1, 'bk']];
-  for (const [v, r, k] of parts) { const c = P(v); q.add(pr(...c)[2], () => pr.sphere(g, c, r, col(ENZ_COL[k]), al)); }
-  const hc = P([0, -3.05, -1.72]); q.add(pr(...hc)[2] - 0.2, () => { pr.disc(g, hc, [0, 0, -1], 0.95, dn ? '#8d8f93' : HEME, al, null); pr.sphere(g, P([0, -3.05, -1.8]), 0.28, IRON, al); });
-  if (o.blocked) { const lift = o.lift || 0; for (const dx of [-0.5, 0.5]) { const c = P([dx, -3.05 - 1.6 * lift, -2.5 - 0.8 * lift]); q.add(pr(...c)[2], () => pr.sphere(g, c, 0.58, BLOCK, al)); } }
+  const parts = [[[0.1, -3.0, 0.95], 2.7, '#a08f7f'], [[-3.3 + 0.75 * sq, -2.85, -1.3 - 0.6 * sq], 1.95, '#ae9d8b'], [[3.15 - 0.75 * sq, -3.15, -1.25 - 0.6 * sq], 1.55, '#968779'],
+    [[-0.35, -5.55 + 0.5 * sq, -0.15 - 0.4 * sq], 1.6, '#b0a190'], [[0.3, -1.05, -0.65], 1.3, '#928374'], [[-1.9, -3.7, 2.45], 2.3, '#a69585'], [[2.0, -2.4, 2.2], 1.85, '#9b8b7c'], [[0.4, -4.9, 2.3], 1.4, '#ab9b8a']];
+  for (const [v, r, c0] of parts) { const c = P(v); q.add(pr(...c)[2], () => pr.sphere(g, c, r, col(c0), al)); }
+  const hc = P([0, -3.05, -1.62]); q.add(pr(...hc)[2] - 0.2, () => { pr.disc(g, hc, [0, 0, -1], 0.7, dn ? '#9a9a9a' : '#7d4a42', al, null); pr.sphere(g, P([0, -3.05, -1.68]), 0.2, dn ? '#8a8a8a' : '#5b4038', al); });
+  if (o.blocked) { const lift = o.lift || 0, c = P([0, -3.05 - 1.4 * lift, -2.75 - 0.6 * lift]); q.add(pr(...c)[2], () => { pr.sphere(g, c, 1.05, BLOCK, al); pr.sphere(g, [c[0] + 0.7, c[1] - 0.5, c[2] - 0.3], 0.6, '#7b838b', al); }); }
 }
 /* a molecule, ball and stick, in a plane facing the camera: the purine core with its oxygens and the methyls still on it */
 const RG = K.RING, CC = [0.922, 0], RIM = ['N1', 'C2', 'N3', 'C4', 'C5', 'C6', 'N7', 'C8', 'N9', 'O2', 'O6'];
@@ -9502,9 +9633,10 @@ const box8 = (x0, x1, y0, y1, z0, z1) => [[x0, y0, z0], [x1, y0, z0], [x0, y1, z
 const E0 = HERO.b;
 const FR = {
   close: {pts: box8(E0[0] - 9, E0[0] + 9, 0.4, -8.5, E0[2] - 4, E0[2] + 3), yaw: 0.14, pitch: 0.22, box: [0.22, 0.06, 0.96, 0.92]},
-  kid: {pts: box8(E0[0] - 9, E0[0] + 15, 0.4, -10, E0[2] - 6, E0[2] + 3), yaw: 0.1, pitch: 0.24, box: [0.2, 0.1, 0.97, 0.9]},
+  kid: {pts: box8(E0[0] - 12, E0[0] + 9, 0.4, -10, E0[2] - 6, E0[2] + 3), yaw: 0.1, pitch: 0.24, box: [0.24, 0.1, 0.97, 0.9]},
   cell: {pts: box8(-RC, RC, 0.4, -7, -RC, RC + 2), yaw: 0.05, pitch: 0.5, box: [0.06, 0.1, 0.94, 0.86]},
   five: {pts: box8(-SP - RC, 3 * SP + RC, 0.4, -7, -RC, RC + 2), yaw: 0.0, pitch: 0.98, box: [0.015, 0.2, 0.985, 0.8]},
+  five2: {pts: box8(-SP - RC, 3 * SP + RC, 0.4, -7, -RC, RC + 2), yaw: 0.0, pitch: 0.98, box: [0.01, 0.26, 0.62, 0.74]},
   push: {pts: box8(E0[0] - 5.2, E0[0] + 5.2, -0.8, -7.2, E0[2] - 4, E0[2] + 1), yaw: 0.12, pitch: 0.2, box: [0.26, 0.06, 0.94, 0.94]}};
 const FL = 900;
 const solve = (S, P, F) => { const ctr = F.pts.reduce((a, q) => V3.add(a, V3.mul(q, 1 / F.pts.length)), [0, 0, 0]);
@@ -9520,21 +9652,11 @@ const blendF = (a, b, u) => ({k: Math.exp(Math.log(a.k) + (Math.log(b.k) - Math.
 const MOLS = [
   {in: [0.03, 0.12], sq: [0.12, 0.15], snap: 0.15, out: [0.18, 0.27], site: 'N3', col: () => '#868e96', pct: '84%', name: 'paraxanthine', from: [-11, -4.5, -4]},
   {in: [0.215, 0.265], sq: [0.265, 0.285], snap: 0.285, out: [0.3, 0.37], site: 'N1', col: () => K.TB, pct: '12%', name: 'theobromine', from: [-11, -2, -3]},
-  {in: [0.33, 0.368], sq: [0.368, 0.384], snap: 0.384, out: [0.4, 0.5], kid: true, site: 'N7', col: () => '#5f7d95', pct: '4%', name: 'theophylline', from: [-11, -6, -3]}];
-const KID = {x: E0[0] + 10.5, bounce: [0.5, 0.56], cafIn: [0.445, 0.5]};
-const KC = [E0[0] + 11.2, E0[1] - 4.6, E0[2] - 2.8], KRA = 2.0;          // the kidney: a bean in the plane facing the camera, its notch to the left
-const kidPts = pr => { const cm = pr.cam, e1 = [cm.cyw, 0, -cm.syw], o = []; for (let k = 0; k <= 8; k++) { const th = (-78 + 156 * k / 8) * PI / 180;
-  o.push([KC[0] + (-1.1 + KRA * Math.cos(th)) * e1[0], KC[1] - KRA * Math.sin(th), KC[2] + (-1.1 + KRA * Math.cos(th)) * e1[2]]); } return {o, e1}; };
-function kidney(g, pr, q, al) {
-  const {o} = kidPts(pr), col = '#8a2a2b';
-  for (let k = 0; k < o.length - 1; k++) { const a = o[k], b = o[k + 1], r = 1.55 - 0.18 * Math.abs(k + 0.5 - 4) / 4; q.add((pr(...a)[2] + pr(...b)[2]) / 2, () => pr.capsule(g, a, b, r, col, al)); }
-  const H = KHIL(pr), U = [H[0] - 0.9, -0.35, H[2]];
-  q.add(pr(...H)[2] + 0.4, () => pr.capsule(g, H, U, 0.32, '#d8bf62', al));   // to the bladder: the tube urine leaves by
-}
-const KHIL = pr => { const {e1} = kidPts(pr); return [KC[0] - 0.9 * e1[0], KC[1] + 1.3, KC[2] - 0.9 * e1[2]]; };
+  {in: [0.33, 0.368], sq: [0.368, 0.384], snap: 0.384, out: [0.405, 0.5], kid: true, site: 'N7', col: () => '#5f7d95', pct: '4%', name: 'theophylline', from: [-11, -6, -3]}];
 const LCLK = [0.6, 0.95];                       // liver: 2 pm → 11 pm
 const hLiver = p => 9 * lin(p, LCLK[0], LCLK[1]);
-const CKN = [[0, 0], [0.2, 0], [0.6, 9], [0.72, 9], [0.92, 17], [1, 17]];   // clearance: the race, the hold, on to 7 am
+const CKN = [[0, 0], [0.15, 0], [0.45, 9], [1, 9]];   // clearance: the race to 11 pm, then the hold and the gauge
+const G = {land: 0.46, drop: 0.6, axis: [0.585, 0.61], band: [0.71, 0.74], l75: [0.75, 0.78], l100: [0.79, 0.82], top: [0.83, 0.86], dec: [0.87, 0.9], foot: [0.91, 0.94], re: [0.565, 0.62]};
 const hClear = p => { for (let i = 1; i < CKN.length; i++) if (p <= CKN[i][0]) { const [a, ta] = CKN[i - 1], [b, tb] = CKN[i]; return ta + (tb - ta) * (b > a ? (p - a) / (b - a) : 1); } return 17; };
 
 function draw(g, S, P) {
@@ -9544,12 +9666,12 @@ function draw(g, S, P) {
   if (beat === 0) { const a = solve(S, P, FR.close), pu = solve(S, P, FR.push), b = solve(S, P, FR.kid), c = solve(S, P, FR.cell);
     const a1 = blendF(a, pu, MOVE(lin(p, 0.085, 0.14)) * (1 - MOVE(lin(p, 0.185, 0.24))));
     F = blendF(blendF(a1, b, MOVE(lin(p, 0.4, 0.47))), c, BIG(lin(p, 0.54, 0.66))); }
-  else F = blendF(solve(S, P, FR.cell), solve(S, P, FR.five), BIG(lin(p, 0.0, 0.17)));
+  else F = blendF(blendF(solve(S, P, FR.cell), solve(S, P, FR.five), BIG(lin(p, 0.0, 0.14))), solve(S, P, FR.five2), MOVE(lin(p, G.re[0], G.re[1])));
   const pr = K.cam(S, P, {yaw: F.yaw, pitch: F.pitch, zoom: F.k, focus: F.ctr, f: FL, ox: F.ox, oy: F.oy, ground: 0});
   const q = X.q3(), others = beat === 1 ? al * lin(p, 0.0, 0.045) : 0;
-  // the cells
-  const rest = beat === 0 ? al * lin(p, 0.56, 0.63) : al;   // the cell's other enzymes and its blood vessel, revealed by the pull-back
-  LANES.forEach((L, i) => { const a = i === 1 ? al : others; if (a > 0.01) cell(g, pr, L, a, i === 1 ? rest : a); });
+  // the cells (no floor in the close-up: the cell's floor, its other enzymes and its blood vessel come in with the pull-back)
+  const rest = beat === 0 ? al * lin(p, 0.56, 0.63) : al, plate = beat === 0 ? al * lin(p, 0.55, 0.62) : al;
+  LANES.forEach((L, i) => { const a = i === 1 ? al : others; if (a > 0.01) cell(g, pr, L, a, i === 1 ? rest : a, i === 1 ? plate : a); });
   // dots and the enzymes' work
   const h = beat === 0 ? hLiver(p) : hClear(p), busy = [];
   DR = beat === 0 ? 0.62 : 0.62 + 0.3 * lin(p, 0.02, 0.15);
@@ -9563,33 +9685,23 @@ function draw(g, S, P) {
   LANES.forEach((L, i) => { const a = i === 1 ? al : others; if (a <= 0.01) return;
     L.enz.forEach(e => { if (e !== HERO && i === 1 && rest <= 0.01) return; const ea = e === HERO || i !== 1 ? a : rest; const lift = e.blocked ? Math.max(0, ...busy.filter(b => b[0] === e).map(b => Math.sin(PI * clamp(b[1])))) : 0;
       enzyme(g, pr, q, e, e === HERO && beat === 0 ? Math.max(heroSq, sqOf.get(e) || 0) : (sqOf.get(e) || 0), ea, {down: e.down, blocked: e.blocked, lift}); }); });
-  // the close-up molecules (liver only)
+  // the close-up molecules (liver only); the last leftover heads off toward the kidneys (the locator, top left)
   const molA = beat === 0 ? al * (1 - lin(p, 0.55, 0.6)) : 0, MS = 0.6, pk = V3.add(E0, POCK);
   const labs = [];
   if (molA > 0.01) {
     MOLS.forEach((M, i) => { if (p < M.in[0]) return;
       const from = V3.add(E0, M.from), uIn = MOVE(lin(p, M.in[0], M.in[1])), uOut = EXIT(lin(p, M.out[0], M.out[1])), snapped = p >= M.snap;
-      const exitTo = [KID.x + 8, E0[1] - 3.4 - i * 1.6, E0[2] - 3.4 + i * 1.2], mid = [KID.x - 0.5, E0[1] - 3.6 - i * 1.6, E0[2] - 3.4 + i * 1.2];
+      const exitTo = [E0[0] + 18, E0[1] - 3.4 - i * 1.6, E0[2] - 3.4 + i * 1.2], mid = [E0[0] + 10, E0[1] - 3.6 - i * 1.6, E0[2] - 3.4 + i * 1.2];
       let c = V3.lerp(from, pk, uIn), sc = 1;
       if (p >= M.out[0] && !M.kid) { const u = uOut; c = u < 0.6 ? V3.lerp(pk, mid, u / 0.6) : V3.lerp(mid, exitTo, (u - 0.6) / 0.4); }
-      if (p >= M.out[0] && M.kid) { const u = lin(p, M.out[0], M.out[1]), kb = [KC[0] + 0.5, KC[1] - 0.2, KC[2]], H = KHIL(pr), U = [H[0] - 0.9, -0.5, H[2]];
-        if (u < 0.45) c = V3.lerp(pk, kb, MOVE(u / 0.45)); else if (u < 0.6) { c = V3.lerp(kb, H, (u - 0.45) / 0.15); sc = 0.35; } else { c = V3.lerp(H, U, (u - 0.6) / 0.4); sc = 0.35; }
-        if (u >= 0.4 && u < 0.45) sc = 1 - 0.65 * (u - 0.4) / 0.05; }
+      if (p >= M.out[0] && M.kid) { const u = lin(p, M.out[0], M.out[1]); c = V3.lerp(pk, [E0[0] - 15, E0[1] - 9.5, E0[2] - 3], EXIT(u)); sc = 1 - 0.55 * u; }
       const jig = p >= M.sq[0] && p < M.snap ? 0.06 * Math.sin((p - M.sq[0]) * 900) : 0; c = [c[0] + jig, c[1], c[2]];
       const col = snapped ? mix(C('c1'), M.col(), lin(p, M.snap, M.snap + 0.02)) : C('c1');
       const meth = {N1: 1, N3: 1, N7: 1}; if (snapped) meth[M.site] = 0;
-      const a = molA * (1 - lin(p, M.out[1] - 0.02, M.out[1]));
+      const a = molA * (1 - lin(p, M.out[1] - 0.03, M.out[1]));
       if (a > 0.01) molecule(g, pr, q, c, MS * sc, col, meth, snapped ? {site: M.site, u: lin(p, M.snap, M.snap + 0.06)} : null, a);
       labs.push({M, c, i, a});
     });
-    // the kidney: the leftovers pass through it on to urine; caffeine is sent back
-    const kA = molA * lin(p, 0.37, 0.42);
-    if (kA > 0.01) { kidney(g, pr, q, kA);
-      const u = lin(p, KID.cafIn[0], KID.bounce[1]);
-      if (u > 0 && u < 1) { const a1 = [E0[0] - 8, E0[1] - 7.8, E0[2] - 5.2], hit = [KC[0] - 3.2, KC[1] - 1.6, KC[2] - 2.2], back = [E0[0] + 1, E0[1] - 8.4, E0[2] - 5.6];
-        const ui = lin(p, KID.cafIn[0], KID.cafIn[1]), ub = lin(p, KID.bounce[0], KID.bounce[1]), c = p < KID.bounce[0] ? V3.lerp(a1, hit, EZ.enter ? ui * ui : ui) : V3.lerp(hit, back, ENTER(ub));
-        molecule(g, pr, q, c, MS, C('c1'), {N1: 1, N3: 1, N7: 1}, null, kA * (1 - lin(p, 0.53, 0.55)));
-        labs.push({kid: c}); } }
   }
   q.flush();
   if (beat === 0 && p > LCLK[0]) for (const [e, u] of busy) if (u < 1 && u > 0.4 && !e.blocked) { const c = pr(...V3.add(e.b, POCK)); X.glow(g, c[0], c[1], 1.6 * (c[4] || 6), C('c1'), al * 0.35 * (u - 0.4)); }
@@ -9598,38 +9710,44 @@ function draw(g, S, P) {
   labels(g, S, pr, beat, p, h, al, labs, pk);
 }
 
+/* a dashed hairline with a small arrowhead at its end (screen px) */
+function leader(g, a, b, col, al) {
+  if (al <= 0.01) return; const d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1, ux = (b[0] - a[0]) / d, uy = (b[1] - a[1]) / d;
+  g.save(); g.globalAlpha *= al; g.strokeStyle = col; g.lineWidth = 1.3; g.setLineDash([5, 4]); g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0] - ux * 6, b[1] - uy * 6); g.stroke();
+  g.setLineDash([]); g.fillStyle = col; g.beginPath(); g.moveTo(b[0], b[1]); g.lineTo(b[0] - ux * 9 - uy * 4, b[1] - uy * 9 + ux * 4); g.lineTo(b[0] - ux * 9 + uy * 4, b[1] - uy * 9 - ux * 4); g.closePath(); g.fill(); g.restore();
+}
+
 function labels(g, S, pr, beat, p, h, al, labs, pk) {
   const V = S.view;
   if (beat === 0) {
-    // the enzyme's name, at it
+    // where we are in the body: the liver, then the kidneys (the body beat's drawing)
+    const locA = al * lin(p, 0.0, 0.04) * (1 - lin(p, 0.56, 0.6));
+    let an = null, rect = null;
+    if (K.bodyMap && locA > 0.01) rect = X.inset(g, {at: [0.02, 0.13], w: 230, h: 320, frame: false, alpha: locA}, (x, w, hh) => { an = K.bodyMap(x, {cx: w / 2, cy: hh / 2, h: hh - 12, hi: p < 0.42 ? 'liver' : 'kidneys'}); });
+    const kidS = an && rect && an.kidneys ? [rect.x + an.kidneys[0][0], rect.y + an.kidneys[0][1]] : [V.x + V.w * 0.1, V.y + V.h * 0.38];
+    // one label at a time: the enzyme, what happened at each snap, the kidneys
     const en = pr(E0[0] - 2.4, E0[1] - 6.2, E0[2]);
-    // where we are in the body (the body beat's drawing, when the page has it): the liver, then the kidneys
-    const locA = al * lin(p, 0.0, 0.04) * (1 - lin(p, 0.55, 0.6));
-    if (K.bodyMap && locA > 0.01) X.inset(g, {at: [0.02, 0.13], w: 230, h: 320, frame: false, alpha: locA}, (x, w, hh) => K.bodyMap(x, {cx: w / 2, cy: hh / 2, h: hh - 12, hi: p < 0.4 ? 'liver' : 'kidneys'}));
-    X.callout('lvCyp', en[0], en[1], {v: 'a liver enzyme', k: '(CYP1A2) · does over 90% of it', color: C('ink'), at: 0.02, until: 0.405, r: 6, cands: [[-30, -24, 1, 1], [30, -24, 0, 1], [-40, 0, 1, 0.5]]});
-    // what happened at each snap, in plain words; the three products' names and shares small, the latest in bold
-    const nSnap = MOLS.filter(M => p >= M.snap).length;
-    if (nSnap) { const line = MOLS.map((M, i) => (i === nSnap - 1 ? `**${M.name} ${M.pct}**` : `${M.name} ${M.pct}`)).join(' · '), sq = pr(...pk), rr = 3.0 * (sq[4] || 20);
-      X.callout('lvSnap', sq[0], sq[1], {v: 'caffeine with one methyl taken off', k: line, color: C('ink'), at: MOLS[0].snap + 0.012, until: 0.425, r: rr, cands: [[rr * 0.55, -rr - 12, 0, 1], [rr + 12, -rr * 0.4, 0, 1], [rr * 0.55, rr + 12, 0, 0]]}); }
-    // the kidney
-    const kq = pr(KC[0] + 2.6, KC[1] - 0.4, KC[2]), H = KHIL(pr), uq = pr(H[0] - 0.9, -0.35, H[2]);
-    const kla = al * lin(p, 0.445, 0.47) * (1 - lin(p, 0.55, 0.59));
-    if (kla > 0.01) { X.label('lvKid', kq[0] + 10, kq[1], 'kidney', {cls: 'big', color: C('ink'), ax: 0, ay: 0.5, alpha: kla, cands: [[10, 0, 0, 0.5], [0, -60, 0.5, 1]]});
-      X.label('lvUrine', uq[0] + 8, uq[1], 'to urine', {cls: 'plain', color: C('ink2'), ax: 0, ay: 0.5, alpha: kla, cands: [[8, 0, 0, 0.5], [-8, 0, 1, 0.5]]}); }
-    const hit = pr(KC[0] - 3.2, KC[1] - 1.6, KC[2] - 2.2);
-    X.callout('lvKid98', hit[0], hit[1], {v: '98%', k: 'of caffeine is sent back', color: X.shadeCol(C('c1'), 0.35), at: KID.bounce[0], until: 0.565, r: 30, cands: [[-30, -36, 1, 1], [0, -44, 0.5, 1], [-30, 30, 1, 0]]});
-    // the cell: clock, counter, halvings
+    X.callout('lvCyp', en[0], en[1], {v: 'a liver enzyme', k: '(CYP1A2) · does over 90% of it', color: C('ink'), at: 0.02, until: 0.14, r: 6, cands: [[-30, -24, 1, 1], [30, -24, 0, 1], [-40, 0, 1, 0.5]]});
+    const sq = pr(...pk), rr = 3.0 * (sq[4] || 20);
+    X.callout('lvSnap', sq[0], sq[1], {v: 'caffeine with one methyl snipped off', k: 'a cousin molecule the kidneys can flush', color: C('ink'), at: MOLS[0].snap + 0.012, until: 0.42, r: rr, cands: [[0, -rr - 14, 0.5, 1], [-rr * 0.3, -rr - 12, 1, 1], [rr * 0.55, -rr - 12, 0, 1]]});
+    const kidM = labs.find(o => o.M && o.M.kid), la = al * lin(p, 0.43, 0.45) * (1 - lin(p, 0.49, 0.505));
+    if (kidM && la > 0.01) { const m = pr(...kidM.c); leader(g, m, kidS, C('ink2'), la);
+      const mx = (m[0] + kidS[0]) / 2, my = (m[1] + kidS[1]) / 2;
+      X.label('lvToKid', mx, my - 10, 'to the kidneys, then urine', {cls: 'big', color: C('ink'), ax: 0.5, ay: 1, alpha: la, cands: [[0, -10, 0.5, 1], [0, 12, 0.5, 0]]}); }
+    X.callout('lvKid98', kidS[0], kidS[1], {v: 'about 98%', k: 'of caffeine is sent back into the blood', color: X.inkOf(C('c1'), 4.5), at: 0.51, until: 0.565, r: 16, cands: [[rect ? rect.x + rect.w - kidS[0] + 16 : 150, -18, 0, 1], [rect ? rect.x + rect.w - kidS[0] + 16 : 150, 22, 0, 0]]});
+    // the cell: its name and its blood vessel, one after the other; then the clock, the counter, the halvings
     if (p >= 0.57) {
       const L = LANES[1], v = amt(h, 4), cq = pr(L.x, 0.5, -RC - 1);
-      if (p < LCLK[1] - 0.012) X.label('lvMg', cq[0], cq[1] + 10, mgTxt(v), {cls: 'num', color: X.shadeCol(C('c1'), 0.35), ax: 0.5, ay: 0, alpha: al * lin(p, LCLK[0], LCLK[0] + 0.02)});
+      const va = al * lin(p, 0.6, 0.62) * (1 - lin(p, 0.655, 0.67)), ca2 = al * lin(p, 0.675, 0.695) * (1 - lin(p, 0.735, 0.75));
+      const bv = pr(L.x - RC * 0.35, -3.6, RC * 0.98), lc = pr(L.x - RC * 0.78, 0.5, -RC * 0.42);
+      if (va > 0.01) X.label('lvVessel', bv[0], bv[1] - 4, 'blood vessel', {cls: 'big', color: C('ink'), ax: 0.5, ay: 1, alpha: va});
+      if (ca2 > 0.01) X.label('lvCell', lc[0] - 6, lc[1], 'one liver cell', {cls: 'big', color: C('ink'), ax: 1, ay: 0.5, alpha: ca2, cands: [[-6, 0, 1, 0.5], [-6, 20, 1, 0]]});
+      if (p < 0.948) X.label('lvMg', cq[0], cq[1] + 10, mgTxt(v), {cls: 'num', color: X.shadeCol(C('c1'), 0.35), ax: 0.5, ay: 0, alpha: al * lin(p, LCLK[0], LCLK[0] + 0.02)});
       X.labelAvoid([cq[0] - 50, cq[1] + 8, cq[0] + 50, cq[1] + 36]);
       const pH = LCLK[0] + (LCLK[1] - LCLK[0]) * T_HALF / 9, pQ = LCLK[0] + (LCLK[1] - LCLK[0]) * T_QUART / 9;
-      X.callout('lvHalf', cq[0] + 46, cq[1] + 22, {v: '½', k: 'by ' + clock5(T_HALF), color: C('ink'), at: pH, until: pQ - 0.004, r: 4, cands: [[30, -6, 0, 0.5], [30, 10, 0, 0.5]]});
-      X.callout('lvQuart', cq[0] + 46, cq[1] + 22, {v: '¼', k: 'by ' + clock5(T_QUART), color: C('ink'), at: pQ, until: LCLK[1] - 0.016, r: 4, cands: [[30, -6, 0, 0.5], [30, 10, 0, 0.5]]});
-      X.callout('lvBed', cq[0], cq[1] + 6, {v: Math.round(amt(9, 4)), u: 'mg', k: 'left at 11 pm', color: X.shadeCol(C('c1'), 0.35), at: 0.972, r: 2, size: 'big', cands: [[0, 4, 0.5, 0]]});
-      const na = al * lin(p, 0.6, 0.63) * (1 - lin(p, 0.74, 0.77)), bv = pr(L.x - RC * 0.35, -3.6, RC * 0.98), lc = pr(L.x - RC * 0.78, 0.5, -RC * 0.42);
-      if (na > 0.01) { X.label('lvVessel', bv[0], bv[1] - 4, 'blood vessel', {cls: 'big', color: C('ink'), ax: 0.5, ay: 1, alpha: na});
-        X.label('lvCell', lc[0] - 6, lc[1], 'one liver cell', {cls: 'big', color: C('ink'), ax: 1, ay: 0.5, alpha: na, cands: [[-6, 0, 1, 0.5], [-6, 20, 1, 0]]}); }
+      X.callout('lvHalf', cq[0] + 46, cq[1] + 22, {v: '½', k: 'by ' + clock5(T_HALF), color: C('ink'), at: pH, until: pQ - 0.05, r: 4, cands: [[30, -6, 0, 0.5], [30, 10, 0, 0.5]]});
+      X.callout('lvQuart', cq[0] + 46, cq[1] + 22, {v: '¼', k: 'by ' + clock5(T_QUART), color: C('ink'), at: pQ, until: 0.94, r: 4, cands: [[30, -6, 0, 0.5], [30, 10, 0, 0.5]]});
+      X.callout('lvBed', cq[0], cq[1] + 6, {v: Math.round(amt(9, 4)), u: 'mg', k: 'left at 11 pm', color: X.inkOf(C('c1'), 4.5), at: 0.952, r: 2, size: 'big', cands: [[0, 4, 0.5, 0]]});
       const ca = al * lin(p, 0.57, 0.6);
       clockFace(g, V.x + 56, V.y + 54, 27, h, ca, lin(h, 8.92, 9));
       X.labelAvoid([V.x + 25, V.y + 23, V.x + 87, V.y + 85]);
@@ -9637,30 +9755,79 @@ function labels(g, S, pr, beat, p, h, al, labs, pk) {
     }
     return;
   }
-  // clearance: the five lanes, their names, counters, notes, the clock
-  const cA = al * lin(p, 0.08, 0.16), hold = p >= 0.6 && p < 0.728;
+  // clearance: the five lanes, their names, counters, notes, marks, the clock; then the gauge
+  const cA = al * lin(p, 0.06, 0.12) * (1 - lin(p, 0.575, 0.6)), laneS = [];
   LANES.forEach((L, i) => {
     const s = pr(L.x, 0.5, -RC - 0.5);
-    X.label('clLane' + i, s[0], s[1] + 8, `<b>${L.name}</b> · ${L.sub}`, {cls: 'big', color: C('ink'), ax: 0.5, ay: 0, alpha: cA});
-    const v = amt(h, L.th);
-    if (!hold) X.label('clMg' + i, s[0], s[1] + 32, mgTxt(v), {cls: 'num', color: X.shadeCol(C('c1'), 0.35), ax: 0.5, ay: 0, alpha: al * lin(p, 0.19, 0.22)});
-    X.callout('clBed' + i, s[0], s[1] + 40, {v: Math.round(amt(9, L.th)), u: 'mg', k: i === 0 ? 'left at 11 pm' : '', color: X.shadeCol(C('c1'), 0.35), at: 0.622, until: 0.702, r: 2, size: 'big', cands: [[0, 6, 0.5, 0]]});
+    X.label('clLane' + i, s[0], s[1] + 8, `<b>${L.name}</b><br>${L.sub}`, {cls: 'big', color: C('ink'), ax: 0.5, ay: 0, alpha: cA});
+    if (p < G.land - 0.012) X.label('clMg' + i, s[0], s[1] + 52, mgTxt(amt(h, L.th)), {cls: 'num', color: X.shadeCol(C('c1'), 0.35), ax: 0.5, ay: 0, alpha: al * lin(p, 0.15, 0.18)});
+    X.callout('clBed' + i, s[0], s[1] + 58, {v: Math.round(amt(9, L.th)), u: 'mg', k: i === 0 ? 'left at 11 pm' : '', color: X.inkOf(C('c1'), 4.5), at: G.land, until: G.drop, r: 2, size: 'big', cands: [[0, 6, 0.5, 0]]});
+    laneS.push([s[0], s[1] + 84]);
   });
-  const nA = al * lin(p, 0.12, 0.2);
-  const top = i => pr(LANES[i].x, -4, RC * 1.12), f0 = top(0), f2 = top(2), mid = top(1);
-  X.label('clSmoke', f0[0], f0[1], 'smokers: liver<br>works 56% faster', {cls: 'plain', color: C('ink2'), ax: 0.5, ay: 1, alpha: nA, cands: [[0, -10, 0.5, 1], [0, -30, 0.5, 1]], drop: true});
-  X.label('clPill', f2[0], f2[1], 'birth-control pill:<br>slower (5.4 → 7.9 h)', {cls: 'plain', color: C('ink2'), ax: 0.5, ay: 1, alpha: nA, cands: [[0, -10, 0.5, 1], [0, -30, 0.5, 1]], drop: true});
-  X.label('clGenes', mid[0], mid[1] - 50, 'fast or slow is mostly inherited (89% in twins)', {cls: 'plain', color: C('ink'), ax: 0.5, ay: 1, alpha: nA, cands: [[0, -6, 0.5, 1], [0, -26, 0.5, 1]]});
-  const f3 = top(3), f4 = top(4);
-  X.label('clPreg', f3[0], f3[1], 'late pregnancy: enzyme<br>slowed by two-thirds', {cls: 'plain', color: C('ink2'), ax: 0.5, ay: 1, alpha: nA, cands: [[0, -10, 0.5, 1], [0, -30, 0.5, 1]], drop: true});
-  X.label('clFluv', f4[0], f4[1], 'the medicine<br>blocks the enzyme', {cls: 'plain', color: C('ink2'), ax: 0.5, ay: 1, alpha: nA, cands: [[0, -10, 0.5, 1], [0, -30, 0.5, 1]], drop: true});
-  const ga = al * lin(p, 0.1, 0.16) * (1 - lin(p, 0.4, 0.44)), l0 = pr(LANES[0].x, 0.5, -RC - 0.5), bvq = pr(LANES[0].x + RC * 0.55, -3.6, RC * 0.98);
-  if (ga > 0.01) { X.label('clGloss', l0[0], l0[1] + 60, 'half-life: hours to clear half', {cls: 'plain', color: C('ink2'), ax: 0.5, ay: 0, alpha: ga});
-    X.label('clVessel', bvq[0] + 14, bvq[1] - 12, 'blood vessels', {cls: 'plain', color: C('ink'), ax: 0, ay: 1, alpha: ga, cands: [[14, -12, 0, 1], [14, 10, 0, 0]]}); }
-  const night = lin(h, 8.92, 9) * (1 - lin(h, 16.92, 17));
-  clockFace(g, V.x + 56, V.y + 54, 27, h, al, night);
+  const nA = al * lin(p, 0.1, 0.16) * (1 - lin(p, 0.55, 0.575));
+  const top = i => pr(LANES[i].x, -4, RC * 1.12), note = (key, i, html) => { const f = top(i); X.label(key, f[0], f[1], html, {cls: 'plain', color: C('ink2'), ax: 0.5, ay: 1, alpha: nA, cands: [[0, -10, 0.5, 1], [0, -30, 0.5, 1]], drop: true}); };
+  note('clSmoke', 0, 'smokers: caffeine<br>cleared 56% faster');
+  note('clPill', 2, 'birth-control pill: slower<br>(7.9 h vs 5.4 h)');
+  note('clPreg', 3, 'late pregnancy: enzyme<br>slowed by two-thirds');
+  note('clFluv', 4, 'the medicine<br>blocks the enzyme');
+  // over the first three lanes, with a bracket
+  if (nA > 0.01) { const a = pr(LANES[0].x - RC * 0.8, -4, RC * 1.12), b = pr(LANES[2].x + RC * 0.8, -4, RC * 1.12), y = Math.min(a[1], b[1]) - 56;
+    g.save(); g.globalAlpha *= nA; g.strokeStyle = C('ink3'); g.lineWidth = 1.2; g.beginPath(); g.moveTo(a[0], y + 8); g.lineTo(a[0], y); g.lineTo(b[0], y); g.lineTo(b[0], y + 8); g.stroke(); g.restore();
+    X.labelAvoid([a[0], y - 2, b[0], y + 9]);
+    X.label('clGenes', (a[0] + b[0]) / 2, y - 6, "in twins who didn't smoke or take the pill: 89% of the difference inherited", {cls: 'plain', color: C('ink'), ax: 0.5, ay: 1, alpha: nA}); }
+  // name marks, one at a time
+  const mark = (key, w, v, at, until) => { const s = pr(...w); X.callout(key, s[0], s[1], {v, size: 'small', color: C('ink'), at, until, r: 6, cands: [[0, -34, 0.5, 1], [18, -26, 0, 1], [-18, -26, 1, 1], [18, 26, 0, 0]]}); };
+  const L0 = LANES[0], L3 = LANES[3], L4 = LANES[4];
+  mark('clMkVessel', [L0.x + RC * 0.45, -3.6, RC * 0.98], 'blood vessels', 0.07, 0.15);
+  mark('clMkDown', V3.add(L3.enz[1].b, [0, -5.2, 0]), 'turned-down enzymes', 0.16, 0.24);
+  mark('clMkBlock', V3.add(L4.enz[0].b, [0, -3.0, -2.8]), 'blocked enzymes', 0.25, 0.33);
+  mark('clMkLeft', V3.add(L0.enz[0].b, [0, -3.0, -3.4]), 'snipped leftovers', 0.34, 0.42);
+  const ga = al * lin(p, 0.1, 0.16) * (1 - lin(p, 0.42, 0.44)), l0 = pr(L0.x, 0.5, -RC - 0.5);
+  if (ga > 0.01) X.label('clGloss', l0[0], l0[1] + 84, 'half-life: hours to clear half', {cls: 'plain', color: C('ink2'), ax: 0.5, ay: 0, alpha: ga});
+  // the clock
+  clockFace(g, V.x + 56, V.y + 54, 27, h, al, lin(h, 8.92, 9));
   X.labelAvoid([V.x + 25, V.y + 23, V.x + 87, V.y + 85]);
   X.label('clClock', V.x + 94, V.y + 54, clockTxt(h), {cls: 'num', color: C('ink'), ax: 0, ay: 0.5, alpha: al});
+  gauge(g, S, p, al, laneS);
+}
+
+/* ---------------- "Is that a lot?": the 11 pm amounts on a scale of mg in you ---------------- */
+const GAUGE_NAMES = ['fast liver', 'average', 'slow liver', 'late pregnancy', 'fluvoxamine'];
+function gauge(g, S, p, al, laneS) {
+  const A = al * lin(p, G.axis[0], G.axis[1]); if (A <= 0.01) return;
+  const V = S.view, AX = V.x + V.w * 0.765, Y0 = V.y + V.h * 0.83, Y1 = V.y + V.h * 0.17, y = m => Y0 - (Y0 - Y1) * m / 120, ink = C('ink'), TEAL = '#0b7285', TEALI = '#0b5f6e';
+  X.labelAvoid([AX - 170, Y1 - 64, V.x + V.w - 4, Y0 + 44]);
+  const T = (s, x, yy, o) => txt(g, s, x, yy, Object.assign({size: 13, col: ink, base: 'middle'}, o));
+  // the band where caffeine blocks some adenosine receptors (drawn first, under the axis)
+  const bA = al * lin(p, G.band[0], G.band[1]);
+  if (bA > 0.01) { g.save(); g.globalAlpha *= bA; g.fillStyle = X.u.rgba(TEAL, 0.16); g.fillRect(AX - 3, y(100), 30, y(10) - y(100)); g.restore();
+    T('≈10–100 mg in you:', AX + 36, y(48) - 9, {alpha: bA, col: TEALI, w: 600, size: 14}); T('blocks some adenosine receptors', AX + 36, y(48) + 9, {alpha: bA, col: TEALI, size: 13}); }
+  // the axis, its ticks and its name
+  g.save(); g.globalAlpha *= A; g.strokeStyle = ink; g.lineWidth = 1.6; g.beginPath(); g.moveTo(AX, Y0); g.lineTo(AX, Y1); g.stroke();
+  g.lineWidth = 1.1; for (const m of [0, 25, 50, 75, 100]) { g.beginPath(); g.moveTo(AX - 5, y(m)); g.lineTo(AX, y(m)); g.stroke(); } g.restore();
+  for (const m of [0, 25, 50, 75, 100]) T(String(m), AX - 9, y(m), {alpha: A, size: 11, col: C('ink2'), align: 'right'});
+  T('mg in you', AX - 6, Y1 - 16, {alpha: A, w: 700, size: 14, align: 'right'});
+  // the lines: 75 mg perks you up; 100 mg near bedtime can disturb sleep; 300–400 mg off the top; one café decaf
+  const ln = (m, a, t1, t2) => { if (a <= 0.01) return; g.save(); g.globalAlpha *= a; g.strokeStyle = ink; g.lineWidth = 1.6; g.beginPath(); g.moveTo(AX - 2, y(m)); g.lineTo(AX + 30, y(m)); g.stroke(); g.restore();
+    T(t1, AX + 36, y(m) - 9, {alpha: a, w: 600, size: 14}); T(t2, AX + 36, y(m) + 9, {alpha: a, size: 13, col: C('ink2')}); };
+  ln(75, al * lin(p, G.l75[0], G.l75[1]), '75 mg in one go: enough', 'to perk you up (EFSA 2011)');
+  ln(100, al * lin(p, G.l100[0], G.l100[1]), '100 mg near bedtime: can disturb', 'sleep in some people (EFSA 2015)');
+  const tA = al * lin(p, G.top[0], G.top[1]);
+  if (tA > 0.01) { g.save(); g.globalAlpha *= tA; g.strokeStyle = ink; g.fillStyle = ink; g.lineWidth = 1.6; g.beginPath(); g.moveTo(AX + 14, y(104)); g.lineTo(AX + 14, Y1 - 30); g.stroke();
+    g.beginPath(); g.moveTo(AX + 14, Y1 - 38); g.lineTo(AX + 9, Y1 - 28); g.lineTo(AX + 19, Y1 - 28); g.closePath(); g.fill(); g.restore();
+    T('300–400 mg: clearly disturbs sleep', AX + 26, Y1 - 30, {alpha: tA, w: 600, size: 14}); }
+  const dA = al * lin(p, G.dec[0], G.dec[1]);
+  if (dA > 0.01) { g.save(); g.globalAlpha *= dA; g.strokeStyle = C('ink2'); g.lineWidth = 1.2; g.beginPath(); g.moveTo(AX, y(6.6)); g.lineTo(AX + 12, y(6.6)); g.stroke(); g.restore();
+    T('one café decaf', AX + 36, y(6.6), {alpha: dA, size: 13, col: C('ink2')}); }
+  const fA = al * lin(p, G.foot[0], G.foot[1]);
+  if (fA > 0.01) T('doses taken at once; people differ, so no single line', AX - 150, Y0 + 30, {alpha: fA, size: 11, col: C('ink3')});
+  // the five 11 pm amounts drop onto the scale, one after another, and settle
+  LANES.forEach((L, i) => { const t = lin(p, G.drop + 0.018 * i, G.drop + 0.018 * i + 0.04); if (t <= 0) return;
+    const mg = amt(9, L.th), a0 = laneS[i] || [AX - 300, Y0], b0 = [AX, y(mg)], u = SNAP(t), mid = [(a0[0] + b0[0]) / 2, Math.min(a0[1], b0[1]) - 60];
+    const v = 1 - Math.min(1, u), x = u <= 1 ? v * v * a0[0] + 2 * v * u * mid[0] + u * u * b0[0] : b0[0] + (u - 1) * 30, yy = u <= 1 ? v * v * a0[1] + 2 * v * u * mid[1] + u * u * b0[1] : b0[1];
+    g.save(); g.globalAlpha *= al; g.fillStyle = C('c1'); g.strokeStyle = '#ffffff'; g.lineWidth = 2; g.beginPath(); g.arc(x, yy, 7, 0, 2 * PI); g.fill(); g.stroke(); g.restore();
+    const la = al * lin(t, 0.8, 1);
+    if (la > 0.01) T(GAUGE_NAMES[i] + ' · ' + Math.round(mg), AX - 40, b0[1], {alpha: la, size: 13, w: 600, col: X.inkOf(C('c1'), 4.5), align: 'right'}); });
 }
 
 LAYERS.push({alpha: 'v_liver_L', draw});
@@ -9768,7 +9935,8 @@ const AD_DOCK = {1: pAt(hAre(0.125)), 3: pAt(hAre(0.375)), 0: pAt(hAre(0.625)), 
 const BUMP = {1: 0.455, 3: 0.485, 0: 0.515};
 const CF_DOCK = {2: 0.43, 1: 0.46, 3: 0.49, 0: 0.52};
 const CF_LEAVE = pAt(18.25);                    // about half of the cup gone (the model): one docked caffeine lets go
-const onOf = (j, p) => j === 2 ? seg(p, AD_DOCK[2] - 0.004, AD_DOCK[2] + 0.02) : seg(p, AD_DOCK[j] - 0.008, AD_DOCK[j] + 0.016) * (1 - seg(p, BUMP[j], BUMP[j] + 0.02));
+const CF_LEAVE2 = pAt(22.25), LAND2 = CF_LEAVE2 + 0.022;   // about a quarter of the peak left (the model): a second one lets go
+const onOf = (j, p) => j === 2 ? seg(p, AD_DOCK[2] - 0.004, AD_DOCK[2] + 0.02) : seg(p, AD_DOCK[j] - 0.008, AD_DOCK[j] + 0.016) * (1 - seg(p, BUMP[j], BUMP[j] + 0.02)) + (j === 3 ? seg(p, LAND2 - 0.004, LAND2 + 0.018) : 0);
 const feelAt = p => (onOf(0, p) + onOf(1, p) + onOf(2, p) + onOf(3, p)) / 4;
 const SNAP = (() => { try { const f = X.ease.bez(0.34, 1.4, 0.64, 1); return typeof f === 'function' ? f : ease; } catch (e) { return ease; } })();
 const EXIT = (X.ease && X.ease.exit) || ease, MOVE = (X.ease && X.ease.move) || ease;
@@ -9783,13 +9951,14 @@ const DOCKA = [1, 3, 0].map(j => mkMol(R0, [REC[j].x + 20, -80, 10]));          
 const FREEC = Array.from({length: NCF}, (_, i) => mkMol(R1, [-110 + 220 * (i + 0.5) / NCF, -88 - R1() * 16, -44 + R1() * 16]));
 const DOCKC = [2, 1, 3, 0].map(j => mkMol(R1, [REC[j].x - 26, -96, -30]));
 /* the pile above the plugged pockets: four columns, stacked */
-const PILE = Array.from({length: NCR + 3}, (_, s) => { const j = s % 4, L = Math.floor(s / 4); return [REC[j].x + (L % 2 ? 8 : -8) + (s * 7 % 5 - 2), -60 - 15 * L + REC[j].dy, -6 + 8 * (L % 3)]; });
+const ROWS = [{y: -62, z: 0, xs: [-108, -72, -36, 0, 36, 72, 108]}, {y: -84, z: 12, xs: [-90, -54, -18, 18, 54, 90]}, {y: -106, z: 22, xs: [-100, -60, -20, 20, 60, 100]}];
+const PILE = ROWS.flatMap(rw => rw.xs.map((x, k) => [x + (k % 2 ? 3 : -3), rw.y + bulge(x, 0) * 0.5 + (k % 3 - 1) * 2, rw.z + (k % 2) * 5]));
 const PILE_OF = i => i;                          // crowd i takes pile slot i; the bumped adenosines take the last three
-const LANDER = 2;                                // crowd 2 (its slot is over the pocket that reopens) lands in the evening
+const LANDER = 4, LANDER2 = 6;                   // crowd 4 and 6 (their slots are over the pockets that reopen) land in the evening
 const wander = (m, t) => [m.b[0] + 6 * Math.sin(0.37 * t + m.ph[0]) + 3 * Math.sin(0.83 * t + m.ph[1]), m.b[1] + 6 * Math.sin(0.29 * t + m.ph[2]) + 4 * Math.sin(0.71 * t + m.ph[3]), m.b[2] + 6 * Math.sin(0.41 * t + m.ph[4])];
 const tumble = (m, t, pc) => frame(pc, m.ph[5] + m.spin * t, 0.45 * Math.sin(0.33 * t + m.ph[6]), 0.45 * Math.sin(0.27 * t + m.ph[7]));
 const settle = (fr, pc, ang, k) => { const fb = frame(pc, ang, 0, 0); return [V3.norm(V3.lerp(fr[0], fb[0], k)), V3.norm(V3.lerp(fr[1], fb[1], k))]; };
-const bob = (m, t) => [0, 2.5 * Math.sin(1.3 * t + m.ph[2]) + 5 * Math.pow(Math.max(0, Math.sin(0.9 * t + m.ph[3])), 6), 0];   // jostling; now and then a dip at the plug
+const bob = (m, t) => [1.5 * Math.sin(0.7 * t + m.ph[4]), 2 * Math.sin(1.3 * t + m.ph[2]) + 4 * Math.pow(Math.max(0, Math.sin(0.9 * t + m.ph[3])), 6), 0];   // jostling; now and then a dip at the plug
 const pileAt = (m, s, t) => V3.add(PILE[s], bob(m, t));
 const pileK = (p, i) => MOVE(lin(p, 0.53 + 0.008 * i, 0.6 + 0.008 * i));
 function cast(p, t, pc) {
@@ -9798,6 +9967,7 @@ function cast(p, t, pc) {
     let o = wander(m, t); o = [o[0], o[1] - 26 * (1 - u), o[2]]; let fr = tumble(m, t, pc);
     const k = pileK(p, i); if (k > 0) { o = V3.lerp(o, pileAt(m, PILE_OF(i), t), k); fr = settle(fr, pc, 0.1 * Math.sin(m.ph[5]), 0.5 * k); }
     if (i === LANDER) { const g1 = SNAP(lin(p, AD_DOCK[2] - 0.03, AD_DOCK[2])), pk = POCKET(REC[2]); if (g1 > 0) { o = V3.lerp(o, pk, g1); fr = settle(fr, pc, 0.15, g1); } }
+    if (i === LANDER2) { const g1 = SNAP(lin(p, LAND2 - 0.025, LAND2)), pk = POCKET(REC[3]); if (g1 > 0) { o = V3.lerp(o, pk, g1); fr = settle(fr, pc, 0.15, g1); } }
     out.ad.push({o, fr, al: u, id: 'c' + i}); });
   DOCKA.forEach((m, n) => { const j = [1, 3, 0][n], pd = AD_DOCK[j], pin = pd - 0.07, u = seg(p, pin, pin + 0.03); if (u <= 0.01) return;
     let o = wander(m, t); o = [o[0], o[1] - 26 * (1 - u), o[2]]; let fr = tumble(m, t, pc); const pk = POCKET(REC[j]);
@@ -9807,19 +9977,22 @@ function cast(p, t, pc) {
     else { o = V3.lerp(bound, pileAt(m, NCR + n, t), g2); fr = settle(fr, pc, 0.15, 1 - 0.5 * g2); }
     out.ad.push({o, fr, al: u, id: 'd' + n}); });
   const ca = CAFF(h);
-  FREEC.forEach((m, i) => { const v = clamp(NCF * ca - i); if (v <= 0.01) return; const u = ease(v);
+  FREEC.forEach((m, i) => { const v = clamp((NCF * ca - i) * 3); if (v <= 0.01) return; const u = ease(v);
     let o = wander(m, t + 30); o = [o[0], o[1] - 30 * (1 - u), o[2]]; out.cf.push({o, fr: tumble(m, t + 30, pc), al: u, id: 'f' + i}); });
-  DOCKC.forEach((m, n) => { const j = [2, 1, 3, 0][n], pd = CF_DOCK[j], u = seg(p, 0.395 + 0.006 * n, 0.425 + 0.006 * n); if (u <= 0.01) return;
+  DOCKC.forEach((m, n) => { const j = [2, 1, 3, 0][n], pd = CF_DOCK[j], u = seg(p, 0.395 + 0.006 * n, 0.41 + 0.006 * n); if (u <= 0.01) return;
     let o = wander(m, t + 50); o = [o[0], o[1] - 30 * (1 - u), o[2]]; let fr = tumble(m, t + 50, pc), al = u; const pk = POCKET(REC[j]);
     const g1 = SNAP(lin(p, pd - 0.03, pd)), bound = [pk[0] - 0.6 + 0.3 * Math.sin(2.3 * t + m.ph[0]), pk[1] + 1 + 0.25 * Math.sin(1.9 * t + m.ph[1]), pk[2]];
     o = V3.lerp(o, bound, g1); fr = settle(fr, pc, 0.2, g1);
-    if (j === 2) { const g2 = EXIT(lin(p, CF_LEAVE, CF_LEAVE + 0.035)); if (g2 > 0) { o = V3.lerp(bound, [pk[0] - 30, pk[1] - 60, pk[2] - 30], g2); al *= 1 - lin(p, CF_LEAVE + 0.015, CF_LEAVE + 0.035); } }
+    if (j === 2 || j === 3) { const pl = j === 2 ? CF_LEAVE : CF_LEAVE2, g2 = EXIT(lin(p, pl, pl + 0.03)); if (g2 > 0) { o = V3.lerp(bound, [pk[0] - 30, pk[1] - 70, pk[2] - 40], g2); al *= 1 - lin(p, pl + 0.018, pl + 0.03); } }
     if (al > 0.01) out.cf.push({o, fr, al, id: 'k' + n, j}); });
   return out;
 }
 /* the activity: pulses along the fibre; their speed falls with the share of receptors switched on (illustrative) */
-const speed = p => 0.16 * (1 - 0.7 * feelAt(p));
-const phase = t => { const n = 90, T = clamp(t, 0, DUR * 1.2), hh = T / n; let s = 0; for (let k = 0; k < n; k++) s += speed(((k + 0.5) * hh) / DUR) * hh; return s; };
+const GOLD = '#e8b008', SIG_T = 3.4;            // a 'stay awake' signal, the same mark as in the beat before
+const rate = p => 1.3 * (1 - 0.75 * feelAt(p));
+const NT = 600, PHI = (() => { const a = new Float64Array(NT + 1); for (let k = 1; k <= NT; k++) a[k] = a[k - 1] + rate((k - 0.5) / NT) * DUR / NT; return a; })();
+const phiAt = t => { const f = clamp(t / DUR) * NT, i = Math.min(NT - 1, Math.floor(f)); return PHI[i] + (PHI[i + 1] - PHI[i]) * (f - i); };
+const tOfPhi = v => { let lo = 0, hi = NT; if (v <= 0) return 0; if (v >= PHI[NT]) return DUR; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (PHI[m] < v) lo = m; else hi = m; } return (lo + (v - PHI[lo]) / Math.max(1e-9, PHI[hi] - PHI[lo])) * DUR / NT; };
 const FIB = (() => { const out = []; for (let i = 0; i <= 48; i++) { const x = -270 + 540 * i / 48; out.push([x, 50 + 4 * Math.sin(x / 55) + bulge(x, 0) * 0.6, 22 + 8 * Math.cos(x / 80)]); } return out; })();
 const along = (pts, u) => { const f = clamp(u) * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(f)), w = f - i; return V3.lerp(pts[i], pts[i + 1], w); };
 
@@ -9846,11 +10019,13 @@ function bars(x, w, h, are, feel, p) {
     x.save(); x.globalAlpha *= hid; x.fillStyle = mix(c1, '#ffffff', 0.78); x.fillRect(a, yF, b - a, BH);
     x.strokeStyle = c1; x.lineWidth = 1.2; x.setLineDash([4, 3]); x.strokeRect(a + 0.5, yF + 0.5, b - a - 1, BH - 1); x.setLineDash([]);
     x.beginPath(); x.moveTo(a + 0.5, yF + BH + 5); x.lineTo(a + 0.5, yF + BH + 10); x.lineTo(b - 0.5, yF + BH + 10); x.lineTo(b - 0.5, yF + BH + 5); x.stroke();
-    SK.t(x, 'hidden by caffeine', Math.max(x0 + 70, Math.min(x0 + W - 70, (a + b) / 2)), yF + BH + 30, 16, X.shadeCol(c1, 0.3), 700, 'center'); x.restore(); }
-  const zz = lin(p, 0.905, 0.94); if (zz > 0.01) { x.save(); x.globalAlpha *= zz; SK.t(x, 'so sleep comes later, shorter,', x0, yF + BH + 74, 20, C('ink'), 700); SK.t(x, 'lighter, with less deep sleep', x0, yF + BH + 101, 20, C('ink'), 700); x.restore(); }
+    SK.t(x, 'hidden by caffeine', Math.max(x0 + 70, Math.min(x0 + W - 70, (a + b) / 2)), yF + BH + 30, 16, X.shadeCol(c1, 0.3), 700, 'center');
+    SK.t(x, 'feeling less tired = feeling more alert', x0, yF + BH + 56, 15, C('ink'), 600); x.restore(); }
+  const zz = lin(p, 0.905, 0.94); if (zz > 0.01) { x.save(); x.globalAlpha *= zz; SK.t(x, 'caffeine can make sleep come later,', x0, yF + BH + 92, 18, C('ink'), 700); SK.t(x, 'shorter, lighter, with less deep sleep', x0, yF + BH + 116, 18, C('ink'), 700); x.restore(); }
 }
 
 /* ---------------- the layer ---------------- */
+const M0 = {sigs: []};
 const box8 = (x0, x1, y0, y1, z0, z1) => [[x0, y0, z0], [x1, y0, z0], [x0, y1, z0], [x1, y1, z0], [x0, y0, z1], [x1, y0, z1], [x0, y1, z1], [x1, y1, z1]];
 const FIT_A = box8(-128, 128, -112, 60, -18, 20), FIT_B = box8(-114, 114, -102, 50, -18, 20), FIT_C = box8(-136, 136, -132, 62, -20, 20);
 const lerpBox = (A, B, u) => A.map((q, i) => V3.lerp(q, B[i], u));
@@ -9866,10 +10041,12 @@ function draw(g, S, P) {
     g.lineTo(pts[pts.length - 1][0], yb); g.lineTo(pts[0][0], yb); g.closePath(); g.fill(); g.restore(); }
   REC.forEach((r, j) => { if (ons[j] < 0.01) return; const c = pr(r.x, HT + 9 + r.dy, 0), e = pr(r.x + 30, HT + 9 + r.dy, 0); X.glow(g, c[0], c[1], Math.abs(e[0] - c[0]), TEAL, 0.8 * ons[j] * al); });
   /* the fibre and its pulses */
-  const ph = phase(t);
-  for (let i = 0; i < FIB.length - 1; i += 4) pr.capsule(g, FIB[i], FIB[Math.min(FIB.length - 1, i + 4)], 3.6, '#dde1e5', al);
-  for (let k = 0; k < 5; k++) { const u = ((ph + k / 5) % 1 + 1) % 1, a = al * Math.min(1, u / 0.05, (1 - u) / 0.05);
-    if (a > 0.02) { pr.capsule(g, along(FIB, u - 0.05), along(FIB, u - 0.018), 4.1, '#9aa1a8', a); pr.capsule(g, along(FIB, u - 0.02), along(FIB, u), 4.6, '#343a40', a); } }
+  pr.path(g, FIB, '#cfd4da', 9, al);
+  const sigs = []; { const now = phiAt(t), then = phiAt(Math.max(0, t - SIG_T));
+    for (let n = Math.floor(then) + 1; n <= Math.floor(now); n++) { const age = t - tOfPhi(n); if (age < 0 || age > SIG_T) continue; const u = age / SIG_T, a = al * Math.min(1, u / 0.04, (1 - u) / 0.04), q = along(FIB, u);
+      pr.sphere(g, q, 4.2, GOLD, a); sigs.push([q, a]); } }
+  M0.sigs = sigs;
+  for (const [q, a] of M0.sigs) { const s0 = pr(...q), s1 = pr(q[0] + 11, q[1], q[2]); X.glow(g, s0[0], s0[1], Math.abs(s1[0] - s0[0]), GOLD, 0.55 * a); }
   /* the receptors, split where they cross the membrane so that painting far to near (the 2D stage) and depth (the GPU) agree:
      below the membrane first, then the sheet, then what stands in front of the cut or above the sheet */
   const RCP = REC.map((r, j) => { const on = ons[j], ends = HELIX.map((H, k) => helixEnds(r, k, on)), top = [], bot = [];
@@ -9901,11 +10078,16 @@ function draw(g, S, P) {
   const pc = P.pitch, M = cast(p, t, pc), fa = family(TEAL), fc = family(C('c1')), W = {};
   M.ad.forEach(m => { W[m.id] = drawMol(g, pr, ADO, m.o, m.fr, fa, al * m.al); });
   M.cf.forEach(m => { W[m.id] = drawMol(g, pr, CAF, m.o, m.fr, fc, al * m.al); });
+  /* the first docked caffeine: its two rings glow briefly, the core it shares with adenosine */
+  { const gl = al * lin(p, 0.43, 0.445) * (1 - lin(p, 0.5, 0.53)), Wk = W.k0;
+    if (gl > 0.01 && Wk) { const ring6 = [0, 1, 2, 3, 4, 5].map(i => Wk[i]), ring5 = [3, 4, 6, 7, 8].map(i => Wk[i]), hot = mix(C('c1'), '#ffffff', 0.25);
+      pr.path(g, ring6, hot, 5, gl, true); pr.path(g, ring5, hot, 5, gl, true);
+      for (const rg of [ring6, ring5]) { const c = rg.reduce((a, q) => V3.add(a, V3.mul(q, 1 / rg.length)), [0, 0, 0]), s0 = pr(...c), s1 = pr(c[0] + 7, c[1], c[2]); X.glow(g, s0[0], s0[1], Math.abs(s1[0] - s0[0]), C('c1'), 0.6 * gl); } } }
   /* over the scene: the day clock, then the two bars under it */
   const ck = [S.view.x + S.view.w * 0.045, S.view.y + S.view.h * 0.1];
   if (!show) return;
   dial(g, ck[0], ck[1], 17, hr, al); X.labelAvoid([ck[0] - 19, ck[1] - 19, ck[0] + 19, ck[1] + 19]);
-  X.inset(g, {at: [0.025, 0.17], w: 300, h: 250, frame: false, alpha: al}, (x, w, h) => bars(x, w, h, are, feel, p));
+  X.inset(g, {at: [0.025, 0.17], w: 320, h: 250, frame: false, alpha: al}, (x, w, h) => bars(x, w, h, are, feel, p));
   labels(g, S, pr, p, al, M, ck, hr);
 }
 
@@ -9919,7 +10101,9 @@ function labels(g, S, pr, p, al, M, ck, hr) {
   const gq = pr(130, -112, 0); lbl('rcGap', gq, 'gap between nerve cells', {cls: 'plain', ax: 1, ay: 0, color: C('ink3'), alpha: al * win(0.0, 0.03, 0.3, 0.34), cands: [[0, 0, 1, 0], [0, 26, 1, 0]], drop: true});
   const a0 = M.ad.find(m => m.id === 'c0'); if (a0) { const q = pr(...a0.o); lbl('rcAd', [q[0], q[1] - 30], 'adenosine', {cls: 'tag', ax: 0.5, ay: 1, color: TEAL, alpha: al * win(0.05, 0.08, 0.3, 0.34), cands: [[0, 0, 0.5, 1], [40, 20, 0, 0.5], [-40, 20, 1, 0.5]]}); }
   // 2 pm: the first caffeine docks in the empty pocket
-  const c0 = M.cf.find(m => m.id === 'k0'); if (c0) { const q = pr(...POCKET(REC[2])); lbl('rcSame', [q[0], q[1] - 34], K17('same shape: fits, switches nothing'), {cls: 'plain big', ax: 0.5, ay: 1, color: X.shadeCol(C('c1'), 0.3), alpha: al * win(0.435, 0.455, 0.6, 0.63), cands: [[0, 0, 0.5, 1], [40, -20, 0, 1], [-40, -20, 1, 1]]}); }
+  const c0 = M.cf.find(m => m.id === 'k0'); if (c0) { const q = pr(...POCKET(REC[2])); lbl('rcSame', [q[0], q[1] - 34], K17('same double-ring core: fits, switches nothing'), {cls: 'plain big', ax: 0.5, ay: 1, color: X.shadeCol(C('c1'), 0.3), alpha: al * win(0.435, 0.455, 0.6, 0.63), cands: [[0, 0, 0.5, 1], [40, -20, 0, 1], [-40, -20, 1, 1]]}); }
+  const ck0 = M.cf.find(m => m.id === 'k0'); if (ck0) { const q = pr(...ck0.o); lbl('rcCafTag', [q[0], q[1] - 30], 'caffeine', {cls: 'tag', ax: 0.5, ay: 1, color: C('c1'), alpha: al * win(0.408, 0.415, 0.43, 0.438), cands: [[0, 0, 0.5, 1], [40, 20, 0, 0.5], [-40, 20, 1, 0.5]]}); }
+  { const sq = pr(...along(FIB, 0.72)); lbl('rcSig', sq, K17('‘stay awake’ signals'), {cls: 'plain big', ax: 0.5, ay: 0, color: X.shadeCol('#e8b008', 0.45), alpha: al * win(0.03, 0.05, 0.2, 0.23), cands: [[0, 14, 0.5, 0], [0, -40, 0.5, 1]]}); }
   // evening: the pile, the caffeine that leaves
   const pq = pr(-10, -134, 0);
   lbl('rcPile', pq, K17('adenosine piles up, can’t land'), {cls: 'plain big', ax: 0.5, ay: 1, color: X.shadeCol(TEAL, 0.2), alpha: al * win(0.6, 0.63, 0.85, 0.88), cands: [[0, 0, 0.5, 1], [0, 22, 0.5, 1]]});
@@ -9942,49 +10126,50 @@ X.scene('receptor', Object.assign(K.ST(Object.assign({}, K.OFF, K.CAMS.v_recepto
 }));
 })();
 /*@@part 04s_tolerance.js@@*/
-/* ============ 4s · tolerance · "If you rarely drink it, caffeine brings anxiety, not alertness." (a slide: two mornings) ============
+/* ============ 4s · tolerance · "Rarely drink it? Caffeine trades sleepiness for jitters." (a slide: two mornings) ============
    Why the same cup hits some people harder, as a newsroom graphic. Two mornings, 7 am to 10 am, stacked: someone who drinks coffee
-   daily and someone who rarely does. Each lane has a dashed "your normal" line and two traces, alert (ink) and anxious (orange).
-   One shared clock sweeps across both lanes and the traces draw behind it, each led by a glowing dot.
-   - Daily: before the cup, alert sits below normal (going without lowers it); at 8 am a cup drops onto the timeline (a bounce and a
-     ripple); alert climbs back and settles ON the line, not above (the cup only undoes the dip); anxious stays nearly flat.
-   - Rarely: alert stays on the line through the cup (no extra alertness); anxious rises, with a fine wobble (the jitters). Then a
-     dotted orange trace rises higher: people who inherited one version of the receptor's gene from both parents (ADORA2A TT).
-   - Closing line: drink it daily and the anxiety fades (tolerance).
-   Rogers et al. 2010 (379 people, caffeine vs placebo, double blind; abstract only) gives directions, not sizes: the traces have no
-   y-axis numbers and their heights are schematic (the honesty note says so). A pure function of the beat's progress. */
+   daily and someone who rarely does. Each lane has a dashed "your normal" line and two traces, the receptor beat's "how tired you
+   feel" (teal; up = more tired) and "jittery" (orange; up = more). One shared clock sweeps across both lanes and the traces draw
+   behind it, each led by a glowing dot. At 8 am a cup drops onto each lane (a bounce, a ripple); the dotted 8 am line is "the cup".
+   - Daily: after a night without caffeine, more tired than normal; the cup only brings it back to normal (it settles on the line);
+     jittery stays nearly flat (Rogers 2010, 2013).
+   - Rarely: a bit less sleepy after the cup, but clearly more jittery, which cancels the gain (Rogers 2013); a dotted orange trace
+     rises higher: born with a touchier receptor version (ADORA2A TT, Rogers 2010).
+   - Closing: neither got sharper than a rested normal, faster at simple tasks, not smarter (Rogers 2013); drink it daily and the
+     jitters mostly fade: tolerance.
+   The studies give directions, not sizes: no y-axis numbers; heights are schematic (the honesty note says so). A pure function of p. */
 (() => {
 const SK = X.sk, C = X.col, PI = Math.PI;
 X.base({v_tol_L: 0});   // kept so scenes that list it in K.OFF still find it declared
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), lin = (p, a, b) => clamp((p - a) / (b - a));
 const io = u => u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;          // ease in-out
-const pop = X.ease.bez(0.34, 1.4, 0.64, 1);                                           // a small overshoot, for pops and the drop's squash
+const pop = X.ease.bez(0.34, 1.4, 0.64, 1);                                           // a small overshoot, for pops
 const smooth = u => { u = clamp(u); return u * u * (3 - 2 * u); };
+const TEAL = '#0b7285', rgba = (c, a) => (X.u && X.u.rgba ? X.u.rgba(c, a) : c);
 /* ---------------- the frame ---------------- */
-const X0 = 380, X1 = 1420, H0 = 7, H1 = 10, U = 96, AXY = 780;                                   // 7 am .. 10 am; U px per schematic step
+const X0 = 380, X1 = 1420, H0 = 7, H1 = 10, U = 92, AXY = 724;                        // 7 am .. 10 am; U px per schematic step
 const hx = h => X0 + (X1 - X0) * (h - H0) / (H1 - H0);
 const LANES = [
-  {key: 'daily', title: 'drinks coffee daily', top: 100, yn: 214},
-  {key: 'rare', title: 'rarely drinks it', top: 388, yn: 698}];
+  {key: 'daily', title: 'drinks coffee daily', top: 96, yn: 228, floor: 318},
+  {key: 'rare', title: 'rarely drinks it', top: 372, yn: 606, floor: AXY}];
 const CUPH = 8;                                                                       // the cup, at 8 am
 /* the beat's clock (fractions of progress) */
-const T = {lanes: [0.0, 0.06], sw1: [0.07, 0.21], dip: 0.165, cup: [0.21, 0.30], sw2: [0.32, 0.63],
-  undo: 0.47, noAl: 0.535, gene: [0.66, 0.78], geneL: 0.765, clockOut: [0.63, 0.67], close: 0.84, still: [0.88, 0.95]};
+const T = {lanes: [0.0, 0.06], sw1: [0.07, 0.21], night: 0.165, cup0: [0.21, 0.29], cup1: [0.235, 0.315], cupL: 0.30, sw2: [0.32, 0.63],
+  undo: 0.47, less: 0.52, cancel: 0.57, gene: [0.65, 0.75], geneL: 0.74, clockOut: [0.63, 0.67], close1: 0.79, close2: 0.87, still: [0.9, 0.96]};
 const clockH = p => p < T.sw1[1] ? H0 + (CUPH - H0) * io(lin(p, T.sw1[0], T.sw1[1])) : p < T.sw2[0] ? CUPH : CUPH + (H1 - CUPH) * io(lin(p, T.sw2[0], T.sw2[1]));
 /* the traces, in schematic steps above (+) or below (-) normal, against the hour h; direction only */
 const after = (h, d, w) => smooth((h - CUPH - d) / w);                                // the cup takes a few minutes to act
-const jit = (h, k, f, ph) => k * Math.sin(2 * PI * f * h + ph) * (0.6 + 0.4 * Math.sin(2 * PI * 3.1 * h));
 const TR = {
-  daily: {alert: h => -1 + after(h, 0.12, 0.62) + 0.035 * Math.sin(2 * PI * 1.3 * h) * (1 - after(h, 0.12, 0.62)),   // below normal, then back ON the line
-          anx: h => 0.13 * after(h, 0.15, 0.6)},                                                                       // nearly flat
-  rare: {alert: h => 0,                                                                                                   // no extra alertness
-         anx: h => { const a = after(h, 0.15, 0.7); return 1.15 * a + a * jit(h, 0.07, 15, 0); },                       // more anxious, with the jitters
-         gene: h => { const a = after(h, 0.15, 0.7); return 2.05 * a + a * jit(h, 0.09, 17, 1.3); }}};                  // more anxious still
-const OFF = {alert: 3, anx: -3, gene: -3};                                            // coincident lines sit a hair apart
+  daily: {tired: h => 1 - after(h, 0.12, 0.62),          // a night without caffeine: more tired; the cup brings it back to normal, not below
+          jit: h => 0.12 * after(h, 0.15, 0.6)},         // nearly flat
+  rare: {tired: h => -0.42 * after(h, 0.12, 0.6),        // a bit less sleepy
+         jit: h => 1.15 * after(h, 0.15, 0.7),           // clearly more jittery
+         gene: h => 2.0 * after(h, 0.15, 0.7)}};          // a touchier receptor version: more jittery still
+const OFF = {tired: 5, jit: -5, gene: -5};                                            // lines that coincide sit apart, the dashed normal between them
 const ty = (L, k, v) => L.yn - v * U + OFF[k];
-function trace(x, L, k, f, h0, h1, col, lw, dash, al) {   // the trace from h0 to h1, sampled each minute
-  if (h1 <= h0 + 1e-4 || al <= 0.01) return null;
-  x.save(); x.globalAlpha *= al; x.strokeStyle = col; x.lineWidth = lw; x.lineJoin = 'round'; x.lineCap = 'round'; if (dash) x.setLineDash(dash);
+function trace(x, L, k, f, h0, h1, col, lw, dash) {   // the trace from h0 to h1, sampled each minute; returns its end
+  if (h1 <= h0 + 1e-4) return null;
+  x.save(); x.strokeStyle = col; x.lineWidth = lw; x.lineJoin = 'round'; x.lineCap = 'round'; if (dash) x.setLineDash(dash);
   x.beginPath(); const n = Math.max(2, Math.ceil((h1 - h0) * 60)); let end = null;
   for (let i = 0; i <= n; i++) { const h = h0 + (h1 - h0) * i / n, px = hx(h), py = ty(L, k, f(h)); if (i) x.lineTo(px, py); else x.moveTo(px, py); end = [px, py]; }
   x.stroke(); x.restore(); return end;
@@ -9998,97 +10183,171 @@ function gap(x, L, k, f, h0, h1, col, a) {   // a pale fill between a trace and 
 function dot(x, at, col, glow, al) {   // the leading dot, glowing while it leads
   if (!at || al <= 0.01) return;
   x.save(); x.globalAlpha *= al;
-  if (glow > 0.01) { const g = x.createRadialGradient(at[0], at[1], 0, at[0], at[1], 28); g.addColorStop(0, col); g.addColorStop(0.35, col); g.addColorStop(1, 'rgba(255,255,255,0)');
-    x.globalAlpha *= 0.32 * glow; x.fillStyle = g; x.beginPath(); x.arc(at[0], at[1], 28, 0, 2 * PI); x.fill(); x.globalAlpha = al; }
+  if (glow > 0.01) { const g = x.createRadialGradient(at[0], at[1], 0, at[0], at[1], 28); g.addColorStop(0, rgba(col, 0.42 * glow)); g.addColorStop(0.35, rgba(col, 0.3 * glow)); g.addColorStop(1, rgba(col, 0));
+    x.fillStyle = g; x.beginPath(); x.arc(at[0], at[1], 28, 0, 2 * PI); x.fill(); }
   x.fillStyle = '#ffffff'; x.beginPath(); x.arc(at[0], at[1], 8, 0, 2 * PI); x.fill();
   x.fillStyle = col; x.beginPath(); x.arc(at[0], at[1], 5.5, 0, 2 * PI); x.fill(); x.restore();
 }
 /* a label that pops in: a quick scale with a small overshoot, then holds */
 function popT(x, a, X0_, Y0, fn) {
-  if (a <= 0.005) return; const s = 0.82 + 0.18 * pop(clamp(a)); x.save(); x.globalAlpha *= clamp(a * 2.5); x.translate(X0_, Y0); x.scale(s, s); fn(); x.restore();
+  if (a <= 0.005) return; const s = 0.8 + 0.2 * pop(clamp(a)); x.save(); x.globalAlpha *= clamp(a * 2.5); x.translate(X0_, Y0); x.scale(s, s); fn(); x.restore();
 }
 const popA = (p, t0, d = 0.035) => lin(p, t0, t0 + d);
-/* a head in profile, facing the morning (a clean silhouette, people's grey) */
-function head(x, cx, cy, s, al, nod = 0, dx = 0) {   // nod: degrees, the face tipping down; dx: a tremble
-  x.save(); x.globalAlpha *= al; x.translate(cx + dx, cy + 58 * s); x.rotate(nod * PI / 180); x.translate(-60 * s, -120 * s); x.scale(s, s); x.fillStyle = '#c4c8cd'; x.beginPath();
-  x.moveTo(30, 122); x.bezierCurveTo(30, 102, 22, 94, 19, 80); x.bezierCurveTo(12, 58, 14, 28, 35, 13); x.bezierCurveTo(52, 1, 80, 2, 92, 19);
-  x.bezierCurveTo(98, 27, 99, 35, 98, 43); x.lineTo(106, 57); x.bezierCurveTo(107, 60, 105, 62, 101, 63); x.lineTo(100, 67);
-  x.bezierCurveTo(103, 69, 103, 72, 100, 73); x.bezierCurveTo(102, 76, 101, 79, 98, 80); x.bezierCurveTo(99, 86, 96, 91, 89, 92);
-  x.bezierCurveTo(81, 94, 76, 96, 73, 101); x.lineTo(73, 122); x.closePath(); x.fill(); x.restore();
-}
-/* the cup: a clear iced-americano glass with a straw, dropping onto the timeline with a bounce and a ripple */
-function cup(x, cx, floor, u, al) {
-  if (u <= 0 || al <= 0.01) return;
-  const fall = clamp(u / 0.42), land = lin(u, 0.42, 1), y = floor - 120 * (1 - fall * fall) - 16 * Math.abs(Math.sin(PI * clamp(land / 0.45))) * (1 - land) * (land < 0.45 ? 1 : 0);
-  const sq = land > 0 ? 1 - 0.12 * Math.sin(PI * clamp(land / 0.25)) : 1, sx = 2 - sq;   // a squash at the landing, settling
-  if (land > 0) for (const [d, k] of [[0, 1], [0.12, 0.7]]) { const r = lin(land, d, d + 0.6); if (r <= 0 || r >= 1) continue;   // the ripple on the line
-    x.save(); x.globalAlpha *= al * (1 - r) * 0.8 * k; x.strokeStyle = C('c1'); x.lineWidth = 2; x.beginPath(); x.ellipse(cx, floor, 14 + 56 * r, 3 + 9 * r, 0, 0, 2 * PI); x.stroke(); x.restore(); }
-  x.save(); x.globalAlpha *= al * clamp(u * 4); x.translate(cx, y); x.scale(sx, sq);
-  const hgt = 60, rb = 14, rt = 20;
+/* the cup: a clear iced-americano glass with a straw, dropping onto a lane's line with a bounce and a ripple */
+function cup(x, cx, floor, u) {
+  if (u <= 0) return;
+  const fall = clamp(u / 0.42), land = lin(u, 0.42, 1), hop = land < 0.45 ? 16 * Math.sin(PI * land / 0.45) * (1 - land) : 0;
+  const y = floor - 110 * (1 - fall * fall) - hop, sq = land > 0 ? 1 - 0.12 * Math.sin(PI * clamp(land / 0.25)) : 1, sx = 2 - sq;   // a squash at the landing
+  if (land > 0) for (const [d, k] of [[0, 1], [0.12, 0.7]]) { const r = lin(land, d, d + 0.6); if (r <= 0 || r >= 1) continue;   // the ripple along the line
+    x.save(); x.globalAlpha *= (1 - r) * 0.8 * k; x.strokeStyle = C('c1'); x.lineWidth = 2; x.beginPath(); x.ellipse(cx, floor, 14 + 56 * r, 3 + 9 * r, 0, 0, 2 * PI); x.stroke(); x.restore(); }
+  x.save(); x.globalAlpha *= clamp(u * 4); x.translate(cx, y); x.scale(sx, sq);
+  const hgt = 58, rb = 14, rt = 20;
   x.fillStyle = '#5e3a22'; x.beginPath(); x.moveTo(-rb + 1.5, -2); x.lineTo(rb - 1.5, -2); x.lineTo(rb + (rt - rb) * 0.78 - 1.5, -hgt * 0.78); x.lineTo(-rb - (rt - rb) * 0.78 + 1.5, -hgt * 0.78); x.closePath(); x.fill();
-  x.fillStyle = '#ffffff'; x.globalAlpha *= 0.85; x.fillRect(-9, -hgt * 0.74, 8, 8); x.fillRect(1, -hgt * 0.66, 8, 8); x.globalAlpha /= 0.85;   // ice
+  x.fillStyle = 'rgba(255,255,255,0.85)'; x.fillRect(-9, -hgt * 0.74, 8, 8); x.fillRect(1, -hgt * 0.66, 8, 8);   // ice
   x.strokeStyle = C('ink'); x.lineWidth = 2.2; x.lineJoin = 'round'; x.beginPath(); x.moveTo(-rt, -hgt); x.lineTo(-rb, 0); x.lineTo(rb, 0); x.lineTo(rt, -hgt); x.stroke();
-  x.lineWidth = 2.6; x.beginPath(); x.moveTo(4, -hgt * 0.3); x.lineTo(9, -hgt - 5); x.stroke();   // the straw
+  x.lineWidth = 2.6; x.beginPath(); x.moveTo(4, -hgt * 0.3); x.lineTo(9, -hgt - 6); x.stroke();   // the straw
   x.restore();
 }
 X.slide('tolerance', (x, w, h, st) => {
-  const p = clamp(st.p ?? 1), la = io(lin(p, T.lanes[0], T.lanes[1])), H = clockH(p), ink = C('ink'), or = C('c1');
+  const p = clamp(st.p ?? 1), la = io(lin(p, T.lanes[0], T.lanes[1])), H = clockH(p), or = C('c1');
   const glow = (1 - lin(p, T.still[0], T.still[1])) * (0.65 + 0.35 * Math.sin(p * 2 * PI * 14));
+  const D = LANES[0], R = LANES[1];
   /* the hour grid and the shared time axis */
-  for (const hr of [7, 8, 9, 10]) { const gx = hx(hr); x.fillStyle = C('line'); x.globalAlpha = la; x.fillRect(gx - 0.5, LANES[0].top + 10, 1, AXY - LANES[0].top - 10); x.globalAlpha = 1; }
-  x.save(); x.globalAlpha = la; SK.rule(x, X0, AXY, X0 + (X1 - X0) * la, 'ink2', 2);
-  [['7 am', 7], ['8', 8], ['9', 9], ['10', 10]].forEach(([s, hr]) => { x.fillStyle = C('ink2'); x.fillRect(hx(hr) - 1, AXY, 2, 8); SK.t(x, s, hx(hr), AXY + 32, 19, 'ink2', 600, 'center'); }); x.restore();
+  x.save(); x.globalAlpha = la;
+  for (const hr of [7, 8, 9, 10]) { x.fillStyle = C('line'); x.fillRect(hx(hr) - 0.5, D.top + 12, 1, AXY - D.top - 12); }
+  SK.rule(x, X0, AXY, X0 + (X1 - X0) * la, 'ink2', 2);
+  [['7 am', 7], ['8', 8], ['9', 9], ['10', 10]].forEach(([s, hr]) => { x.fillStyle = C('ink2'); x.fillRect(hx(hr) - 1, AXY, 2, 8); SK.t(x, s, hx(hr), AXY + 32, 19, 'ink2', 600, 'center'); });
+  x.restore();
+  /* each lane: its name, its normal (dashed, drawn first so the traces pass over it a hair apart), the daily lane's own line for the cup */
   LANES.forEach((L, li) => {
     x.save(); x.globalAlpha = la;
     if (li) SK.rule(x, 60, L.top - 26, 1540, 'line', 1.5);
     SK.t(x, L.title, 60, L.top + 30, 30, 'ink', 700);
-    const daily = L.key === 'daily', hold = 1 - lin(p, T.still[0], T.still[1]);
-    const nod = daily ? 10 * -TR.daily.alert(H) : 0, tr = daily ? 0 : 2.2 * (TR.rare.anx(H) / 1.15) * hold * Math.sin(p * 2 * PI * 260);   // the daily head droops until the cup; the rare one trembles
-    head(x, 112, L.yn + 4, 0.78, 1, nod, tr);
-    x.strokeStyle = C('ink3'); x.lineWidth = 2; x.setLineDash([9, 7]); x.beginPath(); x.moveTo(X0, L.yn); x.lineTo(X0 + (X1 - X0) * la, L.yn); x.stroke(); x.setLineDash([]);
-    SK.t(x, 'your normal', X0 - 14, L.yn + 6, 18, 'ink3', 600, 'right');
+    x.strokeStyle = C('ink2'); x.lineWidth = 2; x.setLineDash([9, 7]); x.beginPath(); x.moveTo(X0, L.yn); x.lineTo(X0 + (X1 - X0) * la, L.yn); x.stroke(); x.setLineDash([]);
+    if (!li) { SK.rule(x, X0, L.floor, X0 + (X1 - X0) * la, 'line2', 1.5); SK.t(x, 'your normal', X0 - 14, L.yn + 6, 18, 'ink2', 600, 'right'); }
     x.restore();
   });
-  /* one cup, the same for both, drops onto the shared timeline at 8 am; its moment rises through both lanes */
-  const cu = lin(p, T.cup[0], T.cup[1]), ev = io(lin(cu, 0.5, 1));
-  if (ev > 0) { x.save(); x.strokeStyle = C('ink3'); x.lineWidth = 1.5; x.setLineDash([2, 5]); const yb = AXY - 64, yt = LANES[0].top + 40;
+  /* the cup's moment: a dotted line at 8 am through both lanes, named at the top */
+  const cu = [lin(p, T.cup0[0], T.cup0[1]), lin(p, T.cup1[0], T.cup1[1])], ev = io(lin(p, T.cup0[0] + 0.04, T.cup1[1]));
+  if (ev > 0) { x.save(); x.strokeStyle = C('ink3'); x.lineWidth = 1.5; x.setLineDash([2, 5]); const yb = AXY - 62, yt = D.top + 34;
     x.beginPath(); x.moveTo(hx(CUPH), yb); x.lineTo(hx(CUPH), yb + (yt - yb) * ev); x.stroke(); x.restore(); }
-  /* the traces behind the clock, then the dotted trace of the inherited gene version */
+  popT(x, popA(p, T.cupL), hx(CUPH) + 10, D.floor + 22, () => SK.t(x, 'the cup', 0, 0, 19, 'ink2', 700));   // named between the lanes, beside its line
+  /* the gaps, then the traces behind the clock, then the dotted trace of the touchier receptor */
   const ends = {};
-  gap(x, LANES[0], 'alert', TR.daily.alert, H0, H, C('ink'), 0.07 * la); gap(x, LANES[1], 'anx', TR.rare.anx, H0, H, or, 0.1 * la);
+  gap(x, D, 'tired', TR.daily.tired, H0, H, TEAL, 0.09 * la); gap(x, R, 'jit', TR.rare.jit, H0, H, or, 0.1 * la); gap(x, R, 'tired', TR.rare.tired, H0, H, TEAL, 0.09 * la);
+  x.save(); x.globalAlpha = la;
   LANES.forEach(L => { const f = TR[L.key];
-    ends[L.key + 'A'] = trace(x, L, 'alert', f.alert, H0, H, ink, 5, null, la);
-    ends[L.key + 'X'] = trace(x, L, 'anx', f.anx, H0, H, or, 5, null, la); });
+    ends[L.key + 'T'] = trace(x, L, 'tired', f.tired, H0, H, TEAL, 4.5, null);
+    ends[L.key + 'J'] = trace(x, L, 'jit', f.jit, H0, H, or, 4.5, null); });
+  x.restore();
   const gH = CUPH + (H1 - CUPH) * io(lin(p, T.gene[0], T.gene[1]));
-  if (p > T.gene[0]) ends.gene = trace(x, LANES[1], 'gene', TR.rare.gene, CUPH, gH, or, 5, [0.1, 10], 1);
-  cup(x, hx(CUPH), AXY - 1, cu, 1);
+  if (p > T.gene[0]) ends.gene = trace(x, R, 'gene', TR.rare.gene, CUPH, gH, or, 5, [0.1, 10]);
+  cup(x, hx(CUPH), D.floor - 1, cu[0]); cup(x, hx(CUPH), R.floor - 1, cu[1]);
   /* the shared clock */
   const ca = la * (1 - lin(p, T.clockOut[0], T.clockOut[1])) * lin(p, T.sw1[0] - 0.01, T.sw1[0] + 0.01);
-  if (ca > 0.01) { const cx = hx(H); x.save(); x.globalAlpha = ca; x.fillStyle = C('ink'); x.fillRect(cx - 0.75, LANES[0].top + 6, 1.5, AXY - LANES[0].top - 6);
-    const hh = Math.floor(H), mm = Math.min(59, Math.floor((H - hh) * 60)); SK.t(x, `${hh}:${String(mm).padStart(2, '0')} am`, cx, LANES[0].top - 8, 19, 'ink', 700, 'center'); x.restore(); }
-  /* the leading dots, each with its name riding beside it */
-  const lead = p < T.clockOut[1] ? glow : glow * 0.5;
-  const give = 1 - lin(p, T.cup[0] - 0.012, T.cup[0]) * (1 - lin(p, T.sw2[0] + 0.01, T.sw2[0] + 0.04));
+  if (ca > 0.01) { const cx = hx(H); x.save(); x.globalAlpha = ca; x.fillStyle = C('ink'); x.fillRect(cx - 0.75, D.top + 6, 1.5, AXY - D.top - 6);
+    const hh = Math.floor(H), mm = Math.min(59, Math.floor((H - hh) * 60)); SK.t(x, `${hh}:${String(mm).padStart(2, '0')} am`, cx, D.top - 10, 19, 'ink', 700, 'center'); x.restore(); }
+  /* the leading dots, each with its name riding beside it (they step aside while the cups drop) */
+  const lead = p < T.clockOut[1] ? glow : glow * 0.5, give = 1 - lin(p, T.cup0[0] - 0.012, T.cup0[0]) * (1 - lin(p, T.sw2[0] + 0.01, T.sw2[0] + 0.04));
   const nm = (at, s, dy, col, a) => { a *= give; if (at && a > 0.01) { x.save(); x.globalAlpha = a; SK.t(x, s, at[0] + 20, at[1] + dy, 20, col, 700, 'left'); x.restore(); } };
-  LANES.forEach(L => { const A = ends[L.key + 'A'], Xn = ends[L.key + 'X'];
-    dot(x, A, ink, lead, la); dot(x, Xn, or, lead, la);
-    const daily = L.key === 'daily';
-    nm(A, 'alert', daily ? 22 : 24, 'ink', la * lin(p, T.sw1[0] + 0.01, T.sw1[0] + 0.03));
-    nm(Xn, 'anxious', -10, SK.readable(or), la * lin(p, T.sw1[0] + 0.01, T.sw1[0] + 0.03)); });
+  const na = la * lin(p, T.sw1[0] + 0.01, T.sw1[0] + 0.03);
+  LANES.forEach(L => { const Tn = ends[L.key + 'T'], Jn = ends[L.key + 'J'];
+    dot(x, Tn, TEAL, lead, la); dot(x, Jn, or, lead, la);
+    if (L.key === 'daily') nm(Tn, 'how tired you feel', H < CUPH + 0.5 ? 7 : 24, SK.readable(TEAL), na);   // named once; below, "a bit less sleepy" names it at the trace
+    nm(Jn, 'jittery', -10, SK.readable(or), na); });
   if (ends.gene) dot(x, ends.gene, or, glow, 1);
   /* the words, one at a time, at what they describe */
-  const D = LANES[0], R = LANES[1];
-  popT(x, popA(p, T.dip), X0 + 26, D.yn + 42, () => { SK.t(x, 'without the morning cup:', 0, 0, 20, 'ink', 600); SK.t(x, 'below normal', 0, 25, 20, 'ink', 700); });
-  popT(x, popA(p, T.undo), hx(9) + 6, D.yn + 48, () => SK.t(x, 'the cup only undoes the dip', 0, 0, 20, 'ink', 700));
-  popT(x, popA(p, T.noAl), hx(9) + 6, R.yn + 40, () => SK.t(x, 'no extra alertness', 0, 0, 20, 'ink', 700));
-  popT(x, popA(p, T.geneL), hx(8.55), ty(R, 'gene', 2.05) - 64, () => {
-    SK.t(x, 'inherited one version of the receptor’s gene', 0, 0, 20, SK.readable(or), 700);
-    SK.t(x, 'from both parents: more anxious still', 0, 25, 20, SK.readable(or), 700);
-    SK.t(x, '(ADORA2A)', SK.w(x, 'from both parents: more anxious still', 20, 700) + 8, 25, 15, 'ink3', 500); });
-  popT(x, popA(p, T.close, 0.04), X0, 864, () => { const w1 = SK.t(x, 'drink it daily and the anxiety fades:', 0, 0, 26, 'ink', 500); SK.t(x, 'tolerance', w1 + 9, 0, 26, 'ink', 800); });
-  SK.credit(x, 'Rogers et al. 2010 · 379 people, caffeine vs placebo, double blind · FSANZ 2025', 1540, 886, 'right');
+  popT(x, popA(p, T.night), X0 + 26, D.yn - 54, () => { SK.t(x, 'a night without caffeine:', 0, 0, 20, 'ink', 600); SK.t(x, 'more tired than normal', 0, 25, 20, 'ink', 700); });
+  popT(x, popA(p, T.undo), hx(9) + 6, D.yn + 66, () => SK.t(x, 'the cup only undoes the dip', 0, 0, 20, 'ink', 700));   // under the riding name
+  popT(x, popA(p, T.less), hx(9) + 6, R.yn + 74, () => SK.t(x, 'a bit less sleepy', 0, 0, 20, SK.readable(TEAL), 700));
+  popT(x, popA(p, T.cancel), hx(9) + 6, R.yn - 46, () => SK.t(x, 'the jitters cancel the gain', 0, 0, 20, 'ink', 700));
+  popT(x, popA(p, T.geneL), hx(8.55), ty(R, 'gene', 2.0) - 52, () => {
+    SK.t(x, 'born with a touchier receptor version:', 0, 0, 20, SK.readable(or), 700);
+    SK.t(x, 'more jittery still', 0, 25, 20, SK.readable(or), 700); });
+  popT(x, popA(p, T.close1, 0.04), X0, 800, () => SK.t(x, 'Neither got sharper than a rested normal: faster at simple tasks, not smarter (Rogers 2013).', 0, 0, 22, 'ink', 500));
+  popT(x, popA(p, T.close2, 0.04), X0, 838, () => { const w1 = SK.t(x, 'Drink it daily and the jitters mostly fade:', 0, 0, 26, 'ink', 500); SK.t(x, 'tolerance.', w1 + 9, 0, 26, 'ink', 800); });
+  SK.credit(x, 'Rogers et al. 2010 (379 people) and 2013 (369 people), caffeine vs placebo, double blind · FSANZ 2025', 1540, 886, 'right');
 });
 X.scene('tolerance', {slide: 'tolerance', state: p => ({p})});
+})();
+/*@@part 04s_why.js@@*/
+/* ============ 4s · why · "It stays longer in you, or it hits you harder." (a slide) ============
+   The chapter's answer in two columns, big and simple, one item at a time, ending on a clean hold.
+   Left, "It stays longer" (a small body with the liver ringed, K.bodyMap from the body beat): a slow liver is mostly inherited
+   (twins, Matthaei 2016); the birth-control pill, late pregnancy and some medicines slow it more (FSANZ; Abernethy & Todd 1985;
+   Jeppesen 1996); smoking speeds it up (Zevin & Benowitz 1999).
+   Right, "It hits harder" (the receptor in its membrane with caffeine on it): rarely drinking it means no tolerance, so the jitters
+   come (Rogers 2010, 2013); some are born with a touchier receptor (Rogers 2010); a smaller body gets a higher level from the same
+   cup (FSANZ, volume of distribution).
+   Bottom: fewer milligrams help in every case; a café decaf has about 6.6 mg, 1/18 of a regular (claims cup-dec, cup-reg);
+   then the way on to Chapter 2. A pure function of the beat's progress. */
+(() => {
+const SK = X.sk, K = X.dk, C = X.col, PI = Math.PI;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), lin = (p, a, b) => clamp((p - a) / (b - a));
+const pop = X.ease.bez(0.34, 1.4, 0.64, 1), TEAL = '#0b7285';
+const COLS = [
+  {x: 60, w: 690, head: 'It stays longer', at: 0.03, items: [
+    ['a slow liver:', 'mostly inherited', 0.12],
+    ['the birth-control pill, late pregnancy, some medicines', 'slow it more', 0.21],
+    ['smoking', 'speeds it up', 0.30]]},
+  {x: 850, w: 690, head: 'It hits harder', at: 0.40, items: [
+    ['you rarely drink it:', 'no tolerance, so jitters come', 0.49],
+    ['born with a touchier receptor', '', 0.58],
+    ['a smaller body:', 'same cup, higher level', 0.67]]}];
+const T = {fewer: 0.78, next: 0.88};
+function popIn(x, a, X0, Y0, fn) {   // a quick rise and scale with a small overshoot, then holds
+  if (a <= 0.005) return; const s = 0.86 + 0.14 * pop(clamp(a)); x.save(); x.globalAlpha *= clamp(a * 2.5); x.translate(X0, Y0 + 12 * (1 - clamp(a))); x.scale(s, s); fn(); x.restore();
+}
+const A = (p, t0, d = 0.04) => lin(p, t0, t0 + d);
+/* the receptor of the earlier beats, as a line drawing: a membrane, seven helices crossing it, caffeine sitting in its pocket */
+function receptor(x, cx, cy, cafA) {
+  const W = 150, m0 = cy - 14, m1 = cy + 14; x.save();
+  x.strokeStyle = C('line2'); x.lineWidth = 2; for (const y of [m0, m1]) { x.beginPath(); x.moveTo(cx - W / 2, y); x.lineTo(cx + W / 2, y); x.stroke(); }
+  const n = 7, sp = 14, x0 = cx - sp * (n - 1) / 2;
+  x.strokeStyle = TEAL; x.lineWidth = 3.2; x.lineJoin = 'round'; x.lineCap = 'round'; x.beginPath(); x.moveTo(x0 - 16, m0 - 14);
+  for (let i = 0; i < n; i++) { const xi = x0 + i * sp, top = i % 2 === 0; x.lineTo(xi, top ? m0 - 8 : m1 + 8); x.lineTo(xi, top ? m1 + 8 : m0 - 8);
+    if (i < n - 1) x.quadraticCurveTo(xi + sp / 2, top ? m1 + 19 : m0 - 19, xi + sp, top ? m1 + 8 : m0 - 8); }
+  x.lineTo(x0 + (n - 1) * sp + 15, m1 + 19); x.stroke();
+  if (cafA > 0.01) { x.globalAlpha *= cafA; x.fillStyle = C('c1'); x.beginPath(); x.arc(cx, m0 - 21, 8, 0, 2 * PI); x.fill(); }
+  x.restore();
+}
+/* one item: a lead in bold and the rest in regular, on one line when they fit, the rest on the next line otherwise */
+function item(x, lead, rest, X0, Y0, maxW, sz) {
+  const gapW = SK.w(x, ' ', sz, 400), lw = SK.w(x, lead, sz, 700), rw = rest ? SK.w(x, rest, sz, 400) : 0;
+  x.fillStyle = C('ink'); x.fillRect(X0 - 32, Y0 - sz * 0.5, 11, 11);   // the bullet
+  if (lw + gapW + rw <= maxW) { SK.t(x, lead, X0, Y0, sz, 'ink', 700); if (rest) SK.t(x, rest, X0 + lw + gapW, Y0, sz, 'ink2', 400); return 1; }
+  const ls = SK.wrap(x, lead, maxW, sz, 700); ls.forEach((l, i) => SK.t(x, l, X0, Y0 + i * sz * 1.3, sz, 'ink', 700));
+  const lastW = SK.w(x, ls[ls.length - 1], sz, 700);
+  if (rest && lastW + gapW + rw <= maxW) { SK.t(x, rest, X0 + lastW + gapW, Y0 + (ls.length - 1) * sz * 1.3, sz, 'ink2', 400); return ls.length; }   // the rest after the lead's last line
+  if (rest) SK.t(x, rest, X0, Y0 + ls.length * sz * 1.3, sz, 'ink2', 400);
+  return ls.length + (rest ? 1 : 0);
+}
+X.slide('why', (x, w, h, st) => {
+  const p = clamp(st.p ?? 1);
+  /* the column heads with their small pictures: the body with its liver ringed, the receptor with caffeine on it */
+  const lh = A(p, COLS[0].at, 0.05), rh = A(p, COLS[1].at, 0.05);
+  if (lh > 0.005) { x.save(); x.globalAlpha *= clamp(lh * 2); if (K.bodyMap) K.bodyMap(x, {cx: 132, cy: 168, h: 176, hi: 'liver', alpha: 1}); x.restore();
+    popIn(x, lh, 236, 188, () => SK.t(x, COLS[0].head, 0, 0, 50, 'ink', 800)); }
+  if (rh > 0.005) { x.save(); x.globalAlpha *= clamp(rh * 2); receptor(x, 930, 176, lin(p, COLS[1].at + 0.03, COLS[1].at + 0.07)); x.restore();
+    popIn(x, rh, 1030, 188, () => SK.t(x, COLS[1].head, 0, 0, 50, 'ink', 800)); }
+  x.save(); x.globalAlpha = Math.max(lh, rh); x.fillStyle = C('line'); x.fillRect(800 - 0.75, 92, 1.5, 572); x.restore();
+  /* the items, one at a time */
+  const SZ = 34, LH = SZ * 1.3;
+  for (const c of COLS) { let y = 350;
+    for (const [lead, rest, t0] of c.items) { const a = A(p, t0); let n = 1;
+      if (a > 0.005) popIn(x, a, c.x + 36, y, () => { n = item(x, lead, rest, 0, 0, c.w - 44, SZ); });
+      else { const g = SK.w(x, ' ', SZ, 400), lw = SK.w(x, lead, SZ, 700), rw = rest ? SK.w(x, rest, SZ, 400) : 0;
+        if (lw + g + rw <= c.w - 44) n = 1; else { const ls = SK.wrap(x, lead, c.w - 44, SZ, 700); n = ls.length + (rest && SK.w(x, ls[ls.length - 1], SZ, 700) + g + rw > c.w - 44 ? 1 : 0); } }
+      y += n * LH + 34; } }
+  /* the bottom line: fewer milligrams; then the way on */
+  const fa = A(p, T.fewer, 0.05);
+  if (fa > 0.005) { x.save(); x.globalAlpha = clamp(fa * 2); SK.rule(x, 60, 700, 1540, 'line2', 1.5); x.restore(); }
+  popIn(x, fa, 60, 764, () => { let cx = SK.t(x, 'Fewer milligrams help in every case:', 0, 0, 32, 'ink', 700) + 10;
+    cx += SK.t(x, 'a café decaf has about', cx, 0, 32, 'ink', 400) + 9; cx += SK.t(x, '6.6 mg,', cx, 0, 32, SK.readable(C('c1')), 800) + 9; SK.t(x, '1/18 of a regular.', cx, 0, 32, 'ink', 400); });
+  popIn(x, A(p, T.next, 0.05), 60, 828, () => SK.t(x, 'Next: how decaf takes the caffeine out.', 0, 0, 26, 'ink3', 600));
+  SK.credit(x, 'Matthaei et al. 2016 · Rogers et al. 2010, 2013 · FSANZ 2025 · Abernethy & Todd 1985 · Jeppesen et al. 1996 · Zevin & Benowitz 1999 · decaf: Gyeonggi Health & Environment Research Institute 2023', 1540, 886, 'right');
+});
+X.scene('why', {slide: 'why', state: p => ({p})});
 })();
 /*@@part 04v_battery.js@@*/
 /* ============ 4v · battery · "Clean solvent meets the oldest beans; 97% out in ten hours." (layer v_battery_L) ============
