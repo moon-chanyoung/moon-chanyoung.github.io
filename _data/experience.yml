@@ -39,8 +39,7 @@
   location: "Daejeon, South Korea"
   role: "Microwave Communications Operator (Squad Leader)"
   bullets:
-    - "Served as squad leader (Jun–Aug 2024) during mandatory military service."
-    - "Participated in UFS, the ROK-US Combined Forces Exercise, in Aug 2023 and Aug 2024."
+    - "Served as squad leader during mandatory military service; participated in two ROK-US combined forces exercises (UFS 2023, 2024)."
 - dates: "Jul 2022 – Sep 2022"
   org: "Compiler & Microarchitecture Lab (COMMIT)"
   org_url: "http://compiler.korea.ac.kr/"
@@ -50,4 +49,4 @@
   advisor: "Prof. Seon Wook Kim"
   advisor_url: "http://compiler.korea.ac.kr/index.php/professor/"
   bullets:
-    - "Implemented and verified RISC-V R-type instruction modules in Verilog HDL on FPGA; published at the IEIE Autumn Conference 2022."
+    - "Implemented and verified RISC-V R-type instruction modules in Verilog HDL on FPGA; first-authored a paper at the IEIE Fall Conference 2022."

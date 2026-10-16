@@ -19,3 +19,9 @@ papers:
     authors: ["Travis Pence", "Daisuke Yamada", "Jiaqi Mo", "Chanyoung Moon", "Karthikeyan Sankaralingam", "Vikas Singh"]
     venue: "Advances in Neural Information Processing Systems (NeurIPS), 2026"
     summary: "A GPU kernel for the rotor sandwich product with bank-conflict-free shared-memory access, yielding up to 64× wall-clock and 35× memory improvements over existing implementations."
+  - id: "C.3"
+    venue_short: "IEIE Fall 2022"
+    badges: ["Domestic Conference", "First Author"]
+    title: "Study for Behavior Verification and Resource Usage Analysis of RISC-V R-Type ISAs on FPGA"
+    authors: ["Chanyoung Moon", "Hyung Jin Cho", "Junil Kim", "Seon Wook Kim"]
+    venue: "IEIE Fall Conference (Institute of Electronics and Information Engineers, Korea), 2022"
