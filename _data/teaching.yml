@@ -1,11 +1,11 @@
 intro: >-
   I am very interested in using AI to make hard concepts easy to understand. As AI builds things faster than ever, I think human understanding is becoming the main bottleneck, and interactive explainers like the one below are one way I am trying to address it.
 items:
-  - dates: "Fall 2026"
+  - dates: "Sep 2026 – Present"
     title: "Architecture & System for AI Seminar"
     org: "HandS Academic Society, Korea University"
     role: "Co-host and lecturer"
-    text: "Gave five lectures to 21 students on GPU architecture, HBM, and interconnects."
+    text: "Co-hosted a weekly seminar for 21 students; lectured on GPUs, HBM, interconnects, and LLM serving."
     links:
       - label: "Interactive lecture: Why Are GPUs Fast?"
         url: "/teaching/gpu-seminar/"
